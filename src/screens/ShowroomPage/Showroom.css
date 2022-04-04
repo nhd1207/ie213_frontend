@@ -9,6 +9,19 @@
     z-index: 1;
     position: relative;
 }
+
+.Banner::before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: -1px;
+    width: 200rem;
+    height: calc(100% + 40px);
+    background-color: #000;
+    transform-origin: top center;
+    transform: translateX(-115%) translateY(-2%) skew(-121deg);
+}
 .title{
     position: relative;
     font-weight: 700;
@@ -30,20 +43,3 @@ h2 {
     color: #fff;
     margin: 0;
 }
-
-.Banner::before{
-    content: '';
-    display: block;
-    position: absolute;
-    z-index: 2;
-    top: -1px;
-    width: 45.85rem;
-    height: calc(100% + 2px);
-    background-color: #000;
-    transform-origin: center center;
-    -webkit-transform: translateX(-50%) skew(-35deg);
-    -moz-transform: translateX(-50%) skew(-35deg);
-    -ms-transform: translateX(-50%) skew(-35deg);
-    transform: translateX(-50%) skew(-35deg);
-}
-
