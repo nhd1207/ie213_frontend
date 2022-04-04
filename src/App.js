@@ -7,7 +7,7 @@ import Showroom from "./screens/ShowroomPage/Showroom";
 
 function App() {
   return (
-    <div className="App">
+    <div className="Appp">
      {/* <LayoutAdmin></LayoutAdmin> */}
      <Showroom></Showroom>
     </div>
