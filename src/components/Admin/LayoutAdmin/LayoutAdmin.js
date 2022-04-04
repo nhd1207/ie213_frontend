@@ -66,7 +66,7 @@ export default function LayoutAdmin(props) {
                 minHeight: '100vh'
             }}>
                 {/* {props.children} */}
-                <CarTable></CarTable>
+                 <CarTable></CarTable> 
             </Content>
         </Layout>
         </BrowserRouter>

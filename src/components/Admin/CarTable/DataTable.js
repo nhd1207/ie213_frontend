@@ -1,11 +1,12 @@
 import React from 'react';
 import { Table, Spin, Space, Tooltip } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
-const DataTable = ({ dataSource, loading, updateCity }) => {
+import { faDeleteLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
+
+const DataTable = ({ dataSource, loading, updateCar }) => {
 
   const onSubmit = (values) => {
-    updateCity(values)
+    updateCar(values)
   }
 
   const columns = [
@@ -15,7 +16,7 @@ const DataTable = ({ dataSource, loading, updateCity }) => {
       render: (value, record, i) => <a>{i + 1}</a>,
     },
     {
-      title: 'Thành phố',
+      title: 'Tên xe',
       dataIndex: 'name',
       key: 'name',
       className: 'text-left',
@@ -26,16 +27,16 @@ const DataTable = ({ dataSource, loading, updateCity }) => {
     },
     {
       title: 'Hình',
-      dataIndex: 'picture',
+      dataIndex: 'image',
       key: 'picture',
       className: 'text-left',
       render: (value, record) =>
         <img src={value} height={50} width={50}></img>
     },
     {
-      title: 'Dân số (nghìn người)',
-      dataIndex: 'population',
-      key: 'population',
+      title: 'Tiền đặt cọc',
+      dataIndex: 'deposit',
+      key: 'deposit',
       className: 'text-left',
       render: (value, record) =>
         <div>
@@ -43,9 +44,19 @@ const DataTable = ({ dataSource, loading, updateCity }) => {
         </div>
     },
     {
-      title: 'Diện tích (m2)',
-      dataIndex: 'area',
-      key: 'area',
+      title: 'Giá',
+      dataIndex: 'price',
+      key: 'price',
+      className: 'text-left',
+      render: (value, record) =>
+        <div>
+          <span> {value || ''} </span>
+        </div>
+    },
+    {
+      title: 'Số lượng',
+      dataIndex: 'amount',
+      key: 'amount',
       className: 'text-left',
       render: (value, record) =>
         <div>
@@ -54,8 +65,8 @@ const DataTable = ({ dataSource, loading, updateCity }) => {
     },
     {
       title: 'Giới thiệu',
-      dataIndex: 'content',
-      key: 'content',
+      dataIndex: 'description',
+      key: 'description',
       className: 'text-left',
       render: (value, record) =>
         <div>
@@ -63,14 +74,21 @@ const DataTable = ({ dataSource, loading, updateCity }) => {
         </div>
     },
     {
-      title: 'Action',
+      title: 'Hành động',
       key: 'action',
       render: (text, record) => (
         <Space >
           <button onClick={() => onSubmit(record?.ID)} className="btn btn-sm btn-primary">
-            <Tooltip placement="top" title="Update City">
+            <Tooltip placement="top" title="Sửa">
               <span className="px-2">
                 <FontAwesomeIcon icon={faEdit} />
+              </span>
+            </Tooltip>
+          </button>
+          <button onClick={() => onSubmit(record?.ID)} className="btn btn-sm btn-primary">
+            <Tooltip placement="top" title="Xóa">
+              <span className="px-2">
+                <FontAwesomeIcon icon={faDeleteLeft}/>
               </span>
             </Tooltip>
           </button>
