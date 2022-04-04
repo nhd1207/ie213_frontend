@@ -9,7 +9,6 @@
     z-index: 1;
     position: relative;
 }
-
 .Banner::before {
     content: '';
     display: block;
@@ -20,7 +19,19 @@
     height: calc(100% + 40px);
     background-color: #000;
     transform-origin: top center;
-    transform: translateX(-115%) translateY(-2%) skew(-121deg);
+    transform: translateX(-190%) translateY(-54%) skew(-121deg);
+}
+.Banner::after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: -1px;
+    width: 200rem;
+    height: calc(100% + 40px);
+    background-color: #000;
+    transform-origin: top center;
+    transform: translateX(11%) translateY(-22%) skew(-116deg);
 }
 .title{
     position: relative;
