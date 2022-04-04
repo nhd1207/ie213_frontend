@@ -1,9 +1,11 @@
-import LoginForm from "./components/Authentication/Login/LoginForm"
-import './App.css';
+import LoginForm from "./components/Authentication/Login/LoginForm";
+import "./App.css";
 
 function App() {
   return (
-    <LoginForm />
+    <div className="App">
+      <LoginForm />
+    </div>
   );
 }
 
