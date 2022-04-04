@@ -9,6 +9,30 @@
     z-index: 1;
     position: relative;
 }
+.Banner::before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: -1px;
+    width: 200rem;
+    height: calc(100% + 40px);
+    background-color: #000;
+    transform-origin: top center;
+    transform: translateX(-190%) translateY(-54%) skew(-121deg);
+}
+.Banner::after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: -1px;
+    width: 200rem;
+    height: calc(100% + 40px);
+    background-color: #000;
+    transform-origin: top center;
+    transform: translateX(11%) translateY(-22%) skew(-116deg);
+}
 .title{
     position: relative;
     font-weight: 700;
@@ -30,3 +54,17 @@ h2 {
     margin: 0;
 }
 
+.city-title{
+    font-size: 5rem;
+}
+
+.HCM-space  {
+    padding: 5rem;
+    width: 45%;
+    line-height: 2rem;
+    text-align: justify;
+}
+
+.HCM-space-content {
+    padding-top: 5rem;
+}
