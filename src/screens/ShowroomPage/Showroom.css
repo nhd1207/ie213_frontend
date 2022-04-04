@@ -14,7 +14,7 @@
     content: '';
     display: block;
     position: absolute;
-    z-index: -1;
+    z-index: 2;
     top: -1px;
     width: 200rem;
     height: calc(100% + 40px);
@@ -22,10 +22,26 @@
     transform-origin: top center;
     transform: translateX(-115%) translateY(-2%) skew(-121deg);
 }
+
+.Banner::after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: -1px;
+    width: 200rem;
+    height: calc(100% + 40px);
+    background-color: #000;
+    transform-origin: top center;
+    transform: translateX(43%) translateY(-12%) skew(-116deg);
+}
+
+
 .title{
     font-weight: 700;
     text-shadow: 0.3rem 0.4rem rgba(0, 0, 0, 0.5);
     z-index: 3;
+    position: relative;
 }
 
 h1 {
