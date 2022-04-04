@@ -1,0 +1,39 @@
+.background {
+  position: relative;
+  top: 200px;
+  background-color: rgba(255, 255, 255, 0.644);
+  padding: 30px 100px;
+  max-width: 600px;
+  border-radius: 8px;
+  min-height: 500px;
+  margin: auto;
+}
+
+.background h1 {
+  text-align: center;
+  opacity: initial;
+}
+
+.background .loginform {
+  margin: auto;
+  font-size: 20px !important;
+  color: black;
+}
+
+.login-label {
+    margin-left: 10px;
+}
+
+.login-input {
+    padding: 10px !important;
+}
+
+#password {
+    padding: 15px;
+}
+
+.login-button {
+    margin-top: 20px;
+    font-size: 20px !important;
+    min-width: 12rem;
+}

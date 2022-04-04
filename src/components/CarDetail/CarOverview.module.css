@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    background-image: url("../../Images/Rectangle12.png");
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-size: cover;
+    color: white;
+}
+
+.car-price {
+    display: grid;
+}
