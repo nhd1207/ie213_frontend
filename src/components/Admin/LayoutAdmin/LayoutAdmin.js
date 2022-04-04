@@ -13,6 +13,7 @@ import {
 import { BrowserRouter } from 'react-router-dom';
 import "antd/dist/antd.css";
 import CarTable from '../CarTable/CarTable';
+import AccessoryTable from '../AccessoryTable/AccessoryTable';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -66,7 +67,7 @@ export default function LayoutAdmin(props) {
                 minHeight: '100vh'
             }}>
                 {/* {props.children} */}
-                 <CarTable></CarTable> 
+                <AccessoryTable></AccessoryTable>
             </Content>
         </Layout>
         </BrowserRouter>
