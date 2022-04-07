@@ -26,12 +26,12 @@
     display: block;
     position: absolute;
     z-index: 2;
-    top: -1px;
+    top: 0px;
     width: 200rem;
     height: calc(100% + 40px);
     background-color: #000;
     transform-origin: top center;
-    transform: translateX(11%) translateY(-22%) skew(-116deg);
+    transform: translateX(10%) translateY(-55%) skew(-120deg);
 }
 .title{
     position: relative;
