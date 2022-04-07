@@ -13,13 +13,13 @@
     content: '';
     display: block;
     position: absolute;
-    z-index: -1;
-    top: -1px;
+    z-index: 2;
+    top: 0px;
     width: 200rem;
-    height: calc(100% + 40px);
+    height: calc(100% + 0px);
     background-color: #000;
-    transform-origin: top center;
-    transform: translateX(-190%) translateY(-54%) skew(-121deg);
+    transform-origin: bottom center;
+    transform: translateX(-80%) translateY(4%) skew(-120deg);
 }
 .Banner::after {
     content: '';
@@ -58,13 +58,13 @@ h2 {
     font-size: 5rem;
 }
 
-.HCM-space  {
+.HCM_space  {
     padding: 5rem;
     width: 45%;
     line-height: 2rem;
     text-align: justify;
 }
 
-.HCM-space-content {
+.HCM_space_content {
     padding-top: 5rem;
 }
