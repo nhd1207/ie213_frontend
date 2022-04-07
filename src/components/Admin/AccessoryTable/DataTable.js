@@ -26,7 +26,11 @@ const DataTable = ({ dataSource, loading, updateAccessory }) => {
         </div>
     },
     {
+<<<<<<< Updated upstream
       title: 'Mã xe',
+=======
+      title: 'Mã',
+>>>>>>> Stashed changes
       dataIndex: 'code',
       key: 'code',
       className: 'text-left',

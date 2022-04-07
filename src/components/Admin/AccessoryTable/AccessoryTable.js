@@ -14,7 +14,7 @@ import classes from "./index.module.css";
 
 export default function CarTable(props) {
     // const query_params = queryString.parse(window.location.search);
-    const car = [
+    const accessory = [
         {
             "_id": "623843e520842dc20d24765f" ,
             "name": "test",
@@ -26,9 +26,6 @@ export default function CarTable(props) {
             "amount": 100, "description": "this is description for test car",
             "specification":
             {
-                "displacement": 600,
-                "power": 200, "maxSpeed": 235,
-                "acceleration": 2.1, "weight": 1500
             },
             "color": ["yelow", "red"],
             "special": "max speed very fast"
@@ -85,7 +82,7 @@ export default function CarTable(props) {
                 dataSource={
                     // props.city.data 
                     // ||
-                    car}
+                    accessory}
                 //loading={props.city.loading}
                 updateCar={openModal}
             />
