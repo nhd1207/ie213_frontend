@@ -20,11 +20,10 @@ export default function CarTable(props) {
             "name": "test",
             "code": "233443221",
             "price": 3600000000,
+            "type":"glass",
             "deposit": 50000000,
             "image": "123456qwet",
             "amount": 100, "description": "this is description for test car",
-            "model": "Hijeep", "warrantyPeriod": 2,
-            "year": 2006,
             "specification":
             {
                 "displacement": 600,

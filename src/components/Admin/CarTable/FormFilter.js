@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import RenderInputText from '../../Share/RenderInputText'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
 let ContactForm = props => {
     const { handleSubmit } = props
     return (
@@ -12,7 +13,7 @@ let ContactForm = props => {
                         <Field
                             name="name"
                             component={RenderInputText}
-                            placeholder='Tên thành phố'
+                            placeholder='Tên Xe'
                         />
                     </div>
                     <div className='col-2'>

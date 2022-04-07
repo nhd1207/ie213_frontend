@@ -26,6 +26,26 @@ const DataTable = ({ dataSource, loading, updateAccessory }) => {
         </div>
     },
     {
+      title: 'Mã xe',
+      dataIndex: 'code',
+      key: 'code',
+      className: 'text-left',
+      render: (value, record) =>
+        <div>
+          <span> {value || ''} </span>
+        </div>
+    },
+    {
+      title: 'Loại',
+      dataIndex: 'type',
+      key: 'type',
+      className: 'text-left',
+      render: (value, record) =>
+        <div>
+          <span> {value || ''} </span>
+        </div>
+    },
+    {
       title: 'Hình',
       dataIndex: 'image',
       key: 'picture',
