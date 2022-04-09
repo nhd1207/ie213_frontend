@@ -3,7 +3,7 @@ import { action_type as type } from './action'
 const initialState = {
     loading: false,
     car: [],
-    new: []
+    post: []
 }
 
 function reducer(state = initialState, action) {
@@ -24,18 +24,18 @@ function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
             }
-        case type.GETNEW.REQUEST:
+        case type.GETPOST.REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case type.GETNEW.SUCCESS:
+        case type.GETPOST.SUCCESS:
             return {
                 ...state,
-                new: action.data,
+                post: action.data,
                 loading: false,
             }
-        case type.GETNEW.ERROR:
+        case type.GETPOST.ERROR:
             return {
                 ...state,
                 loading: false,

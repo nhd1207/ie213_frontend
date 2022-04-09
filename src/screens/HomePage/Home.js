@@ -3,7 +3,7 @@ import style from "./index.module.css";
 import Carousel from "../../components/HomePage/carousel"
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getListCar, getListNew } from "./action";
+import { getListCar, getListPost } from "./action";
 import React, {useEffect, useState} from 'react';
 import { List } from 'antd';
 import { connect } from "react-redux";
@@ -40,7 +40,7 @@ function Home(props) {
     useEffect(() => {
         console.log('useEffect has been called!');
         getListCar();
-        getListNew();
+        getListPost();
       }, []);
 
     return (
@@ -103,8 +103,8 @@ const mapDispatchToProps = dispatch => ({
     getListCar: (params) => {
         dispatch(getListCar(params))
     },
-    getListNew: (params) => {
-        dispatch(getListNew(params))
+    getListPost: (params) => {
+        dispatch(getListPost(params))
     }
 })
 

@@ -1,6 +1,6 @@
 import Login from "./screens/LoginPage/Login";
 import "./App.css";
-import Home from './screens/HomePage'
+import Home from './screens/HomePage/Home'
 
 function App() {
   return (

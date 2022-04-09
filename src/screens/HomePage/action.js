@@ -1,8 +1,8 @@
 export const action_type = {
-    GETNEW: {
-        REQUEST: "GETNEW.REQUEST",
-        SUCCESS: "GETNEW.SUCCESS",
-        ERROR: "GETNEW.ERROR"
+    GETPOST: {
+        REQUEST: "GETPOST.REQUEST",
+        SUCCESS: "GETPOST.SUCCESS",
+        ERROR: "GETPOST.ERROR"
     },
     GETCAR: {
         REQUEST: "GETCAR.REQUEST",
@@ -19,10 +19,10 @@ export function getListCar (params)
     }
 }
 
-export function getListNew (params)
+export function getListPost (params)
 {
     return {
-        type: action_type.GETNEW.REQUEST,
+        type: action_type.GETPOST.REQUEST,
         params,
     }
 }

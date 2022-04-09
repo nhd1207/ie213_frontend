@@ -8,7 +8,7 @@ import {
       action_type as TYPE
   } from './action'  
    
-import * as apiNew from '../../../apis/New'
+import * as apiPost from '../../../apis/Post'
 import * as apiCar from '../../../apis/Car'
 
 function* getListCarSaga(action) {
@@ -29,20 +29,20 @@ function* getListCarSaga(action) {
     }
 }
 
-function* getListNewSaga(action) {
+function* getListPostSaga(action) {
       try {
           const { params } = action
-          const response = yield call(apiNew.getListNew, params)
+          const response = yield call(apiPost.getListPost, params)
           if(response.status){
                   yield all([
-                      put({type: TYPE.GETLISTNEW.SUCCESS, ...response}),
+                      put({type: TYPE.GETLISTPOST.SUCCESS, ...response}),
                   ])
           }else{
-            yield put({type: TYPE.GETLISTNEW.ERROR, error: response})
+            yield put({type: TYPE.GETLISTPOST.ERROR, error: response})
           }
       } catch (error) {
           yield all([
-              put({type: TYPE.GETLISTNEW.ERROR, error})
+              put({type: TYPE.GETLISTPOST.ERROR, error})
           ])
       }
   }
@@ -51,7 +51,7 @@ function* getListNewSaga(action) {
 
   function* watcher() {
       yield all([
-          takeLatest(TYPE.GETNEW.REQUEST, getListNewSaga),
+          takeLatest(TYPE.GETPOST.REQUEST, getListPostSaga),
           takeLatest(TYPE.GETCAR.REQUEST, getListCarSaga)
       ])
   }
