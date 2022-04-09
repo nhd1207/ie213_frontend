@@ -1,6 +1,6 @@
 import axios from '../requestV2'
 
-const prefix = '/accessory';
+const prefix = '/showRoom';
 
 export const getDetailByCode =(code)=> {
     return axios({

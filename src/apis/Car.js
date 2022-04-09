@@ -5,10 +5,7 @@ const prefix = '/car';
 export const getDetailByCode =(code)=> {
     return axios({
         method: 'GET',
-        params: {
-            code
-        },
-        url: `${prefix}/detail`
+        url: `${prefix}/${code}`
     })
 }
 
@@ -16,6 +13,14 @@ export const getList =()=> {
     return axios({
         method: 'GET',
         url: `${prefix}/`
+    })
+}
+
+export const compareTwoCars =(data)=> {
+    return axios({
+        method: 'GET',
+        data,
+        url: `${prefix}/compareTwoCars`
     })
 }
 

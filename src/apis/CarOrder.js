@@ -1,18 +1,25 @@
 import axios from '../requestV2'
 
-const prefix = '/accessory';
+const prefix = '/carOder';
 
-export const getDetailByCode =(code)=> {
-    return axios({
-        method: 'GET',
-        url: `${prefix}/${code}`
-    })
-}
+// export const getDetailByCode =(code)=> {
+//     return axios({
+//         method: 'GET',
+//         url: `${prefix}/${code}`
+//     })
+// }
 
 export const getList =()=> {
     return axios({
         method: 'GET',
         url: `${prefix}/`
+    })
+}
+
+export const getListAdmin =()=> {
+    return axios({
+        method: 'GET',
+        url: `${prefix}/all`
     })
 }
 
@@ -26,7 +33,7 @@ export const create =(data)=> {
 
 export const update =(id, data)=> {
     return axios({
-        method: 'PUT',
+        method: 'PATCH',
         data,
         url: `${prefix}/${id}`
     })

@@ -6,7 +6,7 @@ export const login =(data)=> {
     return axios({
         method: 'POST',
         data,
-        url: `${prefix}/login`
+        url: `${prefix}/logIn`
     })
 }
 
@@ -18,54 +18,77 @@ export const signup =(data)=> {
     })
 }
 
-export const verify =(params)=> {
+export const logout =()=> {
     return axios({
         method: 'GET',
-        params,
-        url: `user`
-    })
-}
-export const getDetailByCode =(booking_code)=> {
-    return axios({
-        method: 'GET',
-        params: {
-            booking_code
-        },
-        url: `${prefix}/detail`
+        url: `${prefix}/logOut`
     })
 }
 
-export const update =(id, data)=> {
+export const updatePassword =(data)=> {
     return axios({
-        method: 'PUT',
+        method: 'POST',
         data,
-        url: `${prefix}/${id}`
+        url: `${prefix}/updatePassword`
     })
 }
 
-export const destroy =(id)=> {
+export const toggleUser =(id)=> { // tắt hoạt động user
     return axios({
-        method: 'POST',
-        url: `${prefix}/${id}/delete`
+        method: 'PATCH',
+        url: `${prefix}/toggleUser/${id}`
     })
 }
 
-export const getWeb =(id)=> {
-    return axios({
-        method: 'GET',
-        params: {
-            id
-        },
-        url: `${prefix}/get-web`
-    })
-}
 
-export const pushWeb =(booking_id)=> {
-    return axios({
-        method: 'POST',
-        data: {
-            booking_id
-        },
-        url: `${prefix}/push-web`
-    })
-}
+// export const verify =(params)=> {
+//     return axios({
+//         method: 'GET',
+//         params,
+//         url: `user`
+//     })
+// }
+// export const getDetailByCode =(booking_code)=> {
+//     return axios({
+//         method: 'GET',
+//         params: {
+//             booking_code
+//         },
+//         url: `${prefix}/detail`
+//     })
+// }
+
+// export const update =(id, data)=> {
+//     return axios({
+//         method: 'PUT',
+//         data,
+//         url: `${prefix}/${id}`
+//     })
+// }
+
+// export const destroy =(id)=> {
+//     return axios({
+//         method: 'POST',
+//         url: `${prefix}/${id}/delete`
+//     })
+// }
+
+// export const getWeb =(id)=> {
+//     return axios({
+//         method: 'GET',
+//         params: {
+//             id
+//         },
+//         url: `${prefix}/get-web`
+//     })
+// }
+
+// export const pushWeb =(booking_id)=> {
+//     return axios({
+//         method: 'POST',
+//         data: {
+//             booking_id
+//         },
+//         url: `${prefix}/push-web`
+//     })
+// }
