@@ -39,8 +39,9 @@ const data = [
 function Home(props) {
     useEffect(() => {
         console.log('useEffect has been called!');
-        getListCar();
-        getListPost();
+        let params='';
+        getListCar(params);
+        getListPost(params);
       }, []);
 
     return (
@@ -55,11 +56,11 @@ function Home(props) {
                 <div className={style.accessories}>
                     <div className={style["accessories-header"]}>PHỤ KIỆN</div>
                     <div className={style["accessories-content"]}>LÀM ĐẸP CHIẾC XE CỦA BẠN</div>
-                    <Button variant='dark' className={style["accessories-btn"]}>
+                    <button variant='dark' class="btn btn-outline-dark" className={style["accessories-btn"]}>
                         <a href="/accessories">
                             MORE   <FontAwesomeIcon icon={faCircleRight} size={{ width: 100 }}></FontAwesomeIcon>
                         </a>
-                    </Button>
+                    </button>
                 </div>
                 <div className={style.news}>
                     <div className={style['news-header']}>TIN TỨC</div>
@@ -74,11 +75,11 @@ function Home(props) {
                                     description={
                                     <div>
                                         <div className={style['news-description']}>{item.time}</div>
-                                        <Button class="btn btn-outline-dark">
+                                        <button class="btn btn-outline-dark">
                                             <a href={`news/${item.id}`}>
                                                 ĐỌC THÊM
                                             </a>
-                                        </Button>
+                                        </button>
                                     </div>
                                     }
                                 />

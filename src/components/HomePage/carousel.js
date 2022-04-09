@@ -54,11 +54,11 @@ function carousel() {
                             <Carousel.Caption className={style.caption}>
                                 <h3 className={style.title}>{car.name}</h3>
                                 <p className={style.attribute}>{car.attribute}</p>
-                                <Button>
+                                <button class="btn btn-outline-dark" className={style.btn}>
                                     <a href="/cars">
                                         MORE <FontAwesomeIcon icon={faCircleRight} size={{ width: 100 }}></FontAwesomeIcon>
                                     </a>
-                                </Button>
+                                </button>
                             </Carousel.Caption>
                         </Carousel.Item>
                     )

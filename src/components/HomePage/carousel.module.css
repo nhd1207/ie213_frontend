@@ -26,7 +26,6 @@
 } */
 
 .container .caption {
-    padding-bottom: 200px;
     color: white;
 }
 
@@ -46,11 +45,10 @@
 .container .caption .attribute {
     text-transform: uppercase;
     font-size: 50px;
+    margin-bottom: 200px
 }
 
-    
-.container .caption .btn {
+.btn {
     color: white;
     opacity: 40%;
 }
-
