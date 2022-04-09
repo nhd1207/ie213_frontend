@@ -8,7 +8,8 @@ import DataTable from "./components/Admin/CarTable/DataTable";
 function App() {
   return (
     <div className="App">
-     <LayoutAdmin></LayoutAdmin>
+      <AdminPage/>
+     {/* <LayoutAdmin></LayoutAdmin> */}
      {/* <CarTable></CarTable> */}
      {/* <DataTable
             dataSource={ []}

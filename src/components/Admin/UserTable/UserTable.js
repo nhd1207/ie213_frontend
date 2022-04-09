@@ -12,28 +12,12 @@ import { createCar, getList, updateAccessory } from './action';
 //import { connect } from 'react-redux'
 import classes from "./index.module.css";
 
-export default function Accessory(props) {
+export default function UserTable(props) {
     // const query_params = queryString.parse(window.location.search);
-    const accessory = [
-        {
-            "_id": "623843e520842dc20d24765f" ,
-            "name": "test",
-            "code": "233443221",
-            "price": 3600000000,
-            "type":"glass",
-            "deposit": 50000000,
-            "image": "123456qwet",
-            "amount": 100, "description": "this is description for test car",
-            "specification":
-            {
-            },
-            "color": ["yelow", "red"],
-            "special": "max speed very fast"
-        }]
     const [state, setState] = useState({
         showForm: false,
         //initial_filter_values: query_params,
-        idAccessory: 0
+        idUser: 0
     })
 
     useEffect(() => {
@@ -58,22 +42,22 @@ export default function Accessory(props) {
         setState({ showForm: false })
     }
 
-    const handleUpdateAccessory = (value) => {
-        let id = state.idAccessory;
+    const handleUpdateUser = (value) => {
+        let id = state.idUser;
         setState({ showForm: false })
         let params = value;
-        updateAccessory(id, params)
+        updateUser(id, params)
     }
 
     const openModal = (values) => {
         handleShowForm(true);
-        setState({ ...state, idAccessory: values });
+        setState({ ...state, idUser: values });
     }
 
     return (
         <div>
             <div className='container-fluid mb-3 text-left py-2'>
-                <span className='h5 font-weight-bold '>Phụ kiện</span>
+                <span className='h5 font-weight-bold '>Xe</span>
             </div>
             {/* <FormFilter
             onSubmit={()=>handleSubmitFilter}
@@ -82,12 +66,12 @@ export default function Accessory(props) {
                 dataSource={
                     // props.city.data 
                     // ||
-                    accessory}
+                    []}
                 //loading={props.city.loading}
                 updateCar={openModal}
             />
             <Modal
-                title="Cập nhật phụ kiện"
+                title="Cập nhật người dùng"
                 visible={false}
                 closable={false}
                 onCancel={handleCloseModal}
@@ -98,7 +82,7 @@ export default function Accessory(props) {
                     keyboard={true}
                     maskClosable={true}
                     onCancel={() => handleShowForm(false)}
-                    onSubmit={handleUpdateAccessory}
+                    onSubmit={handleUpdateUser}
                     handleShowForm={handleShowForm}
                 />
             </Modal>

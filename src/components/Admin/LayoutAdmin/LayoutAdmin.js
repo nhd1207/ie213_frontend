@@ -30,7 +30,7 @@ export default function LayoutAdmin(props) {
     };
 
     return (
-        <BrowserRouter>
+        // <BrowserRouter>
         <Layout style={{ minHeight: '100vh' }}>
             <Sider 
             //collapsible 
@@ -66,11 +66,10 @@ export default function LayoutAdmin(props) {
                 width: '100%',
                 minHeight: '100vh'
             }}>
-                {/* {props.children} */}
-                <AccessoryTable></AccessoryTable>
+                 {props.children} 
             </Content>
         </Layout>
-        </BrowserRouter>
+        // </BrowserRouter>
     );
 }
 
