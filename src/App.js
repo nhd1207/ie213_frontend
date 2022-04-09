@@ -1,4 +1,4 @@
-import LoginForm from "./components/Authentication/Login/LoginForm";
+import Login from "./screens/LoginPage/Login";
 import "./App.css";
 import AdminPage from "./screens/AdminPage/AdminPage";
 import LayoutAdmin from "./components/Admin/LayoutAdmin/LayoutAdmin";
