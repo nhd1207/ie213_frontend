@@ -74,7 +74,7 @@ function LoginForm() {
             className={style["login-input"]}
             type="email"
             placeholder="Vpseven@example.org"
-            value={email}
+            // value={email}
             onChange={emailChangeHandler}
             onBlur={emailValidation}
           />

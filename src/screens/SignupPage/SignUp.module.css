@@ -4,6 +4,9 @@
   grid-template-rows: 100%;
   height: 100vh;
   align-items: center;
+  background-image: url("../../Images/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .triangle {
