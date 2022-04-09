@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer as formReducer } from 'redux-form';
-
+import { BrowserRouter } from 'react-router-dom';
 const rootReducer = combineReducers({
   form: formReducer,
 });
@@ -14,9 +14,11 @@ const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>
+  <BrowserRouter>
   {/* <React.StrictMode> */}
     <App />
   {/* </React.StrictMode> */}
+  </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );
