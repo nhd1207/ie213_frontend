@@ -1,0 +1,56 @@
+.container {
+    text-align: center;
+}
+
+.img-container {
+    display: flex;
+}
+
+.container .img1,.img2 {
+    flex-direction: row;
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+/* 
+.cover {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    color: rgb(0, 0, 0);
+}
+
+.container .img1 {
+    
+} */
+
+.container .caption {
+    padding-bottom: 200px;
+    color: white;
+}
+
+.container .header {
+    font-size: 50px;
+    position: absolute;
+    top: 0;
+    color: white;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.container .caption .title {
+    font-size: 70px;
+    color: white;
+}
+.container .caption .attribute {
+    text-transform: uppercase;
+    font-size: 50px;
+}
+
+    
+.container .caption .btn {
+    color: white;
+    opacity: 40%;
+}
+
