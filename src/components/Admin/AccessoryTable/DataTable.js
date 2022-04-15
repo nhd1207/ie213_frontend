@@ -3,10 +3,10 @@ import { Table, Spin, Space, Tooltip } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDeleteLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
 
-const DataTable = ({ dataSource, loading, updateCar }) => {
+const DataTable = ({ dataSource, loading, updateAccessory }) => {
 
   const onSubmit = (values) => {
-    updateCar(values)
+    updateAccessory(values)
   }
 
   const columns = [
@@ -16,9 +16,29 @@ const DataTable = ({ dataSource, loading, updateCar }) => {
       render: (value, record, i) => <a>{i + 1}</a>,
     },
     {
-      title: 'Tên xe',
+      title: 'Tên phụ kiện',
       dataIndex: 'name',
       key: 'name',
+      className: 'text-left',
+      render: (value, record) =>
+        <div>
+          <span> {value || ''} </span>
+        </div>
+    },
+    {
+      title: 'Mã xe',
+      dataIndex: 'code',
+      key: 'code',
+      className: 'text-left',
+      render: (value, record) =>
+        <div>
+          <span> {value || ''} </span>
+        </div>
+    },
+    {
+      title: 'Loại',
+      dataIndex: 'type',
+      key: 'type',
       className: 'text-left',
       render: (value, record) =>
         <div>
@@ -34,16 +54,6 @@ const DataTable = ({ dataSource, loading, updateCar }) => {
         <img src={value} height={50} width={50}></img>
     },
     {
-      title: 'Tiền đặt cọc',
-      dataIndex: 'deposit',
-      key: 'deposit',
-      className: 'text-left',
-      render: (value, record) =>
-        <div>
-          <span> {value || ''} </span>
-        </div>
-    },
-    {
       title: 'Giá',
       dataIndex: 'price',
       key: 'price',
@@ -57,16 +67,6 @@ const DataTable = ({ dataSource, loading, updateCar }) => {
       title: 'Số lượng',
       dataIndex: 'amount',
       key: 'amount',
-      className: 'text-left',
-      render: (value, record) =>
-        <div>
-          <span> {value || ''} </span>
-        </div>
-    },
-    {
-      title: 'Giới thiệu',
-      dataIndex: 'description',
-      key: 'description',
       className: 'text-left',
       render: (value, record) =>
         <div>

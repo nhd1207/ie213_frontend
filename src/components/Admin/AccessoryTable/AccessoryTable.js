@@ -3,33 +3,29 @@ import { Button, Spin, Alert, Modal } from 'antd';
 import LayoutAdmin from '../LayoutAdmin/LayoutAdmin'
 import DataTable from './DataTable'
 import FormFilter from './FormFilter'
-import FormUpdateCar from './FormUpdateCar'
+import FormUpdateAccessory from './FormUpdateAccessory'
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import queryString from 'query-string'
-import { createCar, getList, updateCar } from './action';
+import { createCar, getList, updateAccessory } from './action';
 //import { connect } from 'react-redux'
 import classes from "./index.module.css";
 
 export default function CarTable(props) {
     // const query_params = queryString.parse(window.location.search);
-    const car = [
+    const accessory = [
         {
             "_id": "623843e520842dc20d24765f" ,
             "name": "test",
             "code": "233443221",
             "price": 3600000000,
+            "type":"glass",
             "deposit": 50000000,
             "image": "123456qwet",
             "amount": 100, "description": "this is description for test car",
-            "model": "Hijeep", "warrantyPeriod": 2,
-            "year": 2006,
             "specification":
             {
-                "displacement": 600,
-                "power": 200, "maxSpeed": 235,
-                "acceleration": 2.1, "weight": 1500
             },
             "color": ["yelow", "red"],
             "special": "max speed very fast"
@@ -62,11 +58,11 @@ export default function CarTable(props) {
         setState({ showForm: false })
     }
 
-    const handleUpdateCar = (value) => {
+    const handleUpdateAccessory = (value) => {
         let id = state.idCar;
         setState({ showForm: false })
         let params = value;
-        updateCar(id, params)
+        updateAccessory(id, params)
     }
 
     const openModal = (values) => {
@@ -86,7 +82,7 @@ export default function CarTable(props) {
                 dataSource={
                     // props.city.data 
                     // ||
-                    car}
+                    accessory}
                 //loading={props.city.loading}
                 updateCar={openModal}
             />
@@ -97,12 +93,12 @@ export default function CarTable(props) {
                 onCancel={handleCloseModal}
                 footer={null}
             >
-                <FormUpdateCar
+                <FormUpdateAccessory
                     destroyOnClose={true}
                     keyboard={true}
                     maskClosable={true}
                     onCancel={() => handleShowForm(false)}
-                    onSubmit={handleUpdateCar}
+                    onSubmit={handleUpdateAccessory}
                     handleShowForm={handleShowForm}
                 />
             </Modal>

@@ -13,7 +13,7 @@ let ContactForm = props => {
                         <Field
                             name="name"
                             component={RenderInputText}
-                            placeholder='Tên Xe'
+                            placeholder='Tên Phụ kiện'
                         />
                     </div>
                     <div className='col-2'>
@@ -26,7 +26,7 @@ let ContactForm = props => {
 
 ContactForm = reduxForm({
     enableReinitialize: true,
-    form: 'FilterCar'
+    form: 'FilterAccessory'
 })(ContactForm)
 
 export default ContactForm

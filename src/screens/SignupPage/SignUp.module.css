@@ -1,0 +1,67 @@
+.container {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 100%;
+  height: 100vh;
+  align-items: center;
+  background-image: url("../../Images/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.triangle {
+  display: inline-block;
+  border-top: 50vh solid transparent;
+  border-bottom: 50vh solid transparent;
+  border-left: 20vw solid rgba(0, 0, 0, 0.685);
+  margin-right: 10px;
+}
+
+.rectangle {
+  display: inline-block;
+  width: 45vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.685);
+}
+
+.introduction {
+  text-align: center;
+  z-index: 1;
+  color: white;
+  font-size: 22px;
+}
+
+.introduction h1 {
+    margin-bottom: 80px;
+    transform: scale(1.5);
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  z-index: 1;
+  align-items: center;
+  
+}
+
+.contact-icon {
+  text-align: right;
+  display: flex;
+  justify-self: flex-end;
+  align-items: center;
+  transform: scale(1.5);
+}
+
+.contact-info {
+  text-align: left;
+  margin-left: 20px;
+}
+
+.contact-info p {
+  margin: 0px;
+}
+
+.signup-form {
+  z-index: 1;
+  padding: 50px;
+}

@@ -1,6 +1,6 @@
 import axios from '../requestV2'
 
-const prefix = '/car';
+const prefix = '/accessory';
 
 export const getDetailByCode =(code)=> {
     return axios({
@@ -13,14 +13,6 @@ export const getList =()=> {
     return axios({
         method: 'GET',
         url: `${prefix}/`
-    })
-}
-
-export const compareTwoCars =(data)=> {
-    return axios({
-        method: 'GET',
-        data,
-        url: `${prefix}/compareTwoCars`
     })
 }
 

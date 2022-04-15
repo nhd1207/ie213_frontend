@@ -1,6 +1,6 @@
 import axios from '../requestV2'
 
-const prefix = '/car';
+const prefix = '/accessory-bill';
 
 export const getDetailByCode =(code)=> {
     return axios({
@@ -8,7 +8,6 @@ export const getDetailByCode =(code)=> {
         url: `${prefix}/${code}`
     })
 }
-
 export const getList =()=> {
     return axios({
         method: 'GET',
@@ -16,13 +15,13 @@ export const getList =()=> {
     })
 }
 
-export const compareTwoCars =(data)=> {
+export const getListAdmin =()=> { //grt all bill for admin
     return axios({
         method: 'GET',
-        data,
-        url: `${prefix}/compareTwoCars`
+        url: `${prefix}/all`
     })
 }
+
 
 export const create =(data)=> {
     return axios({
@@ -34,7 +33,7 @@ export const create =(data)=> {
 
 export const update =(id, data)=> {
     return axios({
-        method: 'PUT',
+        method: 'PATCH',
         data,
         url: `${prefix}/${id}`
     })
