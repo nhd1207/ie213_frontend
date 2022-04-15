@@ -9,7 +9,7 @@ export const action_type = {
 export function getListShowroom (params)
 {
     return {
-        type: action_type.GETLISTSHOWROOM.REQUEST,
+        type: action_type.GETSHOWROOM.REQUEST,
         params,
     }
 }
