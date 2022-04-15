@@ -1,4 +1,4 @@
-import { takeLatest, call, put, all, select } from "redux-saga/effects";
+import { takeLatest, call, put, all } from "redux-saga/effects";
 import { action_type as TYPE } from "./action";
 import { push } from "react-router-redux";
 import * as api from "../../apis/Auth";
