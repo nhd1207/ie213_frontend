@@ -1,9 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import style from './Showroom.module.css'
 import Showroom2 from '../../Images/Showroom2.png'
 import Showroom3 from '../../Images/Showroom3.png'
 import {getListShowroom} from './action'
-export default function Showroom() {
+
+ function Showroom(props) {
+   useEffect(() =>{
+     let params = {};
+      props.getListShowroom(params);
+      console.log(props);
+   }, [])
   return (
     <div className={style.SHcon}>
       <div className={style.Banner}>
@@ -65,3 +71,15 @@ export default function Showroom() {
     </div>
   )
 }
+
+const mapStateToProps = state => ({
+  data: state.data
+})
+
+const mapDispatchToProps = dispatch => ({
+  getListShowroom: (params) => {
+      dispatch(getListShowroom(params))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Showroom)
