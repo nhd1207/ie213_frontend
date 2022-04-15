@@ -2,6 +2,7 @@ import React from 'react'
 import style from './Showroom.module.css'
 import Showroom2 from '../../Images/Showroom2.png'
 import Showroom3 from '../../Images/Showroom3.png'
+import {getListShowroom} from './action'
 export default function Showroom() {
   return (
     <div className={style.SHcon}>

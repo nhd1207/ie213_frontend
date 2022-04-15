@@ -1,28 +1,15 @@
 export const action_type = {
     GETPOST: {
-        REQUEST: "GETPOST.REQUEST",
-        SUCCESS: "GETPOST.SUCCESS",
-        ERROR: "GETPOST.ERROR"
-    },
-    GETCAR: {
-        REQUEST: "GETCAR.REQUEST",
-        SUCCESS: "GETCAR.SUCCESS",
-        ERROR: "GETCAR.ERROR"
+        REQUEST: "GETSHOWROOM.REQUEST",
+        SUCCESS: "GETSHOWROOM.SUCCESS",
+        ERROR: "GETSHOWROOM.ERROR"
     }
 }
 
-export function getListCar (params)
+export function getListShowroom (params)
 {
     return {
-        type: action_type.GETCAR.REQUEST,
-        params,
-    }
-}
-
-export function getListPost (params)
-{
-    return {
-        type: action_type.GETPOST.REQUEST,
+        type: action_type.GETLISTSHOWROOM.REQUEST,
         params,
     }
 }
