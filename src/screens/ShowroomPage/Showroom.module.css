@@ -53,6 +53,7 @@ h2 {
     margin: 0;
 }
 
+/* LeftContent */
 .leftContent__wrapper {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -99,6 +100,7 @@ h2 {
     margin-top: 5rem;
 }
 
+/* rightcontent */
 .rightContent__wrapper {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -112,7 +114,6 @@ h2 {
     text-align: justify;
     
 }
-
 
 .rightContent__desc {
     padding-top: 5rem;
