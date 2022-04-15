@@ -15,7 +15,7 @@ function reducer(state = initialState, action) {
         case type.GETSHOWROOM.SUCCESS:
             return {
                 ...state,
-                cars: action.data,
+                data: action.data,
                 loading: false,
             }
         case type.GETSHOWROOM.ERROR:

@@ -1,5 +1,5 @@
 export const action_type = {
-    GETPOST: {
+    GETSHOWROOM: {
         REQUEST: "GETSHOWROOM.REQUEST",
         SUCCESS: "GETSHOWROOM.SUCCESS",
         ERROR: "GETSHOWROOM.ERROR"
