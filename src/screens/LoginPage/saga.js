@@ -2,21 +2,21 @@ import { takeLatest, call, put, all, select } from "redux-saga/effects";
 import { action_type as TYPE } from "./action";
 import { push } from "react-router-redux";
 import * as api from "../../apis/Auth";
-import * as apiuser from "../../apis/User";
+// import * as apiuser from "../../../apis/User";
 import Cookies from "js-cookie";
 
 function* getListSaga(action) {
   try {
     const { params } = action;
-    params.remember_me = true;
-    let data = params;
-    const response = yield call(api.login, data);
+    // params.remember_me = true;
+    const response = yield call(api.login, params);
+    console.log(params);
     if (response.status) {
       yield all([put({ type: TYPE.LOGIN.SUCCESS, ...response })]);
-      Cookies.set("web_token", response.access_token);
-      let param = {email: params.email};
-      yield put({type: TYPE.VERIFY.REQUEST, param})
-      yield put(push("/home"));
+      Cookies.set("web_token", response.token);
+      // let param = {email: params.email};
+      // yield put({type: TYPE.VERIFY.REQUEST, param})
+      // yield put(push("/home"));
     } else {
       yield put({ type: TYPE.LOGIN.ERROR, error: response });
     }
@@ -39,27 +39,27 @@ function* verifySaga(action) {
   }
 }
 
-function* getListUserSaga(action) {
-    try {
+// function* getListUserSaga(action) {
+//     try {
       
-      const { params } = action;
-      console.log(params);
-      const response = yield call(apiuser.getAllUser, params);
-      if (response.status) {
-        yield all([put({ type: TYPE.USER.SUCCESS, ...response })]);
-      } else {
-        yield put({ type: TYPE.USER.ERROR, error: response });
-      }
-    } catch (error) {
-      yield all([put({ type: TYPE.USER.ERROR, error })]);
-    }
-  }
+//       const { params } = action;
+//       console.log(params);
+//       const response = yield call(apiuser.getList, params);
+//       if (response.status) {
+//         yield all([put({ type: TYPE.USER.SUCCESS, ...response })]);
+//       } else {
+//         yield put({ type: TYPE.USER.ERROR, error: response });
+//       }
+//     } catch (error) {
+//       yield all([put({ type: TYPE.USER.ERROR, error })]);
+//     }
+//   }
 
 function* watcher() {
   yield all([
     takeLatest(TYPE.LOGIN.REQUEST, getListSaga),
     takeLatest(TYPE.VERIFY.REQUEST, verifySaga),
-    takeLatest(TYPE.USER.REQUEST, getListUserSaga)
+    // takeLatest(TYPE.USER.REQUEST, getListUserSaga)
   ]);
 }
 
