@@ -32,6 +32,7 @@
     transform-origin: top center;
     transform: translateX(10%) translateY(-55%) skew(-120deg);
 } */
+/* General CSS */
 .title{
     position: relative;
     font-weight: 700;
@@ -53,11 +54,18 @@ h2 {
     margin: 0;
 }
 
+.backgroundSetting {
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* End General CSS */
+
 /* LeftContent */
 .leftContent__wrapper {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 100% 50%;
 }
 
 .city_title{
@@ -82,31 +90,28 @@ h2 {
 
 .leftContent__img_wrapper {
     display: grid;
+    margin-top: 5rem;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%, 100% 0%);
 }
 
 .img_wrapper_1 {
-    clip-path: polygon(60% 0%, 30% 100%, 100% 100%, 100% 0%);
     background-image: url(../../Images/Showroom2.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    
+    composes: backgroundSetting;
 }
 
 .img_wrapper_2 {
-    clip-path: polygon(30% 0%, 0% 100%, 100% 100%, 100% 0%);
     background-image: url(../../Images/Showroom3.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
+    composes: backgroundSetting;
     margin-top: 5rem;
 }
+/* End LeftContent */
 
 /* rightcontent */
 .rightContent__wrapper {
     display: grid;
     grid-template-columns: 50% 50%;
-    /* grid-template-rows: 50% 50%; */
+    grid-template-rows: 50% 50%;
 }
-
 
 .rightContent__text  {
     font-size: 2rem;
@@ -127,15 +132,13 @@ h2 {
 
 .img_wrapper_3 {
     background-image: url(../../Images/Showroom2.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
+    composes: backgroundSetting;
     
 }
 
 .img_wrapper_4 {
     background-image: url(../../Images/Showroom3.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
+    composes: backgroundSetting;
     margin-top: 5rem;
 }
-
+/* End rightcontent */

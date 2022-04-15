@@ -34,14 +34,14 @@ import {connect} from 'react-redux'
               <hr className={style.line}></hr>
             </div>
         </div>
-        {/* <div className={style.leftContent__img_wrapper}>  */}
+        <div className={style.leftContent__img_wrapper}> 
           <div className={style.img_wrapper_1}>
             {/* <img src={Showroom2}></img> */}
           </div>
           <div className={style.img_wrapper_2}>
             {/* <img src={Showroom3}></img> */}
           </div>
-        {/* </div> */}
+        </div>
       </div> 
       <div className={style.rightContent__wrapper}>
         
