@@ -10,14 +10,14 @@ export default function Showroom() {
         <h1 className={style.title}>SHOWROOMS</h1>
         <h2 className={style.title}>LỚN NHẤT CẢ NƯỚC</h2>
       </div>
-      <div className={style.HCM_wrapper}>
-        <div className={style.HCM_text}>
+      <div className={style.leftContent__wrapper}>
+        <div className={style.leftContent__text}>
           <hr className={style.line}></hr>
           <h1 className={style.city_title}>HỒ CHÍ MINH</h1>
-          <div className={style.HCM_text_content}>Đây là 1 đoạn giới thiệu,  Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu,  Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu<br /><br />
+          <div className={style.leftContent__desc}>Đây là 1 đoạn giới thiệu,  Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu,  Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu<br /><br />
             Đây là 1 đoạn giới thiệu,  Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu,  Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu<br />
             </div>
-            <div className={style.HCM_text_content}>
+            <div className={style.leftContent__desc}>
               123, đường 567, Q1, Tp.HCM
               <hr className={style.line}></hr>
               123, đường 567, Q1, Tp.HCM
@@ -26,11 +26,39 @@ export default function Showroom() {
               <hr className={style.line}></hr>
             </div>
         </div>
-        <div className={style.img_wrapper_1}>
-          {/* <img src={Showroom2}></img> */}
+        {/* <div className={style.leftContent__img_wrapper}>  */}
+          <div className={style.img_wrapper_1}>
+            {/* <img src={Showroom2}></img> */}
+          </div>
+          <div className={style.img_wrapper_2}>
+            {/* <img src={Showroom3}></img> */}
+          </div>
+        {/* </div> */}
+      </div> 
+      <div className={style.rightContent__wrapper}>
+        
+        <div className={style.rightContent__image_wrapper}>
+          <div className={style.img_wrapper_3}>
+            {/* <img src={Showroom2}></img> */}
+          </div>
+          <div className={style.img_wrapper_4}>
+            {/* <img src={Showroom3}></img> */}
+          </div>
         </div>
-        <div className={style.img_wrapper_2}>
-          {/* <img src={Showroom3}></img> */}
+        <div className={style.rightContent__text}>
+          <hr className={style.line}></hr>
+          <h1 className={style.city_title}>ĐÀ NẴNG</h1>
+          <div className={style.rightContent__desc}>Đây là 1 đoạn giới thiệu,  Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu,  Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu<br /><br />
+            Đây là 1 đoạn giới thiệu,  Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu,  Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu, Đây là 1 đoạn giới thiệu<br />
+            </div>
+            <div className={style.rightContent__desc}>
+              123, đường 567, Q1, Tp.HCM
+              <hr className={style.line}></hr>
+              123, đường 567, Q1, Tp.HCM
+              <hr className={style.line}></hr>
+              123, đường 567, Q1, Tp.HCM
+              <hr className={style.line}></hr>
+            </div>
         </div>
       </div> 
     </div>

@@ -53,7 +53,7 @@ h2 {
     margin: 0;
 }
 
-.HCM_wrapper {
+.leftContent__wrapper {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
@@ -63,19 +63,24 @@ h2 {
     font-size: 7rem;
 }
 
-.HCM_text  {
+.leftContent__text  {
     font-size: 2rem;
     padding: 5rem;
     text-align: justify;
     grid-row: 1 / span 2;
+    margin-top: 2rem;
 }
 
 .line {
     color: #000;
 }
 
-.HCM_text_content {
+.leftContent__desc {
     padding-top: 5rem;
+}
+
+.leftContent__img_wrapper {
+    display: grid;
 }
 
 .img_wrapper_1 {
@@ -91,5 +96,45 @@ h2 {
     background-image: url(../../Images/Showroom3.png);
     background-size: 100%;
     background-repeat: no-repeat;
+    margin-top: 5rem;
+}
+
+.rightContent__wrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    /* grid-template-rows: 50% 50%; */
+}
+
+
+.rightContent__text  {
+    font-size: 2rem;
+    padding: 5rem;
+    text-align: justify;
+    
+}
+
+
+.rightContent__desc {
+    padding-top: 5rem;
+}
+
+.rightContent__image_wrapper {
+    grid-row: 1 / span 2;
+    display: grid;
+    clip-path: polygon(0% 0%, 0% 100%, 50% 100%, 100% 0%);
+}
+
+.img_wrapper_3 {
+    background-image: url(../../Images/Showroom2.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    
+}
+
+.img_wrapper_4 {
+    background-image: url(../../Images/Showroom3.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-top: 5rem;
 }
 
