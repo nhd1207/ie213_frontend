@@ -6,11 +6,12 @@ import { link_api } from './webConfig'
 const instance = axios.create({
   baseURL: link_api,
   timeout: 50000,
-  // transformRequest: [(data) => JSON.stringify(data)],
-  // headers: {
-  //   'Accept': 'application/json',
-  //   'Content-Type': 'application/json',
-  // },
+  transformRequest: [(data) => JSON.stringify(data)],
+  headers: {
+    // 'Accept': 'application/json',
+    // 'Content-Type': 'application/json',
+    // 'Access-Control-Allow-Origin': '*'
+  },
   validateStatus: (status) => {
     return true; // I'm always returning true, you may want to do it depending on the status received
   },

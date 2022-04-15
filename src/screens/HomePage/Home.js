@@ -37,11 +37,12 @@ const data = [
 ];
 
 function Home(props) {
+
     useEffect(() => {
-        console.log('useEffect has been called!');
-        let params='';
-        getListCar(params);
-        getListPost(params);
+        let params={};
+        props.getListCar(params);
+        props.getListPost(params);
+        console.log(props);
       }, []);
 
     return (
@@ -96,8 +97,8 @@ function Home(props) {
 }
 
 const mapStateToProps = state => ({
-    cars: state.car,
-    news: state.new
+    car: state.cars,
+    post: state.posts
 })
 
 const mapDispatchToProps = dispatch => ({
