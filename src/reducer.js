@@ -4,13 +4,15 @@ import { reducer as formReducer } from 'redux-form'
 import login from "./screens/LoginPage/reducer"
 import signup from "./screens/SignupPage/reducer"
 import home from "./screens/HomePage/reducer"
+import user from "./screens/UserPage/reducer"
 
 const Reducer = (history) => combineReducers({    
     form: formReducer,
     router: connectRouter(history),
     login,
     signup,
-    home
+    home,
+    user
   })
   
 export default Reducer

@@ -1,7 +1,8 @@
 import Login from "../screens/LoginPage"
 import Signup from "../screens/SignupPage"
 import Home from "../screens/HomePage"
-
+import User from "../screens/UserPage"
+import Car from "../screens/CarPage"
 export default [
     {
         path: '/home',
@@ -18,5 +19,13 @@ export default [
     {
         path: '/errors/404',
         component: Error
+    },
+    {
+        path: '/user',
+        component: User
+    },
+    {
+        path: '/car',
+        component: Car
     }
 ]
