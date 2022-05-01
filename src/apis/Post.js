@@ -38,6 +38,3 @@ export const destroy =(id)=> {
         url: `${prefix}/${id}`
     })
 }
-
-
-

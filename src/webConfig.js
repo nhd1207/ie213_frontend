@@ -1,0 +1,1 @@
+export const link_api = 'https://seven-ie213.herokuapp.com/api/v1'

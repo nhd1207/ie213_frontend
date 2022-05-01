@@ -41,13 +41,13 @@ export const toggleUser =(id)=> { // tắt hoạt động user
 }
 
 
-// export const verify =(params)=> {
-//     return axios({
-//         method: 'GET',
-//         params,
-//         url: `user`
-//     })
-// }
+export const verify =(params)=> {
+    return axios({
+        method: 'GET',
+        params,
+        url: `user`
+    })
+}
 // export const getDetailByCode =(booking_code)=> {
 //     return axios({
 //         method: 'GET',

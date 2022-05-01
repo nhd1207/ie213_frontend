@@ -6,33 +6,57 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 
+
 function emailReducer(state, action) {
-  if (action.type === "EMAIL_LOGIN")
-  {
+  if (action.type === "EMAIL_LOGIN") {
     return {
       value: action.value,
       isEmailValid: action.isEmailValid,
-      isEmailInputLostFocus: action.isEmailInputLostFocus
-    }
+      isEmailInputLostFocus: action.isEmailInputLostFocus,
+    };
   } else if (action.type === "EMAIL_INPUT_LOSTFOCUS") {
     return {
       value: state.value,
       isEmailValid: state.isEmailValid,
-      isEmailInputLostFocus: true
-    }
+      isEmailInputLostFocus: true,
+    };
   } else {
     return {
       value: "",
       isEmailValid: false,
-      isEmailInputLostFocus: false
-    }
+      isEmailInputLostFocus: false,
+    };
   }
 }
-function LoginForm() {
+
+function passwordReducer(state, action) {
+  if (action.type === "PASSWORD_LOGIN") {
+    return {
+      value: action.value,
+      isPasswordCorrect: action.isPasswordCorrect,
+    };
+  } else if (action.type === "PASSWORD_INPUT_LOSTFOCUS") {
+    return {
+      value: state.value,
+      isPasswordCorrect: state.isPasswordCorrect,
+    };
+  }
+  return {
+    value: "",
+    isPasswordCorrect: false,
+  };
+}
+
+function LoginForm(props) {
   const [email, dispatchEmail] = useReducer(emailReducer, {
     value: "",
     isEmailValid: false,
     isEmailInputLostFocus: false,
+  });
+
+  const [password, dispatchPassword] = useReducer(passwordReducer, {
+    value: "",
+    isPasswordCorrect: false,
   });
 
   function emailChangeHandler(event) {
@@ -52,18 +76,37 @@ function LoginForm() {
 
   function emailValidation() {
     dispatchEmail({
-      type: "EMAIL_INPUT_LOSTFOCUS"
-    })
+      type: "EMAIL_INPUT_LOSTFOCUS",
+    });
   }
 
-  function passwordChangeHandler() {
-    
+  function passwordChangeHandler(event) {
+    let enteredPassword = event.target.value.trim();
+    function validatePassword(password) {
+     //compare password with database
+    }
+    dispatchPassword({
+      type: "PASSWORD_LOGIN",
+      value: enteredPassword,
+      isPasswordCorrect: validatePassword(enteredPassword),
+    });
   }
 
-  function loginHandler(email, password) {}
+  let invalidEmail = email.isEmailInputLostFocus && !email.isEmailValid;
+  let wrongPassword = !password.isPasswordCorrect;
+
+  function loginHandler(event) {
+    event.preventDefault();
+    let params = {
+      "email": email.value,
+      "password": password.value
+    }
+    props.onSendLoginData(params)
+  }
+
   return (
     <div className={style.background}>
-      <h1>ĐĂNG KÝ</h1>
+      <h1>ĐĂNG NHẬP</h1>
       <Form className={style.loginform} onSubmit={loginHandler}>
         <Form.Group className={"mb-3"} controlId="formBasicEmail">
           <div>
@@ -74,10 +117,15 @@ function LoginForm() {
             className={style["login-input"]}
             type="email"
             placeholder="Vpseven@example.org"
-            value={email}
+            // value={email}
             onChange={emailChangeHandler}
             onBlur={emailValidation}
           />
+          {invalidEmail && (
+            <Form.Text className={style["email-error"]}>
+              Emai không hợp lệ
+            </Form.Text>
+          )}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <div>
@@ -87,9 +135,14 @@ function LoginForm() {
           <Form.Control
             className={style["login-input"]}
             type="password"
-            placeholder="Mật khẩu ít nhất 8 ký tự"
+            placeholder="Ít nhất 8 ký tự"
             onChange={passwordChangeHandler}
           />
+          {wrongPassword && (
+            <Form.Text className={style["password-error"]}>
+              Mật khẩu sai
+            </Form.Text>
+          )}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Nhớ mật khẩu" />
@@ -106,4 +159,5 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+
+export default (LoginForm);

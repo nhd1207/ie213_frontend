@@ -1,22 +1,22 @@
-import { takeLatest, call, put, all, select } from "redux-saga/effects";
+import { takeLatest, call, put, all } from "redux-saga/effects";
 import { action_type as TYPE } from "./action";
 import { push } from "react-router-redux";
-import * as api from "../../../apis/Auth";
+import * as api from "../../apis/Auth";
 // import * as apiuser from "../../../apis/User";
 import Cookies from "js-cookie";
 
 function* getListSaga(action) {
   try {
     const { params } = action;
-    params.remember_me = true;
-    let data = params;
-    const response = yield call(api.login, data);
+    // params.remember_me = true;
+    const response = yield call(api.login, params);
+    console.log(params);
     if (response.status) {
       yield all([put({ type: TYPE.LOGIN.SUCCESS, ...response })]);
-      Cookies.set("web_token", response.access_token);
-      let param = {email: params.email};
-      yield put({type: TYPE.VERIFY.REQUEST, param})
-      yield put(push("/home"));
+      Cookies.set("web_token", response.token);
+      // let param = {email: params.email};
+      // yield put({type: TYPE.VERIFY.REQUEST, param})
+      // yield put(push("/home"));
     } else {
       yield put({ type: TYPE.LOGIN.ERROR, error: response });
     }

@@ -1,0 +1,5 @@
+section.container {
+    height: 100vh;
+    background-image: url(../../Images/background.jpg);
+    background-size: cover;
+}
