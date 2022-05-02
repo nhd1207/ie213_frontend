@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Button, Spin, Modal } from 'antd';
 import DataTable from './components/DataTable'
-import FormUpdateCar from './components/FormUpdateCar'
+import FormUpdateAccessory from './components/FormUpdateAccessory'
 import FormAddCar from './components/FormAddNew'
 import Layout from '../../Admin2/LayoutAdmin/LayoutAdmin'
 import queryString from 'query-string'
-import { createCar, getList, updateCar, deleteCar } from './action';
+import { createAccessory, getList, updateAccessory, deleteAccessory } from './action';
 import { PlusOutlined } from '@ant-design/icons';
-import FormFilter from './components/FormFilter'
-import classes from "./index.module.css";;
+import FormFilter from './components/FormFilter';
+import classes from "./index.module.css";
 
 
 class index extends Component {
@@ -20,20 +20,28 @@ class index extends Component {
             showForm: false,
             showForm2: false,
             initial_filter_values: query_params,
-            idCar: 0,
-            car: {}
+            idAcc: 0,
+            acc: {}
         }
     }
 
     componentDidMount = () => {
         let params = {};
         this.props.getList(params)
-        console.log(this.props)
     }
 
-    //add car
+    handleSubmitFilter = ({...values}) => { // chưa chạy
+        let params = {
+            ...values,
+            status:1
+        }
+        this.props.history.replace(window.location.pathname + '?' + queryString.stringify(params));
+        this.props.getList(params)
+        console.log('handleSubmitFilter')
+    }
+
+    //add Acc
     handleShowFormAdd = (value) => {
-        console.log('handleShowForm')
         this.setState({ showForm2: value || false })
     }
 
@@ -41,9 +49,7 @@ class index extends Component {
         this.setState({ showForm2: false })
     }
 
-    handleCreateCar = (value) => {
-        console.log('handleCreateCar')
-        let id = this.state.idCar;
+    handleCreateAccessory = (value) => {
         this.setState({ showForm2: false })
         let params = value
         //     name: value.name,
@@ -53,17 +59,15 @@ class index extends Component {
         // }
         // if(params.name && params.deposit && params.amount && params.price)
         // return console.log('loi')
-        this.props.createCar(params)
+        this.props.createAccessory(params)
     }
 
     openModalAdd = (values) => {
-        console.log('openModal')
         this.handleShowFormAdd(true);
     }
 
-    //update car
+    //update Acc
     handleShowForm = (value) => {
-        console.log('handleShowForm')
         this.setState({ showForm: value || false })
     }
 
@@ -71,8 +75,7 @@ class index extends Component {
         this.setState({ showForm: false })
     }
 
-    handleUpdateCar = (value) => {
-        console.log('handleUpdateCar')
+    handleUpdateAccessory = (value) => {
         let id = this.state.idCar;
         this.setState({ showForm: false })
         let params = value
@@ -86,15 +89,15 @@ class index extends Component {
         this.props.updateCar(id, params)
     }
 
-    handleDeleteCar = (value) => {
+    handleDeleteAccessory = (value) => {
         let id = value;
-        this.props.deleteCar(id);
+        this.props.deleteAccessory(id);
     }
     openModal = (values) => {
         console.log('openModal')
         this.handleShowForm(true);
-        this.state.idCar = values._id;
-        this.state.car = values;
+        this.state.idAcc = values._id;
+        this.state.acc= values;
     }
 
     render() {
@@ -104,37 +107,37 @@ class index extends Component {
                 <Layout>
                     {/* <Spin size='large' spinning={this.props.car.loading}> */}
                     <div className='container-fluid mb-3 text-left py-2' style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span className='h5 font-weight-bold '>Xe</span>
-                        <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} title='Thêm xe' type="primary" ></Button></span>
+                        <span className='h3 font-weight-bold '>Phụ kiện</span>
+                        <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} text='Thêm xe' type="primary" ></Button></span>
                     </div>
-                    {/* <FormFilter
-                    onSubmit={()=>handleSubmitFilter}
-                    /> */}
+                    <FormFilter
+                    onSubmit={this.handleSubmitFilter}
+                    />
                     <DataTable //done
-                        dataSource={this.props?.car?.data.car || []}
-                        loading={this.props.car.loading}
-                        updateCar={this.openModal}
-                        deleteCar={this.handleDeleteCar}
+                        dataSource={this.props?.accessory?.data.accessory || []}
+                        loading={this.props.accessory.loading}
+                        updateAccessory={this.openModal}
+                        deleteAccessory={this.handleDeleteAccessory}
                     />
                     <Modal
-                        title="Cập nhật xe"
+                        title="Cập nhật Phụ kiện"
                         visible={showForm}
                         closable={true}
                         onCancel={this.handleCloseModal}
                         footer={null}
                     >
-                        <FormUpdateCar
+                        <FormUpdateAccessory
                             destroyOnClose={false}
                             keyboard={true}
                             maskClosable={true}
                             onCancel={() => this.handleShowForm(false)}
-                            onSubmit={this.handleUpdateCar}
+                            onSubmit={this.handleUpdateAccessory}
                             handleShowForm={this.handleShowForm}
-                            initialValues={this.state.car}
+                            initialValues={this.state.acc}
                         />
                     </Modal>
                     <Modal
-                        title="Thêm xe"
+                        title="Thêm Phụ kiện"
                         visible={showForm2}
                         closable={true}
                         onCancel={this.handleCloseModalAdd}
@@ -144,7 +147,7 @@ class index extends Component {
                             keyboard={true}
                             maskClosable={true}
                             onCancel={() => this.handleShowFormAdd(false)}
-                            onSubmit={this.handleCreateCar}
+                            onSubmit={this.handleCreateAccessory}
                             handleShowForm={this.handleShowFormAdd}
                         />
                     </Modal>
@@ -156,21 +159,21 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    car: state.car
+    accessory: state.accessory
 })
 
 const mapDispatchToProps = dispatch => ({
     getList: (params) => {
         dispatch(getList(params))
     },
-    updateCar: (id, params) => {
-        dispatch(updateCar(id, params))
+    updateAccessory: (id, params) => {
+        dispatch(updateAccessory(id, params))
     },
-    createCar: (params) => {
-        dispatch(createCar(params))
+    createAccessory: (params) => {
+        dispatch(createAccessory(params))
     },
-    deleteCar: (id) => {
-        dispatch(deleteCar(id))
+    deleteAccessory: (id) => {
+        dispatch(deleteAccessory(id))
     }
 })
 

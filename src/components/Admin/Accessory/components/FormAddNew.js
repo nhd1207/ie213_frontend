@@ -8,9 +8,7 @@ import RenderInputText from '../../../Share/RenderInputText'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Space } from 'antd'
-import { values } from 'redux-form'
-let ModalUpdateCar = props => {
-    console.log(props)
+let ModalAddAccessory = props => {
     const { handleSubmit, handleShowForm, initialValues } = props
 
     return (
@@ -22,6 +20,14 @@ let ModalUpdateCar = props => {
                         name="name"
                         component={RenderInputText}
                         placeholder='Tên xe'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Mã xe</label>
+                    <Field
+                        name="code"
+                        component={RenderInputText}
+                        placeholder='Đây là mã xe'
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
@@ -82,6 +88,7 @@ let ModalUpdateCar = props => {
                         placeholder='Đây là mô tả'
                     />
                 </div>
+                
                 {/* <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Hình ảnh: </label>
                     <Field
@@ -101,9 +108,9 @@ let ModalUpdateCar = props => {
     )
 }
 
-ModalUpdateCar = reduxForm({
+ModalAddAccessory = reduxForm({
     enableReinitialize: true,
-    form: 'FormUpdateCar'
-})(ModalUpdateCar)
+    form: 'FormAddAccessory'
+})(ModalAddAccessory)
 
-export default ModalUpdateCar
+export default ModalAddAccessory

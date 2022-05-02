@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { Button, Spin, Alert, Modal } from 'antd';
+import { Button, Spin, Modal } from 'antd';
 import { connect } from 'react-redux'
 import Layout from '../../Admin2/LayoutAdmin/LayoutAdmin'
 import DataTable from './components/DataTable'
 import FormFilter from './components/FormFilter'
 import { getList, updateUser, deleteUser } from './action'
 import FormUpdateUser from "./components/FormUpdateUser"
-import moment from 'moment'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import queryString from 'query-string'
 let user = [{
     "_id": "6237e16646a3fb6ad90464e2",
-    "name": "lcd", 
+    "name": "lcd",
     "email": "lcd8@gmail.com",
     "photo": "default.png",
     "role": "admin",
@@ -29,11 +26,10 @@ class index extends Component {
         const query_params = queryString.parse(window.location.search);
         this.state = {
             initial_filter_values: query_params,
-            // showForm: false,
+            showForm: false,
             idUser: 0
         }
     }
-
 
     componentDidMount = () => {
         this.handleSubmitFilter(this.state.initial_filter_values)
@@ -52,28 +48,8 @@ class index extends Component {
         this.props.deleteUser(value)
     }
 
-    // handleShowForm = (value) => {
-    //     this.setState({ showForm: value || false })
-    // }
-
-    // handleCloseModal = (value) => {
-    //     this.setState({ showForm: false })
-    // }
-
-    // handleUpdateUser = (value) => {
-    //     let id = this.state.idUser;
-    //     this.setState({ showForm: false })
-    //     let params = value;
-    //     this.props.updateCity(id, params)
-    // }
-
-    // openModal = (values) => {
-    //     this.handleShowForm(true);
-    //     this.state.idUser = values;
-    // }
-
     render() {
-        const { users, showForm } = this.props
+        const { user, showForm } = this.props
         return (
             <div>
                 <Layout>
@@ -84,7 +60,7 @@ class index extends Component {
                         onSubmit={this.handleSubmitFilter}
                     />
                     <DataTable
-                        dataSource={user||
+                        dataSource={user ||
                             // users.data || 
                             []}
                         loading='true'
@@ -115,7 +91,7 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    users: state.user
+    user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({

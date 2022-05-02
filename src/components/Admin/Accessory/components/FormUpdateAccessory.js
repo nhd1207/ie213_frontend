@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Space } from 'antd'
 import { values } from 'redux-form'
-let ModalUpdateCar = props => {
+let ModalUpdateAccessory = props => {
     console.log(props)
     const { handleSubmit, handleShowForm, initialValues } = props
 
@@ -101,9 +101,9 @@ let ModalUpdateCar = props => {
     )
 }
 
-ModalUpdateCar = reduxForm({
+ModalUpdateAccessory = reduxForm({
     enableReinitialize: true,
-    form: 'FormUpdateCar'
-})(ModalUpdateCar)
+    form: 'FormUpdateAccessory'
+})(ModalUpdateAccessory)
 
-export default ModalUpdateCar
+export default ModalUpdateAccessory

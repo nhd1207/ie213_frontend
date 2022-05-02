@@ -23,6 +23,14 @@ let ModalAddCar = props => {
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Mã xe</label>
+                    <Field
+                        name="code"
+                        component={RenderInputText}
+                        placeholder='Đây là mã xe'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Giá xe</label>
                     <Field
                         name="price"
@@ -48,6 +56,39 @@ let ModalAddCar = props => {
 
                     />
                 </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Năm sản xuất</label>
+                    <Field
+                        name="year"
+                        component={RenderNumberAnt}
+                        placeholder='Năm sản xuất'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Thời gian bảo hành</label>
+                    <Field
+                        name="warrantyPeriod"
+                        component={RenderNumberAnt}
+                        placeholder='24'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Mẫu</label>
+                    <Field
+                        name="model"
+                        component={RenderInputText}
+                        placeholder='A001'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Mô tả</label>
+                    <Field
+                        name="description"
+                        component={RenderInputText}
+                        placeholder='Đây là mô tả'
+                    />
+                </div>
+                
                 {/* <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Hình ảnh: </label>
                     <Field
