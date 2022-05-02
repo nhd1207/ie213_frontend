@@ -4,6 +4,9 @@ import "./App.css";
 import Home from "./screens/HomePage/Home";
 import User from "./screens/UserPage/User";
 import Car from "./screens/CarPage/Car"
+import Admin from "./screens/AdminPage/AdminPage"
+import Usertest from "./components/Admin/User";
+import Car2 from "./components/Admin/Car";
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import { verify } from "./apis/Auth";
@@ -20,6 +23,7 @@ function App() {
         <Route path="/signup" component={SignUp} />
         <Route path="/user" component={User} />
         <Route path="/car" component={Car}/>
+        <Route path="/admin" component={Car2}/>
       </Switch>
     </div>
   );
