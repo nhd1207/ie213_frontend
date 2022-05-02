@@ -30,7 +30,7 @@ sagaMiddleware.run(saga);
 
 ReactDOM.render(
   <Provider store={store}>
-  <BrowserRouter history={history}>
+  <BrowserRouter >
   {/* <React.StrictMode> */}
     <App history={history} />
   {/* </React.StrictMode> */}

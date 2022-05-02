@@ -2,13 +2,14 @@ import Login from "./screens/LoginPage/Login";
 import SignUp from "./screens/SignupPage/SignUp";
 import "./App.css";
 import Home from "./screens/HomePage/Home";
+import User from "./screens/UserPage/User";
+import Car from "./screens/CarPage/Car"
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import { verify } from "./apis/Auth";
 import {useEffect} from 'react'
 import Cookies from "js-cookie";
 import { connect } from "react-redux";
-import Showroom from "./screens/ShowroomPage/Showroom";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Route path="/home" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/showroom" component={Showroom} />
+        <Route path="/user" component={User} />
+        <Route path="/car" component={Car}/>
       </Switch>
     </div>
   );

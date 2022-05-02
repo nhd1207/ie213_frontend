@@ -58,7 +58,7 @@ function Layouts(props) {
 
             <Menu.Item key="cars">
               <NavLink
-                to={`/cars`}
+                to={`/car`}
                 style={{ color: "#F3EA01", marginRight: 5 }}
               >
                 {" "}

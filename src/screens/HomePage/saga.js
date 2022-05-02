@@ -14,7 +14,7 @@ import * as apiCar from '../../apis/Car'
 function* getListCarSaga(action) {
     try {
         const { params } = action
-        const response = yield call(apiCar.getList, params)
+        const response = (yield call(apiCar.getList, params))
         if (response.status) {
             yield all([
                 put({ type: TYPE.GETCAR.SUCCESS, ...response }),
