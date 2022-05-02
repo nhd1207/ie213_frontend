@@ -2,6 +2,8 @@ import Login from "./screens/LoginPage/Login";
 import SignUp from "./screens/SignupPage/SignUp";
 import "./App.css";
 import Home from "./screens/HomePage/Home";
+import Showroom from "./screens/ShowroomPage/Showroom";
+import NewsPage from "./screens/NewsPage/NewsPage";
 import User from "./screens/UserPage/User";
 import Car from "./screens/CarPage/Car"
 import { Route } from "react-router-dom";
@@ -15,11 +17,12 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path="/home" component={Home} />
+        {/* <Route path="/home" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/user" component={User} />
-        <Route path="/car" component={Car}/>
+        <Route path="/user" component={User} /> */}
+        <Route path="/showroom" component={Showroom}/>
+        <Route path="/news" component={NewsPage}/>
       </Switch>
     </div>
   );

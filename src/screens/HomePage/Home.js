@@ -67,9 +67,9 @@ return (
                 <div className={style.news}>
                     <div className={style['news-header']}>TIN TỨC</div>
                     <div className={style['news-name']}>THẾ GIỚI SEVEN</div>
-                    <List itemLayout="horizontal"
-                        dataSource={props.posts?.post}
-                        renderItem={(item) => (
+                        <List itemLayout="horizontal"
+                            dataSource={props.posts?.post}
+                            renderItem={(item) => (
                             <List.Item>
                                 <List.Item.Meta
                                     avatar={<img className={style['news-image']} src={require(`../../Images/andre-tan-79.jpg`)} />}

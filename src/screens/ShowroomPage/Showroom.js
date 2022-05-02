@@ -74,7 +74,7 @@ import {connect} from 'react-redux'
 }
 
 const mapStateToProps = state => ({
-  data: state.showroom.data
+  data: state.showroom
 })
 
 const mapDispatchToProps = dispatch => ({
