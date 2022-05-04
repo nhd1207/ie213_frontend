@@ -163,7 +163,6 @@ function Layouts(props) {
           minHeight: "100vh",
         }}
       >
-        {" "}
         {props.children}
       </Content>
 

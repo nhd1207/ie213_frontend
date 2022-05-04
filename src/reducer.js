@@ -5,14 +5,15 @@ import login from "./screens/LoginPage/reducer"
 import signup from "./screens/SignupPage/reducer"
 import home from "./screens/HomePage/reducer"
 import user from "./screens/UserPage/reducer"
-
+import cart from "./screens/CartPage/reducer"
 const Reducer = (history) => combineReducers({    
     form: formReducer,
     router: connectRouter(history),
     login,
     signup,
     home,
-    user
+    user,
+    cart
   })
   
 export default Reducer
