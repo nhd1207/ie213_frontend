@@ -1,3 +1,5 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
 import Login from "./screens/LoginPage/Login";
 import SignUp from "./screens/SignupPage/SignUp";
 import "./App.css";
