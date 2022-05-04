@@ -6,6 +6,12 @@ import signup from "./screens/SignupPage/reducer"
 import home from "./screens/HomePage/reducer"
 import user from "./screens/UserPage/reducer"
 import cart from "./screens/CartPage/reducer"
+import userAdmin from './components/Admin/User/reducer'
+import car from './components/Admin/Car/reducer'
+import accessory from './components/Admin/Accessory/reducer'
+import accessoryBill from './components/Admin/AccessoryBill/reducer'
+import carOrder from './components/Admin/CarOrder/reducer'
+
 const Reducer = (history) => combineReducers({    
     form: formReducer,
     router: connectRouter(history),
@@ -13,7 +19,12 @@ const Reducer = (history) => combineReducers({
     signup,
     home,
     user,
-    cart
+    cart,
+    userAdmin,
+    car,
+    accessory,
+    accessoryBill,
+    carOrder
   })
   
 export default Reducer

@@ -8,18 +8,18 @@ const initialState = {
 function reducer(state = initialState, action) {
     // console.log(action);
     switch (action.type) {
-        case type.ACCESSORY.REQUEST:
+        case type.ACCESSORYBILLADMIN.REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case type.ACCESSORY.SUCCESS:
+        case type.ACCESSORYBILLADMIN.SUCCESS:
             return {
                 ...state,
                 data: action.data,
                 loading: false,
             }
-        case type.ACCESSORY.ERROR:
+        case type.ACCESSORYBILLADMIN.ERROR:
             return {
                 ...state,
                 loading: false,

@@ -1,8 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Oswald", sans-serif;
+}
 .App {
   background-image: url("./Images/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+  
 }
 
 .App-logo {

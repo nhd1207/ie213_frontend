@@ -1,9 +1,8 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import RenderInputText from '../../Share/RenderInputText'
+import RenderInputText from '../../../Share/RenderInputText'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-
 let ContactForm = props => {
     const { handleSubmit } = props
     return (
@@ -11,14 +10,15 @@ let ContactForm = props => {
             <div className='row bg-white m-3 pt-3' >
                     <div className='col-3 mb-3 text-left' >
                         <Field
-                            name="name"
+                            name="email"
                             component={RenderInputText}
-                            placeholder='Tên Xe'
+                            placeholder='Email người dùng'
                         />
                     </div>
                     <div className='col-2'>
                     <button className='btn btn-primary' type="submit"> <FontAwesomeIcon icon={faSearch} /> Search</button>
                     </div>
+
             </div>
         </form>
     )
@@ -26,7 +26,7 @@ let ContactForm = props => {
 
 ContactForm = reduxForm({
     enableReinitialize: true,
-    form: 'FilterCar'
+    form: 'FilterUser'
 })(ContactForm)
 
 export default ContactForm

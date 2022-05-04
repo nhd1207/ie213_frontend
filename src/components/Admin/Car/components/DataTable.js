@@ -2,11 +2,16 @@ import React from 'react';
 import { Table, Spin, Space, Tooltip } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDeleteLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { Popconfirm, message, Button } from 'antd';
 
-const DataTable = ({ dataSource, loading, updateCar }) => {
+const DataTable = ({ dataSource, loading, updateCar, deleteCar }) => {
 
   const onSubmit = (values) => {
     updateCar(values)
+  }
+
+  const onDelete = (values) => {
+    deleteCar(values)
   }
 
   const columns = [
@@ -31,7 +36,7 @@ const DataTable = ({ dataSource, loading, updateCar }) => {
       key: 'picture',
       className: 'text-left',
       render: (value, record) =>
-        <img src={value} height={50} width={50}></img>
+        <img src={value} height={50} width={50} style={{ objectFit: 'cover' }} ></img>
     },
     {
       title: 'Tiền đặt cọc',
@@ -78,20 +83,24 @@ const DataTable = ({ dataSource, loading, updateCar }) => {
       key: 'action',
       render: (text, record) => (
         <Space >
-          <button onClick={() => onSubmit(record?.ID)} className="btn btn-sm btn-primary">
+          <button onClick={() => onSubmit(record)} className="btn btn-sm btn-primary">
             <Tooltip placement="top" title="Sửa">
               <span className="px-2">
                 <FontAwesomeIcon icon={faEdit} />
               </span>
             </Tooltip>
           </button>
-          <button onClick={() => onSubmit(record?.ID)} className="btn btn-sm btn-primary">
-            <Tooltip placement="top" title="Xóa">
-              <span className="px-2">
-                <FontAwesomeIcon icon={faDeleteLeft}/>
-              </span>
-            </Tooltip>
-          </button>
+          <Popconfirm placement="left" title='Bạn có muốn xóa?' onConfirm={() => onDelete(record?._id)} okText="Có" cancelText="Không">
+            <button 
+           // onClick={() => onDelete(record?._id)} 
+            className="btn btn-sm btn-primary">
+              <Tooltip placement="top" title="Xóa">
+                <span className="px-2">
+                  <FontAwesomeIcon icon={faDeleteLeft} />
+                </span>
+              </Tooltip>
+            </button>
+            </Popconfirm>
         </Space>
       ),
     },]

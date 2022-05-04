@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import RenderInputText from '../../Share/RenderInputText'
+import RenderInputText from '../../../Share/RenderInputText'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
@@ -17,7 +17,7 @@ let ContactForm = props => {
                         />
                     </div>
                     <div className='col-2'>
-                    <button className='btn btn-primary' type="submit"> <FontAwesomeIcon icon={faSearch} /> Search</button>
+                    <button className='btn btn-primary' type="submit"> <FontAwesomeIcon icon={faSearch} /> Tìm kiếm</button>
                     </div>
             </div>
         </form>
