@@ -8,18 +8,18 @@ const initialState = {
 function reducer(state = initialState, action) {
     // console.log(action);
     switch (action.type) {
-        case type.CARORDER.REQUEST:
+        case type.CARORDERADMIN.REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case type.CARORDER.SUCCESS:
+        case type.CARORDERADMIN.SUCCESS:
             return {
                 ...state,
                 data: action.data,
                 loading: false,
             }
-        case type.CARORDER.ERROR:
+        case type.CARORDERADMIN.ERROR:
             return {
                 ...state,
                 loading: false,

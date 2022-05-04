@@ -17,14 +17,14 @@ function* getListSaga(action) {
         const response = yield call(api.getListAdmin, params)
         if (response.status==='success') {
             yield all([
-                put({ type: TYPE.CARORDER.SUCCESS, ...response }),
+                put({ type: TYPE.CARORDERADMIN.SUCCESS, ...response }),
             ])
         } else {
-            yield put({ type: TYPE.CARORDER.ERROR, error: response })
+            yield put({ type: TYPE.CARORDERADMIN.ERROR, error: response })
         }
     } catch (error) {
         yield all([
-            put({ type: TYPE.CARORDER.ERROR, error })
+            put({ type: TYPE.CARORDERADMIN.ERROR, error })
         ])
     }
 }
@@ -37,7 +37,7 @@ function* CreateSaga(action) {
         if (response.status==='success') {
             yield all([
                 put({ type: TYPE.CREATE.SUCCESS, ...response }),
-                put({ type: TYPE.CARORDER.REQUEST, params: { status: 1 } })
+                put({ type: TYPE.CARORDERADMIN.REQUEST, params: { status: 1 } })
             ])
         } else {
             yield put({ type: TYPE.CREATE.ERROR, error: response })
@@ -56,7 +56,7 @@ function* UpdateSaga(action) {
         if (response.status==='success') {
             yield all([
                 put({ type: TYPE.UPDATE.SUCCESS, ...response }),
-                put({ type: TYPE.CARORDER.REQUEST, params: { status: 1 } })
+                put({ type: TYPE.CARORDERADMIN.REQUEST, params: { status: 1 } })
             ])
         } else {
             yield put({ type: TYPE.UPDATE.ERROR, error: response })
@@ -75,7 +75,7 @@ function* DeleteSaga(action) {
         if (response.status==='success') {
             yield all([
                 put({ type: TYPE.DELETE.SUCCESS, ...response }),
-                put({ type: TYPE.CARORDER.REQUEST, params: { status: 1 } }),
+                put({ type: TYPE.CARORDERADMIN.REQUEST, params: { status: 1 } }),
             ])
         } else {
             yield put({ type: TYPE.DELETE.ERROR, error: response })
@@ -90,7 +90,7 @@ function* DeleteSaga(action) {
 
 function* watcher() {
     yield all([
-        takeLatest(TYPE.CARORDER.REQUEST, getListSaga),
+        takeLatest(TYPE.CARORDERADMIN.REQUEST, getListSaga),
         takeLatest(TYPE.CREATE.REQUEST, CreateSaga),
         takeLatest(TYPE.UPDATE.REQUEST, UpdateSaga),
         takeLatest(TYPE.DELETE.REQUEST, DeleteSaga),

@@ -1,30 +1,30 @@
 export const action_type = {
-    CAR: {
-        REQUEST: "CAR.REQUEST",
-        SUCCESS: "CAR.SUCCESS",
-        ERROR: "CAR.ERROR"
+    CARADMIN: {
+        REQUEST: "CARADMIN.REQUEST",
+        SUCCESS: "CARADMIN.SUCCESS",
+        ERROR: "CARADMIN.ERROR"
     },
     CREATE: {
-        REQUEST: "CAR.CREATE.REQUEST",
-        SUCCESS: "CAR.CREATE.SUCCESS",
-        ERROR: "CAR.CREATE.ERROR"
+        REQUEST: "CARADMIN.CREATE.REQUEST",
+        SUCCESS: "CARADMIN.CREATE.SUCCESS",
+        ERROR: "CARADMIN.CREATE.ERROR"
     },
     UPDATE: {
-        REQUEST: "CAR.UPDATE.REQUEST",
-        SUCCESS: "CAR.UPDATE.SUCCESS",
-        ERROR: "CAR.UPDATE.ERROR"
+        REQUEST: "CARADMIN.UPDATE.REQUEST",
+        SUCCESS: "CARADMIN.UPDATE.SUCCESS",
+        ERROR: "CARADMIN.UPDATE.ERROR"
     },
     DELETE: {
-        REQUEST: "CAR.DELETE.REQUEST",
-        SUCCESS: "CAR.DELETE.SUCCESS",
-        ERROR: "CAR.DELETE.ERROR"
+        REQUEST: "CARADMIN.DELETE.REQUEST",
+        SUCCESS: "CARADMIN.DELETE.SUCCESS",
+        ERROR: "CARADMIN.DELETE.ERROR"
     },
 }
 
 export function getList (params)
 {
     return {
-        type: action_type.CAR.REQUEST,
+        type: action_type.CARADMIN.REQUEST,
         params,
     }
 }

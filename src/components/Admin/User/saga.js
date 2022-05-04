@@ -20,14 +20,14 @@ function* getListSaga(action) {
           const response = yield call(api.getList)//, params)
           if(response.status==='success'){
                   yield all([
-                      put({type: TYPE.USER.SUCCESS, ...response}),
+                      put({type: TYPE.USERADMIN.SUCCESS, ...response}),
                   ])
           }else{
-            yield put({type: TYPE.USER.ERROR, error: response})
+            yield put({type: TYPE.USERADMIN.ERROR, error: response})
           }
       } catch (error) {
           yield all([
-              put({type: TYPE.USER.ERROR, error})
+              put({type: TYPE.USERADMIN.ERROR, error})
           ])
       }
   }
@@ -59,7 +59,7 @@ function* UpdateSaga(action) {
         if(response.status==='success'){
                 yield all([
                     put({type: TYPE.UPDATE.SUCCESS, ...response}),
-                    put({type: TYPE.USER.REQUEST, params:{status:1}})
+                    put({type: TYPE.USERADMIN.REQUEST, params:{status:1}})
                 ])
         }else{
           yield put({type: TYPE.UPDATE.ERROR, error: response})
@@ -76,10 +76,10 @@ function* DeleteSaga(action) {
         const { id } = action
         console.log(id);
         const response = yield call(apiAuth.toggleUser, id)  // chua co ham xoa nguoi dung
-        if(response.status){
+        if(response.status==='success'){
                 yield all([
                     put({type: TYPE.DELETE.SUCCESS, ...response}),
-                    put({type: TYPE.USER.REQUEST, params:{status:1}}),
+                    put({type: TYPE.USERADMIN.REQUEST, params:{status:1}}),
                 ])
         }else{
           yield put({type: TYPE.DELETE.ERROR, error: response})
@@ -94,7 +94,7 @@ function* DeleteSaga(action) {
 
   function* watcher() {
       yield all([
-          takeLatest(TYPE.USER.REQUEST, getListSaga),
+          takeLatest(TYPE.USERADMIN.REQUEST, getListSaga),
           //takeLatest(TYPE.CREATE.REQUEST, CreateSaga),
           takeLatest(TYPE.UPDATE.REQUEST, UpdateSaga),
           takeLatest(TYPE.DELETE.REQUEST, DeleteSaga),

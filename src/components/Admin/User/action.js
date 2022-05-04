@@ -1,30 +1,30 @@
 export const action_type = {
-    USER: {
-        REQUEST: "USER.REQUEST",
-        SUCCESS: "USER.SUCCESS",
-        ERROR: "USER.ERROR"
+    USERADMIN: {
+        REQUEST: "USERADMIN.REQUEST",
+        SUCCESS: "USERADMIN.SUCCESS",
+        ERROR: "USERADMIN.ERROR"
     },
     CREATE: {
-        REQUEST: "USER.CREATE.REQUEST",
-        SUCCESS: "USER.CREATE.SUCCESS",
-        ERROR: "USER.CREATE.ERROR"
+        REQUEST: "USERADMIN.CREATE.REQUEST",
+        SUCCESS: "USERADMIN.CREATE.SUCCESS",
+        ERROR: "USERADMIN.CREATE.ERROR"
     },
     UPDATE: {
-        REQUEST: "USER.UPDATE.REQUEST",
-        SUCCESS: "USER.UPDATE.SUCCESS",
-        ERROR: "USER.UPDATE.ERROR"
+        REQUEST: "USERADMIN.UPDATE.REQUEST",
+        SUCCESS: "USERADMIN.UPDATE.SUCCESS",
+        ERROR: "USERADMIN.UPDATE.ERROR"
     },
     DELETE: {
-        REQUEST: "DELETE.REQUEST",
-        SUCCESS: "DELETE.SUCCESS",
-        ERROR: "DELETE.ERROR"
+        REQUEST: "USERADMIN.DELETE.REQUEST",
+        SUCCESS: "USERADMIN.DELETE.SUCCESS",
+        ERROR: "USERADMIN.DELETE.ERROR"
     },
 }
 
 export function getList (params)
 {
     return {
-        type: action_type.USER.REQUEST,
+        type: action_type.USERADMIN.REQUEST,
         params,
     }
 }
