@@ -4,7 +4,7 @@ import { Button, Spin, Modal } from 'antd';
 import DataTable from './components/DataTable'
 import FormUpdateCar from './components/FormUpdateCar'
 import FormAddCar from './components/FormAddNew'
-import Layout from '../../Admin2/LayoutAdmin/LayoutAdmin'
+import Layout from '../LayoutAdmin/LayoutAdmin'
 import queryString from 'query-string'
 import { createCar, getList, updateCar, deleteCar } from './action';
 import { PlusOutlined } from '@ant-design/icons';
@@ -104,7 +104,7 @@ class index extends Component {
                 <Layout>
                     {/* <Spin size='large' spinning={this.props.car.loading}> */}
                     <div className='container-fluid mb-3 text-left py-2' style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span className='h5 font-weight-bold '>Xe</span>
+                        <span className='h3 font-weight-bold '>Xe</span>
                         <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} title='Thêm xe' type="primary" ></Button></span>
                     </div>
                     {/* <FormFilter

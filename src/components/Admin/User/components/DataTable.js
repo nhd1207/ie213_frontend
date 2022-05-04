@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, Spin, Space, Tooltip } from 'antd';
+import { Table, Spin, Space, Tooltip, Popconfirm } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faExclamation } from '@fortawesome/free-solid-svg-icons'
+import dateFormat from 'dateformat';
 const DataTable = ({ dataSource, loading, updateUser, deleteUser }) => {
 
   const onSubmit = (values) => {
@@ -48,7 +49,7 @@ const DataTable = ({ dataSource, loading, updateUser, deleteUser }) => {
     },
     {
       title: 'Số điện thoại',
-      dataIndex: 'info.phoneNumber',
+      dataIndex: ['info', 'phoneNumber'],
       key: 'phone_number',
       className: 'text-left',
       render: (value, record) =>
@@ -58,12 +59,14 @@ const DataTable = ({ dataSource, loading, updateUser, deleteUser }) => {
     },
     {
       title: 'Ngày sinh',
-      dataIndex: 'date_of_birth',
+      dataIndex: ['info', 'dateOfBirth'],
       key: 'date_of_birth',
       className: 'text-left',
       render: (value, record) =>
         <div>
-          <span> {value || ''} </span>
+          <span> {
+            dateFormat(value, "mmmm dS, yyyy")
+            || ''} </span>
         </div>
     },
     {
@@ -71,20 +74,29 @@ const DataTable = ({ dataSource, loading, updateUser, deleteUser }) => {
       key: 'action',
       render: (text, record) => (
         <Space >
-          <button onClick={() => onSubmit(record?.id)} className="btn btn-sm btn-primary">
+          {/* <button onClick={() => onSubmit(record)} className="btn btn-sm btn-primary">
             <Tooltip placement="top" title="Update User">
               <span className="px-2">
                 <FontAwesomeIcon icon={faEdit} />
               </span>
             </Tooltip>
-          </button>
-          <button onClick={() => onDelete(record?.id)} className="btn btn-sm btn-primary">
-            <Tooltip placement="top" title="Delete User">
-              <span className="px-2">
-                <FontAwesomeIcon icon={faExclamation} />
-              </span>
-            </Tooltip>
-          </button>
+          </button> */}
+          <Popconfirm
+            placement="left"
+            title='Bạn có muốn xóa?'
+            onConfirm={() => onDelete(record?._id)}
+            okText="Có"
+            cancelText="Không">
+            <button
+              //onClick={() => onDelete(record?._id)} 
+              className="btn btn-sm btn-primary">
+              <Tooltip placement="top" title="Delete User">
+                <span className="px-2">
+                  <FontAwesomeIcon icon={faExclamation} />
+                </span>
+              </Tooltip>
+            </button>
+          </Popconfirm>
         </Space>
       ),
     },]

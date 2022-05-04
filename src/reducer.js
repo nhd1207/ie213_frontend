@@ -5,8 +5,11 @@ import login from "./screens/LoginPage/reducer"
 import signup from "./screens/SignupPage/reducer"
 import home from "./screens/HomePage/reducer"
 import user from "./screens/UserPage/reducer"
+import userAdmin from './components/Admin/User/reducer'
 import car from './components/Admin/Car/reducer'
 import accessory from './components/Admin/Accessory/reducer'
+import accessoryBill from './components/Admin/AccessoryBill/reducer'
+import carOrder from './components/Admin/CarOrder/reducer'
 
 const Reducer = (history) => combineReducers({    
     form: formReducer,
@@ -15,8 +18,11 @@ const Reducer = (history) => combineReducers({
     signup,
     home,
     user,
+    userAdmin,
     car,
-    accessory
+    accessory,
+    accessoryBill,
+    carOrder
   })
   
 export default Reducer

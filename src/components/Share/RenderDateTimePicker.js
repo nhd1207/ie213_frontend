@@ -1,13 +1,15 @@
 import React from 'react'
 import { DatePicker } from 'antd';
+import dateFormat from 'dateformat';
 
 const renderField = ({
   input,
   size,
-  showTime = true,
+  showTime = false,
   meta: { invalid, error },
   ...props
 }) => { 
+  //input.value = ''//dateFormat(input.value,'yyyy mm dd')
   const disabledDate = value => {
     const { min } = props;
     if(value && min){
@@ -26,6 +28,7 @@ const renderField = ({
       <div className="position-relative">
         <DatePicker
           {...props}
+          //defaultValue={'05/03/2022'}
           disabledDate={disabledDate}
           value={input.value}
           size={size || 'large'}

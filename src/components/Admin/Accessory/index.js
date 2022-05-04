@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { Button, Spin, Modal } from 'antd';
 import DataTable from './components/DataTable'
 import FormUpdateAccessory from './components/FormUpdateAccessory'
-import FormAddCar from './components/FormAddNew'
-import Layout from '../../Admin2/LayoutAdmin/LayoutAdmin'
+import FormAddAccessory from './components/FormAddNew'
+import Layout from '../LayoutAdmin/LayoutAdmin'
 import queryString from 'query-string'
 import { createAccessory, getList, updateAccessory, deleteAccessory } from './action';
 import { PlusOutlined } from '@ant-design/icons';
@@ -76,7 +76,7 @@ class index extends Component {
     }
 
     handleUpdateAccessory = (value) => {
-        let id = this.state.idCar;
+        let id = this.state.idAcc;
         this.setState({ showForm: false })
         let params = value
         //     name: value.name,
@@ -86,7 +86,7 @@ class index extends Component {
         // }
         // if(params.name && params.deposit && params.amount && params.price)
         // return console.log('loi')
-        this.props.updateCar(id, params)
+        this.props.updateAccessory(id, params)
     }
 
     handleDeleteAccessory = (value) => {
@@ -143,7 +143,7 @@ class index extends Component {
                         onCancel={this.handleCloseModalAdd}
                         footer={null}
                     >
-                        <FormAddCar
+                        <FormAddAccessory
                             keyboard={true}
                             maskClosable={true}
                             onCancel={() => this.handleShowFormAdd(false)}

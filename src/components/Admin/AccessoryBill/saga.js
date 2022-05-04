@@ -9,22 +9,22 @@ import {
     action_type as TYPE
 } from './action'
 
-import * as api from '../../../apis/Accessory'
+import * as api from '../../../apis/AccessoryBill'
 
 function* getListSaga(action) {
     try {
         const { params } = action
-        const response = yield call(api.getList, params)
-        if (response.status) {
+        const response = yield call(api.getListAdmin, params)
+        if (response.status==='success') {
             yield all([
-                put({ type: TYPE.ACCESSORY.SUCCESS, ...response }),
+                put({ type: TYPE.ACCESSORYBILL.SUCCESS, ...response }),
             ])
         } else {
-            yield put({ type: TYPE.ACCESSORY.ERROR, error: response })
+            yield put({ type: TYPE.ACCESSORYBILL.ERROR, error: response })
         }
     } catch (error) {
         yield all([
-            put({ type: TYPE.ACCESSORY.ERROR, error })
+            put({ type: TYPE.ACCESSORYBILL.ERROR, error })
         ])
     }
 }
@@ -34,10 +34,10 @@ function* CreateSaga(action) {
         const { params } = action
         let data = params
         const response = yield call(api.create, data)
-        if (response.status) {
+        if (response.status==='success') {
             yield all([
                 put({ type: TYPE.CREATE.SUCCESS, ...response }),
-                put({ type: TYPE.ACCESSORY.REQUEST, params: { status: 1 } })
+                put({ type: TYPE.ACCESSORYBILL.REQUEST, params: { status: 1 } })
             ])
         } else {
             yield put({ type: TYPE.CREATE.ERROR, error: response })
@@ -53,10 +53,10 @@ function* UpdateSaga(action) {
     try {
         const { id, params } = action
         const response = yield call(api.update, id, params)
-        if (response.status) {
+        if (response.status==='success') {
             yield all([
                 put({ type: TYPE.UPDATE.SUCCESS, ...response }),
-                put({ type: TYPE.ACCESSORY.REQUEST, params: { status: 1 } })
+                put({ type: TYPE.ACCESSORYBILL.REQUEST, params: { status: 1 } })
             ])
         } else {
             yield put({ type: TYPE.UPDATE.ERROR, error: response })
@@ -72,10 +72,10 @@ function* DeleteSaga(action) {
     try {
         const { id } = action
         const response = yield call(api.destroy, id)
-        if (response.status) {
+        if (response.status==='success') {
             yield all([
                 put({ type: TYPE.DELETE.SUCCESS, ...response }),
-                put({ type: TYPE.ACCESSORY.REQUEST, params: { status: 1 } }),
+                put({ type: TYPE.ACCESSORYBILL.REQUEST, params: { status: 1 } }),
             ])
         } else {
             yield put({ type: TYPE.DELETE.ERROR, error: response })
@@ -90,7 +90,7 @@ function* DeleteSaga(action) {
 
 function* watcher() {
     yield all([
-        takeLatest(TYPE.ACCESSORY.REQUEST, getListSaga),
+        takeLatest(TYPE.ACCESSORYBILL.REQUEST, getListSaga),
         takeLatest(TYPE.CREATE.REQUEST, CreateSaga),
         takeLatest(TYPE.UPDATE.REQUEST, UpdateSaga),
         takeLatest(TYPE.DELETE.REQUEST, DeleteSaga),

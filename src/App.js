@@ -5,9 +5,11 @@ import Home from "./screens/HomePage/Home";
 import User from "./screens/UserPage/User";
 import Car from "./screens/CarPage/Car"
 import Admin from "./screens/AdminPage/AdminPage"
-import Usertest from "./components/Admin/User";
-import Car2 from "./components/Admin/Car";
-import Acc from "./components/Admin/Accessory";
+import CarAdmin from "./components/Admin/Car";
+import AccAdmin from "./components/Admin/Accessory";
+import AccBillAdmin from "./components/Admin/AccessoryBill";
+import UserAdmin from "./components/Admin/User";
+import CarOrder from "./components/Admin/CarOrder";
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import { verify } from "./apis/Auth";
@@ -24,7 +26,12 @@ function App() {
         <Route path="/signup" component={SignUp} />
         <Route path="/user" component={User} />
         <Route path="/car" component={Car}/>
-        <Route path="/admin" component={Acc}/>
+        <Route path="/admin/car-order" component={CarOrder}/>
+        <Route path="/admin/accessory-bill" component={AccBillAdmin}/>
+        <Route path="/admin/car" component={CarAdmin}/>
+        <Route path="/admin/accessory" component={AccAdmin}/>
+        <Route path="/admin/user" component={UserAdmin}/>
+        <Route path="/admin" component={CarOrder}/>
       </Switch>
     </div>
   );

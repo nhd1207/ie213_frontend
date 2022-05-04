@@ -16,7 +16,7 @@ function reducer(state = initialState, action) {
         case type.USER.SUCCESS:
             return {
                 ...state,
-                data: action.data,
+                data: action.users,
                 loading: false,
             }
         case type.USER.ERROR:

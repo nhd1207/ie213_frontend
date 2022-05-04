@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCity, faMapMarkedAlt, faFile, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faCity, faMapMarkedAlt, faFile, faHome,faCar } from '@fortawesome/free-solid-svg-icons';
 import {
     DesktopOutlined,
     PieChartOutlined,
     FileOutlined,
     TeamOutlined,
     UserOutlined,
+    ShoppingCartOutlined,
+    LogoutOutlined,
+    UnorderedListOutlined
 } from '@ant-design/icons';
 import { BrowserRouter } from 'react-router-dom';
 import "antd/dist/antd.css";
-import CarTable from '../CarTable/CarTable';
-import AccessoryTable from '../AccessoryTable/AccessoryTable';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -42,22 +43,22 @@ export default function LayoutAdmin(props) {
                     <Menu.Item key="1" icon={<FontAwesomeIcon icon={faHome} />}>
                         <Link to={`/home`} > Trang chủ </Link>
                     </Menu.Item>
-                    <Menu.Item key="2" icon={<TeamOutlined />}>
+                    <Menu.Item key="2" icon={<UnorderedListOutlined />}>
                         <Link to={`/admin/car-order`} > Đơn đặt cọc</Link>
                     </Menu.Item>
                     <Menu.Item key="3" icon={<FontAwesomeIcon icon={faFile} />}>
                         <Link to={`/admin/accessory-bill`} > Đơn đặt hàng phụ kiện </Link>
                     </Menu.Item>
-                    <Menu.Item key="4" icon={<FontAwesomeIcon icon={faMapMarkedAlt} />}>
+                    <Menu.Item key="4" icon={<FontAwesomeIcon icon={faCar} />}>
                         <Link to={`/admin/car`} > Xe </Link>
                     </Menu.Item>
-                    <Menu.Item key="5" icon={<FontAwesomeIcon icon={faCity} />}>
+                    <Menu.Item key="5" icon={<ShoppingCartOutlined />}>
                         <Link to={`/admin/accessory`} > Phụ kiện </Link>
                     </Menu.Item>
-                    <Menu.Item key="6" icon={<FontAwesomeIcon icon={faCity} />}>
+                    <Menu.Item key="6" icon={<TeamOutlined /> }>
                         <Link to={`/admin/user`} > Người dùng </Link>
                     </Menu.Item>
-                    <Menu.Item key="7" icon={<FontAwesomeIcon icon={faCity} />}>
+                    <Menu.Item key="7" icon={<LogoutOutlined />}>
                         <Link to={`/admin/logout`} > Đăng xuất </Link>
                     </Menu.Item>
                 </Menu>

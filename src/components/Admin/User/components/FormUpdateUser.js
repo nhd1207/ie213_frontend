@@ -8,8 +8,10 @@ import RenderDateTimePicker from '../../../Share/RenderDateTimePicker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons'
 
+
 let ModalUpdateUser = props => {
     const { handleSubmit, handleShowForm } = props
+
 
     return (
         <form onSubmit={handleSubmit}>
@@ -25,7 +27,7 @@ let ModalUpdateUser = props => {
                     <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Số điện thoại: </label>
                         <Field
-                            name="phone_number"
+                            name="info.phoneNumber"
                             component={RenderInputText}
                             placeholder='Số điện thoại'
                         />
@@ -33,14 +35,17 @@ let ModalUpdateUser = props => {
                     <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Ngày sinh: </label>
                         <Field
-                            name="date_of_birth"
+                            name='info.dateOfBirth'
+                            type='date'
+                            // normalize={(value)=>dateFormat(value,"YYYY mm dd")}
                             component={RenderDateTimePicker}
                             placeholder='Ngày sinh'
+                            //format={Formatter}
                         />
                     </div>
                     <div className='col-12 text-center'>
                     <button className='btn btn-primary mr-3' type="submit"> <FontAwesomeIcon icon={faSave} /> Save</button>
-                    <button onClick={()=>handleShowForm(false)} className='btn btn-secondary'> <FontAwesomeIcon icon={faTimes} /> Cancel</button>
+                    <button onClick={()=>handleShowForm(false)} className='btn btn-secondary' type='button'> <FontAwesomeIcon icon={faTimes} /> Cancel</button>
                     </div>
             </div>
         </form>

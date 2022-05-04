@@ -1,24 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Spin, Modal } from 'antd';
 import { connect } from 'react-redux'
-import Layout from '../../Admin2/LayoutAdmin/LayoutAdmin'
+import Layout from '../LayoutAdmin/LayoutAdmin'
 import DataTable from './components/DataTable'
 import FormFilter from './components/FormFilter'
-import { getList, updateUser, deleteUser } from './action'
+import { getList, updateUser, deleteUser, crateUser } from './action'
 import FormUpdateUser from "./components/FormUpdateUser"
 import queryString from 'query-string'
-let user = [{
-    "_id": "6237e16646a3fb6ad90464e2",
-    "name": "lcd",
-    "email": "lcd8@gmail.com",
-    "photo": "default.png",
-    "role": "admin",
-    "active": true,
-    "info": {
-        "dateOfBirth": "1989-12-31T17:00:00.000Z",
-        "phoneNumber": "000000"
-    }
-}]
 
 class index extends Component {
     constructor(props) {
@@ -27,12 +15,14 @@ class index extends Component {
         this.state = {
             initial_filter_values: query_params,
             showForm: false,
-            idUser: 0
+            idUser: 0,
+            initUser:{}
         }
     }
 
     componentDidMount = () => {
-        this.handleSubmitFilter(this.state.initial_filter_values)
+        //this.handleSubmitFilter(this.state.initial_filter_values)
+        this.props.getList()
     }
 
     handleSubmitFilter = ({ ...values }) => {
@@ -44,8 +34,46 @@ class index extends Component {
         this.props.getList(params)
     }
 
+    // //update Acc
+    handleShowForm = (value) => {
+        this.setState({ showForm: value || false })
+    }
+
+    handleCloseModal = (value) => {
+        this.setState({ showForm: false })
+    }
+
+    handleUpdateUser = (value) => {
+        console.log('handleUpdateUser',value)
+        let id = this.state.idUser;
+        this.setState({ showForm: false })
+        let params = value
+        //     name: value.name,
+        //     deposit: value.deposit,
+        //     amount: value.amount,
+        //     price: value.price
+        // }
+        // if(params.name && params.deposit && params.amount && params.price)
+        // return console.log('loi')
+        this.props.updateUser(id, params)
+    }
+
+    // handleDeleteAccessory = (value) => {
+    //     let id = value;
+    //     this.props.deleteAccessory(id);
+    // }
+
+
     deleteUser = (value) => {
         this.props.deleteUser(value)
+    }
+
+    openModal = (values) => {
+        console.log('openModal')
+        this.handleShowForm(true);
+        this.state.idUser = values._id;
+        this.state.initUser = values;
+        console.log(this.state.initUser)
     }
 
     render() {
@@ -60,18 +88,17 @@ class index extends Component {
                         onSubmit={this.handleSubmitFilter}
                     />
                     <DataTable
-                        dataSource={user ||
-                            // users.data || 
+                        dataSource={
+                            user?.data ||
                             []}
-                        loading='true'
-                        //{users.loading}
-                        // updateUser={this.openModal}
+                        loading={user.loading}
+                        updateUser={this.openModal}
                         deleteUser={this.deleteUser}
                     />
-                    {/* <Modal
+                    <Modal
                         title="Cập nhật người dùng"
-                        visible={showForm}
-                        closable={false}
+                        visible={this.state.showForm}
+                        closable={true}
                         onCancel={this.handleCloseModal}
                         footer={null}
                     >
@@ -82,8 +109,9 @@ class index extends Component {
                             onCancel={() => this.handleShowForm(false)}
                             onSubmit={this.handleUpdateUser}
                             handleShowForm={this.handleShowForm}
+                            initialValues={this.state.initUser}
                         />
-                    </Modal> */}
+                    </Modal>
                 </Layout>
             </div>
         );
@@ -91,7 +119,7 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.userAdmin
 })
 
 const mapDispatchToProps = dispatch => ({
