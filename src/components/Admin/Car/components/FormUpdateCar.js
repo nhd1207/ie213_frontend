@@ -25,19 +25,19 @@ let ModalUpdateCar = props => {
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Giá xe</label>
+                    <label className="font-weight-bold text-muted">Giá xe (VNĐ)</label>
                     <Field
                         name="price"
                         component={RenderNumberAnt}
-                        placeholder='Giá xe'
+                        placeholder='Giá xe (VNĐ)'
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Giá đặt cọc</label>
+                    <label className="font-weight-bold text-muted">Giá đặt cọc (VNĐ)</label>
                     <Field
                         name="deposit"
                         component={RenderNumberAnt}
-                        placeholder='Giá đặt cọc'
+                        placeholder='Giá đặt cọc (VNĐ)'
 
                     />
                 </div>
@@ -59,7 +59,7 @@ let ModalUpdateCar = props => {
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Thời gian bảo hành</label>
+                    <label className="font-weight-bold text-muted">Thời gian bảo hành (Tháng)</label>
                     <Field
                         name="warrantyPeriod"
                         component={RenderNumberAnt}

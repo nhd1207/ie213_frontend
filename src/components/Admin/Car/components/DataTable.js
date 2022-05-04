@@ -3,6 +3,8 @@ import { Table, Spin, Space, Tooltip } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDeleteLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { Popconfirm, message, Button } from 'antd';
+import money from '../../../Share/functions/money';
+
 
 const DataTable = ({ dataSource, loading, updateCar, deleteCar }) => {
 
@@ -45,7 +47,7 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar }) => {
       className: 'text-left',
       render: (value, record) =>
         <div>
-          <span> {value || ''} </span>
+          <span> {money(value, 'VNĐ') || ''} </span>
         </div>
     },
     {
@@ -55,7 +57,7 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar }) => {
       className: 'text-left',
       render: (value, record) =>
         <div>
-          <span> {value || ''} </span>
+          <span> {money(value, 'VNĐ')|| ''} </span>
         </div>
     },
     {
