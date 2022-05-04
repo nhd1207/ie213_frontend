@@ -3,7 +3,6 @@ import { Table, Spin, Space, Tooltip, List } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import money from '../Share/functions/money';
-import clsx from "clsx";
 
 const DataTable = ({ dataSource, loading, handleShowForm }) => {
 

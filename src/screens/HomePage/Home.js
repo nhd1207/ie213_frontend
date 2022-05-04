@@ -67,7 +67,7 @@ return (
                     <div className={style['news-header']}>TIN TỨC</div>
                     <div className={style['news-name']}>THẾ GIỚI SEVEN</div>
                     <List itemLayout="horizontal"
-                        dataSource={props.posts?.post.slice(0,2)}
+                        dataSource={props.posts?.post?.slice(0,2)}
                         renderItem={(item) => (
                             <List.Item>
                                 <List.Item.Meta

@@ -87,7 +87,7 @@ function User(props) {
                             renderItem={item => (
                                 <List.Item key={item.id}>
                                     <List.Item.Meta
-                                        title={item.itemId}
+                                        title={item.itemId.name}
                                     />
                                     <div>Số lượng: {item.quantity}</div>
                                 </List.Item>
