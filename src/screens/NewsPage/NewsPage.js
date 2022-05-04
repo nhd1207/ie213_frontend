@@ -46,6 +46,7 @@ export default function NewsPage() {
     return (
         <div>
             <div className={style.news}>
+                
                 <div className={style['news-header']}>TIN TỨC</div>
                 <div className={style['news-name']}>THẾ GIỚI <br></br> SEVEN</div>
                 <List
@@ -66,7 +67,7 @@ export default function NewsPage() {
                                         <div className={style['news-date']}>{dateFormat(post.createdAt, "mmmm dS, yyyy")}</div>
                                         <p className={style['news-content']}>{post.content}</p>
                                         <button className={style['btn-outline-dark']}>
-                                            <a href={`news/${post._id}`}>
+                                            <a className={style['btn-title']} href={`news/${post._id}`}>
                                                 ĐỌC THÊM
                                             </a>
                                         </button>
