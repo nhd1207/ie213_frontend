@@ -83,6 +83,7 @@ function User(props) {
                         onOk={handleCloseModal}
                     >
                         <List
+                        pagination={{pageSize: 1}}
                             dataSource={accessoryBill.accessoryInfo || []}
                             renderItem={item => (
                                 <List.Item key={item.id}>

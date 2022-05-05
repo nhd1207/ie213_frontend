@@ -35,7 +35,7 @@ return (
                                     <div className={style["img-container"]}>
                                         <img
                                             className={style.img2}
-                                            src={require(`../../Images/andre-tan-79.jpg`)}
+                                            src={car.image}
                                             alt="Carousel Slide"
                                         />
                                     </div>

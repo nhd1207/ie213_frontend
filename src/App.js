@@ -14,6 +14,9 @@ import AccAdmin from "./components/Admin/Accessory";
 import AccBillAdmin from "./components/Admin/AccessoryBill";
 import UserAdmin from "./components/Admin/User";
 import CarOrder from "./components/Admin/CarOrder";
+import Accessory from "./screens/AccessoryPage/Accessory"
+import AccessoryDetail from "./screens/AccessoryDetailPage/AccessoryDetail"
+import Error404 from "./screens/ErrorPage/Error404"
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import { verify } from "./apis/Auth";
@@ -22,6 +25,10 @@ import Cookies from "js-cookie";
 import { connect } from "react-redux";
 
 function App() {
+  useEffect(() => {
+    document.title = "Seven"
+ }, []);
+ 
   return (
     <div>
       <Switch>
@@ -37,7 +44,11 @@ function App() {
         <Route path="/admin/car" component={CarAdmin}/>
         <Route path="/admin/accessory" component={AccAdmin}/>
         <Route path="/admin/user" component={UserAdmin}/>
-        <Route path="/admin" component={CarOrder}/>
+        <Route path="/admin" component={CarOrder}/> 
+        <Route exact path="/accessory" component={Accessory}/>
+        <Route path="/accessory/:id" component={AccessoryDetail}></Route> 
+        <Route exact path="/" component={Home} />
+        <Route component={Error404} />
       </Switch>
     </div>
   );

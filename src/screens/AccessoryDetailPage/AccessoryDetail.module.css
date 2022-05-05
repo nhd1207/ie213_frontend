@@ -1,0 +1,32 @@
+.container {
+    margin: 40px;
+  }
+
+  .heading {
+    text-shadow: 2px 2px 5px rgb(157, 197, 1);
+    color: rgba(0, 0, 0, 0.9);
+  }
+  
+  
+  .headingNumber {
+    font-size: 1.2rem;
+  }
+  
+  .main {
+    display: flex;
+    font-size: 25px;
+  }
+  
+  .text {
+    font-size: 1.2rem;
+    color: rgba(86, 114, 2, 0.9);
+    text-shadow: 1px 1px rgba(46, 64, 0, 0.9);
+  }
+
+  .content {
+    padding-left: 50px
+  }
+
+  .content .content_name {
+    text-align: center;
+  }

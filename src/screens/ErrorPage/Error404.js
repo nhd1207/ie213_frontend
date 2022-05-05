@@ -1,8 +1,8 @@
 import { Result, Button } from 'antd';
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import Layout from "../../layouts/index"
+import Layout from "../../components/layout"
 
 class Error404 extends Component {
     render() {
@@ -12,7 +12,7 @@ class Error404 extends Component {
                     status="404"
                     title="404"
                     subTitle="Sorry, the page you visited does not exist."
-                    extra={<Button type="primary" ><Navigate to={`/home`} > Back Home</Navigate></Button>}
+                    extra={<Button type="primary" ><Link to={`/home`} > Back Home</Link></Button>}
                 />
             </Layout>
         );
