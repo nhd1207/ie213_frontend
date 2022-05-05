@@ -1,6 +1,6 @@
 import axios from '../requestV2'
 
-const prefix = '/carOder';
+const prefix = '/carOrder';
 
 // export const getDetailByCode =(code)=> {
 //     return axios({

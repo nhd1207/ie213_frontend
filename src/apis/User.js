@@ -9,7 +9,7 @@ export const getMe =()=> {
     })
 }
 
-export const getAllUser =()=> {
+export const getList =()=> {
     return axios({
         method: 'GET',
         url: `${prefix}/getAllUser`

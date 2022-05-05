@@ -4,13 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from 'react-bootstrap/Carousel'
 import { getListCar, getListPost } from "./action";
 import React, { useEffect, useState } from 'react';
-import { List } from 'antd';
+import { List, Spin } from 'antd';
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCircleRight
 } from "@fortawesome/free-solid-svg-icons";
-import { Spin } from 'antd';
 import dateFormat from 'dateformat';
 
 function Home(props) {
@@ -67,9 +66,9 @@ return (
                 <div className={style.news}>
                     <div className={style['news-header']}>TIN TỨC</div>
                     <div className={style['news-name']}>THẾ GIỚI SEVEN</div>
-                        <List itemLayout="horizontal"
-                            dataSource={props.posts?.post}
-                            renderItem={(item) => (
+                    <List itemLayout="horizontal"
+                        dataSource={props.posts?.post?.slice(0,2)}
+                        renderItem={(item) => (
                             <List.Item>
                                 <List.Item.Meta
                                     avatar={<img className={style['news-image']} src={require(`../../Images/andre-tan-79.jpg`)} />}

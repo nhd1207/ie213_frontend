@@ -1,0 +1,145 @@
+.Banner{
+    background-image: url(../../Images/Showroom1.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-left: 15%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    z-index: 1;
+    position: relative;
+}
+.Banner::before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 2;
+    bottom: 0px;
+    width: 200rem;
+    height: calc(100% + 0px);
+    background-color: #000;
+    transform-origin: bottom center;
+    transform: translateX(-80%) translateY(4%) skew(-120deg);
+}
+/* .Banner::after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: 0px;
+    width: 200rem;
+    height: calc(100% + 40px);
+    background-color: #000;
+    transform-origin: top center;
+    transform: translateX(10%) translateY(-55%) skew(-120deg);
+} */
+/* General CSS */
+.title{
+    position: relative;
+    font-weight: 700;
+    text-shadow: 0.3rem 0.4rem rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    color: #fff;
+}
+
+h1 {
+    font-size: 7rem;
+    margin: 0;
+    line-height: 6rem;
+    margin-top: 2rem;
+
+}
+
+h2 {
+    font-size: 4rem;
+    margin: 0;
+}
+
+.backgroundSetting {
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* End General CSS */
+
+/* LeftContent */
+.leftContent__wrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100% 50%;
+}
+
+.city_title{
+    font-size: 7rem;
+}
+
+.leftContent__text  {
+    font-size: 2rem;
+    padding: 5rem;
+    text-align: justify;
+    grid-row: 1 / span 2;
+    margin-top: 2rem;
+}
+
+.line {
+    color: #000;
+}
+
+.leftContent__desc {
+    padding-top: 5rem;
+}
+
+.leftContent__img_wrapper {
+    display: grid;
+    margin-top: 5rem;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%, 100% 0%);
+}
+
+.img_wrapper_1 {
+    background-image: url(../../Images/Showroom2.png);
+    composes: backgroundSetting;
+}
+
+.img_wrapper_2 {
+    background-image: url(../../Images/Showroom3.png);
+    composes: backgroundSetting;
+    margin-top: 5rem;
+}
+/* End LeftContent */
+
+/* rightcontent */
+.rightContent__wrapper {
+    padding-top: 5rem;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+}
+
+.rightContent__text  {
+    font-size: 2rem;
+    padding: 5rem;
+    text-align: justify;
+    
+}
+
+.rightContent__desc {
+    padding-top: 5rem;
+}
+
+.rightContent__image_wrapper {
+    grid-row: 1 / span 2;
+    display: grid;
+    clip-path: polygon(0% 0%, 0% 100%, 50% 100%, 100% 0%);
+}
+
+.img_wrapper_3 {
+    background-image: url(../../Images/Showroom2.png);
+    composes: backgroundSetting;
+    
+}
+
+.img_wrapper_4 {
+    background-image: url(../../Images/Showroom3.png);
+    composes: backgroundSetting;
+    margin-top: 5rem;
+}
+/* End rightcontent */

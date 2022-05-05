@@ -10,10 +10,9 @@ import Layout from '../../components/Admin/LayoutAdmin/LayoutAdmin'
 
 export default function AdminPage() {
     return (
-        <div>
-            <p>helllo</p>
-            {/* <Layout>
-            </Layout> */}
+        <div>    
+            <Layout>
+            </Layout>  
         </div>
     );
 }

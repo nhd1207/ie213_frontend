@@ -66,9 +66,9 @@ function Layouts(props) {
               </NavLink>
             </Menu.Item>
 
-            <Menu.Item key="accessories">
+            <Menu.Item key="showrooms">
               <NavLink
-                to={`/accessories`}
+                to={`/showroom`}
                 style={{ color: "#F3EA01", marginRight: 5 }}
               >
                 {" "}
@@ -163,7 +163,6 @@ function Layouts(props) {
           minHeight: "100vh",
         }}
       >
-        {" "}
         {props.children}
       </Content>
 
