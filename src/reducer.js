@@ -5,6 +5,7 @@ import login from "./screens/LoginPage/reducer"
 import signup from "./screens/SignupPage/reducer"
 import home from "./screens/HomePage/reducer"
 import user from "./screens/UserPage/reducer"
+import post from "./screens/NewsPage/reducer"
 
 const Reducer = (history) => combineReducers({    
     form: formReducer,
@@ -12,7 +13,8 @@ const Reducer = (history) => combineReducers({
     login,
     signup,
     home,
-    user
+    user,
+    post,
   })
   
 export default Reducer
