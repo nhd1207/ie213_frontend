@@ -17,6 +17,7 @@ import { Menu, Spin } from "antd";
 import money from '../../components/Share/functions/money'
 import { getDetailAccessory, updateCart } from "./action";
 import FormUpdateCart from "../../components/AccessoryDetail/FormUpdateCart";
+
 function AccessoryDetail(props) {
 
     useEffect(() => {
