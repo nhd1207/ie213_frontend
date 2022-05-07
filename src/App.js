@@ -13,10 +13,14 @@ import CarAdmin from "./components/Admin/Car";
 import AccAdmin from "./components/Admin/Accessory";
 import AccBillAdmin from "./components/Admin/AccessoryBill";
 import UserAdmin from "./components/Admin/User";
+import News from "./screens/NewsPage/NewsPage"
 import CarOrder from "./components/Admin/CarOrder";
 import Accessory from "./screens/AccessoryPage/Accessory"
 import AccessoryDetail from "./screens/AccessoryDetailPage/AccessoryDetail"
+import NewsDetail from "./screens/NewsDetail/NewsDetail"
 import Error404 from "./screens/ErrorPage/Error404"
+import WishList from './screens/WishListPage/WishList';
+import CarDetail from './screens/CarDetailPage/CarDetail'
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import { verify } from "./apis/Auth";
@@ -36,7 +40,8 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/user" component={User} />
-        <Route path="/car" component={Car}/>
+        <Route exact path="/car" component={Car}/>
+        <Route path="/car/:id" component={CarDetail}></Route>
         <Route path="/cart" component={Cart}/>
         <Route path="/showroom" component={Showroom}/>
         <Route path="/admin/car-order" component={CarOrder}/>
@@ -45,8 +50,11 @@ function App() {
         <Route path="/admin/accessory" component={AccAdmin}/>
         <Route path="/admin/user" component={UserAdmin}/>
         <Route path="/admin" component={CarOrder}/> 
+        <Route exact path="/news" component={News}/> 
+        <Route path="/news/:id" component={NewsDetail}/> 
         <Route exact path="/accessory" component={Accessory}/>
         <Route path="/accessory/:id" component={AccessoryDetail}></Route> 
+        <Route path="/wishlist" component={WishList}></Route>
         <Route exact path="/" component={Home} />
         <Route component={Error404} />
       </Switch>

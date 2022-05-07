@@ -11,6 +11,7 @@ import {
     faCircleRight
 } from "@fortawesome/free-solid-svg-icons";
 import dateFormat from 'dateformat';
+import { NavLink } from "react-router-dom";
 
 function Home(props) {
     useEffect(() => {
@@ -29,7 +30,7 @@ function Home(props) {
                     </div>
                     <Carousel className={style.carousel}>
                         {
-                            props.cars?.car?.map((car) => {
+                            props.cars?.car?.slice(0,3).map((car) => {
                                 return (
                                     <Carousel.Item className={style.container}>
                                         <div className={style["img-container"]}>
@@ -44,9 +45,9 @@ function Home(props) {
                                             <h3 className={style.title}>{car?.name}</h3>
                                             <p className={style.attribute}>{car?.description}</p>
                                             <button class="btn btn-outline-dark" className={style.btn}>
-                                                <a href="/cars">
+                                                <NavLink to="/car">
                                                     MORE <FontAwesomeIcon icon={faCircleRight} size={{ width: 100 }}></FontAwesomeIcon>
-                                                </a>
+                                                </NavLink>
                                             </button>
                                         </Carousel.Caption>
                                     </Carousel.Item>
@@ -71,15 +72,15 @@ function Home(props) {
                             renderItem={(item) => (
                                 <List.Item>
                                     <List.Item.Meta
-                                        avatar={<img className={style['news-image']} src={require(`../../Images/andre-tan-79.jpg`)} />}
+                                        avatar={<img className={style['news-image']} src={item.image.banner} alt="abc" />}
                                         title={<div className={style['news-title']}>{item.content}</div>}
                                         description={
                                             <div>
                                                 <div className={style['news-description']}>{dateFormat(item.createdAt, "mmmm dS, yyyy")}</div>
                                                 <button class="btn btn-outline-dark">
-                                                    <a href={`news/${item._id}`}>
+                                                    <NavLink to={`news/${item._id}`}>
                                                         ĐỌC THÊM
-                                                    </a>
+                                                    </NavLink>
                                                 </button>
                                             </div>
                                         }

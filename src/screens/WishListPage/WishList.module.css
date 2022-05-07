@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Oswald", sans-serif;
+}
+
+.imgWrapper {
+  height: 25vh;
+  background: url(../../Images/Rectangle12.png);
+  background-size: cover;
+  background-position: center center;
+}
+
+.heading {
+  text-align: center;
+  font-size: 3.2rem;
+  color: rgba(0, 0, 0, 0.9);
+  /* text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
+    1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; */
+}
+
+.main {
+  margin: 5vh 10vw;
+}
+
+.main .listHeading {
+  font-size: 2.2rem;
+  margin: 1rem 0;
+}
+
+/* product */
+
+.product {
+  padding: 1rem;
+  border-bottom: 1px solid #000;
+}
+
+.productImgWrapper {
+  border: 1px solid rgb(255, 0, 0);
+}
+
+.product .productImg {
+  height: 10rem;
+  padding: 0.5rem;
+  background: url(../../Images/Rectangle12.png);
+  background-size: cover;
+  background-position: center center;
+}
+
+.product .productDetail .productName {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #000;
+  padding: 0.5rem;
+}
+
+.productDetail .heartIcon {
+  width: inherit;
+  font-size: 2rem;
+  color: red;
+}
+
+.product .productDetail .productDesc {
+  font-weight: italic;
+  padding: 0.5rem;
+}
+
+.product .productPrice {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product .productButton .addButton,
+.product .productButton .bookButton {
+  height: 3rem;
+  font-size: 1.4rem;
+  width: 100%;
+  background-color: rgba(255, 255, 0, 0.9);
+  border: 1px solid #000;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.8rem 0;
+}
+
+.product .productButton .addButton:hover,
+.product .productButton .bookButton:hover {
+  background-color: rgb(0, 0, 0);
+  color: rgba(255, 255, 0, 0.9);
+}
+
+.product .productButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.product .productButton .removeButton {
+  color: #000;
+  border: 1px solid #000;
+  margin: 0.8rem 0;
+}
+
+.product .productButton .removeButton:hover {
+  background-color: rgb(201, 115, 115);
+}
