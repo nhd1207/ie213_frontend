@@ -2,29 +2,26 @@ import { action_type as type } from './action'
 
 const initialState = {
     loading: false,
-    data: {},
-    message: ""
+    accessories: []
 }
 
 function reducer(state = initialState, action) {
-    console.log(action)
     switch (action.type) {
-        case type.GETPOST.REQUEST:
+        case type.GETACCESSORY.REQUEST:
             return {
                 ...state,
-                loading: true
+                loading: true,
             }
-        case type.GETPOST.SUCCESS:
+        case type.GETACCESSORY.SUCCESS:
             return {
                 ...state,
-                data: action.data,
+                accessories: action.data,
                 loading: false,
             }
-        case type.GETPOST.ERROR:
+        case type.GETACCESSORY.ERROR:
             return {
                 ...state,
                 loading: false,
-                message: action.message,
             }
         default:
             return state

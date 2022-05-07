@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import Layout from "../../components/layout"
 import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom'
 import {
     Form,
     Button,
@@ -91,27 +92,31 @@ function Car(props) {
                                 {
                                     props.cars.map(car => {
                                         let myStyle = {
-                                            backgroundImage: `url(${car.image})`
+                                            backgroundImage: `url(${car?.image?.avatar})`
                                         }
-                                return (
-                                <div className={`${style.card} col col-xl-6`}>
-                                    <div className={`${style.image}`} style={myStyle}></div>
-                                    <div className={`${style.description}`}>
-                                        <div className={`${style.nameGroup}`}>
-                                            <h5 className={`${style.sub}`}>Tên Xe</h5>
-                                            <h4 className={`${style.text}`}>{car.name}</h4>
-                                        </div>
-                                        <div>
-                                            <h5 className={`${style.sub}`}>Công Suất</h5>
-                                            <h4 className={`${style.text}`}>{car?.specification?.power}</h4>
-                                        </div>
-                                        <div>
-                                            <h5 className={`${style.sub}`}>Chỗ ngồi</h5>
-                                            <h4 className={`${style.text}`}>{car?.specification?.displacement} chỗ</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                )
+                                        return (
+                                            <div className={`${style.card} col col-xl-6`}>
+                                                {/* <NavLink to={`/car/${car._id}`}> */}
+                                                {/* </NavLink> */}
+                                                <div className={`${style.image}`} style={myStyle}>
+                                                </div>
+
+                                                    <div className={`${style.description}`}>
+                                                        <div className={`${style.nameGroup}`}>
+                                                            <h5 className={`${style.sub}`}>Tên Xe</h5>
+                                                            <h4 className={`${style.text}`}>{car.name}</h4>
+                                                        </div>
+                                                        <div>
+                                                            <h5 className={`${style.sub}`}>Công Suất</h5>
+                                                            <h4 className={`${style.text}`}>{car?.specification?.power}</h4>
+                                                        </div>
+                                                        <div>
+                                                            <h5 className={`${style.sub}`}>Chỗ ngồi</h5>
+                                                            <h4 className={`${style.text}`}>{car?.specification?.displacement} chỗ</h4>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        )
                                     })
                                 }
                             </div>

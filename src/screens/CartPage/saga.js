@@ -8,12 +8,12 @@ import {
     action_type as TYPE
 } from './action'
 
-import * as api from '../../apis/AccessoryBill'
+import * as api from '../../apis/User'
 
 function* getListCartSaga(action) {
     try {
         const { params } = action
-        const response = (yield call(api.getList, params))
+        const response = (yield call(api.getCart, params))
         if (response.status) {
             yield all([
                 put({ type: TYPE.GETCART.SUCCESS, ...response }),

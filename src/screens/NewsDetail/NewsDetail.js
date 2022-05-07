@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Spin } from 'antd';
+import Layouts from '../../components/layout'
 import style from "./index.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from 'react';
-import { List, Spin } from 'antd';
 import dateFormat from 'dateformat';
 import { connect } from "react-redux";
 import { getListPost } from './action';
@@ -13,47 +13,45 @@ const { Content } = Layout;
 
 function NewsDetail(props) {
     useEffect(() => {
-        //const query_params = queryString.parse(window.location.search);  
-        //console.log('query_params',query_params)
-        props.getListPost('627378546aa0922c58ed996e')
-        console.log(props.posts.posts) 
+        props.getListPost(props.match.params.id)
+        console.log(props)
     }, [])
 
     return (
-        <Layout
-            dataSource={props.posts.posts}
-            renderItem={(post) => (
-                <Content>
-                    className={style["site-layout"]}
-                    <Breadcrumb>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
-                    <div
-                        className={style["site-layout-background"]}
-                        avatar={<img className={style['news-image']} src={post.image?.avatar} />}
+        <Layouts>
+            <Spin size="large" spinning={props.data.loading}>
+                {/* <Layout
+                dataSource={props?.data?.data[0]}
+                renderItem={(post) => (
+                    <Content> */}
+                {/* className={style["site-layout"]} */}
+                <Breadcrumb>
+                    <Breadcrumb.Item>Home</Breadcrumb.Item>
+                    <Breadcrumb.Item>List</Breadcrumb.Item>
+                    <Breadcrumb.Item>App</Breadcrumb.Item>
+                </Breadcrumb>
+                <div className={style["site-layout-background"]}>  
+                    <img className={style['news-image']} src={props?.data?.data[0]?.image?.avatar} alt="abc" />
 
-                        title={<div className={style['news-title']}>{post.title}</div>}
+                    <div className={style['news-title']}>{props?.data?.data[0]?.title}</div>
 
-                        description={
-                            <div className={style['news-items']}>
-                                <div className={style['news-date']}>{dateFormat(post.createdAt, "mmmm dS, yyyy")}</div>
-                                <p className={style['news-content']}>{post.content}</p>
-                            </div>
-                        }
-                    >
+                    <div className={style['news-items']}>
+                        <div className={style['news-date']}>{dateFormat(props.data?.data[0]?.createdAt, "mmmm dS, yyyy")}</div>
+                        <p className={style['news-content']}>{props.data?.data[0]?.content}</p>
                     </div>
-                </Content>
-            )}>
-        </Layout>
+
+                </div>
+                {/* </Content>
+                )}>
+            </Layout> */}
+            </Spin>
+        </Layouts>
     )
 }
 
 
 const mapStateToProps = state => ({
-    // posts: state.post
-    posts: state.newsdetail
+    data: state.newDetail
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -13,8 +13,9 @@ import * as apiPost from '../../apis/Post'
 
 function* getPostSaga(action) {
     try {
-        const { ID } = action
-        const response = yield call(apiPost.getDetailByCode, ID)
+        const { params } = action
+        let code = params
+        const response = yield call(apiPost.getDetailByCode, code)
         if (response.status==='success') {
             yield all([
                 put({ type: TYPE.GETPOST.SUCCESS, ...response }),

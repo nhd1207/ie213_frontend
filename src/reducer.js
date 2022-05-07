@@ -13,7 +13,11 @@ import car from './components/Admin/Car/reducer'
 import accessory from './components/Admin/Accessory/reducer'
 import accessoryBill from './components/Admin/AccessoryBill/reducer'
 import carOrder from './components/Admin/CarOrder/reducer'
-
+import accessoryPage from './screens/AccessoryPage/reducer'
+import accessoryDetailPage from './screens/AccessoryDetailPage/reducer'
+import news from './screens/NewsPage/reducer'
+import newDetail from './screens/NewsDetail/reducer'
+import wishList from './screens/WishListPage/reducer'
 const Reducer = (history) => combineReducers({    
     form: formReducer,
     router: connectRouter(history),
@@ -28,7 +32,11 @@ const Reducer = (history) => combineReducers({
     accessory,
     accessoryBill,
     carOrder,
-    newsdetail
+    accessoryPage,
+    accessoryDetailPage,
+    news,
+    newDetail,
+    // wishList
   })
   
 export default Reducer

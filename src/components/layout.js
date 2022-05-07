@@ -76,7 +76,16 @@ function Layouts(props) {
               </NavLink>
             </Menu.Item>
 
-            <Menu.Item key="1" style={{ marginRight: 250 }}></Menu.Item>
+            <Menu.Item key="accessory">
+              <NavLink
+                to={`/accessory`}
+                style={{ color: "#F3EA01", marginRight: 5 }}
+              >
+                {" "}
+                PHỤ KIỆN{" "}
+              </NavLink>
+            </Menu.Item>
+
 
             <Menu.Item key="news">
               <NavLink

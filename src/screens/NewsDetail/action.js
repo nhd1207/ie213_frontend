@@ -7,10 +7,10 @@ export const action_type = {
 }
 
 
-export function getListPost (ID)
+export function getListPost (params)
 {
     return {
         type: action_type.GETPOST.REQUEST,
-        ID,
+        params,
     }
 }
