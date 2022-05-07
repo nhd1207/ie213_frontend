@@ -9,7 +9,7 @@ import NewsPage from "./screens/NewsPage/NewsPage";
 import User from "./screens/UserPage/User";
 import Car from "./screens/CarPage/Car"
 import Cart from "./screens/CartPage/Cart"
-import Showroom from "./screens/ShowroomPage/Showroom"
+import NewsDetail from "./screens/NewsDetail/NewsDetail"
 import Admin from "./screens/AdminPage/AdminPage"
 import CarAdmin from "./components/Admin/Car";
 import AccAdmin from "./components/Admin/Accessory";
@@ -43,6 +43,7 @@ function App() {
         <Route path="/admin/accessory" component={AccAdmin}/>
         <Route path="/admin/user" component={UserAdmin}/>
         <Route path="/admin" component={CarOrder}/>
+        <Route path="/newsdetail" component={NewsDetail}/>
       </Switch>
     </div>
   );
