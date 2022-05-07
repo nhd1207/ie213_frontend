@@ -33,7 +33,7 @@ function* getDetailAccessorySaga(action) {
 function* updateCartSaga(action) {
     try {
         const { data } = action
-        const response = yield call(apiCart.updateCart, data)
+        const response = yield call(apiCart.addItemToCart, data)
         if(response.status){
                 yield all([
                     put({type: TYPE.UPDATECART.SUCCESS, ...response}),

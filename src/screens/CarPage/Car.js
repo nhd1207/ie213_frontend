@@ -91,7 +91,7 @@ function Car(props) {
                                 {
                                     props.cars.map(car => {
                                         let myStyle = {
-                                            backgroundImage: `url(${car.image})`
+                                            backgroundImage: `url(${car?.image?.avatar})`
                                         }
                                 return (
                                 <div className={`${style.card} col col-xl-6`}>
