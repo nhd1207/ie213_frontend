@@ -14,6 +14,7 @@ import AccAdmin from "./components/Admin/Accessory";
 import AccBillAdmin from "./components/Admin/AccessoryBill";
 import UserAdmin from "./components/Admin/User";
 import CarOrder from "./components/Admin/CarOrder";
+import RenderImage from './components/Share/RenderImage'
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import { verify } from "./apis/Auth";
@@ -38,6 +39,7 @@ function App() {
         <Route path="/admin/accessory" component={AccAdmin}/>
         <Route path="/admin/user" component={UserAdmin}/>
         <Route path="/admin" component={CarOrder}/>
+        <Route path="/test" component={RenderImage}/>
       </Switch>
     </div>
   );

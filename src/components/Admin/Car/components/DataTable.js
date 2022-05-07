@@ -6,7 +6,7 @@ import { Popconfirm, message, Button } from 'antd';
 import money from '../../../Share/functions/money';
 
 
-const DataTable = ({ dataSource, loading, updateCar, deleteCar }) => {
+const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
 
   const onSubmit = (values) => {
     updateCar(values)
@@ -14,6 +14,10 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar }) => {
 
   const onDelete = (values) => {
     deleteCar(values)
+  }
+
+  const onShowImage = (values) => {
+    showImage(values)
   }
 
   const columns = [
@@ -37,8 +41,9 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar }) => {
       dataIndex: 'image',
       key: 'picture',
       className: 'text-left',
-      render: (value, record) =>
-        <img src={value} height={50} width={50} style={{ objectFit: 'cover' }} ></img>
+      render: (value, record) => <button className="btn btn-sm btn-primary" onClick={()=>onShowImage(record)}>Hình ảnh</button>
+      // render: (value, record) =>
+      //   <img src={value} height={50} width={50} style={{ objectFit: 'cover' }} ></img>
     },
     {
       title: 'Tiền đặt cọc',

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Button, Spin, Modal } from 'antd';
+import { Button, Spin, Modal,Image } from 'antd';
 import DataTable from './components/DataTable'
 import FormUpdateCar from './components/FormUpdateCar'
 import FormAddCar from './components/FormAddNew'
@@ -19,6 +19,7 @@ class index extends Component {
         this.state = {
             showForm: false,
             showForm2: false,
+            showFormImage:false,
             initial_filter_values: query_params,
             idCar: 0,
             car: {}
@@ -97,8 +98,22 @@ class index extends Component {
         this.state.car = values;
     }
 
+    // Image
+    openModalImage = (values) => {
+        this.handleShowFormImage(true);
+        this.state.car = values;
+    }
+
+    handleShowFormImage = (value) => {
+        this.setState({ showFormImage: value || false })
+    }
+
+    handleCloseModalImage = (value) => {
+        this.setState({ showFormImage: false })
+    }
+
     render() {
-        const { showForm, showForm2 } = this.state;
+        const { showForm, showForm2,showFormImage } = this.state;
         return (
             <div>
                 <Layout>
@@ -115,6 +130,7 @@ class index extends Component {
                         loading={this.props.car.loading}
                         updateCar={this.openModal}
                         deleteCar={this.handleDeleteCar}
+                        showImage={this.openModalImage}
                     />
                     <Modal
                         title="Cập nhật xe"
@@ -147,6 +163,25 @@ class index extends Component {
                             onSubmit={this.handleCreateCar}
                             handleShowForm={this.handleShowFormAdd}
                         />
+                    </Modal>
+                    <Modal
+                        title="Hình ảnh"
+                        visible={showFormImage}
+                        closable={true}
+                        onCancel={this.handleCloseModalImage}
+                        footer={null}
+                    >
+                        <Image.PreviewGroup>
+                            <p>Hình đại diện</p>
+                            <Image width={200} src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
+                            <Image width={200} src={this.state.car.image} />
+                            <Image
+                                width={200}
+                                src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
+                            />
+                             <p>Hình ảnh bìa</p>
+                             <p>Hình Các bộ phận</p>
+                        </Image.PreviewGroup>
                     </Modal>
                     {/* </Spin> */}
                 </Layout>
