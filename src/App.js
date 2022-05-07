@@ -19,7 +19,6 @@ import News from "./screens/NewsPage/NewsPage"
 import CarOrder from "./components/Admin/CarOrder";
 import Accessory from "./screens/AccessoryPage/Accessory"
 import AccessoryDetail from "./screens/AccessoryDetailPage/AccessoryDetail"
-import NewsDetail from "./screens/NewsDetail/NewsDetail"
 import Error404 from "./screens/ErrorPage/Error404"
 import WishList from './screens/WishListPage/WishList';
 import CarDetail from './screens/CarDetailPage/CarDetail'
