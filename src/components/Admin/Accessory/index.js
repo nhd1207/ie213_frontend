@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Button, Spin, Modal } from 'antd';
+import { Button, Spin, Modal,Image,Empty } from 'antd';
+import queryString from 'query-string'
+import { PlusOutlined } from '@ant-design/icons';
+
 import DataTable from './components/DataTable'
 import FormUpdateAccessory from './components/FormUpdateAccessory'
 import FormAddAccessory from './components/FormAddNew'
 import Layout from '../LayoutAdmin/LayoutAdmin'
-import queryString from 'query-string'
 import { createAccessory, getList, updateAccessory, deleteAccessory } from './action';
-import { PlusOutlined } from '@ant-design/icons';
 import FormFilter from './components/FormFilter';
+import FileInput from '../../Share/FileInput';
 import classes from "./index.module.css";
 
 
@@ -19,9 +21,10 @@ class index extends Component {
         this.state = {
             showForm: false,
             showForm2: false,
+            showFormImage:false,
             initial_filter_values: query_params,
             idAcc: 0,
-            acc: {}
+            acc: {},
         }
     }
 
@@ -100,12 +103,43 @@ class index extends Component {
         this.state.acc= values;
     }
 
+    //Image manager
+    openModalImage = (values) => {
+        this.handleShowFormImage(true);
+        this.state.idAcc = values._id;
+        this.state.acc = values;
+    }
+
+    handleShowFormImage = (value) => {
+        this.setState({ showFormImage: value || false })
+    }
+
+    handleCloseModalImage = (value) => {
+        this.setState({ showFormImage: false })
+    }
+
+    handleUrlImage = (value, type) => {
+        switch (type) {
+            case 'avatar':
+                this.state.acc.image.avatar = value;
+                break;
+            case 'banner':
+                this.state.acc.image.banner = value;
+                break;
+            case 'gallery':
+                this.state.acc.image.gallery.push(value);
+                break;
+            default:
+                break;
+        }
+        this.setState({ urlImage: value })
+    }
+
     render() {
         const { showForm, showForm2 } = this.state;
         return (
             <div>
                 <Layout>
-                    {/* <Spin size='large' spinning={this.props.car.loading}> */}
                     <div className='container-fluid mb-3 text-left py-2' style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <span className='h3 font-weight-bold '>Phụ kiện</span>
                         <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} text='Thêm xe' type="primary" ></Button></span>
@@ -118,6 +152,7 @@ class index extends Component {
                         loading={this.props.accessory.loading}
                         updateAccessory={this.openModal}
                         deleteAccessory={this.handleDeleteAccessory}
+                        showImage={this.openModalImage}
                     />
                     <Modal
                         title="Cập nhật Phụ kiện"
@@ -151,7 +186,33 @@ class index extends Component {
                             handleShowForm={this.handleShowFormAdd}
                         />
                     </Modal>
-                    {/* </Spin> */}
+                    <Modal
+                        title="Quản lý hình ảnh"
+                        visible={this.state.showFormImage}
+                        closable={true}
+                        onCancel={this.handleCloseModalImage}
+                        footer={null}
+                    >
+                        <Image.PreviewGroup>
+                            <p>Tải lên hình ảnh cho {this.state.acc?.name}</p>
+                            <FileInput urlImage={this.handleUrlImage} update={() => this.handleUpdateAccessory(this.state.acc)}></FileInput>
+                            <hr/>
+                            <p>Hình đại diện cho phụ kiện</p>{this.state.acc.image?.avatar?
+                                <Image width={200} src={this.state.acc.image?.avatar} /> : <Empty />
+                            }
+                            <hr/>
+                            <p>Hình ảnh bìa cho phụ kiện</p>{this.state.acc.image?.banner?
+                                <Image width={200} src={this.state.acc.image?.banner} />: <Empty />
+                            }
+                            <hr/>
+                            <p>Hình khác</p>
+                            {this.state.acc.image?.gallery[0]?
+                                this.state.acc.image?.gallery.map(item => {
+                                    return <Image key={item.id} width={200} src={item} />
+                                }): <Empty />
+                            }
+                        </Image.PreviewGroup>
+                    </Modal>
                 </Layout>
             </div>
         )

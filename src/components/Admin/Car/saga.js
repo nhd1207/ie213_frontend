@@ -10,6 +10,7 @@ import {
   } from './action'  
    
 import * as api from '../../../apis/Car'
+import { message } from 'antd'
 
 function* getListSaga(action) {
       try {
@@ -39,8 +40,12 @@ function* getListSaga(action) {
                     put({type: TYPE.CREATE.SUCCESS, ...response}),
                     put({type: TYPE.CARADMIN.REQUEST, params:{status:1}})
                 ])
+                message.success('Tạo xe thành công')
+                message.success('Hãy thêm ảnh cho xe!!!')
         }else{
           yield put({type: TYPE.CREATE.ERROR, error: response})
+          message.error('Tạo xe thất bại')
+
         }
     } catch (error) {
         yield all([
@@ -58,13 +63,19 @@ function* UpdateSaga(action) {
                     put({type: TYPE.UPDATE.SUCCESS, ...response}),
                     put({type: TYPE.CARADMIN.REQUEST, params:{status:1}})
                 ])
+                message.success('Sửa thông tin xe thành công')
+
         }else{
           yield put({type: TYPE.UPDATE.ERROR, error: response})
+          message.error('Sửa thông tin xe thất bại')
+
         }
     } catch (error) {
         yield all([
             put({type: TYPE.UPDATE.ERROR, error})
         ])
+        message.error('Sửa thông tin xe thất bại')
+
     }
 }
 
@@ -79,13 +90,18 @@ function* DeleteSaga(action) {
                     put({type: TYPE.DELETE.SUCCESS, ...response}),
                     put({type: TYPE.CARADMIN.REQUEST, params:{status:1}}),
                 ])
+        message.success('Xóa xe thành công')
+
         }else{
           yield put({type: TYPE.DELETE.ERROR, error: response})
+        message.success('Xóa xe thất bại')
+
         }
     } catch (error) {
         yield all([
             put({type: TYPE.DELETE.ERROR, error})
         ])
+        message.success('Xóa xe thất bại')
     }
 }
 

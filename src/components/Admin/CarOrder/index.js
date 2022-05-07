@@ -87,7 +87,7 @@ class index extends Component {
                     />
                     <DataTable //done
                         dataSource={this.props?.carOrder?.data.carOrders || []}
-                        // loading={this.props.accessoryBill.loading}
+                        loading={this.props.carOrder.loading}
                         info={this.openModal}
                         // deleteAccessory={this.handleDeleteAccessoryBill}
                     />

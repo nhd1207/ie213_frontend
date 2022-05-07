@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDeleteLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { Popconfirm, message, Button } from 'antd';
 
-const DataTable = ({ dataSource, loading, updateAccessory, deleteAccessory }) => {
+const DataTable = ({ dataSource, loading, updateAccessory, deleteAccessory,showImage }) => {
 
   const onSubmit = (values) => {
     updateAccessory(values)
@@ -13,6 +13,10 @@ const DataTable = ({ dataSource, loading, updateAccessory, deleteAccessory }) =>
   const onDelete = (values) => {
     deleteAccessory(values)
   }
+  const onShowImage = (values) => {
+    showImage(values)
+  }
+
 
   const columns = [
     {
@@ -29,6 +33,13 @@ const DataTable = ({ dataSource, loading, updateAccessory, deleteAccessory }) =>
         <div>
           <span> {value || ''} </span>
         </div>
+    },
+    {
+      title: 'Hình',
+      dataIndex: 'image',
+      key: 'picture',
+      className: 'text-left',
+      render: (value, record) => <button className="btn btn-sm btn-primary" onClick={()=>onShowImage(record)}>Quản lý hình ảnh</button>
     },
     {
       title: 'Mã phụ kiện',
@@ -49,14 +60,6 @@ const DataTable = ({ dataSource, loading, updateAccessory, deleteAccessory }) =>
         <div>
           <span> {value || ''} </span>
         </div>
-    },
-    {
-      title: 'Hình',
-      dataIndex: 'image',
-      key: 'picture',
-      className: 'text-left',
-      render: (value, record) =>
-        <img src={value} height={50} width={50}></img>
     },
     {
       title: 'Giá',

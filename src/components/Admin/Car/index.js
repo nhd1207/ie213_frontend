@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Button, Spin, Modal,Image } from 'antd';
+import { Button, Spin, Modal, Image, Empty } from 'antd';
 import DataTable from './components/DataTable'
 import FormUpdateCar from './components/FormUpdateCar'
 import FormAddCar from './components/FormAddNew'
@@ -9,7 +9,8 @@ import queryString from 'query-string'
 import { createCar, getList, updateCar, deleteCar } from './action';
 import { PlusOutlined } from '@ant-design/icons';
 import FormFilter from './components/FormFilter'
-import classes from "./index.module.css";;
+import classes from "./index.module.css"; import FileInput from '../../Share/FileInput';
+;
 
 
 class index extends Component {
@@ -19,12 +20,14 @@ class index extends Component {
         this.state = {
             showForm: false,
             showForm2: false,
-            showFormImage:false,
+            showFormImage: false,
             initial_filter_values: query_params,
             idCar: 0,
-            car: {}
+            car: {},
+            urlImage: ''
         }
     }
+
 
     componentDidMount = () => {
         let params = {};
@@ -46,14 +49,8 @@ class index extends Component {
         console.log('handleCreateCar')
         let id = this.state.idCar;
         this.setState({ showForm2: false })
+        this.setState({ showFormImage: true })
         let params = value
-        //     name: value.name,
-        //     deposit: value.deposit,
-        //     amount: value.amount,
-        //     price: value.price
-        // }
-        // if(params.name && params.deposit && params.amount && params.price)
-        // return console.log('loi')
         this.props.createCar(params)
     }
 
@@ -73,17 +70,10 @@ class index extends Component {
     }
 
     handleUpdateCar = (value) => {
-        console.log('handleUpdateCar')
+        console.log('handleUpdateCar aaa')
         let id = this.state.idCar;
         this.setState({ showForm: false })
         let params = value
-        //     name: value.name,
-        //     deposit: value.deposit,
-        //     amount: value.amount,
-        //     price: value.price
-        // }
-        // if(params.name && params.deposit && params.amount && params.price)
-        // return console.log('loi')
         this.props.updateCar(id, params)
     }
 
@@ -101,6 +91,7 @@ class index extends Component {
     // Image
     openModalImage = (values) => {
         this.handleShowFormImage(true);
+        this.state.idCar = values._id;
         this.state.car = values;
     }
 
@@ -112,12 +103,28 @@ class index extends Component {
         this.setState({ showFormImage: false })
     }
 
+    handleUrlImage = (value, type) => {
+        switch (type) {
+            case 'avatar':
+                this.state.car.image.avatar = value;
+                break;
+            case 'banner':
+                this.state.car.image.banner = value;
+                break;
+            case 'gallery':
+                this.state.car.image.gallery.push(value);
+                break;
+            default:
+                break;
+        }
+        this.setState({ urlImage: value })
+    }
+
     render() {
-        const { showForm, showForm2,showFormImage } = this.state;
+        const { showForm, showForm2, showFormImage } = this.state;
         return (
             <div>
                 <Layout>
-                    {/* <Spin size='large' spinning={this.props.car.loading}> */}
                     <div className='container-fluid mb-3 text-left py-2' style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <span className='h3 font-weight-bold '>Xe</span>
                         <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} title='Thêm xe' type="primary" ></Button></span>
@@ -165,25 +172,34 @@ class index extends Component {
                         />
                     </Modal>
                     <Modal
-                        title="Hình ảnh"
+                        title="Quản lý hình ảnh"
                         visible={showFormImage}
                         closable={true}
                         onCancel={this.handleCloseModalImage}
                         footer={null}
                     >
                         <Image.PreviewGroup>
-                            <p>Hình đại diện</p>
-                            <Image width={200} src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
-                            <Image width={200} src={this.state.car.image} />
-                            <Image
-                                width={200}
-                                src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
-                            />
-                             <p>Hình ảnh bìa</p>
-                             <p>Hình Các bộ phận</p>
+                            <p>Tải lên hình ảnh cho xe {this.state.car?.name}</p>
+                            <FileInput urlImage={this.handleUrlImage} update={() => this.handleUpdateCar(this.state.car)}></FileInput>
+                            <hr/>
+                            <p>Hình đại diện cho xe</p>{this.state.car.image?.avatar?
+                                <Image width={200} src={this.state.car.image?.avatar} /> : <Empty />
+                            }
+                            <hr/>
+
+                            <p>Hình ảnh bìa cho xe</p>{this.state.car.image?.banner?
+                                <Image width={200} src={this.state.car.image?.banner} />: <Empty />
+                            }
+                            <hr/>
+                            <p>Hình khác</p>
+                            {this.state.car.image?.gallery[0]?
+                                this.state.car.image?.gallery.map(item => {
+                                    return <Image key={item.id} width={200} src={item} />
+                                }): <Empty />
+
+                            }
                         </Image.PreviewGroup>
                     </Modal>
-                    {/* </Spin> */}
                 </Layout>
             </div>
         )

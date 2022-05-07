@@ -24,6 +24,7 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
     {
       title: '#',
       width: 100,
+      key: 'std',
       render: (value, record, i) => <a>{i + 1}</a>,
     },
     {
@@ -38,10 +39,10 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
     },
     {
       title: 'Hình',
-      dataIndex: 'image',
+      dataIndex: ['image'],
       key: 'picture',
       className: 'text-left',
-      render: (value, record) => <button className="btn btn-sm btn-primary" onClick={()=>onShowImage(record)}>Hình ảnh</button>
+      render: (value, record) => <button className="btn btn-sm btn-primary" onClick={()=>onShowImage(record)}>Quản lý hình ảnh</button>
       // render: (value, record) =>
       //   <img src={value} height={50} width={50} style={{ objectFit: 'cover' }} ></img>
     },
