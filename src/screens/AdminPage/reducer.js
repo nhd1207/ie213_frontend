@@ -2,7 +2,7 @@ import { action_type as type } from './action'
 
 const initialState = {
     loading: true,
-    data: [],
+    user: {},
 }
 
 function reducer(state = initialState, action) {
@@ -16,7 +16,7 @@ function reducer(state = initialState, action) {
         case type.VERIFY.SUCCESS:
             return {
                 ...state,
-                data: action.data,
+                data: action.user,
                 loading: false,
             }
         case type.VERIFY.ERROR:

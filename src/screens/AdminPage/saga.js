@@ -25,18 +25,18 @@ function* verifyAdminSaga(action) {
             message.success(`Chào mừng ${response.user.name} đến với trang admin`)
         } else {
             yield put({ type: TYPE.VERIFY.ERROR, error: response })
-            message.error('Bạn không phải admin')
             //Cookies.set("web_token", null);
             yield put(push("/login"));
+            message.error('Bạn không có quyền')
             window.location.reload();
         }
     } catch (error) {
         yield all([
             put({ type: TYPE.VERIFY.ERROR, error })
         ])
-        message.error('Bạn không phải admin')
         //Cookies.set("web_token", null);
         yield put(push("/login"));
+        message.error('Bạn không không có quyền')
         window.location.reload();
     }
 }
