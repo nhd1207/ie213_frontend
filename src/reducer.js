@@ -6,6 +6,7 @@ import signup from "./screens/SignupPage/reducer"
 import home from "./screens/HomePage/reducer"
 import user from "./screens/UserPage/reducer"
 import cart from "./screens/CartPage/reducer"
+import admin from "./screens/AdminPage/reducer"
 import userAdmin from './components/Admin/User/reducer'
 import car from './components/Admin/Car/reducer'
 import accessory from './components/Admin/Accessory/reducer'
@@ -25,6 +26,7 @@ const Reducer = (history) => combineReducers({
     home,
     user,
     cart,
+    admin,
     userAdmin,
     car,
     accessory,

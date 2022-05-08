@@ -22,7 +22,7 @@ export default function LayoutAdmin(props) {
                 <div className="logo" />
                 <Menu theme="dark" mode="inline">
                     <Menu.Item key="1" icon={<FontAwesomeIcon icon={faHome} />}>
-                        <Link to={`/admin-home`} > Trang chủ </Link>
+                        <Link to={`/admin/home`} > Trang chủ </Link>
                     </Menu.Item>
                     <Menu.Item key="2" icon={<UnorderedListOutlined />}>
                         <Link to={`/admin/car-order`} > Đơn đặt cọc</Link>

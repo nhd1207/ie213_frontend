@@ -8,15 +8,15 @@ import User from "./screens/UserPage/User";
 import Car from "./screens/CarPage/Car"
 import Cart from "./screens/CartPage/Cart"
 import Showroom from "./screens/ShowroomPage/Showroom"
-import Admin from "./screens/AdminPage/AdminPage"
-import CarAdmin from "./components/Admin/Car";
-import AccAdmin from "./components/Admin/Accessory";
-import postAdmin from "./components/Admin/Post";
-import AccBillAdmin from "./components/Admin/AccessoryBill";
-import UserAdmin from "./components/Admin/User";
-import News from "./screens/NewsPage/NewsPage"
+// import Admin from "./screens/AdminPage/AdminPage"
+// import CarAdmin from "./components/Admin/Car";
+// import AccAdmin from "./components/Admin/Accessory";
+// import postAdmin from "./components/Admin/Post";
+// import AccBillAdmin from "./components/Admin/AccessoryBill";
+// import UserAdmin from "./components/Admin/User";
 import CarOrder from "./components/Admin/CarOrder";
 import RenderImage from './components/Share/RenderImage'
+import News from "./screens/NewsPage/NewsPage"
 import Accessory from "./screens/AccessoryPage/Accessory"
 import AccessoryDetail from "./screens/AccessoryDetailPage/AccessoryDetail"
 import NewsDetail from "./screens/NewsDetail/NewsDetail"
@@ -29,6 +29,7 @@ import { verify } from "./apis/Auth";
 import {useEffect} from 'react'
 import Cookies from "js-cookie";
 import { connect } from "react-redux";
+import AdminPage from './screens/AdminPage/AdminPage';
 
 function App() {
   useEffect(() => {
@@ -46,15 +47,7 @@ function App() {
         <Route path="/car/:id" component={CarDetail}></Route>
         <Route path="/cart" component={Cart}/>
         <Route path="/showroom" component={Showroom}/>
-        <Route path="/admin/car-order" component={CarOrder}/>
-        <Route path="/admin/accessory-bill" component={AccBillAdmin}/>
-        <Route path="/admin/car" component={CarAdmin}/>
-        <Route path="/admin/accessory" component={AccAdmin}/>
-        <Route path="/admin/user" component={UserAdmin}/>
-        <Route path="/admin/post" component={postAdmin}/>
-        <Route path="/admin" component={CarOrder}/>
-        <Route path="/test" component={RenderImage}/>
-        <Route path="/admin" component={CarOrder}/> 
+        <Route path="/admin" component={AdminPage}/> 
         <Route exact path="/news" component={News}/> 
         <Route path="/news/:id" component={NewsDetail}/> 
         <Route exact path="/accessory" component={Accessory}/>
