@@ -11,6 +11,7 @@ import Showroom from "./screens/ShowroomPage/Showroom"
 import Admin from "./screens/AdminPage/AdminPage"
 import CarAdmin from "./components/Admin/Car";
 import AccAdmin from "./components/Admin/Accessory";
+import postAdmin from "./components/Admin/Post";
 import AccBillAdmin from "./components/Admin/AccessoryBill";
 import UserAdmin from "./components/Admin/User";
 import CarOrder from "./components/Admin/CarOrder";
@@ -38,6 +39,7 @@ function App() {
         <Route path="/admin/car" component={CarAdmin}/>
         <Route path="/admin/accessory" component={AccAdmin}/>
         <Route path="/admin/user" component={UserAdmin}/>
+        <Route path="/admin/post" component={postAdmin}/>
         <Route path="/admin" component={CarOrder}/>
         <Route path="/test" component={RenderImage}/>
       </Switch>

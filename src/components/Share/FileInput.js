@@ -16,7 +16,7 @@ class FileInput extends React.Component {
   }
 
   handleChange = (value) => {
-    this.state.type = value;
+    this.setState({type : value});
   }
 
   handleFileUpload = async (e) => {
@@ -45,16 +45,15 @@ class FileInput extends React.Component {
           <Select defaultValue="avatar" style={{ width: 150 }} onChange={this.handleChange}>
             <Option value="avatar">Thay hình đại diện</Option>
             <Option value="banner">Thay ảnh bìa</Option>
-            <Option value="gallery">Thêm hình khác</Option>
+            <Option disabled={!this.props.gallery} value="gallery">Thêm hình khác</Option>
           </Select>
           <input className='fancy-input'
             type="file"
             //value={value}
             onChange={(e) => { this.setState({ value: e }); console.log(this.state.value) }}
           />
-          <p>{this.state.url}</p>
+          <p></p>
           <Button className='btn btn-sm btn-primary'
-            //loading={this.state.loading} 
             onClick={() => this.handleFileUpload(this.state.value)}>Tải lên</Button>
         </Spin>
       </div>)

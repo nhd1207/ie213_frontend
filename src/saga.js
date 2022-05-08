@@ -7,6 +7,7 @@ import cartSaga from "./screens/CartPage/saga"
 import userAdminSaga from './components/Admin/User/saga'
 import carAdminSaga from './components/Admin/Car/saga'
 import accessoryAdminSaga from './components/Admin/Accessory/saga'
+import postAdminSaga from './components/Admin/Post/saga'
 import accessoryBillAdminSaga from './components/Admin/AccessoryBill/saga'
 import carOrderAdminSaga from './components/Admin/CarOrder/saga'
 
@@ -20,6 +21,7 @@ const Saga = function* (){
       userAdminSaga(),
       carAdminSaga(),
       accessoryAdminSaga(),
+      postAdminSaga(),
       accessoryBillAdminSaga(),
       carOrderAdminSaga()
     ])

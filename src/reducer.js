@@ -10,6 +10,7 @@ import userAdmin from './components/Admin/User/reducer'
 import car from './components/Admin/Car/reducer'
 import accessory from './components/Admin/Accessory/reducer'
 import accessoryBill from './components/Admin/AccessoryBill/reducer'
+import postAdmin from './components/Admin/Post/reducer'
 import carOrder from './components/Admin/CarOrder/reducer'
 
 const Reducer = (history) => combineReducers({    
@@ -23,6 +24,7 @@ const Reducer = (history) => combineReducers({
     userAdmin,
     car,
     accessory,
+    postAdmin,
     accessoryBill,
     carOrder
   })

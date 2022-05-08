@@ -70,6 +70,19 @@ const DataTable = ({ dataSource, loading, updateUser, deleteUser }) => {
         </div>
     },
     {
+      title: 'Quyền',
+      dataIndex: 'role',
+      key: 'role',
+      className: 'text-left',
+      render: (value, record) =>
+          <div style={{ textAlign: 'center' }}>{
+          (value === 'admin') ?
+            <span style={{ color: 'green' }}>  {'Quản trị viên' || ''} </span> :
+              <span style={{ color: 'blue' }}> {"Người dùng" || ''} </span>
+        }
+        </div>
+        },
+    {
       title: 'Action',
       key: 'action',
       render: (text, record) => (

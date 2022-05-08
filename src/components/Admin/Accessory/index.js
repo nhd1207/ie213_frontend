@@ -142,7 +142,7 @@ class index extends Component {
                 <Layout>
                     <div className='container-fluid mb-3 text-left py-2' style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <span className='h3 font-weight-bold '>Phụ kiện</span>
-                        <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} text='Thêm xe' type="primary" ></Button></span>
+                        <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} text='Thêm phụ kiện' type="primary" >Thêm phụ kiện</Button></span>
                     </div>
                     <FormFilter
                     onSubmit={this.handleSubmitFilter}
@@ -195,7 +195,7 @@ class index extends Component {
                     >
                         <Image.PreviewGroup>
                             <p>Tải lên hình ảnh cho {this.state.acc?.name}</p>
-                            <FileInput urlImage={this.handleUrlImage} update={() => this.handleUpdateAccessory(this.state.acc)}></FileInput>
+                            <FileInput gallery={true} urlImage={this.handleUrlImage} update={() => this.handleUpdateAccessory(this.state.acc)}></FileInput>
                             <hr/>
                             <p>Hình đại diện cho phụ kiện</p>{this.state.acc.image?.avatar?
                                 <Image width={200} src={this.state.acc.image?.avatar} /> : <Empty />
