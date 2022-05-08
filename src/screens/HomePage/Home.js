@@ -73,7 +73,7 @@ function Home(props) {
                                 <List.Item>
                                     <List.Item.Meta
                                         avatar={<img className={style['news-image']} src={item.image.banner} alt="abc" />}
-                                        title={<div className={style['news-title']}>{item.content}</div>}
+                                        title={<div className={style['news-title']}>{item.title}</div>}
                                         description={
                                             <div>
                                                 <div className={style['news-description']}>{dateFormat(item.createdAt, "mmmm dS, yyyy")}</div>
