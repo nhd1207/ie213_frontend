@@ -36,13 +36,13 @@ export default function LayoutAdmin(props) {
                     <Menu.Item key="5" icon={<ShoppingCartOutlined />}>
                         <Link to={`/admin/accessory`} > Phụ kiện </Link>
                     </Menu.Item>
-                    <Menu.Item key="5" icon={<FontAwesomeIcon icon={faNewspaper} />}>
+                    <Menu.Item key="6" icon={<FontAwesomeIcon icon={faNewspaper} />}>
                         <Link to={`/admin/post`} > Bài viết </Link>
                     </Menu.Item>
-                    <Menu.Item key="6" icon={<TeamOutlined /> }>
+                    <Menu.Item key="7" icon={<TeamOutlined /> }>
                         <Link to={`/admin/user`} > Người dùng </Link>
                     </Menu.Item>
-                    <Menu.Item key="7" icon={<LogoutOutlined />}>
+                    <Menu.Item key="8" icon={<LogoutOutlined />}>
                         <Link to={`/admin/logout`} > Đăng xuất </Link>
                     </Menu.Item>
                 </Menu>
