@@ -53,6 +53,19 @@ export const updateCart =(data)=> {
     })
 }
 
+export const addItemToCart =(data)=> {
+    return axios({
+        method: 'PATCH',
+        data,
+        url: `${prefix}/addItemToCart`
+    })
+}
+
+//{
+//    itemId:'',
+//   quantity:
+//}
+
 export const updateWishlist =(data)=> {
     return axios({
         method: 'PATCH',

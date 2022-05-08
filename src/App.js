@@ -14,8 +14,15 @@ import AccAdmin from "./components/Admin/Accessory";
 import postAdmin from "./components/Admin/Post";
 import AccBillAdmin from "./components/Admin/AccessoryBill";
 import UserAdmin from "./components/Admin/User";
+import News from "./screens/NewsPage/NewsPage"
 import CarOrder from "./components/Admin/CarOrder";
 import RenderImage from './components/Share/RenderImage'
+import Accessory from "./screens/AccessoryPage/Accessory"
+import AccessoryDetail from "./screens/AccessoryDetailPage/AccessoryDetail"
+import NewsDetail from "./screens/NewsDetail/NewsDetail"
+import Error404 from "./screens/ErrorPage/Error404"
+import WishList from './screens/WishListPage/WishList';
+import CarDetail from './screens/CarDetailPage/CarDetail'
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import { verify } from "./apis/Auth";
@@ -24,6 +31,10 @@ import Cookies from "js-cookie";
 import { connect } from "react-redux";
 
 function App() {
+  useEffect(() => {
+    document.title = "Seven"
+ }, []);
+ 
   return (
     <div>
       <Switch>
@@ -31,7 +42,8 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/user" component={User} />
-        <Route path="/car" component={Car}/>
+        <Route exact path="/car" component={Car}/>
+        <Route path="/car/:id" component={CarDetail}></Route>
         <Route path="/cart" component={Cart}/>
         <Route path="/showroom" component={Showroom}/>
         <Route path="/admin/car-order" component={CarOrder}/>
@@ -42,6 +54,14 @@ function App() {
         <Route path="/admin/post" component={postAdmin}/>
         <Route path="/admin" component={CarOrder}/>
         <Route path="/test" component={RenderImage}/>
+        <Route path="/admin" component={CarOrder}/> 
+        <Route exact path="/news" component={News}/> 
+        <Route path="/news/:id" component={NewsDetail}/> 
+        <Route exact path="/accessory" component={Accessory}/>
+        <Route path="/accessory/:id" component={AccessoryDetail}></Route> 
+        <Route path="/wishlist" component={WishList}></Route>
+        <Route exact path="/" component={Home} />
+        <Route component={Error404} />
       </Switch>
     </div>
   );

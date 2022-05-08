@@ -10,7 +10,11 @@ import accessoryAdminSaga from './components/Admin/Accessory/saga'
 import postAdminSaga from './components/Admin/Post/saga'
 import accessoryBillAdminSaga from './components/Admin/AccessoryBill/saga'
 import carOrderAdminSaga from './components/Admin/CarOrder/saga'
-
+import accessorySaga from './screens/AccessoryPage/saga'
+import accessoryDetailSaga from './screens/AccessoryDetailPage/saga'
+import newSaga from './screens/NewsPage/saga'
+import newDetailSaga from './screens/NewsDetail/saga'
+import wishListSaga from './screens/WishListPage/saga'
 const Saga = function* (){
     yield all([
       loginSaga(),
@@ -23,7 +27,12 @@ const Saga = function* (){
       accessoryAdminSaga(),
       postAdminSaga(),
       accessoryBillAdminSaga(),
-      carOrderAdminSaga()
+      carOrderAdminSaga(),
+      accessorySaga(),
+      accessoryDetailSaga(),
+      newSaga(),
+      newDetailSaga(),
+      // wishListSaga()
     ])
   }
   
