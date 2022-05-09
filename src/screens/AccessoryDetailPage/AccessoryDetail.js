@@ -55,7 +55,7 @@ function AccessoryDetail(props) {
                                 <img className={style.image} style={{ backgroundImage: `url(${props.data?.data[0]?.image?.gallery[2]})` }}></img>
                             </CarouselItem>
                         </Carousel> */}
-                        <img className={`${style.image} col-6`} style={{ backgroundImage: `url(${props.data?.data[0]?.image.avatar})` }} alt="abc"></img>
+                        <img className={`${style.image} col-6`} style={{ backgroundImage: `url(${props.data?.data[0]?.image.banner})` }} alt="abc"></img>
                         <div className={`${style.content} col-6`}>
                             <div className={`${style.content_name}`}>
                                 {props.data?.data[0]?.name}

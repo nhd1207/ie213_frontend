@@ -36,7 +36,7 @@ function Home(props) {
                                         <div className={style["img-container"]}>
                                             <img
                                                 className={style.img2}
-                                                src={car.image.banner}
+                                                src={car.image.avatar}
                                                 alt="Carousel Slide"
                                             />
                                         </div>
@@ -72,7 +72,7 @@ function Home(props) {
                             renderItem={(item) => (
                                 <List.Item>
                                     <List.Item.Meta
-                                        avatar={<img className={style['news-image']} src={item.image.banner} alt="abc" />}
+                                        avatar={<img className={style['news-image']} src={item.image.avatar} alt="abc" />}
                                         title={<div className={style['news-title']}>{item.title}</div>}
                                         description={
                                             <div>

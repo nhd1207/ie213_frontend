@@ -97,7 +97,7 @@ function Accessory(props) {
                 {
                   props.accessories?.accessories?.accessory?.map(item => {
                     let myStyle = {
-                      backgroundImage: `url(${item.image.banner})`
+                      backgroundImage: `url(${item.image.avatar})`
                     }
                     return (
                       <Card className={`${style.card} col col-xl-4 col-md-6 col-12`}>

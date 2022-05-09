@@ -31,7 +31,7 @@ function NewsDetail(props) {
                     <Breadcrumb.Item>App</Breadcrumb.Item>
                 </Breadcrumb>
                 <div className={style["site-layout-background"]}>  
-                    <img className={style['news-image']} src={props?.data?.data[0]?.image?.avatar} alt="abc" />
+                    <img className={style['news-image']} src={props?.data?.data[0]?.image?.banner} alt="abc" />
 
                     <div className={style['news-title']}>{props?.data?.data[0]?.title}</div>
 

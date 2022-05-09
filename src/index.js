@@ -14,10 +14,11 @@ import saga from "./saga";
 import { routerMiddleware } from "connected-react-router";
 const history = createBrowserHistory({ basename: "/" });
 const sagaMiddleware = createSagaMiddleware();
+const reduxRouterMiddleware = routerMiddleware(history)
 const composeSetup =
   process.env.NODE_ENV !== "production" &&
-  typeof window === "object" &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    typeof window === "object" &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     : compose;
 
@@ -29,11 +30,11 @@ sagaMiddleware.run(saga);
 
 ReactDOM.render(
   <Provider store={store}>
-  <BrowserRouter >
-  {/* <React.StrictMode> */}
-    <App history={history} />
-  {/* </React.StrictMode> */}
-  </BrowserRouter>
+    <BrowserRouter >
+      {/* <React.StrictMode> */}
+      <App history={history} />
+      {/* </React.StrictMode> */}
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );

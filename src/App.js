@@ -30,6 +30,8 @@ import {useEffect} from 'react'
 import Cookies from "js-cookie";
 import { connect } from "react-redux";
 import AdminPage from './screens/AdminPage/AdminPage';
+import AboutUs from './screens/AboutUsPage/AboutUs';
+import Support from './screens/SupportPage/Support'
 
 function App() {
   useEffect(() => {
@@ -53,6 +55,8 @@ function App() {
         <Route exact path="/accessory" component={Accessory}/>
         <Route path="/accessory/:id" component={AccessoryDetail}></Route> 
         <Route path="/wishlist" component={WishList}></Route>
+        <Route path="/about_us" component={AboutUs}></Route>
+        <Route path="/support" component={Support}></Route>
         <Route exact path="/" component={Home} />
         <Route component={Error404} />
       </Switch>
