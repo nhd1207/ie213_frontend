@@ -3,13 +3,12 @@ import {
     call, 
     put, 
     all,
-    select
   } from 'redux-saga/effects'
 import {
       action_type as TYPE
   } from './action'  
    
-import * as api from '../../../apis/Car'
+import * as api from '../../../apis/Post'
 import { message } from 'antd'
 
 function* getListSaga(action) {
@@ -18,14 +17,14 @@ function* getListSaga(action) {
           const response = yield call(api.getList, params)
           if(response.status==='success'){
                   yield all([
-                      put({type: TYPE.CARADMIN.SUCCESS, ...response}),
+                      put({type: TYPE.POSTADMIN.SUCCESS, ...response}),
                   ])
           }else{
-            yield put({type: TYPE.CARADMIN.ERROR, error: response})
+            yield put({type: TYPE.POSTADMIN.ERROR, error: response})
           }
       } catch (error) {
           yield all([
-              put({type: TYPE.CARADMIN.ERROR, error})
+              put({type: TYPE.POSTADMIN.ERROR, error})
           ])
       }
   }
@@ -38,13 +37,13 @@ function* getListSaga(action) {
         if(response.status==='success'){
                 yield all([
                     put({type: TYPE.CREATE.SUCCESS, ...response}),
-                    put({type: TYPE.CARADMIN.REQUEST, params:{status:1}})
+                    put({type: TYPE.POSTADMIN.REQUEST, params:{status:1}})
                 ])
-                message.success('Tạo xe thành công')
-                message.success('Hãy thêm ảnh cho xe!!!')
+                message.success('Tạo post thành công')
+                message.success('Hãy thêm ảnh cho post!!!')
         }else{
           yield put({type: TYPE.CREATE.ERROR, error: response})
-          message.error('Tạo xe thất bại')
+          message.error('Tạo bài viết thất bại')
 
         }
     } catch (error) {
@@ -61,20 +60,20 @@ function* UpdateSaga(action) {
         if(response.status==='success'){
                 yield all([
                     put({type: TYPE.UPDATE.SUCCESS, ...response}),
-                    put({type: TYPE.CARADMIN.REQUEST, params:{status:1}})
+                    put({type: TYPE.POSTADMIN.REQUEST, params:{status:1}})
                 ])
-                message.success('Sửa thông tin xe thành công')
+                message.success('Sửa thông tin bài viết thành công')
 
         }else{
           yield put({type: TYPE.UPDATE.ERROR, error: response})
-          message.error('Sửa thông tin xe thất bại')
+          message.error('Sửa thông tin bài viết thất bại')
 
         }
     } catch (error) {
         yield all([
             put({type: TYPE.UPDATE.ERROR, error})
         ])
-        message.error('Sửa thông tin xe thất bại')
+        message.error('Sửa thông tin bài viết thất bại')
 
     }
 }
@@ -88,27 +87,27 @@ function* DeleteSaga(action) {
         if(response.status==='success'){
                 yield all([
                     put({type: TYPE.DELETE.SUCCESS, ...response}),
-                    put({type: TYPE.CARADMIN.REQUEST, params:{status:1}}),
+                    put({type: TYPE.POSTADMIN.REQUEST, params:{status:1}}),
                 ])
-        message.success('Xóa xe thành công')
+        message.success('Xóa bài viết thành công')
 
         }else{
           yield put({type: TYPE.DELETE.ERROR, error: response})
-        message.success('Xóa xe thất bại')
+        message.success('Xóa bài viết thất bại')
 
         }
     } catch (error) {
         yield all([
             put({type: TYPE.DELETE.ERROR, error})
         ])
-        message.success('Xóa xe thất bại')
+        message.success('Xóa bài viếtthất bại')
     }
 }
 
 
   function* watcher() {
       yield all([
-          takeLatest(TYPE.CARADMIN.REQUEST, getListSaga),
+          takeLatest(TYPE.POSTADMIN.REQUEST, getListSaga),
           takeLatest(TYPE.CREATE.REQUEST, CreateSaga),
           takeLatest(TYPE.UPDATE.REQUEST, UpdateSaga),
           takeLatest(TYPE.DELETE.REQUEST, DeleteSaga),

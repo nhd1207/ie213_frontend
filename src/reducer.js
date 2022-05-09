@@ -5,13 +5,13 @@ import login from "./screens/LoginPage/reducer"
 import signup from "./screens/SignupPage/reducer"
 import home from "./screens/HomePage/reducer"
 import user from "./screens/UserPage/reducer"
-import post from "./screens/NewsPage/reducer"
 import cart from "./screens/CartPage/reducer"
-import newsdetail from "./screens/NewsDetail/reducer"
+import admin from "./screens/AdminPage/reducer"
 import userAdmin from './components/Admin/User/reducer'
 import car from './components/Admin/Car/reducer'
 import accessory from './components/Admin/Accessory/reducer'
 import accessoryBill from './components/Admin/AccessoryBill/reducer'
+import postAdmin from './components/Admin/Post/reducer'
 import carOrder from './components/Admin/CarOrder/reducer'
 import accessoryPage from './screens/AccessoryPage/reducer'
 import accessoryDetailPage from './screens/AccessoryDetailPage/reducer'
@@ -25,11 +25,12 @@ const Reducer = (history) => combineReducers({
     signup,
     home,
     user,
-    post,
     cart,
+    admin,
     userAdmin,
     car,
     accessory,
+    postAdmin,
     accessoryBill,
     carOrder,
     accessoryPage,

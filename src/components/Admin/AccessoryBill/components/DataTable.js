@@ -1,90 +1,118 @@
-import React from 'react';
-import { Table, Spin, Space, Tooltip } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDeleteLeft, faEdit,faInfo } from '@fortawesome/free-solid-svg-icons'
-import { Popconfirm, message, Button } from 'antd';
-import { HistoryOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import money from '../../../Share/functions/money';
+import React from "react";
+import { Table, Spin, Space, Tooltip } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDeleteLeft,
+  faEdit,
+  faInfo,
+} from "@fortawesome/free-solid-svg-icons";
+import { Popconfirm, message, Button } from "antd";
+import {
+  HistoryOutlined,
+  CheckOutlined,
+  CloseOutlined,
+} from "@ant-design/icons";
+import money from "../../../Share/functions/money";
 
 const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
-
   const onSubmit = (values) => {
-    info(values)
-  }
+    info(values);
+  };
 
   const onDelete = (values) => {
-    deleteAccessory(values)
-  }
+    deleteAccessory(values);
+  };
 
   const columns = [
     {
-      title: '#',
+      title: "#",
       width: 100,
-      className: 'text-center',
+      className: "text-center",
       render: (value, record, i) => <a>{i + 1}</a>,
     },
     {
-      title: 'Tên người dùng',
-      dataIndex: ['userId', 'name'],
-      key: 'name',
-      className: 'text-center',
-      render: (value, record) =>
-        <div style={{ textAlign: 'center' }}>
-          <span> {value || ''} </span>
+      title: "Tên người dùng",
+      dataIndex: ["userId"],
+      key: "name",
+      className: "text-center",
+      render: (value, record) => (
+        <div style={{ textAlign: "center" }}>
+          <span> {value || ""} </span>
         </div>
+      ),
     },
     {
-      title: 'Tổng giá',
-      dataIndex: 'totalPrice',
-      key: 'totalPrice',
-      className: 'text-center',
-      render: (value, record) =>
-        <div style={{ textAlign: 'center' }}>
-          <span> {money(value,'VNĐ') || ''} </span>
+      title: "Tổng giá",
+      dataIndex: "totalPrice",
+      key: "totalPrice",
+      className: "text-center",
+      render: (value, record) => (
+        <div style={{ textAlign: "center" }}>
+          <span> {money(value, "VNĐ") || ""} </span>
         </div>
+      ),
     },
     {
-      title: 'Phương thức vận chuyển',
-      dataIndex: 'deliveryMethod',
-      key: 'deliveryMethod',
-      className: 'text-center',
-      render: (value, record) =>
-        <div style={{ textAlign: 'center' }}>
-          <span> {value || ''} </span>
+      title: "Phương thức vận chuyển",
+      dataIndex: "deliveryMethod",
+      key: "deliveryMethod",
+      className: "text-center",
+      render: (value, record) => (
+        <div style={{ textAlign: "center" }}>
+          <span> {value || ""} </span>
         </div>
+      ),
     },
     {
-      title: 'Trạng thái',
-      dataIndex: 'status',
-      key: 'status',
-      className: 'text-center',
-      render: (value, record) =>
-        <div style={{ textAlign: 'center' }}>{
-          (value === 'Pending') ?
-            <span style={{ color: 'blue' }}><HistoryOutlined />   {'Đang chờ' || ''} </span> :
-            (value === 'Success') ?
-              <span style={{ color: 'green' }}><CheckOutlined /> {'Thành công' || ''} </span> :
-              <span style={{ color: 'red' }}><CloseOutlined /> {value || ''} </span>
-        }
+      title: "Trạng thái",
+      dataIndex: "status",
+      key: "status",
+      className: "text-center",
+      render: (value, record) => (
+        <div style={{ textAlign: "center" }}>
+          {value === "Pending" ? (
+            <span style={{ color: "blue" }}>
+              <HistoryOutlined /> {"Đang chờ" || ""}{" "}
+            </span>
+          ) : value === "Success" ? (
+            <span style={{ color: "green" }}>
+              <CheckOutlined /> {"Thành công" || ""}{" "}
+            </span>
+          ) : (
+            <span style={{ color: "red" }}>
+              <CloseOutlined /> {value || ""}{" "}
+            </span>
+          )}
         </div>
+      ),
     },
     {
-      title: 'Hành động',
-      key: 'action',
+      title: "Hành động",
+      key: "action",
       render: (text, record) => (
         <Space>
-          <button onClick={() => onSubmit(record)} className="btn btn-sm btn-primary">
+          <button
+            onClick={() => onSubmit(record)}
+            className="btn btn-sm btn-primary"
+          >
             <Tooltip placement="top" title="Thông tin đơn hàng">
               <span className="px-2">
                 <FontAwesomeIcon icon={faInfo} />
               </span>
             </Tooltip>
           </button>
-          <Popconfirm disabled={(record.status==='Success')} placement="left" title='Bạn có muốn hủy?' onConfirm={() => onDelete(record?._id)} okText="Có" cancelText="Không">
+          <Popconfirm
+            disabled={record.status === "Success"}
+            placement="left"
+            title="Bạn có muốn hủy?"
+            onConfirm={() => onDelete(record?._id)}
+            okText="Có"
+            cancelText="Không"
+          >
             <button
-              // onClick={() => onDelete(record?._id)} 
+              // onClick={() => onDelete(record?._id)}
               className="btn btn-sm btn-primary"
-              >
+            >
               <Tooltip placement="top" tilte="Xóa">
                 <span className="px-2">
                   <FontAwesomeIcon icon={faDeleteLeft} />
@@ -94,7 +122,8 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
           </Popconfirm>
         </Space>
       ),
-    },]
+    },
+  ];
   return (
     <Table
       rowKey="id"
@@ -103,7 +132,6 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
       loading={loading}
     />
   );
-}
+};
 
 export default DataTable;
-

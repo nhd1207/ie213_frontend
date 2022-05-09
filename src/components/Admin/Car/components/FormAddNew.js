@@ -8,6 +8,7 @@ import RenderInputText from '../../../Share/RenderInputText'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Space } from 'antd'
+import renderImageDragAnt from '../../../Share/RenderImage'
 let ModalAddCar = props => {
     const { handleSubmit, handleShowForm, initialValues } = props
 
@@ -30,6 +31,14 @@ let ModalAddCar = props => {
                         placeholder='Đây là mã xe'
                     />
                 </div>
+                {/* <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Hình ảnh</label>
+                    <Field
+                        name="image"
+                        component={FileInput}
+                        //placeholder='Đây là mã xe'
+                    />
+                </div> */}
                 <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Giá xe</label>
                     <Field

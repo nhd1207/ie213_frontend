@@ -1,19 +1,19 @@
 import React from 'react';
-import { Table, Spin, Space, Tooltip } from 'antd';
+import { Table, Space, Tooltip, Popconfirm } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDeleteLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
-import { Popconfirm, message, Button } from 'antd';
+import dateFormat from 'dateformat';
 import money from '../../../Share/functions/money';
 
 
-const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
+const DataTable = ({ dataSource, loading, updatePost, deletePost, showImage }) => {
 
   const onSubmit = (values) => {
-    updateCar(values)
+    updatePost(values)
   }
 
   const onDelete = (values) => {
-    deleteCar(values)
+    deletePost(values)
   }
 
   const onShowImage = (values) => {
@@ -23,14 +23,15 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
   const columns = [
     {
       title: '#',
-      width: 100,
+      width: 50,
       key: 'std',
-      render: (value, record, i) => <a>{i + 1}</a>,
+      render: (value, record, i) => <p>{i + 1}</p>,
     },
     {
-      title: 'Tên xe',
-      dataIndex: 'name',
-      key: 'name',
+      title: 'Tiêu đề',
+      dataIndex: 'title',
+      width: 200,
+      key: 'title',
       className: 'text-left',
       render: (value, record) =>
         <div>
@@ -42,14 +43,12 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
       dataIndex: ['image'],
       key: 'picture',
       className: 'text-left',
-      render: (value, record) => <button className="btn btn-sm btn-primary" onClick={()=>onShowImage(record)}>Quản lý hình ảnh</button>
-      // render: (value, record) =>
-      //   <img src={value} height={50} width={50} style={{ objectFit: 'cover' }} ></img>
+      render: (value, record) => <button className="btn btn-sm btn-primary" onClick={() => onShowImage(record)}>Quản lý hình ảnh</button>
     },
     {
-      title: 'Tiền đặt cọc',
-      dataIndex: 'deposit',
-      key: 'deposit',
+      title: 'Nội dung',
+      dataIndex: 'content',
+      //key: 'content',
       className: 'text-left',
       render: (value, record) =>
         <div>
@@ -57,19 +56,9 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
         </div>
     },
     {
-      title: 'Giá',
-      dataIndex: 'price',
-      key: 'price',
-      className: 'text-left',
-      render: (value, record) =>
-        <div>
-          <span> {money(value, 'VNĐ')|| ''} </span>
-        </div>
-    },
-    {
-      title: 'Số lượng',
-      dataIndex: 'amount',
-      key: 'amount',
+      title: 'tác giả',
+      dataIndex: ['author', 'name'],
+      key: 'author',
       className: 'text-left',
       render: (value, record) =>
         <div>
@@ -77,13 +66,13 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
         </div>
     },
     {
-      title: 'Giới thiệu',
-      dataIndex: 'description',
-      key: 'description',
+      title: 'Thời gian tạo',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
       className: 'text-left',
       render: (value, record) =>
         <div>
-          <span> {value || ''} </span>
+          <span> {dateFormat(value, 'hh:mm:ss dd:mm:yyyy') || ''} </span>
         </div>
     },
     {
@@ -99,16 +88,15 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
             </Tooltip>
           </button>
           <Popconfirm placement="left" title='Bạn có muốn xóa?' onConfirm={() => onDelete(record?._id)} okText="Có" cancelText="Không">
-            <button 
-           // onClick={() => onDelete(record?._id)} 
-            className="btn btn-sm btn-primary">
+            <button
+              className="btn btn-sm btn-primary">
               <Tooltip placement="top" title="Xóa">
                 <span className="px-2">
                   <FontAwesomeIcon icon={faDeleteLeft} />
                 </span>
               </Tooltip>
             </button>
-            </Popconfirm>
+          </Popconfirm>
         </Space>
       ),
     },]

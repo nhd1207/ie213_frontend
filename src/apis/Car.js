@@ -47,5 +47,18 @@ export const destroy =(id)=> {
     })
 }
 
+export const cloudinaryUpload = (fileToUpload) => {
+    return axios({
+        method:'POST',
+        fileToUpload,
+        url:`uploads/cloudinary-upload`
+    })
+    
+    
+    // .post(link_api + 'uploads/cloudinary-upload', fileToUpload)
+    // .then(res => res.data)
+    // .catch(err => console.log(err))
+}
+
 
 
