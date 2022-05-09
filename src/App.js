@@ -4,10 +4,12 @@ import Login from "./screens/LoginPage/Login";
 import SignUp from "./screens/SignupPage/SignUp";
 import "./App.css";
 import Home from "./screens/HomePage/Home";
+import Showroom from "./screens/ShowroomPage/Showroom";
+import NewsPage from "./screens/NewsPage/NewsPage";
 import User from "./screens/UserPage/User";
 import Car from "./screens/CarPage/Car"
 import Cart from "./screens/CartPage/Cart"
-import Showroom from "./screens/ShowroomPage/Showroom"
+import NewsDetail from "./screens/NewsDetail/NewsDetail"
 import Admin from "./screens/AdminPage/AdminPage"
 import CarAdmin from "./components/Admin/Car";
 import AccAdmin from "./components/Admin/Accessory";
@@ -17,7 +19,6 @@ import News from "./screens/NewsPage/NewsPage"
 import CarOrder from "./components/Admin/CarOrder";
 import Accessory from "./screens/AccessoryPage/Accessory"
 import AccessoryDetail from "./screens/AccessoryDetailPage/AccessoryDetail"
-import NewsDetail from "./screens/NewsDetail/NewsDetail"
 import Error404 from "./screens/ErrorPage/Error404"
 import WishList from './screens/WishListPage/WishList';
 import CarDetail from './screens/CarDetailPage/CarDetail'
@@ -36,9 +37,12 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path="/home" component={Home} />
+        {/* <Route path="/home" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/user" component={User} /> */}
+        <Route path="/showroom" component={Showroom}/>
+        <Route path="/news" component={NewsPage}/>
         <Route path="/user" component={User} />
         <Route exact path="/car" component={Car}/>
         <Route path="/car/:id" component={CarDetail}></Route>
