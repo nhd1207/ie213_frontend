@@ -15,7 +15,7 @@ function reducer(state = initialState, action) {
         case type.GETCART.SUCCESS:
             return {
                 ...state,
-                carts: action.data,
+                carts: action.cart,
                 loading: false,
             }
         case type.GETCART.ERROR:

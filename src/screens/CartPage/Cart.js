@@ -13,7 +13,7 @@ import {
   PlusSquareOutlined,
   RightCircleOutlined,
 } from "@ant-design/icons";
-
+import money from "../../components/Share/functions/money"
 import { InputNumber, Space } from "antd";
 import { Button, Spin } from "antd";
 import Layout from "../../components/layout"
@@ -23,9 +23,16 @@ const { SubMenu } = Menu;
 const { Search } = Input;
 
 function Cart(props) {
+  const [cart, setCart] = useState({});
+
+  const deleteItem= () => {
+
+  }
+
   useEffect(() => {
     props.getCart();
-    console.log(props);
+    console.log(props.carts);
+    setCart(props?.carts?.carts)
 }, []);
 
   return (
@@ -51,22 +58,24 @@ function Cart(props) {
                   <h3 className={`${style.column} col-xl-2`}>GIÁ</h3>
                 </div>
                 {/* list product */}
-                <div className={`${style.product} row`}>
-                  <img className={`${style.productImg} col-xl-4 col-md-12`}></img>
+                {props.carts.carts.map(item => {
+                  // let myStyle = {
+                  //   backgroundImage: `url(${item?.itemId?.image?.avatar})`
+                  // }
+                  return (
+                    <div className={`${style.product} row`}>
+                  <img className={`${style.productImg} col-xl-4 col-md-12`} alt="abc"></img>
                   <div className={`${style.productDetail} col-xl-4 col-md-12`}>
-                    <div className={`${style.productName} row`}> Ten San Pham </div>
+                    <div className={`${style.productName} row`}> {item?.itemId?.name} </div>
                     <div className={`${style.productDesc} row`}>
-                      {" "}
-                      Mo ta San pham sieu cap vip pro Mo ta San pham sieu cap vip
-                      pro Mo ta San pham sieu cap vip pro Mo ta San pham sieu cap
-                      vip pro
+                      {item?.itemId?.description}
                     </div>
                   </div>
                   <div className={`${style.productQty} col-xl-2 col-md-12`}>
                     <Space>
                       <InputNumber
                         className={`${style.inputNumber}`}
-                        defaultValue={1000}
+                        defaultValue={item?.quantity}
                         formatter={(value) =>
                           `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                         }
@@ -77,80 +86,18 @@ function Cart(props) {
                       className={`${style.removeButton}`}
                       type="primary"
                       danger
+                      onClick={deleteItem}
                     >
                       Xóa
                     </Button>
                   </div>
                   <div className={`${style.productPrice} col-xl-2 col-md-12`}>
-                    1 000 000
+                    {money(item?.itemId?.price, "VND")}
                   </div>
                 </div>
-
-                <div className={`${style.product} row`}>
-                  <img className={`${style.productImg} col-xl-4`}></img>
-                  <div className={`${style.productDetail} col-xl-4`}>
-                    <div className={`${style.productName} row`}> Ten San Pham </div>
-                    <div className={`${style.productDesc} row`}>
-                      {" "}
-                      Mo ta San pham sieu cap vip pro Mo ta San pham sieu cap vip
-                      pro Mo ta San pham sieu cap vip pro Mo ta San pham sieu cap
-                      vip pro
-                    </div>
-                  </div>
-                  <div className={`${style.productQty} col-xl-2`}>
-                    <Space>
-                      <InputNumber
-                        className={`${style.inputNumber}`}
-                        defaultValue={1000}
-                        formatter={(value) =>
-                          `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                        }
-                        parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                      />
-                    </Space>
-                    <Button
-                      className={`${style.removeButton}`}
-                      type="primary"
-                      danger
-                    >
-                      Xóa
-                    </Button>
-                  </div>
-                  <div className={`${style.productPrice} col-xl-2`}>1 000 000</div>
-                </div>
-
-                <div className={`${style.product} row`}>
-                  <img className={`${style.productImg} col-xl-4`}></img>
-                  <div className={`${style.productDetail} col-xl-4`}>
-                    <div className={`${style.productName} row`}> Ten San Pham </div>
-                    <div className={`${style.productDesc} row`}>
-                      {" "}
-                      Mo ta San pham sieu cap vip pro Mo ta San pham sieu cap vip
-                      pro Mo ta San pham sieu cap vip pro Mo ta San pham sieu cap
-                      vip pro
-                    </div>
-                  </div>
-                  <div className={`${style.productQty} col-xl-2`}>
-                    <Space>
-                      <InputNumber
-                        className={`${style.inputNumber}`}
-                        defaultValue={1000}
-                        formatter={(value) =>
-                          `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                        }
-                        parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                      />
-                    </Space>
-                    <Button
-                      className={`${style.removeButton}`}
-                      type="primary"
-                      danger
-                    >
-                      Xóa
-                    </Button>
-                  </div>
-                  <div className={`${style.productPrice} col-xl-2`}>1 000 000</div>
-                </div>
+                  )
+                })}
+                
                 {/* end list product */}
                 <div className={`${style.endMain} row`}>
                   <div className={`${style.addToWishList} endMainCol col-xl-6`}>
