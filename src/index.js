@@ -12,6 +12,7 @@ import reducer from "./reducer";
 import { createBrowserHistory } from "history";
 import saga from "./saga";
 import { routerMiddleware } from "connected-react-router";
+
 const history = createBrowserHistory({ basename: "/" });
 const sagaMiddleware = createSagaMiddleware();
 const reduxRouterMiddleware = routerMiddleware(history)

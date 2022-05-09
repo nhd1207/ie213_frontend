@@ -15,9 +15,6 @@ import postAdmin from './components/Admin/Post/reducer'
 import carOrder from './components/Admin/CarOrder/reducer'
 import accessoryPage from './screens/AccessoryPage/reducer'
 import accessoryDetailPage from './screens/AccessoryDetailPage/reducer'
-import news from './screens/NewsPage/reducer'
-import newDetail from './screens/NewsDetail/reducer'
-import wishList from './screens/WishListPage/reducer'
 const Reducer = (history) => combineReducers({    
     form: formReducer,
     router: connectRouter(history),
@@ -34,10 +31,7 @@ const Reducer = (history) => combineReducers({
     accessoryBill,
     carOrder,
     accessoryPage,
-    accessoryDetailPage,
-    news,
-    newDetail,
-    // wishList
+    accessoryDetailPage
   })
   
 export default Reducer
