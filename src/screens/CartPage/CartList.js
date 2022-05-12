@@ -27,65 +27,96 @@ function CartList(props) {
     const [cart2, setCart2] = useState([]);
     const [update, setUpdate] = useState(true);
     const [totalPrice, setTotalPrice] = useState(0);
- 
+
     //props.totalPrice ham
     //const [update,setUpdate]=  useState(false);
 
     useEffect(() => {
-        setCart(props.data)
-        setCart2(props.data)
+        console.log('Use efect for prop.data')
+        const cart3 = Object.assign([],  props.data)
+        const cart4 = cart3.map(item=>{
+            return{
+                itemId: item.itemId,
+                quantity: item.quantity,
+                quantityTemp: item.quantity,
+                color: item.color,
+            }
+        })
+        setCart([...cart4])
+        setCart2([...cart4])
         //handleTotalPrice();
     }, [props.data]);
 
     useEffect(() => {
-        console.log('cart hh',cart);
+        console.log('Use efect for cart')
         handleTotalPrice();
     }, [cart]);
 
-
-
-
-    const handleTotalPrice = () =>{
-        // setTotalPrice(value);
+    const handleTotalPrice = () => {
         let total = 0
         cart?.forEach(item => {
-            total +=item.quantity * item?.itemId?.price
+            total += item.quantity * item?.itemId?.price
         });
-        // console.log(total);
-        // console.log('cart: ', cart);
         setTotalPrice(total);
-        // console.log('setTotalPrice(value)',totalPrice)
         props.totalPrice(total)
-
     }
 
     const handleAmount = (value, id) => {
         setUpdate(false)
-        //set value for cart2
-        let cart3;
-        cart3 = [...cart2]
+        const cart3 = [...cart2]
         cart3[id].quantity = value;
-        setCart2(cart3);
+        setCart2([...cart3]);
+        console.log("cart amount:", cart)
+        console.log("cart 2 amount:", cart2)
     }
 
-    
+
     const handleUpdateCart = () => {
         let cart3;
-        cart3 = cart2.map(item=>{return {
-            itemId:item.itemId._id,
-            quantity:item.quantity,
-            color:item.color,
-        }
+        cart3 = cart2.filter(item => { return !item.disabled }).map(item => {
+            return {
+                itemId: item.itemId._id,
+                quantity: item.quantity,
+                color: item.color,
+            }
         })
-        props.newCart({cart:cart3});
+        props.newCart({ cart: cart3 });
         props.totalPrice(totalPrice);
         setUpdate(true)
+    }
+
+    const handleCancelUpdateCart = () => {
+        let cart3;
+        setUpdate(true)
+        cart3 = [...cart2]
+        let cart4 = cart3.map(item=>{
+             return {
+                itemId:item.itemId,
+                quantity:item.quantityTemp,
+                color:item.color,
+                quantityTemp:item.quantityTemp,
+
+             }
+        })
+        console.log('cart4',cart4)
+        setCart([...cart4])
+        setCart2([...cart4])
+    }
+
+    const handleDeleteCartItem = (index) => {
+        let cart3;
+        setUpdate(false)
+        cart3 = [...cart]
+        cart3[index].disabled = true
+        setCart([...cart3]);
+        setCart2([...cart3]);
+        console.log("cart 2 state:", cart2)
     }
 
     return (
         <div>
             <Spin spinning={props.spinning}>
-                {console.log('cart render', cart)}
+                {/* {console.log('cart render', cart)} */}
                 {cart?.map((item, index) => {
                     let myStyle = {
                         backgroundImage: `url(${item?.itemId?.image?.avatar})`
@@ -93,7 +124,7 @@ function CartList(props) {
                     //total += item.quantity * item?.itemId?.price;
 
                     return (
-                        <div className={`${style.product} row`}>
+                        <div style={item.disabled ? { pointerEvents: "none", opacity: "0.4" } : {}} className={`${style.product} row`}>
                             <img className={`${style.productImg} col-xl-4 col-md-12`} style={myStyle} alt="abc"></img>
                             <div className={`${style.productDetail} col-xl-4 col-md-12`}>
                                 <div className={`${style.productName} row`}> {item?.itemId?.name} </div>
@@ -105,7 +136,8 @@ function CartList(props) {
                                 <Space>
                                     <InputNumber
                                         className={`${style.inputNumber}`}
-                                        defaultValue={item?.quantity}
+                                        defaultValue={item?.quantityTemp}
+                                        value ={item?.quantity}
                                         min="1"
                                         onChange={(e) => handleAmount(e, index)}
                                         formatter={(value) =>
@@ -118,10 +150,13 @@ function CartList(props) {
                                     className={`${style.removeButton}`}
                                     type="primary"
                                     danger
-                                    onClick={props.deleteItemChild}
+                                    onClick={() => handleDeleteCartItem(index)
+                                        //props.deleteItemChild
+                                    }
                                 >
                                     Xóa
                                 </Button>
+
                             </div>
                             <div className={`${style.productPrice} col-xl-2 col-md-12`}>
                                 {money(item?.itemId?.price, "VND")}
@@ -131,6 +166,7 @@ function CartList(props) {
                 })}
 
                 <button disabled={update} onClick={handleUpdateCart}>Cập nhật</button>
+                <button disabled={update} onClick={handleCancelUpdateCart}>Hủy</button>
             </Spin>
         </div>
     );
