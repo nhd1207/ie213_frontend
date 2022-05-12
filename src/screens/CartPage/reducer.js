@@ -23,6 +23,22 @@ function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
             }
+            case type.UPDATECART.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case type.UPDATECART.SUCCESS:
+            return {
+                ...state,
+                carts: action.cart,
+                loading: false,
+            }
+        case type.UPDATECART.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
         default:
             return state
     }
