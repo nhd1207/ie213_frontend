@@ -177,6 +177,7 @@ class index extends Component {
                         closable={true}
                         onCancel={this.handleCloseModalImage}
                         footer={null}
+                        destroyOnClose={true}
                     >
                         <Image.PreviewGroup>
                             <p>Tải lên hình ảnh cho xe {this.state.car?.name}</p>

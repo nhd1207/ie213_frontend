@@ -14,13 +14,13 @@ import {
 } from "@ant-design/icons";
 import money from "../../../Share/functions/money";
 
-const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
+const DataTable = ({ dataSource, loading, info, cancelAccessory }) => {
   const onSubmit = (values) => {
     info(values);
   };
 
-  const onDelete = (values) => {
-    deleteAccessory(values);
+  const onCancel = (values) => {
+    cancelAccessory(values);
   };
 
   const columns = [
@@ -64,6 +64,17 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
       ),
     },
     {
+      title: "Địa chỉ giao hàng",
+      dataIndex: "place",
+      key: "place",
+      className: "text-center",
+      render: (value, record) => (
+        <div style={{ textAlign: "center" }}>
+          <span> {value || ""} </span>
+        </div>
+      ),
+    },
+    {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
@@ -71,14 +82,18 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
       render: (value, record) => (
         <div style={{ textAlign: "center" }}>
           {value === "Pending" ? (
-            <span style={{ color: "blue" }}>
-              <HistoryOutlined /> {"Đang chờ" || ""}{" "}
+            <span style={{ color: "black" }}>
+              <HistoryOutlined /> {"Đang chờ duyệt" || ""}{" "}
             </span>
           ) : value === "Success" ? (
             <span style={{ color: "green" }}>
               <CheckOutlined /> {"Thành công" || ""}{" "}
             </span>
-          ) : (
+          ) : value === "Accepted"? (
+            <span style={{ color: "blue" }}>
+              <CloseOutlined /> {'Đã duyệt' || ""}{" "}
+            </span>
+          ):(
             <span style={{ color: "red" }}>
               <CloseOutlined /> {value || ""}{" "}
             </span>
@@ -105,7 +120,7 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
             disabled={record.status === "Success"}
             placement="left"
             title="Bạn có muốn hủy?"
-            onConfirm={() => onDelete(record?._id)}
+            onConfirm={() => onCancel(record)}
             okText="Có"
             cancelText="Không"
           >
@@ -113,7 +128,7 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
               // onClick={() => onDelete(record?._id)}
               className="btn btn-sm btn-primary"
             >
-              <Tooltip placement="top" tilte="Xóa">
+              <Tooltip placement="top" tilte="Hủy đơn">
                 <span className="px-2">
                   <FontAwesomeIcon icon={faDeleteLeft} />
                 </span>
