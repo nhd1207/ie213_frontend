@@ -3,6 +3,7 @@ import {
     call,
     put,
     all,
+    take,
 } from 'redux-saga/effects'
 import {
     action_type as TYPE
@@ -28,9 +29,31 @@ function* getListCartSaga(action) {
     }
 }
 
+function* updateCartSaga(action) {
+    try {
+        const { params } = action
+        console.log('params:', params);
+        const response = yield call(api.updateCart, params)
+        if(response.status==="success"){
+                yield all([
+                    put({type: TYPE.UPDATECART.SUCCESS, ...response}),
+                    put({type: TYPE.GETCART.REQUEST, params})
+                ])
+        }else{
+          yield put({type: TYPE.UPDATECART.ERROR, error: response})
+        }
+    } catch (error) {
+        yield all([
+            put({type: TYPE.UPDATECART.ERROR, error})
+        ])
+    }
+}
+
+
 function* watcher() {
     yield all([
-        takeLatest(TYPE.GETCART.REQUEST, getListCartSaga)
+        takeLatest(TYPE.GETCART.REQUEST, getListCartSaga),
+        takeLatest(TYPE.UPDATECART.REQUEST, updateCartSaga)
     ])
 }
 
