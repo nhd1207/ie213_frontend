@@ -60,7 +60,7 @@ function Home(props) {
                         <div className={style["accessories-header"]}>PHỤ KIỆN</div>
                         <div className={style["accessories-content"]}>LÀM ĐẸP CHIẾC XE CỦA BẠN</div>
                         <button variant='dark' class="btn btn-outline-dark" className={style["accessories-btn"]}>
-                            <a href="/accessories">
+                            <a href="/accessory">
                                 MORE   <FontAwesomeIcon icon={faCircleRight} size={{ width: 100 }}></FontAwesomeIcon>
                             </a>
                         </button>
