@@ -4,6 +4,7 @@ import Layouts from '../../components/layout'
 import style from "./index.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from 'react';
+import ReactDOMServer from 'react-dom/server'
 import dateFormat from 'dateformat';
 import { connect } from "react-redux";
 import { getListPost } from './action';
@@ -16,7 +17,6 @@ function NewsDetail(props) {
         props.getListPost(props.match.params.id)
         console.log(props)
     }, [])
-
     return (
         <Layouts>
             <Spin size="large" spinning={props.data.loading}>
@@ -36,9 +36,8 @@ function NewsDetail(props) {
                     <div className={`${style.img_position}`}>
                         <img className={`${style.news_image}`} src={props?.data?.data[0]?.image?.banner} alt="abc" />
                     </div>
-
                     <div className={`${style.news_items}`}>
-                        <p className={`${style.news_content}`}>{props.data?.data[0]?.content}</p>
+                        <div className={`${style.news_content}`} dangerouslySetInnerHTML={{__html: props.data?.data[0]?.content}}></div>
                     </div>
 
                 </div>
