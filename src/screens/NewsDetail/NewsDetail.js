@@ -24,20 +24,21 @@ function NewsDetail(props) {
                 dataSource={props?.data?.data[0]}
                 renderItem={(post) => (
                     <Content> */}
-                {/* className={style["site-layout"]} */}
-                <Breadcrumb>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
+                {/* className={sstyle["site-layout"]} */}
+                <div className={`${style.site_layout_background}`}>
+                    <div className={`${style.news_title}`}>{props?.data?.data[0]?.title}</div>
+                <Breadcrumb className={`${style.breadcrumb}`}>
+                    <Breadcrumb.Item href={"/"}>Home</Breadcrumb.Item>
+                    <Breadcrumb.Item href={"/news"}>List</Breadcrumb.Item>
+                    <Breadcrumb.Item>{props?.data?.data[0]?.title}</Breadcrumb.Item>
                 </Breadcrumb>
-                <div className={style["site-layout-background"]}>  
-                    <img className={style['news-image']} src={props?.data?.data[0]?.image?.banner} alt="abc" />
+                        <div className={`${style.news_date}`}>{dateFormat(props.data?.data[0]?.createdAt, "mmmm dS, yyyy")}</div>
+                    <div className={`${style.img_position}`}>
+                        <img className={`${style.news_image}`} src={props?.data?.data[0]?.image?.banner} alt="abc" />
+                    </div>
 
-                    <div className={style['news-title']}>{props?.data?.data[0]?.title}</div>
-
-                    <div className={style['news-items']}>
-                        <div className={style['news-date']}>{dateFormat(props.data?.data[0]?.createdAt, "mmmm dS, yyyy")}</div>
-                        <p className={style['news-content']}>{props.data?.data[0]?.content}</p>
+                    <div className={`${style.news_items}`}>
+                        <p className={`${style.news_content}`}>{props.data?.data[0]?.content}</p>
                     </div>
 
                 </div>
