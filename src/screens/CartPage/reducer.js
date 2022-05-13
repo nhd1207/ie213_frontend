@@ -15,10 +15,26 @@ function reducer(state = initialState, action) {
         case type.GETCART.SUCCESS:
             return {
                 ...state,
-                carts: action.data,
+                carts: action.cart,
                 loading: false,
             }
         case type.GETCART.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
+            case type.UPDATECART.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case type.UPDATECART.SUCCESS:
+            return {
+                ...state,
+                carts: action.cart,
+                loading: false,
+            }
+        case type.UPDATECART.ERROR:
             return {
                 ...state,
                 loading: false,

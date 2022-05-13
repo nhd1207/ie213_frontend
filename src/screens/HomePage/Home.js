@@ -14,6 +14,7 @@ import dateFormat from 'dateformat';
 import { NavLink } from "react-router-dom";
 
 function Home(props) {
+    
     useEffect(() => {
         props.getListCar();
         props.getListPost();

@@ -33,8 +33,8 @@ export function updateAccessoryBill (id, params)
 {
     return {
         type: action_type.UPDATE.REQUEST,
-        params,
-        id
+        id,
+        params
     }
 }
 

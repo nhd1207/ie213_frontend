@@ -7,6 +7,7 @@ import queryString from 'query-string'
 import { createCarOrder, getList, updateCarOrder, deleteCarOrder } from './action';
 import { PlusOutlined } from '@ant-design/icons';
 import FormFilter from './components/FormFilter';
+import money from '../../Share/functions/money';
 import classes from "./index.module.css";
 
 
@@ -92,29 +93,22 @@ class index extends Component {
                         // deleteAccessory={this.handleDeleteAccessoryBill}
                     />
                     <Modal
-                        title="Thông tin đơn đặt hàng xe"
+                        title="Thông tin xe"
                         visible={showForm}
                         closable={true}
                         onCancel={this.handleCloseModal}
                         onOk={this.handleCloseModal}
+                        destroyOnClose={true}
                     //onCancel={handleCancel}
                     >
-                        <List
-                            dataSource={this.state.carOrder?.carInfo || []}
-                            renderItem={item => (
-                                <List.Item key={item.id}>
-                                    <List.Item.Meta
-                                        //avatar={<Avatar src={item.picture.large} />}
-                                        title=
-                                        // {<a href="https://ant.design">
-                                                {item.itemId}
-                                        //    </a>}
-                                        description={item.quantity}
-                                    />
-                                    <div>Content</div>
-                                </List.Item>
-                            )}
-                        />
+                        <img src={this.state.carOrder?.carInfo?.image.avatar} style={{width:100,height:100}}></img>
+                        <h4>Tên xe: {this.state.carOrder?.carInfo?.name}</h4>
+                        <p>Dòng: {this.state.carOrder?.carInfo?.model}</p>
+                        <p>Mã: {this.state.carOrder?.carInfo?.code}</p>
+                        <p>Giá tiền: {money(this.state.carOrder?.carInfo?.price,'VNĐ')}</p>
+                        <p>Tiền đặt cọc: {money(this.state.carOrder?.carInfo?.deposit,'VNĐ')}</p>
+                        <p>Mô tả: {this.state.carOrder?.carInfo?.description}</p>
+                        <p>Thông tin đặc biệt: {this.state.carOrder?.carInfo?.special}</p>
                     </Modal>
                     {/* </Spin> */}
                 </Layout>

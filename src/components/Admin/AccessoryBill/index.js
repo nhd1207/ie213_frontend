@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, Spin, Modal, List } from "antd";
+import { Button, Spin, Modal, List, Avatar,Tabs } from "antd";
 import DataTable from "./components/DataTable";
 import Layout from "../LayoutAdmin/LayoutAdmin";
 import queryString from "query-string";
@@ -13,6 +13,7 @@ import {
 import { PlusOutlined } from "@ant-design/icons";
 import FormFilter from "./components/FormFilter";
 import classes from "./index.module.css";
+const { TabPane } = Tabs;
 
 class index extends Component {
   constructor(props) {
@@ -57,19 +58,13 @@ class index extends Component {
     this.setState({ showForm: false });
   };
 
-  // handleUpdateAccessoryBill = (value) => {
-  //     let id = this.state.idAcc;
-  //     this.setState({ showForm: false })
-  //     let params = value
-  //     //     name: value.name,
-  //     //     deposit: value.deposit,
-  //     //     amount: value.amount,
-  //     //     price: value.price
-  //     // }
-  //     // if(params.name && params.deposit && params.amount && params.price)
-  //     // return console.log('loi')
-  //     this.props.updateAccessoryBill(id, params)
-  // }
+  handleUpdateAccessoryBillStatus = (value) => {
+    // let id = this.state.idAcc;
+    let id = value._id;
+    this.setState({ showForm: false })
+    let params = { status: 'Cancelled' }
+    this.props.updateAccessoryBill(id, params)
+  }
 
   openModal = (values) => {
     console.log("openModal", values);
@@ -84,7 +79,6 @@ class index extends Component {
     return (
       <div>
         <Layout>
-          {/* <Spin size='large' spinning={this.props.car.loading}> */}
           <div
             className="container-fluid mb-3 text-left py-2"
             style={{ display: "flex", justifyContent: "space-between" }}
@@ -92,36 +86,74 @@ class index extends Component {
             <span className="h3 font-weight-bold ">Đơn hàng Phụ kiện</span>
           </div>
           <FormFilter onSubmit={this.handleSubmitFilter} />
-          <DataTable //done
-            dataSource={this.props?.accessoryBill?.data.accessoryBills || []}
+          
+          <Tabs defaultActiveKey="1"  style={{marginLeft:10,marginRight:10}}
+          ///onChange={callback}
+          >
+            <TabPane tab="Đang chờ duyệt" key="1">
+            <DataTable //done
+            dataSource={this.props?.accessoryBill?.data.accessoryBills.filter((item)=>{
+              return item.status=='Pending'
+            }) 
+            || []} 
             loading={this.props.accessoryBill.loading}
             info={this.openModal}
-            deleteAccessory={this.handleDeleteAccessoryBill}
+            cancelAccessory={this.handleUpdateAccessoryBillStatus}
           />
+            </TabPane>
+            <TabPane tab="Đã duyệt" key="2">
+            <DataTable //done
+            dataSource={this.props?.accessoryBill?.data.accessoryBills.filter((item)=>{
+              return item.status=='Accepted'
+            })  || []}
+            loading={this.props.accessoryBill.loading}
+            info={this.openModal}
+            cancelAccessory={this.handleUpdateAccessoryBillStatus}
+          />
+            </TabPane>
+            <TabPane tab="Giao thành công" key="3">
+            <DataTable //done
+            dataSource={this.props?.accessoryBill?.data.accessoryBills.filter((item)=>{
+              return item.status=='Success'
+            })  || []}
+            loading={this.props.accessoryBill.loading}
+            info={this.openModal}
+            cancelAccessory={this.handleUpdateAccessoryBillStatus}
+          />
+            </TabPane>
+            <TabPane tab="Đã hủy" key="4">
+            <DataTable //done
+            dataSource={this.props?.accessoryBill?.data.accessoryBills.filter((item)=>{
+              return item.status=='Cancelled'
+            })  || []}
+            loading={this.props.accessoryBill.loading}
+            info={this.openModal}
+            cancelAccessory={this.handleUpdateAccessoryBillStatus}
+          />
+            </TabPane>
+          </Tabs>
           <Modal
             title="Thông tin đơn hàng"
             visible={showForm}
             closable={true}
             onCancel={this.handleCloseModal}
             onOk={this.handleCloseModal}
-            //onCancel={handleCancel}
+          //onCancel={handleCancel}
           >
             <List
               dataSource={this.state.accBill?.accessoryInfo || []}
-              renderItem={(item) => (
+              renderItem={(item,index) => (
                 <List.Item
-                //key={item.id}
+               key={index}
                 >
                   <List.Item.Meta
-                    //avatar={<Avatar src={item.picture.large} />}
+                    avatar={<Avatar src={item.itemId.image.avatar} />}
                     title={
-                      // {<a href="https://ant.design">
                       item.itemId.name
                     }
-                    //    </a>}
-                    description={item.quantity}
+                    description={'Số lượng: ' + item.quantity}
                   />
-                  <div>{item.color}</div>
+                  <div>{'màu sắc: ' + item.color}</div>
                 </List.Item>
               )}
             />

@@ -31,6 +31,7 @@ function Car(props) {
     useEffect(() => {
         console.log(props)
     }, [props.cars]);
+    
     return (
         <Layout>
             <Spin size='large' spinning={props.loading}>
