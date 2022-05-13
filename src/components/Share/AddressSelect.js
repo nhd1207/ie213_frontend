@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import { Select, Input } from 'antd';
 import data from '../../local.json'
-import RenderInputText from './RenderInputText';
 
 const { Option } = Select;
 
@@ -10,9 +8,7 @@ export default function Province(props) {
     const [city, setCity] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [wards, setWards] = useState([])
-    //const [ward, setWard] = useState('')//dai chi
     const [address, setAddress] = useState({city:'',district:'',ward:'',add:''});
-
 
     useEffect(() => {
         setCity([...data]);
@@ -21,9 +17,13 @@ export default function Province(props) {
 
     useEffect(() => {
         props.address(address.add+', '+address.ward+', '+address.district+', '+address.city)
+        if(address.add=='' ||address.ward=='' || address.district=='' ||address.city=='' )
+        {
+            props.modalValidate(false)
+        }else{
+            props.modalValidate(true)
+        }
     }, [address])
-
-
 
     const handleCityChange = (value) => { //value là id
         if (value != "") {

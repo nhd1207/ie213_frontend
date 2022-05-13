@@ -13,6 +13,11 @@ export const action_type = {
         REQUEST: "CREATEBILL.REQUEST",
         SUCCESS: "CREATEBILL.SUCCESS",
         ERROR: "CREATEBILL.ERROR"
+    },
+    GETMEFORCART: {
+        REQUEST: "GETMEFORCART.REQUEST",
+        SUCCESS: "GETMEFORCART.SUCCESS",
+        ERROR: "GETMEFORCART.ERROR"
     }
 }
 
@@ -36,6 +41,14 @@ export function createBill(params)
 {
     return {
         type: action_type.CREATEBILL.REQUEST,
+        params
+    }
+}
+
+export function getMe(params)
+{
+    return {
+        type: action_type.GETMEFORCART.REQUEST,
         params
     }
 }

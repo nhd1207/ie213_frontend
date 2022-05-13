@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { InputNumber, Space, Button, Spin, Empty } from "antd";
-import money from "../../components/Share/functions/money"
+import money from "../Share/functions/money"
 import style from "./Cart.module.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -88,7 +88,15 @@ function CartList(props) {
     return (
         <div>
             <Spin spinning={props.spinning}>
-                {cart? <Empty></Empty>:cart.map((item, index) => {
+                {cart.length===0? <Empty 
+                    description={
+                        <span>
+                          Giỏ hàng trống
+                        </span>
+                      }
+                >
+                </Empty>:
+                cart?.map((item, index) => {
                     let myStyle = {
                         backgroundImage: `url(${item?.itemId?.image?.avatar})`
                     }
