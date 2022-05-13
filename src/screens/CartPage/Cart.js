@@ -1,57 +1,69 @@
 import React, { useEffect, useState } from "react";
-import style from "./Cart.module.css";
-import "antd/dist/antd.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { getCart, updateCart } from "./action"
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom"
+import { Button, Modal } from "antd";
+import { Menu, Input } from "antd";
 import {
-  TagsOutlined,
   CarOutlined,
   PlusCircleOutlined,
-  MinusCircleOutlined,
   CheckCircleOutlined,
   PlusSquareOutlined,
   RightCircleOutlined,
 } from "@ant-design/icons";
 import money from "../../components/Share/functions/money"
-import { InputNumber, Space } from "antd";
-import { Button, Spin } from "antd";
 import Layout from "../../components/layout"
-
-import { Menu, Input } from "antd";
+import { getCart, updateCart,createBill } from "./action"
+import style from "./Cart.module.css";
+import "antd/dist/antd.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import CartList from "./CartList";
+import Province from "../../components/Share/Province";
+
 const { SubMenu } = Menu;
 const { Search } = Input;
 
 function Cart(props) {
   const [cart, setCart] = useState([]);
   const [price, setPrice] = useState(5);
-  //const [update, setUpdate] = useState({});
-  var total = 0;
+  const [place, setPlace] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const deleteItem = () => {
-    // setCart(props?.carts?.carts);
-    // console.log(cart);
-  }
-
-  // useEffect(() => {
-  //   console.log(props.carts.loading);
-  //   setCart(props?.carts?.carts);
-  // }, [props?.carts?.loading]);
+  useEffect(() => {
+    console.log(props.carts.carts);
+    setCart(props?.carts?.carts);
+  }, [props?.carts?.loading]);
 
   useEffect(() => {
     props.getCart();
   }, []);
 
+  const showModal = () => {
+    setIsModalVisible(true);
+  }
+
   const handleUpdateCart = (value) => {
-    console.log('value', value)
-    console.log('bbbbbbbb')
     props.updateCart(value);
   }
 
   const onChangePrice = (value) => {
     setPrice(value)
+  }
+  const handlePlace = (value) => {
+    setPlace(value)
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  }
+
+  const handleSubmitCart = () => {
+    let params = {
+      place: place,
+      totalPrice:price,
+      deliveryMethod:"COD"
+    }
+
+    props.createBill(params)
   }
 
   return (
@@ -80,7 +92,6 @@ function Cart(props) {
               <CartList
                 spinning={props.carts.loading}
                 data={props.carts.carts}
-                deleteItemChild={deleteItem}
                 newCart={handleUpdateCart}
                 totalPrice={onChangePrice}
               > </CartList>
@@ -96,36 +107,36 @@ function Cart(props) {
               </div>
             </div>
 
-              <div
-                className={`${style.cartSummaryWrapper} col col-xl-4 col-md-4 col-12`}
-              >
-                <div className={`${style.cartSummary} `}>
-                  <div className={`row`}>
-                    <h2 className={`${style.summaryTitle} col-xl-12 col-md-12`}>
-                      TỔNG GIỎ HÀNG:
-                    </h2>
-                  </div>
-                  <div className={`${style.shippingPolicy} row`}>
-                    <div className={`${style.subTitle} col-xl-6 col-md-12`}>
-                      <CarOutlined /> Phí vận chuyển
-                      <br></br>
-                      {/* <div className={`${style.shippingMessage}`}>
+            <div
+              className={`${style.cartSummaryWrapper} col col-xl-4 col-md-4 col-12`}
+            >
+              <div className={`${style.cartSummary} `}>
+                <div className={`row`}>
+                  <h2 className={`${style.summaryTitle} col-xl-12 col-md-12`}>
+                    TỔNG GIỎ HÀNG:
+                  </h2>
+                </div>
+                <div className={`${style.shippingPolicy} row`}>
+                  <div className={`${style.subTitle} col-xl-6 col-md-12`}>
+                    <CarOutlined /> Phí vận chuyển
+                    <br></br>
+                    {/* <div className={`${style.shippingMessage}`}>
                         Bạn sẽ được miễn phí <br></br>nếu đơn hàng trên 2 000 000
                       </div> */}
-                    </div>
-                    <div className={`${style.number} col-xl-6 col-md-12`}>
-                      50 000
-                    </div>
                   </div>
-                  <div className={`${style.totalAllProduct} row`}>
-                    <div className={`${style.subTitle} col-xl-6 col-md-12`}>
-                      <PlusCircleOutlined /> Tổng tiền sản phẩm
-                    </div>
-                    <div className={`${style.number} col-xl-6 col-md-12`}>
-                      {money(price, "VND")}
-                    </div>
+                  <div className={`${style.number} col-xl-6 col-md-12`}>
+                    50 000
                   </div>
-                  {/* <div className={`${style.discount} row`}>
+                </div>
+                <div className={`${style.totalAllProduct} row`}>
+                  <div className={`${style.subTitle} col-xl-6 col-md-12`}>
+                    <PlusCircleOutlined /> Tổng tiền sản phẩm
+                  </div>
+                  <div className={`${style.number} col-xl-6 col-md-12`}>
+                    {money(price, "VND")}
+                  </div>
+                </div>
+                {/* <div className={`${style.discount} row`}>
                     <div className={`${style.subTitle} col-xl-6 col-md-12`}>
                       <MinusCircleOutlined /> Giảm giá
                     </div>
@@ -133,24 +144,25 @@ function Cart(props) {
                       -200 000
                     </div>
                   </div> */}
-                  <div className={`${style.totalDue} row`}>
-                    <h3 className={`${style.subTitle} col-xl-6 col-md-12`}>
-                      <CheckCircleOutlined /> TỔNG CỘNG
-                    </h3>
-                    <div className={`${style.number} col-xl-6 col-md-12`}>
-                      {money(price + 50000, "VND")}
-                    </div>
+                <div className={`${style.totalDue} row`}>
+                  <h3 className={`${style.subTitle} col-xl-6 col-md-12`}>
+                    <CheckCircleOutlined /> TỔNG CỘNG
+                  </h3>
+                  <div className={`${style.number} col-xl-6 col-md-12`}>
+                    {price ? money(price + 50000, "VND") : '0 VNĐ'}
                   </div>
-                  <div className={`${style.checkout} row`}>
-                    <Button
-                      className={`${style.checkoutButton} col-xl-11`}
-                      type="primary"
-                    >
-                      Thanh Toán
-                    </Button>
-                  </div>
-                  {/* <div className={`${style.couponCode} row`}> */}
-                  {/* <Menu
+                </div>
+                <div className={`${style.checkout} row`}>
+                  <Button
+                    className={`${style.checkoutButton} col-xl-11`}
+                    type="primary"
+                    onClick={showModal}
+                  >
+                    Thanh Toán
+                  </Button>
+                </div>
+                {/* <div className={`${style.couponCode} row`}> */}
+                {/* <Menu
                       className={`${style.couponCodeTitle} col-xl-11`}
                       defaultSelectedKeys={["1"]}
                       defaultOpenKeys={["sub1"]}
@@ -165,7 +177,7 @@ function Cart(props) {
                       placeholder="ĐIỀN MÃ GIẢM GIÁ"
                       enterButton="Search"
                     /> */}
-                  {/* <Space
+                {/* <Space
                           className={`${style.inputCoupon}`}
                           direction="vertical"
                         >
@@ -178,13 +190,25 @@ function Cart(props) {
                         </Space>
                       </SubMenu>
                     </Menu> */ }
-                  {/* </div> */}
-                </div>
+                {/* </div> */}
               </div>
-            
+            </div>
           </div>
         </div>
       </div>
+      <Modal title="Xác nhận thông tin"
+        visible={isModalVisible}
+        closable={true}
+        onOk={handleSubmitCart} 
+        onCancel={handleCancel}
+      >
+         <p>Tên người nhận*</p>
+        <Input></Input>
+        <p>Số điện thoại*</p>
+        <Input></Input>
+        <Province address={handlePlace}></Province>
+        <p>{place}</p>
+      </Modal>
       {/* </Spin> */}
     </Layout>
   );
@@ -201,6 +225,9 @@ const mapDispatchToProps = dispatch => ({
   updateCart: (params) => {
     dispatch(updateCart(params))
   },
+  createBill: (params) => {
+    dispatch(createBill(params))
+  }
 
 })
 

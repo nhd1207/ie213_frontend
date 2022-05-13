@@ -23,7 +23,7 @@ function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
             }
-            case type.UPDATECART.REQUEST:
+        case type.UPDATECART.REQUEST:
             return {
                 ...state,
                 loading: true,
@@ -35,6 +35,22 @@ function reducer(state = initialState, action) {
                 loading: false,
             }
         case type.UPDATECART.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
+        case type.CREATEBILL.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case type.CREATEBILL.SUCCESS:
+            return {
+                ...state,
+                carts: action.cart,
+                loading: false,
+            }
+        case type.CREATEBILL.ERROR:
             return {
                 ...state,
                 loading: false,

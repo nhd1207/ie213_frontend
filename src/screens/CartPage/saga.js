@@ -10,6 +10,7 @@ import {
 } from './action'
 
 import * as api from '../../apis/User'
+import * as apiBill from '../../apis/AccessoryBill'
 
 function* getListCartSaga(action) {
     try {
@@ -50,10 +51,32 @@ function* updateCartSaga(action) {
 }
 
 
+function* createBillSaga(action) {
+    try {
+        const { params } = action
+        //console.log('params:', params);
+        const response = yield call(apiBill.create, params)
+        if(response.status==="success"){
+                yield all([
+                    put({type: TYPE.CREATEBILL.SUCCESS, ...response}),
+                    put({type: TYPE.GETCART.REQUEST, params})
+                ])
+        }else{
+          yield put({type: TYPE.CREATEBILL.ERROR, error: response})
+        }
+    } catch (error) {
+        yield all([
+            put({type: TYPE.CREATEBILL.ERROR, error})
+        ])
+    }
+}
+
+
 function* watcher() {
     yield all([
         takeLatest(TYPE.GETCART.REQUEST, getListCartSaga),
-        takeLatest(TYPE.UPDATECART.REQUEST, updateCartSaga)
+        takeLatest(TYPE.UPDATECART.REQUEST, updateCartSaga),
+        takeLatest(TYPE.CREATEBILL.REQUEST, createBillSaga)
     ])
 }
 
