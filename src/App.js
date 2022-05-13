@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Login from "./screens/LoginPage/Login";
 import SignUp from "./screens/SignupPage/SignUp";
 import "./App.css";
@@ -8,15 +7,15 @@ import User from "./screens/UserPage/User";
 import Car from "./screens/CarPage/Car"
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
-import { verify } from "./apis/Auth";
-import {useEffect} from 'react'
-import Cookies from "js-cookie";
-import { connect } from "react-redux";
+import { Redirect } from 'react-router-dom';
 
 function App() {
   return (
     <div>
       <Switch>
+      <Route path="/" exact>
+        <Redirect to="/home"></Redirect>
+      </Route>
         <Route path="/home" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />

@@ -1,12 +1,12 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import style from "./LoginForm.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
-
-
+import { Spin } from "antd";
+import AuthContext from "../../../context/AuthContext"
 function emailReducer(state, action) {
   if (action.type === "EMAIL_LOGIN") {
     return {
@@ -83,7 +83,7 @@ function LoginForm(props) {
   function passwordChangeHandler(event) {
     let enteredPassword = event.target.value.trim();
     function validatePassword(password) {
-     //compare password with database
+      //compare password with database
     }
     dispatchPassword({
       type: "PASSWORD_LOGIN",
@@ -94,14 +94,15 @@ function LoginForm(props) {
 
   let invalidEmail = email.isEmailInputLostFocus && !email.isEmailValid;
   let wrongPassword = !password.isPasswordCorrect;
+  let context = useContext(AuthContext);
 
   function loginHandler(event) {
     event.preventDefault();
     let params = {
-      "email": email.value,
-      "password": password.value
-    }
-    props.onSendLoginData(params)
+      email: email.value,
+      password: password.value,
+    };
+    props.onSendLoginData(params);
   }
 
   return (
@@ -147,17 +148,18 @@ function LoginForm(props) {
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Nhớ mật khẩu" />
         </Form.Group>
-        <Button
-          className={style["login-button"]}
-          variant="primary"
-          type="submit"
-        >
-          Đăng nhập
-        </Button>
+        <Spin spinning={props.loading}>
+          <Button
+            className={style["login-button"]}
+            variant="primary"
+            type="submit"
+          >
+            Đăng nhập
+          </Button>
+        </Spin>
       </Form>
     </div>
   );
 }
 
-
-export default (LoginForm);
+export default LoginForm;
