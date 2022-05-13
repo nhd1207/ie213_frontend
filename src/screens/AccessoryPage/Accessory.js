@@ -82,7 +82,7 @@ function Accessory(props) {
                   <Menu.Item key="3">Option 3</Menu.Item>
                   <Menu.Item key="4">Option 4</Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub2" icon={<SettingOutlined />} title="Chổ Ngồi">
+                <SubMenu key="sub2" icon={<SettingOutlined />} title="Chỗ Ngồi">
                   <Menu.Item key="5">Option 5</Menu.Item>
                   <Menu.Item key="6">Option 6</Menu.Item>
                   <Menu.Item key="7">Option 7</Menu.Item>
