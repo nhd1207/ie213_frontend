@@ -1,0 +1,101 @@
+.container {
+  margin: 40px;
+}
+.headingContainer {
+}
+
+.headings {
+  /* display: grid;
+  grid-template-columns: 20% 80%; */
+}
+
+.heading {
+  text-shadow: 2px 2px 5px rgb(157, 197, 1);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.searchGroup {
+  padding: 0;
+  border-radius: 12px;
+  box-shadow: 6px 6px 4px 0px #ddd;
+}
+
+#bootstrap-overrides .input-group {
+  width: auto;
+}
+
+.searchTitle {
+  border-radius: 12px 0px 0px 12px;
+}
+.searchBox {
+  border-radius: 0px 12px 12px 0px;
+}
+
+.headingNumber {
+  font-size: 1.2rem;
+}
+
+.main {
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.filterContainer {
+  margin: 0 0;
+}
+
+.rangeInput {
+  margin: 12px 0;
+}
+
+.cardContainer {
+  /* flex cua main */
+  flex: 1;
+  /* 
+  display: grid;
+  grid-template-columns: 50% 50%; */
+  grid-gap: 16px;
+  position: inherit;
+  /* border-left: 1px solid #000;  */
+  /* margin: 1rem; */
+}
+
+.card {
+  margin: 12px;
+  height: 300px;
+  display: border-box;
+  /* position: absolute; */
+  background: fff;
+  /* top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; */
+  margin: 0;
+  margin-bottom: 2rem;
+  transition: all 0.4s cubic-bezier(1, 0.4, 0.4, 1);
+}
+
+.cardContainer .card {
+  height: 24em;
+  border: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.125);
+}
+.card:hover {
+  box-shadow: 0px 10px 16px 12px rgb(0 0 0 / 20%);
+  transform: translateY(-4px);
+  transition: linear 0.1s;
+  z-index: 10;
+}
+
+.card > .image {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0) 50%,
+      rgba(252, 252, 252, 0) 70%,
+      rgba(246, 246, 246, 1) 100%
+    );
+    /* url(../../Images/andre-tan-79.jpg); */
+  background-size: cover;
+  background-position: center center;
+}

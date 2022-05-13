@@ -9,7 +9,7 @@ export const getMe =()=> {
     })
 }
 
-export const getAllUser =()=> {
+export const getList =()=> {
     return axios({
         method: 'GET',
         url: `${prefix}/getAllUser`
@@ -52,6 +52,19 @@ export const updateCart =(data)=> {
         url: `${prefix}/updateCart`
     })
 }
+
+export const addItemToCart =(data)=> {
+    return axios({
+        method: 'PATCH',
+        data,
+        url: `${prefix}/addItemToCart`
+    })
+}
+
+//{
+//    itemId:'',
+//   quantity:
+//}
 
 export const updateWishlist =(data)=> {
     return axios({

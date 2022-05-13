@@ -2,7 +2,9 @@ import { action_type as type } from './action'
 
 const initialState = {
     loading: false,
-    user: []
+    user: [],
+    bills: []
+
 }
 
 function reducer(state = initialState, action) {
@@ -15,10 +17,26 @@ function reducer(state = initialState, action) {
         case type.GETUSER.SUCCESS:
             return {
                 ...state,
-                user: action.data,
+                user: action.user,
                 loading: false,
             }
         case type.GETUSER.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
+            case type.GETLISTBILL.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case type.GETLISTBILL.SUCCESS:
+            return {
+                ...state,
+                bills: action.data,
+                loading: false,
+            }
+        case type.GETLISTBILL.ERROR:
             return {
                 ...state,
                 loading: false,

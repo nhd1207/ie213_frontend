@@ -48,6 +48,14 @@ export const verify =(params)=> {
         url: `/user`
     })
 }
+
+export const verifyAdmin =(params)=> {
+    return axios({
+        method: 'GET',
+        params,
+        url: `user/getMe`
+    })
+}
 // export const getDetailByCode =(booking_code)=> {
 //     return axios({
 //         method: 'GET',

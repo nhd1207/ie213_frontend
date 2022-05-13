@@ -13,10 +13,11 @@ function* getListSaga(action) {
     if (response.status === "success") {
       yield all([put({ type: TYPE.LOGIN.SUCCESS, ...response })]);
       Cookies.set("jwt", response.token);
-      // let param = {email: params.email};
-      // yield put({type: TYPE.VERIFY.REQUEST, param})
+      console.log(response);
       yield put(push("/home"));
       window.location.reload();
+      // let param = {email: params.email};
+      // yield put({type: TYPE.VERIFY.REQUEST, param})
     } else {
       yield put({ type: TYPE.LOGIN.ERROR, response: response });
     }
