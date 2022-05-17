@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import Layout from "../../components/layout"
 import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
+import { getListCar } from "./action";
 import { NavLink } from 'react-router-dom'
 import {
     Form,
@@ -24,17 +25,18 @@ import {
 const { SubMenu } = Menu;
 
 function Car(props) {
-    const handleClick = (e) => {
-        console.log("click ", e);
-    };
+    // const handleClick = (e) => {
+    //     console.log("click ", e);
+    // };
 
     useEffect(() => {
-        console.log(props)
-    }, [props.cars]);
+        props.getListCar()
+        console.log(props.cars.car);
+    }, []);
     
     return (
         <Layout>
-            <Spin size='large' spinning={props.loading}>
+            <Spin size='large' spinning={props?.cars?.loading}>
                 <div className={`${style.container}`}>
                     <div className={`${style.headingContainer} container`}>
                         <div className={`${style.headings} `}>
@@ -54,14 +56,14 @@ function Car(props) {
                                 />
                             </InputGroup>
                         </div>
-                        <h3 className={`${style.headingNumber}`}>{props.cars?.length} chiếc</h3>
+                        <h3 className={`${style.headingNumber}`}>{props.cars?.cars?.car?.length} chiếc</h3>
                     </div>
                     <div className={`${style.main} row`}>
                         <div
                             className={`${style.filterContainer} col col-xl-2 col-lg-3 col-md-4 d-none d-md-block`}
                         >
                             <Menu
-                                onClick={handleClick}
+                                // onClick={handleClick}
                                 defaultSelectedKeys={["1"]}
                                 defaultOpenKeys={["sub1"]}
                                 mode="inline"
@@ -91,7 +93,7 @@ function Car(props) {
                         >
                             <div className={`row`}>
                                 {
-                                    props.cars.map(car => {
+                                    props.cars?.cars?.car?.map(car => {
                                         let myStyle = {
                                             backgroundImage: `url(${car?.image?.avatar})`
                                         }
@@ -130,8 +132,13 @@ function Car(props) {
 }
 
 const mapStateToProps = state => ({
-    cars: state.home.cars.car,
-    loading: state.home.loading
+    cars: state.carList,
 })
 
-export default connect(mapStateToProps, null)(Car);
+const mapDispatchToProps = dispatch => ({
+    getListCar: (params) => {
+        dispatch(getListCar(params))
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Car);
