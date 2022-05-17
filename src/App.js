@@ -33,6 +33,7 @@ import AdminPage from "./screens/AdminPage/AdminPage";
 import AboutUs from "./screens/AboutUsPage/AboutUs";
 import Support from "./screens/SupportPage/Support";
 import Compare from "./screens/ComparePage/Compare";
+import CarOrderPage from "./screens/CarOrder/CarOrder"
 
 function App() {
   useEffect(() => {
@@ -64,6 +65,7 @@ function App() {
         <Route path="/compare" component={Compare}>
           
         </Route>
+        <Route path="/order/:id" component={CarOrderPage}></Route>
         <Route exact path="/" component={Home} />
         <Route component={Error404} />
       </Switch>
