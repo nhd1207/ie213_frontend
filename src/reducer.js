@@ -19,7 +19,7 @@ import news from "./screens/NewsPage/reducer";
 import newDetail from "./screens/NewsDetail/reducer";
 import wishList from "./screens/WishListPage/reducer";
 import carDetail from "./screens/CarDetailPage/reducer";
-
+import carList from "./screens/CarPage/reducer"
 const Reducer = (history) =>
   combineReducers({
     form: formReducer,
@@ -41,6 +41,7 @@ const Reducer = (history) =>
     news,
     newDetail,
     wishList,
+    carList,
     carDetail
   })
   
