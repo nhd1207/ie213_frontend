@@ -8,6 +8,16 @@ export const action_type = {
         REQUEST: "UPDATECARTLIST.REQUEST",
         SUCCESS: "UPDATECARTLIST.SUCCESS",
         ERROR: "UPDATECARTLIST.ERROR"
+    },
+    CREATEBILL: {
+        REQUEST: "CREATEBILL.REQUEST",
+        SUCCESS: "CREATEBILL.SUCCESS",
+        ERROR: "CREATEBILL.ERROR"
+    },
+    GETMEFORCART: {
+        REQUEST: "GETMEFORCART.REQUEST",
+        SUCCESS: "GETMEFORCART.SUCCESS",
+        ERROR: "GETMEFORCART.ERROR"
     }
 }
 
@@ -23,6 +33,22 @@ export function updateCart(params)
 {
     return {
         type: action_type.UPDATECART.REQUEST,
+        params
+    }
+}
+
+export function createBill(params)
+{
+    return {
+        type: action_type.CREATEBILL.REQUEST,
+        params
+    }
+}
+
+export function getMe(params)
+{
+    return {
+        type: action_type.GETMEFORCART.REQUEST,
         params
     }
 }

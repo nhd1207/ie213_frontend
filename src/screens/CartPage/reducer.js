@@ -2,7 +2,8 @@ import { action_type as type } from './action'
 
 const initialState = {
     loading: false,
-    carts: []
+    carts: [],
+    userInfo: {}
 }
 
 function reducer(state = initialState, action) {
@@ -23,7 +24,7 @@ function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
             }
-            case type.UPDATECART.REQUEST:
+        case type.UPDATECART.REQUEST:
             return {
                 ...state,
                 loading: true,
@@ -35,6 +36,38 @@ function reducer(state = initialState, action) {
                 loading: false,
             }
         case type.UPDATECART.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
+        case type.CREATEBILL.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case type.CREATEBILL.SUCCESS:
+            return {
+                ...state,
+                carts: action.cart,
+                loading: false,
+            }
+        case type.CREATEBILL.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
+        case type.GETMEFORCART.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case type.GETMEFORCART.SUCCESS:
+            return {
+                ...state,
+                userInfo: action.user,
+                loading: false,
+            }
+        case type.GETMEFORCART.ERROR:
             return {
                 ...state,
                 loading: false,
