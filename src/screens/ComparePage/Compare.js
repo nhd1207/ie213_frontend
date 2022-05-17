@@ -12,9 +12,9 @@ import {
   ShoppingCartOutlined,
   CarOutlined,
 } from "@ant-design/icons";
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Layouts from "../../components/layout";
-
+import CarSelection from "../../components/CarSelection";
 function CompareTwoCar(props) {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -28,6 +28,10 @@ function CompareTwoCar(props) {
         <div className={`${style.carSpecWrapper} row`}>
           <div className={`${style.carSpecCol} col-xl-10`}>
             <div className={`${style.specTitle} row`}>So Sánh xe</div>
+            <div className={`${style.select} row`}>
+              <CarSelection />
+              <CarSelection />
+            </div>
             <div className={`${style.specRowHeading} row`}>
               <div className={`${style.rowHeading} col-xl-4`}>Thông số</div>
               <div className={`${style.rowHeading} col-xl-4`}>Alo 2</div>

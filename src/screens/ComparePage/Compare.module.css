@@ -164,3 +164,7 @@
 .buttonWrapper .compareButton:hover {
   background-color: #eee;
 }
+
+.select {
+  justify-content: space-evenly;
+}
