@@ -3,3 +3,7 @@ section.container {
     background-image: url(../../Images/background.jpg);
     background-size: cover;
 }
+
+.message {
+    margin: auto;
+}

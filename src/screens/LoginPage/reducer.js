@@ -3,40 +3,53 @@ import { action_type as type } from "./action";
 const initialState = {
   loading: false,
   user: {},
+  response: {},
 };
 
 function reducer(state = initialState, action) {
+  console.log(action.error);
   switch (action.type) {
     case type.LOGIN.REQUEST:
       return {
         ...state,
         loading: true,
+        response: action.response,
       };
     case type.LOGIN.SUCCESS:
       return {
         ...state,
         loading: false,
+        response: action.response,
+
       };
     case type.LOGIN.ERROR:
       return {
         ...state,
         loading: false,
+        response: action.response,
+
       };
     case type.VERIFY.REQUEST:
       return {
         ...state,
         loading: true,
+        response: action.response,
+
       };
     case type.VERIFY.SUCCESS:
       return {
         ...state,
         loading: false,
         user: action?.data || {},
+        response: action.response,
+
       };
     case type.VERIFY.ERROR:
       return {
         ...state,
         loading: false,
+        response: action.response,
+
       };
     case type.USER.REQUEST:
       return {

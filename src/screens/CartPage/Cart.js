@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom"
 import { Button, message, Modal, Select } from "antd";
+import { Link } from "react-router-dom"
 import {
   CarOutlined,
   PlusCircleOutlined,
@@ -104,7 +104,7 @@ function Cart(props) {
                   <a> Thêm giỏ hàng vào danh sách yêu thích</a>
                 </div>
                 <div className={`${style.continue} col-xl-6`}>
-                  <NavLink to="/home">Tiếp tục mua sắm</NavLink> &nbsp; &nbsp; <RightCircleOutlined />
+                  <Link to="/home">Tiếp tục mua sắm</Link> &nbsp; &nbsp; <RightCircleOutlined />
                 </div>
               </div>
             </div>

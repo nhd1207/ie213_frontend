@@ -10,8 +10,7 @@ function* getListSaga(action) {
     const { params } = action;
     // params.remember_me = true;
     const response = yield call(api.login, params);
-    console.log(params);
-    if (response.status) {
+    if (response.status === "success") {
       yield all([put({ type: TYPE.LOGIN.SUCCESS, ...response })]);
       Cookies.set("jwt", response.token);
       console.log(response);
@@ -20,7 +19,7 @@ function* getListSaga(action) {
       // let param = {email: params.email};
       // yield put({type: TYPE.VERIFY.REQUEST, param})
     } else {
-      yield put({ type: TYPE.LOGIN.ERROR, error: response });
+      yield put({ type: TYPE.LOGIN.ERROR, response: response });
     }
   } catch (error) {
     yield all([put({ type: TYPE.LOGIN.ERROR, error })]);
@@ -30,7 +29,7 @@ function* verifySaga(action) {
   try {
     const { param } = action;
     const response = yield call(api.verify, param);
-    if (response.status && response.data[0]?.id > 0) {
+    if (response.status === "success" && response.data[0]?.id > 0) {
       yield all([put({ type: TYPE.VERIFY.SUCCESS, ...response })]);
     } else {
       Cookies.set("web_token", null);
