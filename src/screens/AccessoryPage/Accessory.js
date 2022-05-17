@@ -4,6 +4,7 @@ import { InputGroup } from "react-bootstrap";
 import "antd/dist/antd.css";
 import Card from "react-bootstrap/Card";
 import Layout from "../../components/layout";
+import { Pagination } from "antd";
 import {
   Form,
   Button,
@@ -13,7 +14,7 @@ import {
   Dropdown,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getListAccessory } from './action'
+import { getListAccessory } from "./action";
 import { Menu, Spin } from "antd";
 import {
   AppstoreOutlined,
@@ -21,12 +22,11 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { connect } from "react-redux";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 
 const { SubMenu } = Menu;
 
 function Accessory(props) {
-
   useEffect(() => {
     props.getListAccessory();
     console.log(props.accessories);
@@ -38,7 +38,7 @@ function Accessory(props) {
 
   return (
     <Layout>
-      <Spin size='large' spinning={props.accessories?.loading}>
+      <Spin size="large" spinning={props.accessories?.loading}>
         <div className={`${style.container}`}>
           <div className={`${style.headingContainer} container`}>
             <div className={`${style.headings} `}>
@@ -58,7 +58,9 @@ function Accessory(props) {
                 />
               </InputGroup>
             </div>
-            <h3 className={`${style.headingNumber}`}>{props.accessories?.accessories?.accessory?.length} sản phẩm</h3>
+            <h3 className={`${style.headingNumber}`}>
+              {props.accessories?.accessories?.accessory?.length} sản phẩm
+            </h3>
           </div>
           <div className={`${style.main} row`}>
             <div
@@ -93,26 +95,32 @@ function Accessory(props) {
             <div
               className={`${style.cardContainer} col col-xl-10 col-lg-9 col-md-8`}
             >
-              <div className={`row no-gutters`}>
-                {
-                  props.accessories?.accessories?.accessory?.map(item => {
-                    let myStyle = {
-                      backgroundImage: `url(${item.image.avatar})`
-                    }
-                    return (
-                      <Card className={`${style.card} col col-xl-4 col-md-6 col-12`}>
-                  <Card.Img className={`${style.image}`} style={myStyle} />
-                  <Card.Body>
-                    <Card.Title>{item.name}</Card.Title>
-                    <Card.Text>
-                      {item.description}
-                    </Card.Text>
-                    <NavLink to={`/accessory/${item._id}`} className="btn btn-sm btn-primary">Chi tiết phụ kiện</NavLink>
-                  </Card.Body>
-                </Card>
-                    )
-                  })
-                }
+              <div className={`${style.cardRow} row no-gutters`}>
+                {props.accessories?.accessories?.accessory?.map((item) => {
+                  let myStyle = {
+                    backgroundImage: `url(${item.image.avatar})`,
+                  };
+                  return (
+                    <Card
+                      className={`${style.card} col col-xl-3 col-md-6 col-12`}
+                    >
+                      <Card.Img className={`${style.image}`} style={myStyle} />
+                      <Card.Body>
+                        <Card.Title>{item.name}</Card.Title>
+                        <Card.Text>{item.description}</Card.Text>
+                        <NavLink
+                          to={`/accessory/${item._id}`}
+                          className="btn btn-sm btn-primary"
+                        >
+                          Chi tiết phụ kiện
+                        </NavLink>
+                      </Card.Body>
+                    </Card>
+                  );
+                })}
+              </div>
+              <div className={`${style.pagination} row`}>
+                <Pagination defaultCurrent={6} total={100} />;
               </div>
             </div>
           </div>
@@ -122,15 +130,14 @@ function Accessory(props) {
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   accessories: state.accessoryPage,
-})
+});
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getListAccessory: (params) => {
-    dispatch(getListAccessory(params))
+    dispatch(getListAccessory(params));
   },
+});
 
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Accessory)
+export default connect(mapStateToProps, mapDispatchToProps)(Accessory);

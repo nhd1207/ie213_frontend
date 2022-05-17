@@ -1,3 +1,45 @@
+@keyframes appear {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes appearRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes appearLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes appearBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .container {
   margin: 40px;
 }
@@ -18,6 +60,7 @@
   padding: 0;
   border-radius: 12px;
   box-shadow: 6px 6px 4px 0px #ddd;
+  margin: 1.5rem 0;
 }
 
 #bootstrap-overrides .input-group {
@@ -69,27 +112,25 @@
   background-color: #000;
 } */
 
+.cardRow {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
 .card {
-  /* overflow: hidden; */
-  /* font-family: "Open Sans", sans-serif; */
   color: #ff4200;
-  /* width: 480px; */
   height: 300px;
   display: border-box;
-  /* position: absolute; */
   background: fff;
-  /* top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0; */
   margin: 0;
   margin-bottom: 2rem;
+  padding: 0;
   transition: all 0.4s cubic-bezier(1, 0.4, 0.4, 1);
+  border: 1px solid #ccc;
+  animation-name: appearBottom;
+  animation-duration: 1s;
 }
-/* 
-.card:nth-child(2n + 1) {
-  margin: 0;
-} */
 
 .card:hover {
   box-shadow: 0px 30px 30px -20px rgba(0, 0, 0, 0.2);
@@ -123,11 +164,11 @@
   width: 100%;
   height: 80%;
   background: linear-gradient(
-      rgba(255, 255, 255, 0) 50%,
-      rgba(252, 252, 252, 0) 70%,
-      rgba(246, 246, 246, 1) 100%
-    );
-    /* url(../../Images/Rectangle12.png); */
+    rgba(255, 255, 255, 0) 50%,
+    rgba(252, 252, 252, 0) 70%,
+    rgba(246, 246, 246, 1) 100%
+  );
+  /* url(../../Images/Rectangle12.png); */
   background-size: cover;
   background-position: center center;
 }
@@ -158,8 +199,9 @@
 
 .text {
   font-size: 1.2rem;
-  color: rgba(86, 114, 2, 0.9);
-  text-shadow: 1px 1px rgba(46, 64, 0, 0.9);
+  color: yellow;
+  text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
+    1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
 }
 .card .description h4 {
   white-space: nowrap;
@@ -183,4 +225,9 @@
 .card.expand .long-description {
   margin-top: 2em;
   opacity: 1;
+}
+
+/* .pagination */
+.pagination {
+  text-align: center;
 }
