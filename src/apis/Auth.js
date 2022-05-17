@@ -45,7 +45,7 @@ export const verify =(params)=> {
     return axios({
         method: 'GET',
         params,
-        url: `user`
+        url: `/user`
     })
 }
 

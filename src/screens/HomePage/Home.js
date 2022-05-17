@@ -77,7 +77,10 @@ function Home(props) {
                                         title={<div className={style['news-title']}>{item.title}</div>}
                                         description={
                                             <div>
-                                                <div className={style['news-description']}>{dateFormat(item.createdAt, "mmmm dS, yyyy")}</div>
+                                                <div className={style['news-description']}>{dateFormat(item.createdAt, "mmmm dS, yyyy")}
+                                                
+                                                <p className={`${style.news_content} `}>{item.content}</p>
+                                                </div>
                                                 <button class="btn btn-outline-dark">
                                                     <NavLink to={`news/${item._id}`}>
                                                         ĐỌC THÊM

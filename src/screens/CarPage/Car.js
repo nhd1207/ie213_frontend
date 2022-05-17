@@ -1,7 +1,7 @@
 import style from "./car.module.css";
 import { InputGroup } from "react-bootstrap";
 import "antd/dist/antd.css";
-import Layout from "../../components/layout"
+import Layout from "../../components/layout";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import { getListCar } from "./action";
@@ -33,7 +33,7 @@ function Car(props) {
         props.getListCar()
         console.log(props.cars.car);
     }, []);
-    
+
     return (
         <Layout>
             <Spin size='large' spinning={props?.cars?.loading}>
@@ -103,26 +103,31 @@ function Car(props) {
                                                 {/* </NavLink> */}
                                                 <div className={`${style.image}`} style={myStyle}>
                                                 </div>
-
-                                                    <div className={`${style.description}`}>
-                                                        <div className={`${style.nameGroup}`}>
-                                                            <h5 className={`${style.sub}`}>Tên Xe</h5>
-                                                            <h4 className={`${style.text}`}>{car.name}</h4>
-                                                        </div>
-                                                        <div>
-                                                            <h5 className={`${style.sub}`}>Công Suất</h5>
-                                                            <h4 className={`${style.text}`}>{car?.specification?.power}</h4>
-                                                        </div>
-                                                        <div>
-                                                            <h5 className={`${style.sub}`}>Chỗ ngồi</h5>
-                                                            <h4 className={`${style.text}`}>{car?.specification?.displacement} chỗ</h4>
-                                                        </div>
+                                                <div className={`${style.description}`}>
+                                                    <div className={`${style.nameGroup}`}>
+                                                        <h5 className={`${style.sub}`}>Tên Xe</h5>
+                                                        <h4 className={`${style.text}`}>{car.name}</h4>
                                                     </div>
+                                                    <div>
+                                                        <h5 className={`${style.sub}`}>Công Suất</h5>
+                                                        <h4 className={`${style.text}`}>
+                                                            {car?.specification?.power}
+                                                        </h4>
+                                                    </div>
+                                                    <div>
+                                                        <h5 className={`${style.sub}`}>Chỗ ngồi</h5>
+                                                        <h4 className={`${style.text}`}>
+                                                            {car?.specification?.displacement} chỗ
+                                                        </h4>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        )
-                                    })
-                                }
+                                        );
+                                    })}
                             </div>
+                            {/* <div className={`${style.pagination} row`}>
+                <Pagination defaultCurrent={6} total={100} />;
+              </div> */}
                         </div>
                     </div>
                 </div>

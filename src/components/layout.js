@@ -152,8 +152,7 @@ function Layouts(props) {
                 to={"/login"}
                 style={{ color: "#F3EA01", marginRight: 5 }}
               >
-                {" "}
-                Đăng nhập{" "}
+                Đăng nhập
               </NavLink>
             </Menu.Item>
             {/* )} */}
