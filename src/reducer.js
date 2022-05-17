@@ -40,8 +40,7 @@ const Reducer = (history) =>
     accessoryDetailPage,
     news,
     newDetail,
-    carDetail,
-    // wishList
-  });
-
-export default Reducer;
+    wishList
+  })
+  
+export default Reducer

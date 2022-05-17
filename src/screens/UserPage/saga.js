@@ -29,12 +29,11 @@ function* getListBillSaga(action) {
     }
 }
 
-
 function* getUserSaga(action) {
     try {
         const { params } = action
         const response = (yield call(apiUser.getMe, params))
-        if (response.status) {
+        if (response.status==="success") {
             yield all([
                 put({ type: TYPE.GETUSER.SUCCESS, ...response }),
             ])

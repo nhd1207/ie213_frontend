@@ -21,7 +21,6 @@ import FormUpdateCart from "../../components/AccessoryDetail/FormUpdateCart";
 function AccessoryDetail(props) {
     useEffect(() => {
         props.getDetailAccessory(props.match.params.id)
-        console.log(props);
     }, []);
 
     const handleUpdateCart = (value) => {

@@ -39,8 +39,7 @@ const Saga = function* (){
       accessoryDetailSaga(),
       newSaga(),
       newDetailSaga(),
-      carByID()
-      // wishListSaga()
+      wishListSaga()
     ])
   }
   
