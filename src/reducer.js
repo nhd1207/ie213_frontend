@@ -37,7 +37,7 @@ const Reducer = (history) => combineReducers({
     accessoryDetailPage,
     news,
     newDetail,
-    // wishList
+    wishList
   })
   
 export default Reducer

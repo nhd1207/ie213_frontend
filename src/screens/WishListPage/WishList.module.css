@@ -42,7 +42,6 @@
 .product .productImg {
   height: 10rem;
   padding: 0.5rem;
-  background: url(../../Images/Rectangle12.png);
   background-size: cover;
   background-position: center center;
 }

@@ -37,7 +37,7 @@ const Saga = function* (){
       accessoryDetailSaga(),
       newSaga(),
       newDetailSaga(),
-      // wishListSaga()
+      wishListSaga()
     ])
   }
   
