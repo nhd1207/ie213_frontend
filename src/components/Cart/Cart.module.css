@@ -27,9 +27,6 @@
   margin: 1rem 0;
 }
 
-.productsWrapper {
-}
-
 .mainColumn {
   border: 1px solid #000;
 }
@@ -115,8 +112,6 @@
 }
 
 /* cart summary */
-.cartSummaryWrapper {
-}
 
 .cartSummary {
   padding: 0.5rem;
@@ -139,8 +134,6 @@
 
 .shippingMessage {
   font-style: normal;
-}
-.totalDue {
 }
 
 .subTitle {
