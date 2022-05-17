@@ -1,15 +1,15 @@
 export const action_type = {
-    GETCARBYID: {
-        REQUEST: "GETCARBYID.REQUEST",
-        SUCCESS: "GETCARBYID.SUCCESS",
-        ERROR: "GETCARBYID.ERROR"
+    GETLISTCAR: {
+        REQUEST: "GETLISTCAR.REQUEST",
+        SUCCESS: "GETLISTCAR.SUCCESS",
+        ERROR: "GETLISTCAR.ERROR"
     }
 }
 
-export function getCarByID (params)
+export function getListCar (params)
 {
     return {
-        type: action_type.GETCARBYID.REQUEST,
+        type: action_type.GETLISTCAR.REQUEST,
         params,
     }
 }

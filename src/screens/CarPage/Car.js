@@ -21,6 +21,7 @@ import {
     MailOutlined,
     SettingOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const { SubMenu } = Menu;
 
@@ -98,7 +99,8 @@ function Car(props) {
                                             backgroundImage: `url(${car?.image?.avatar})`
                                         }
                                         return (
-                                            <div className={`${style.card} col col-xl-6`}>
+                                            <Link className={"col col-xl-6"} key={car?._id} to={`/car/${car?._id}`}>
+                                            <div className={`${style.card} `}>
                                                 {/* <NavLink to={`/car/${car._id}`}> */}
                                                 {/* </NavLink> */}
                                                 <div className={`${style.image}`} style={myStyle}>
@@ -122,6 +124,7 @@ function Car(props) {
                                                     </div>
                                                 </div>
                                             </div>
+                                            </Link>
                                         );
                                     })}
                             </div>

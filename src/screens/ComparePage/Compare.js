@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./Compare.module.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getCarByID } from "./action";
+import { getListCar } from "./action";
 import { Button } from "antd";
 import { connect } from "react-redux";
 import {
@@ -15,9 +15,9 @@ import {
 import { useLocation } from "react-router-dom";
 import Layouts from "../../components/layout";
 import CarSelection from "../../components/CarSelection";
+
 function CompareTwoCar(props) {
   const location = useLocation();
-  const params = new URLSearchParams(location.search);
 
   return (
     <Layouts>
@@ -29,8 +29,8 @@ function CompareTwoCar(props) {
           <div className={`${style.carSpecCol} col-xl-10`}>
             <div className={`${style.specTitle} row`}>So Sánh xe</div>
             <div className={`${style.select} row`}>
-              <CarSelection />
-              <CarSelection />
+              <CarSelection data={props?.cars}/>
+              <CarSelection data={props?.cars}/>
             </div>
             <div className={`${style.specRowHeading} row`}>
               <div className={`${style.rowHeading} col-xl-4`}>Thông số</div>
@@ -132,14 +132,14 @@ function CompareTwoCar(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  carDetail: state.carDetail,
-});
+const mapStateToProps = state => ({
+  cars: state.carList,
+})
 
-const mapDispatchToProps = (dispatch) => ({
-  getCarByID: (params) => {
-    dispatch(getCarByID(params));
-  },
-});
+const mapDispatchToProps = dispatch => ({
+  getListCar: (params) => {
+      dispatch(getListCar(params))
+  }
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompareTwoCar);

@@ -3,7 +3,6 @@ import {
     call,
     put,
     all,
-    take,
 } from 'redux-saga/effects'
 import {
     action_type as TYPE
@@ -11,29 +10,27 @@ import {
 
 import * as api from '../../apis/Car'
 
-function* getListCarByIDSaga(action) {
+function* getListCarSaga(action) {
     try {
         const { params } = action
-        const response = (yield call(api.getDetailByCode, params))
+        const response = (yield call(api.getList, params))
         if (response.status) {
             yield all([
-                put({ type: TYPE.GETCARBYID.SUCCESS, ...response }),
+                put({ type: TYPE.GETLISTCAR.SUCCESS, ...response }),
             ])
         } else {
-            yield put({ type: TYPE.GETCARBYID.ERROR, error: response })
+            yield put({ type: TYPE.GETLISTCAR.ERROR, error: response })
         }
     } catch (error) {
         yield all([
-            put({ type: TYPE.GETCARBYID.ERROR, error })
+            put({ type: TYPE.GETLISTCAR.ERROR, error })
         ])
     }
 }
 
-
-
 function* watcher() {
     yield all([
-        takeLatest(TYPE.GETCARBYID.REQUEST, getListCarByIDSaga),
+        takeLatest(TYPE.GETLISTCAR.REQUEST, getListCarSaga)
     ])
 }
 
