@@ -18,7 +18,7 @@ import accessoryDetailSaga from './screens/AccessoryDetailPage/saga'
 import newSaga from './screens/NewsPage/saga'
 import newDetailSaga from './screens/NewsDetail/saga'
 import wishListSaga from './screens/WishListPage/saga'
-import carByID from "./screens/CarDetailPage/saga"
+import getListCarByIDSaga from "./screens/CarDetailPage/saga"
 
 const Saga = function* (){
     yield all([
@@ -39,7 +39,8 @@ const Saga = function* (){
       accessoryDetailSaga(),
       newSaga(),
       newDetailSaga(),
-      wishListSaga()
+      wishListSaga(),
+      getListCarByIDSaga()
     ])
   }
   

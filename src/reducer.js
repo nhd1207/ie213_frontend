@@ -40,7 +40,8 @@ const Reducer = (history) =>
     accessoryDetailPage,
     news,
     newDetail,
-    wishList
+    wishList,
+    carDetail
   })
   
 export default Reducer
