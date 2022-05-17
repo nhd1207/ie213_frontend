@@ -5,6 +5,7 @@ import Layout from "../../components/layout";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Pagination } from "antd";
 import {
   Form,
   Button,
@@ -67,6 +68,7 @@ function Car(props) {
                 defaultSelectedKeys={["1"]}
                 defaultOpenKeys={["sub1"]}
                 mode="inline"
+                className={`${style.filter}`}
               >
                 <div className={`${style.rangeInput}`}>
                   <>
@@ -91,14 +93,18 @@ function Car(props) {
             <div
               className={`${style.cardContainer} col col-xl-10 col-lg-9 col-md-8`}
             >
-              <div className={style.container}>
+              <div className={`${style.listCardContainer} row`}>
                 {props.cars.map((car) => {
                   let myStyle = {
                     backgroundImage: `url(${car?.image?.avatar})`,
                   };
                   return (
-                    <Link key={car._id} to={`/car/${car._id}`}>
-                      <div className={`${style.card} col col-xl-6`}>
+                    <Link
+                      key={car._id}
+                      to={`/car/${car._id}`}
+                      className={`col col-xl-6`}
+                    >
+                      <div className={`${style.card}`}>
                         <div className={`${style.image}`} style={myStyle}></div>
                         <div className={`${style.description}`}>
                           <div className={`${style.nameGroup}`}>
@@ -122,6 +128,9 @@ function Car(props) {
                     </Link>
                   );
                 })}
+              </div>
+              <div className={`${style.pagination} row`}>
+                <Pagination defaultCurrent={6} total={100} />;
               </div>
             </div>
           </div>
