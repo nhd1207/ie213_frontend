@@ -32,6 +32,7 @@ import { connect } from "react-redux";
 import AdminPage from './screens/AdminPage/AdminPage';
 import AboutUs from './screens/AboutUsPage/AboutUs';
 import Support from './screens/SupportPage/Support'
+import Compare from "./screens/ComparePage/Compare"
 
 function App() {
   useEffect(() => {
@@ -60,6 +61,9 @@ function App() {
         <Route path="/wishlist" component={WishList}></Route>
         <Route path="/about_us" component={AboutUs}></Route>
         <Route path="/support" component={Support}></Route>
+        <Route path="/compare" >
+          <Compare />
+        </Route>
         <Route exact path="/" component={Home} />
         <Route component={Error404} />
       </Switch>

@@ -83,7 +83,8 @@ function LoginForm(props) {
   function passwordChangeHandler(event) {
     let enteredPassword = event.target.value.trim();
     function validatePassword(password) {
-      //compare password with database
+      if (password.trim().length >= 8)
+        return true;
     }
     dispatchPassword({
       type: "PASSWORD_LOGIN",
@@ -141,7 +142,7 @@ function LoginForm(props) {
           />
           {wrongPassword && (
             <Form.Text className={style["password-error"]}>
-              Mật khẩu sai
+              Mật khẩu cần có ít nhất 8 ký tự
             </Form.Text>
           )}
         </Form.Group>

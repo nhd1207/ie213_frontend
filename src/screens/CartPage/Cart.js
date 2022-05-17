@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getCart, updateCart } from "./action"
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import {
   TagsOutlined,
   CarOutlined,
@@ -91,7 +91,7 @@ function Cart(props) {
                   <a> Thêm giỏ hàng vào danh sách yêu thích</a>
                 </div>
                 <div className={`${style.continue} col-xl-6`}>
-                  <NavLink to="/home">Tiếp tục mua sắm</NavLink> &nbsp; &nbsp; <RightCircleOutlined />
+                  <Link to="/home">Tiếp tục mua sắm</Link> &nbsp; &nbsp; <RightCircleOutlined />
                 </div>
               </div>
             </div>
