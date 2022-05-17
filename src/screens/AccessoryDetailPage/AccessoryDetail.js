@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import Layout from "../../components/layout"
 import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
+import {message} from 'antd';
 import {
     Form,
     Button,
@@ -25,12 +26,20 @@ function AccessoryDetail(props) {
     }, []);
 
     const handleUpdateCart = (value) => {
+        if(value.color==null){
+            message.error('Chưa chọn màu sắc')
+            return;
+        }
+        if(!value.quantity){
+            message.error('Số lượng phải lớn hơn 0')
+            return;
+        }
         let data = {
             ...value,
-            color: null,
+            //color: null,
             itemId: props.match.params.id
         }
-        console.log(data);
+        console.log('value.quantity',value.quantity);
         props.updateCart(data)
     }
 
@@ -55,7 +64,7 @@ function AccessoryDetail(props) {
                                 <img className={style.image} style={{ backgroundImage: `url(${props.data?.data[0]?.image?.gallery[2]})` }}></img>
                             </CarouselItem>
                         </Carousel> */}
-                        <img className={`${style.image} col-6`} style={{ backgroundImage: `url(${props.data?.data[0]?.image.banner})` }} alt="abc"></img>
+                        <div className={`${style.image} col-6`} style={{ backgroundImage: `url(${props.data?.data[0]?.image.banner})` }} alt="abc"></div>
                         <div className={`${style.content} col-6`}>
                             <div className={`${style.content_name}`}>
                                 {props.data?.data[0]?.name}
