@@ -73,7 +73,14 @@
     font-weight: 300;
     margin-bottom: 105px;
 }
-
+.news_content {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 67px;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
 
 .news-header {
     font-size: 50px;
