@@ -206,7 +206,7 @@ export default function CarOrder() {
                 <Input.TextArea showCount maxLength={100} />
               </Form.Item>
 
-              <Form.Item label="Captcha" extra="Chúng tôi cần xác nhận từ bạn">
+              {/* <Form.Item label="Captcha" extra="Chúng tôi cần xác nhận từ bạn">
                 <Row gutter={8}>
                   <Col span={12}>
                     <Form.Item
@@ -226,7 +226,7 @@ export default function CarOrder() {
                     <Button>Get captcha</Button>
                   </Col>
                 </Row>
-              </Form.Item>
+              </Form.Item> */}
 
               <Form.Item
                 name="agreement"
