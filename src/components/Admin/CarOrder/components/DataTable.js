@@ -118,7 +118,7 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
     },]
   return (
     <Table
-      rowKey="id"
+      rowKey="_id"
       columns={columns}
       dataSource={dataSource || []}
       loading={loading}
@@ -127,4 +127,3 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
 }
 
 export default DataTable;
-

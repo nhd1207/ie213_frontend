@@ -32,12 +32,10 @@ class index extends Component {
     componentDidMount = () => {
         let params = {};
         this.props.getList(params)
-        console.log(this.props)
     }
 
     //add car
     handleShowFormAdd = (value) => {
-        console.log('handleShowForm')
         this.setState({ showForm2: value || false })
     }
 
@@ -46,8 +44,6 @@ class index extends Component {
     }
 
     handleCreateCar = (value) => {
-        console.log('handleCreateCar')
-        let id = this.state.idCar;
         this.setState({ showForm2: false })
         this.setState({ showFormImage: true })
         let params = value
@@ -55,13 +51,11 @@ class index extends Component {
     }
 
     openModalAdd = (values) => {
-        console.log('openModal')
         this.handleShowFormAdd(true);
     }
 
     //update car
     handleShowForm = (value) => {
-        console.log('handleShowForm')
         this.setState({ showForm: value || false })
     }
 
@@ -70,7 +64,6 @@ class index extends Component {
     }
 
     handleUpdateCar = (value) => {
-        console.log('handleUpdateCar aaa')
         let id = this.state.idCar;
         this.setState({ showForm: false })
         let params = value
@@ -82,7 +75,6 @@ class index extends Component {
         this.props.deleteCar(id);
     }
     openModal = (values) => {
-        console.log('openModal')
         this.handleShowForm(true);
         this.state.idCar = values._id;
         this.state.car = values;

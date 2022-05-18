@@ -6,6 +6,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 let ContactForm = props => {
     const { handleSubmit } = props
+    
     return (
         <form onSubmit={handleSubmit}>
             <div className='row bg-white m-3 pt-3' >

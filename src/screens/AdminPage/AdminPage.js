@@ -12,11 +12,9 @@ import CarOrder from "../../components/Admin/CarOrder";
 import { Route } from "react-router-dom";
 import AdminHome from '../../components/Admin/AdminHome/AdminHome';
 
-
 //neu lam router tự sửa chứ không biết nhé
 function AdminPage(props) {
     useEffect(() => {
-        console.log('admin call')
         props.verify();
     }, [])
     return (

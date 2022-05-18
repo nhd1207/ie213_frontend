@@ -1,9 +1,9 @@
 import React from "react";
-import { Table, Spin, Space, Tooltip } from "antd";
+import { Table, Space, Tooltip } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDeleteLeft,
-  faEdit,
+  faCheck,
   faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import { Popconfirm, message, Button } from "antd";
@@ -14,14 +14,22 @@ import {
 } from "@ant-design/icons";
 import money from "../../../Share/functions/money";
 
-const DataTable = ({ dataSource, loading, info, cancelAccessory }) => {
+const DataTable = ({ dataSource, loading, info, cancelAccessory, type }) => {
   const onSubmit = (values) => {
     info(values);
   };
 
   const onCancel = (values) => {
-    cancelAccessory(values);
+    cancelAccessory(values,'Cancelled');
   };
+
+  const onAccept = (values) => {
+    cancelAccessory(values,'Accepted');
+  }
+
+  const onSuccess = (values) => {
+    cancelAccessory(values,'Success');
+  }
 
   const columns = [
     {
@@ -42,7 +50,7 @@ const DataTable = ({ dataSource, loading, info, cancelAccessory }) => {
       ),
     },
     {
-      title: "Tổng giá",
+      title: "Tổng đơn hàng",
       dataIndex: "totalPrice",
       key: "totalPrice",
       className: "text-center",
@@ -89,13 +97,13 @@ const DataTable = ({ dataSource, loading, info, cancelAccessory }) => {
             <span style={{ color: "green" }}>
               <CheckOutlined /> {"Thành công" || ""}{" "}
             </span>
-          ) : value === "Accepted"? (
+          ) : value === "Accepted" ? (
             <span style={{ color: "blue" }}>
-              <CloseOutlined /> {'Đã duyệt' || ""}{" "}
+              <CheckOutlined /> {'Đã duyệt' || ""}{" "}
             </span>
-          ):(
+          ) : (
             <span style={{ color: "red" }}>
-              <CloseOutlined /> {value || ""}{" "}
+              <CloseOutlined /> {"Đã hủy" || ""}{" "}
             </span>
           )}
         </div>
@@ -116,32 +124,63 @@ const DataTable = ({ dataSource, loading, info, cancelAccessory }) => {
               </span>
             </Tooltip>
           </button>
-          <Popconfirm
-            disabled={record.status === "Success"}
-            placement="left"
-            title="Bạn có muốn hủy?"
-            onConfirm={() => onCancel(record)}
-            okText="Có"
-            cancelText="Không"
-          >
-            <button
-              // onClick={() => onDelete(record?._id)}
-              className="btn btn-sm btn-primary"
-            >
-              <Tooltip placement="top" tilte="Hủy đơn">
+          {type == "Pending" ?
+            <Popconfirm
+              disabled={record.status === "Success"}
+              placement="left"
+              title="Xác nhận duyệt đơn?"
+              onConfirm={() => onAccept(record)}
+              okText="Có"
+              cancelText="Không">
+              <button className="btn btn-sm btn-primary" style={{color:'green'}}>
                 <span className="px-2">
-                  <FontAwesomeIcon icon={faDeleteLeft} />
+                <FontAwesomeIcon icon={faCheck} />
                 </span>
-              </Tooltip>
-            </button>
-          </Popconfirm>
+              </button>
+            </Popconfirm>
+            : <></>
+          }
+           {type == "Accepted" ?
+            <Popconfirm
+              disabled={record.status === "Success"}
+              placement="left"
+              title="Xác nhận giao hàng thành công?"
+              onConfirm={() => onSuccess(record)}
+              okText="Có"
+              cancelText="Không">
+              <button className="btn btn-sm btn-primary" style={{color:'green'}}>
+                <span className="px-2">
+                <FontAwesomeIcon icon={faCheck} />
+                </span>
+              </button>
+            </Popconfirm>
+            : <></>
+          }
+          {type == "Pending" || type == "Accepted" ?
+            <Popconfirm
+              disabled={record.status === "Success"}
+              placement="left"
+              title="Bạn có muốn hủy?"
+              onConfirm={() => onCancel(record)}
+              okText="Có"
+              cancelText="Không"
+            >
+              <button className="btn btn-sm btn-primary">
+                <Tooltip placement="top" tilte="Hủy đơn">
+                  <span className="px-2">
+                    <FontAwesomeIcon icon={faDeleteLeft} />
+                  </span>
+                </Tooltip>
+              </button>
+            </Popconfirm> : <></>}
         </Space>
       ),
     },
   ];
+
   return (
     <Table
-      rowKey="id"
+      rowKey="_id"
       columns={columns}
       dataSource={dataSource || []}
       loading={loading}

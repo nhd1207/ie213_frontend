@@ -3,7 +3,8 @@ import { Table, Space, Tooltip, Popconfirm } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDeleteLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
 import dateFormat from 'dateformat';
-import money from '../../../Share/functions/money';
+import classes from "../index.module.css"; 
+
 
 
 const DataTable = ({ dataSource, loading, updatePost, deletePost, showImage }) => {
@@ -24,7 +25,7 @@ const DataTable = ({ dataSource, loading, updatePost, deletePost, showImage }) =
     {
       title: '#',
       width: 50,
-      key: 'std',
+      key: 'stt',
       render: (value, record, i) => <p>{i + 1}</p>,
     },
     {
@@ -39,8 +40,9 @@ const DataTable = ({ dataSource, loading, updatePost, deletePost, showImage }) =
         </div>
     },
     {
-      title: 'Hình',
+      title: 'Hình ảnh',
       dataIndex: ['image'],
+      width: 140,
       key: 'picture',
       className: 'text-left',
       render: (value, record) => <button className="btn btn-sm btn-primary" onClick={() => onShowImage(record)}>Quản lý hình ảnh</button>
@@ -48,15 +50,15 @@ const DataTable = ({ dataSource, loading, updatePost, deletePost, showImage }) =
     {
       title: 'Nội dung',
       dataIndex: 'content',
-      //key: 'content',
       className: 'text-left',
+      width: 300,
       render: (value, record) =>
-        <div>
-          <span> {money(value, 'VNĐ') || ''} </span>
+        <div className={`${classes.news_content}`}>
+          <span> {value || ''} </span>
         </div>
     },
     {
-      title: 'tác giả',
+      title: 'Tác giả',
       dataIndex: ['author', 'name'],
       key: 'author',
       className: 'text-left',
@@ -102,7 +104,7 @@ const DataTable = ({ dataSource, loading, updatePost, deletePost, showImage }) =
     },]
   return (
     <Table
-      rowKey="id"
+      rowKey="_id"
       columns={columns}
       dataSource={dataSource || []}
       loading={loading}
@@ -111,4 +113,3 @@ const DataTable = ({ dataSource, loading, updatePost, deletePost, showImage }) =
 }
 
 export default DataTable;
-

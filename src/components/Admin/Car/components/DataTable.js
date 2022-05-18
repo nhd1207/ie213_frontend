@@ -24,7 +24,7 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
     {
       title: '#',
       width: 100,
-      key: 'std',
+      key: 'stt',
       render: (value, record, i) => <a>{i + 1}</a>,
     },
     {
@@ -114,7 +114,7 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
     },]
   return (
     <Table
-      rowKey="id"
+      rowKey="_id"
       columns={columns}
       dataSource={dataSource || []}
       loading={loading}
@@ -123,4 +123,3 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
 }
 
 export default DataTable;
-

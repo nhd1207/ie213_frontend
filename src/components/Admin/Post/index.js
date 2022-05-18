@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Button, Spin, Modal, Image, Empty } from 'antd';
+import { Button, Modal, Image, Empty } from 'antd';
 import DataTable from './components/DataTable'
 import FormUpdatePost from './components/FormUpdatePost'
 import FormAddPost from './components/FormAddNew'
@@ -9,10 +9,9 @@ import queryString from 'query-string'
 import { createPost, getList, updatePost, deletePost } from './action';
 import { PlusOutlined } from '@ant-design/icons';
 import FormFilter from './components/FormFilter'
-import classes from "./index.module.css"; 
 import FileInput from '../../Share/FileInput';
 
-const noImage ='https://res.cloudinary.com/sevenimg/image/upload/v1652028058/no-image-available_yyhche.png';
+const noImage = 'https://res.cloudinary.com/sevenimg/image/upload/v1652028058/no-image-available_yyhche.png';
 
 class index extends Component {
     constructor(props) {
@@ -29,16 +28,13 @@ class index extends Component {
         }
     }
 
-
     componentDidMount = () => {
         let params = {};
         this.props.getList(params)
-        console.log(this.props)
     }
 
-    //add car
+    //add post
     handleShowFormAdd = (value) => {
-        console.log('handleShowForm')
         this.setState({ showForm2: value || false })
     }
 
@@ -47,22 +43,18 @@ class index extends Component {
     }
 
     handleCreatePost = (value) => {
-        console.log('handleCreatePosst')
         let id = this.state.idPost;
         this.setState({ showForm2: false })
-        //this.setState({ showFormImage: true })
-        let params = {...value,image:{avatar:noImage,banner:noImage}}
+        let params = { ...value, image: { avatar: noImage, banner: noImage } }
         this.props.createPost(params)
     }
 
     openModalAdd = (values) => {
-        console.log('openModal')
         this.handleShowFormAdd(true);
     }
 
-    //update car
+    //update post
     handleShowForm = (value) => {
-        console.log('handleShowForm')
         this.setState({ showForm: value || false })
     }
 
@@ -71,7 +63,6 @@ class index extends Component {
     }
 
     handleUpdatePost = (value) => {
-        console.log('handleUpdatepost aaa')
         let id = this.state.idPost;
         this.setState({ showForm: false })
         let params = value
@@ -82,14 +73,14 @@ class index extends Component {
         let id = value;
         this.props.deletePost(id);
     }
+
     openModal = (values) => {
-        console.log('openModal')
         this.handleShowForm(true);
         this.state.idPost = values._id;
         this.state.post = values;
     }
 
-    // Image
+    // Image post
     openModalImage = (values) => {
         this.handleShowFormImage(true);
         this.state.idPost = values._id;
@@ -133,7 +124,7 @@ class index extends Component {
                     {/* <FormFilter
                     onSubmit={()=>handleSubmitFilter}
                     /> */}
-                    <DataTable //done
+                    <DataTable
                         dataSource={this.props?.post?.data.post || []}
                         loading={this.props.post.loading}
                         updatePost={this.openModal}
@@ -183,13 +174,13 @@ class index extends Component {
                         <Image.PreviewGroup>
                             <p>Tải lên hình ảnh cho {this.state.post?.title}</p>
                             <FileInput gallery={false} urlImage={this.handleUrlImage} update={() => this.handleUpdatePost(this.state.post)}></FileInput>
-                            <hr/>
-                            <p>Hình đại diện cho bài viết</p>{this.state.post.image?.avatar?
+                            <hr />
+                            <p>Hình đại diện cho bài viết</p>{this.state.post.image?.avatar ?
                                 <Image width={200} src={this.state.post.image?.avatar} /> : <Empty />
                             }
-                            <hr/>
-                            <p>Hình ảnh bìa cho bài viết</p>{this.state.post.image?.banner?
-                                <Image width={200} src={this.state.post.image?.banner} />: <Empty />
+                            <hr />
+                            <p>Hình ảnh bìa cho bài viết</p>{this.state.post.image?.banner ?
+                                <Image width={200} src={this.state.post.image?.banner} /> : <Empty />
                             }
                             {/* <hr/>
                             <p>Hình khác</p>
