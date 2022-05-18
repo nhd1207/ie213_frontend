@@ -71,16 +71,16 @@ h2 {
 }
 
 .city_title{
-    font-size: 5rem;
+    font-size: 3rem;
     text-align: left;
 }
 
 .leftContent__text  {
-    font-size: 1.5rem;
-    padding: 5rem;
+    font-size: 1.2rem;
+    padding: 9rem 5rem;
     text-align: justify;
     /* grid-row: 1 / span 2; */
-    margin-top: 2rem;
+    margin: 5rem 0;
 }
 
 .line {
@@ -118,10 +118,10 @@ h2 {
 }
 
 .rightContent__text  {
-    font-size: 1.5rem;
-    padding: 5rem;
+    font-size: 1.2rem;
+    padding: 9rem 5rem;
     text-align: justify;
-    
+    margin: 5rem 0;
 }
 
 .rightContent__desc {

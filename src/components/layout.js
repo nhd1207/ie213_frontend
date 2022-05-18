@@ -38,8 +38,8 @@ function Layouts(props) {
   //     }
   return (
     <Layout>
-      <Affix>
-        <Header className="header" style={{ backgroundColor: "black" }}>
+      <Affix style={{ zIndex: 100}}>
+        <Header className="header" style={{ backgroundColor: "black"}}>
           <Menu
             style={{ backgroundColor: "black" }}
             mode="horizontal"
