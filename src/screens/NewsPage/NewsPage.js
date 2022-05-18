@@ -39,7 +39,7 @@ function NewsPage(props) {
                                         description={
                                             <div className={`${style.news_items} `}>
                                                 <div className={`${style.news_date} `}>{dateFormat(post.createdAt, "mmmm dS, yyyy")}</div>
-                                                <p className={`${style.news_content} `}>{post.content}</p>
+                                                <div className={`${style.news_content} `} dangerouslySetInnerHTML={{__html: post?.content}}/>
                                                 <a className={`${style.btn_title} `} href={`news/${post._id}`}>
                                                     <button className={`${style.btn_outline_dark} `}>
                                                         ĐỌC THÊM
