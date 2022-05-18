@@ -16,6 +16,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import "antd/dist/antd.css";
 import Cookies from "js-cookie";
+import "./layout.css";
 // import AuthenContext from "../components/context/AuthenContext";
 const { Header, Content, Footer } = Layout;
 
@@ -37,16 +38,27 @@ function Layouts(props) {
   //       setUserInput(event.target.value);
   //     }
   return (
-    <Layout>
-      <Affix style={{ zIndex: 100}}>
-        <Header className="header" style={{ backgroundColor: "black"}}>
+    <Layout
+      style={
+        {
+          // overflow: "hidden"
+        }
+      }
+    >
+      <Affix style={{ zIndex: 100 }}>
+        <Header className="header" style={{ backgroundColor: "black" }}>
           <Menu
-            style={{ backgroundColor: "black" }}
+            style={{
+              width: "100%",
+              backgroundColor: "black",
+              color: "#fff",
+            }}
             mode="horizontal"
-            defaultSelectedKeys={["2"]}
+            theme="dark"
+            className="Navbar navLeft"
           >
             <Menu.Item key="home">
-              <NavLink to={"/home"} style={{ marginRight: 20 }}>
+              <NavLink to={"/home"} style={{}}>
                 <img
                   src={require("../Images/logo.png")}
                   alt={"logo"}
@@ -57,79 +69,67 @@ function Layouts(props) {
             </Menu.Item>
 
             <Menu.Item key="cars">
-              <NavLink
-                to={`/car`}
-                style={{ color: "#F3EA01", marginRight: 5 }}
-              >
+              <NavLink to={`/car`} style={{ color: "#F3EA01" }}>
                 {" "}
                 CÁC DÒNG XE{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="showrooms">
-              <NavLink
-                to={`/showroom`}
-                style={{ color: "#F3EA01", marginRight: 5 }}
-              >
+              <NavLink to={`/showroom`} style={{ color: "#F3EA01" }}>
                 {" "}
                 SHOWROOMS{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="accessory">
-              <NavLink
-                to={`/accessory`}
-                style={{ color: "#F3EA01", marginRight: 5 }}
-              >
+              <NavLink to={`/accessory`} style={{ color: "#F3EA01" }}>
                 {" "}
                 PHỤ KIỆN{" "}
               </NavLink>
             </Menu.Item>
 
-
             <Menu.Item key="news">
-              <NavLink
-                to={`/news`}
-                style={{ color: "#F3EA01", marginRight: 5 }}
-              >
+              <NavLink to={`/news`} style={{ color: "#F3EA01" }}>
                 {" "}
                 TIN TỨC{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="about_us">
-              <NavLink
-                to={`/about_us`}
-                style={{ color: "#F3EA01", marginRight: 5 }}
-              >
+              <NavLink to={`/about_us`} style={{ color: "#F3EA01" }}>
                 {" "}
                 VỀ CHÚNG TÔI{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="support">
-              <NavLink
-                to={`/support`}
-                style={{ color: "#F3EA01", marginRight: 5 }}
-              >
+              <NavLink to={`/support`} style={{ color: "#F3EA01" }}>
                 {" "}
                 HỖ TRỢ{" "}
               </NavLink>
             </Menu.Item>
-
+          </Menu>
+          <Menu
+            style={{
+              width: "100%",
+              backgroundColor: "black",
+              color: "#fff",
+            }}
+            mode="horizontal"
+            theme="dark"
+            className="Navbar navRight"
+          >
             <Menu.Item key="wishlist">
               <NavLink to={`/wishlist`}>
-                <FontAwesomeIcon
-                  style={{ color: "#F3EA01", marginRight: 5 }}
-                  icon={faHeart}
-                />
+                <FontAwesomeIcon style={{ color: "#F3EA01" }} icon={faHeart} />
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="cart">
               <NavLink to={`/cart`}>
                 <FontAwesomeIcon
-                  style={{ color: "#F3EA01", marginRight: 5 }}
+                  style={{ color: "#F3EA01" }}
                   icon={faCartShopping}
                 />
               </NavLink>
@@ -148,10 +148,7 @@ function Layouts(props) {
 
             {/* {!context.isLoggedIn && ( */}
             <Menu.Item key="login">
-              <NavLink
-                to={"/login"}
-                style={{ color: "#F3EA01", marginRight: 5 }}
-              >
+              <NavLink to={"/login"} style={{ color: "#F3EA01" }}>
                 Đăng nhập
               </NavLink>
             </Menu.Item>
@@ -159,7 +156,7 @@ function Layouts(props) {
 
             {/* {context.isLoggedIn && ( */}
             {/* <Menu.Item key="logout">
-                                <a style={{ color: "#F3EA01", marginRight: 5 }} onClick={signoutHandler} > Đăng xuất </a>
+                                <a style={{ color: "#F3EA01",  }} onClick={signoutHandler} > Đăng xuất </a>
                             </Menu.Item > */}
             {/* )} */}
           </Menu>
@@ -196,29 +193,16 @@ function Layouts(props) {
           <div className="col-3 text-white">
             <strong style={{ fontSize: 20 }}>Contact Us</strong>
             <br></br>
-            <FontAwesomeIcon
-              icon={faEnvelope}
-              style={{ marginRight: 5 }}
-            />{" "}
-            Email: VeryCute@gm.uit.edu.vn
+            <FontAwesomeIcon icon={faEnvelope} style={{}} /> Email:
+            VeryCute@gm.uit.edu.vn
             <br></br>
-            <FontAwesomeIcon icon={faPhone} style={{ marginRight: 5 }} /> Phone:
-            039 2022 001
+            <FontAwesomeIcon icon={faPhone} style={{}} /> Phone: 039 2022 001
             <br></br>
             <strong style={{ marginTop: 20, fontSize: 20 }}>Follow Us</strong>
             <br></br>
-            <FontAwesomeIcon
-              icon={faInstagram}
-              style={{ marginRight: 15, fontSize: 20 }}
-            />
-            <FontAwesomeIcon
-              icon={faFacebook}
-              style={{ marginRight: 15, fontSize: 20 }}
-            />
-            <FontAwesomeIcon
-              icon={faTwitter}
-              style={{ marginRight: 15, fontSize: 20 }}
-            />
+            <FontAwesomeIcon icon={faInstagram} style={{ fontSize: 20 }} />
+            <FontAwesomeIcon icon={faFacebook} style={{ fontSize: 20 }} />
+            <FontAwesomeIcon icon={faTwitter} style={{ fontSize: 20 }} />
           </div>
         </div>
       </Footer>
