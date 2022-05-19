@@ -21,6 +21,7 @@ import wishList from "./screens/WishListPage/reducer";
 import carDetail from "./screens/CarDetailPage/reducer";
 import carList from "./screens/CarPage/reducer";
 import carOrderPage from "./screens/CarOrder/reducer"
+import compare from "./screens/ComparePage/reducer"
 const Reducer = (history) =>
   combineReducers({
     form: formReducer,
@@ -44,7 +45,8 @@ const Reducer = (history) =>
     wishList,
     carList,
     carDetail,
-    carOrderPage
+    carOrderPage,
+    compare
   })
   
 export default Reducer

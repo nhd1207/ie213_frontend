@@ -79,7 +79,7 @@ function Home(props) {
                                             <div>
                                                 <div className={style['news-description']}>{dateFormat(item.createdAt, "mmmm dS, yyyy")}
                                                 
-                                                <p className={`${style.news_content} `}>{item.content}</p>
+                                                <div className={`${style.news_content} `} dangerouslySetInnerHTML={{__html: item?.content}}/>
                                                 </div>
                                                 <button class="btn btn-outline-dark">
                                                     <NavLink to={`news/${item._id}`}>
