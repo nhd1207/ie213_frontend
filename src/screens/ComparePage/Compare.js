@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./Compare.module.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getListCar } from "./action";
+import { getListCar, compareTwoCar } from "./action";
 import { Button } from "antd";
 import { connect } from "react-redux";
 import {
@@ -19,6 +19,16 @@ import CarSelection from "../../components/CarSelection";
 function CompareTwoCar(props) {
   const location = useLocation();
 
+  useEffect(() => {
+    props.getListCar();
+    console.log(props.cars.car);
+    let params = {
+      carID1: "62736ec039a81301857e39d7",
+      carID2: "62736ec039a81301857e39d7"
+    }
+    props.compareTwoCar(params)
+  }, [])
+
   return (
     <Layouts>
       <div className={`${style.main}`}>
@@ -29,8 +39,8 @@ function CompareTwoCar(props) {
           <div className={`${style.carSpecCol} col-xl-10`}>
             <div className={`${style.specTitle} row`}>So Sánh xe</div>
             <div className={`${style.select} row`}>
-              <CarSelection data={props?.cars}/>
-              <CarSelection data={props?.cars}/>
+              <CarSelection data={props?.cars?.car}/>
+              <CarSelection data={props?.cars?.car}/>
             </div>
             <div className={`${style.specRowHeading} row`}>
               <div className={`${style.rowHeading} col-xl-4`}>Thông số</div>
@@ -133,12 +143,16 @@ function CompareTwoCar(props) {
 }
 
 const mapStateToProps = state => ({
-  cars: state.carList,
+  cars: state.compare.cars,
+  loading: state.compare.loading
 })
 
 const mapDispatchToProps = dispatch => ({
   getListCar: (params) => {
       dispatch(getListCar(params))
+  },
+  compareTwoCar: (params) => {
+    dispatch(compareTwoCar(params))
   }
 })
 
