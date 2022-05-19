@@ -24,18 +24,18 @@ function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
             }
-        case type.GETCOMPAREBYID.REQUEST:
+        case type.COMPARETWOCAR.REQUEST:
             return {
                 ...state,
                 loading: true,
             }
-        case type.GETCOMPAREBYID.SUCCESS:
+        case type.COMPARETWOCAR.SUCCESS:
             return {
                 ...state,
                 compareCar: action.data,
                 loading: false,
             }
-        case type.GETCOMPAREBYID.ERROR:
+        case type.COMPARETWOCAR.ERROR:
             return {
                 ...state,
                 loading: false,
