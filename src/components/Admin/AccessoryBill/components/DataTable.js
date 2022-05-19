@@ -40,8 +40,19 @@ const DataTable = ({ dataSource, loading, info, cancelAccessory, type }) => {
     },
     {
       title: "Tên người dùng",
-      dataIndex: ["userId"],
+      dataIndex: ["userId","name"],
       key: "name",
+      className: "text-center",
+      render: (value, record) => (
+        <div style={{ textAlign: "center" }}>
+          <span> {value || ""} </span>
+        </div>
+      ),
+    },
+    {
+      title: "Số điện thoại",
+      dataIndex: ["userId","info","phoneNumber"],
+      key: "STD",
       className: "text-center",
       render: (value, record) => (
         <div style={{ textAlign: "center" }}>
