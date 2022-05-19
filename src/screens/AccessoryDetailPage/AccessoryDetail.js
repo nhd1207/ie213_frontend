@@ -29,7 +29,6 @@ function AccessoryDetail(props) {
             color: null,
             itemId: props.match.params.id
         }
-        console.log(data);
         props.updateCart(data)
     }
 
