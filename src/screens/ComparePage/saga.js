@@ -14,23 +14,43 @@ function* getListCarSaga(action) {
     try {
         const { params } = action
         const response = (yield call(api.getList, params))
-        if (response.status) {
+        if (response.status==="success") {
             yield all([
-                put({ type: TYPE.GETLISTCAR.SUCCESS, ...response }),
+                put({ type: TYPE.GETLISTCOMPARE.SUCCESS, ...response }),
             ])
         } else {
-            yield put({ type: TYPE.GETLISTCAR.ERROR, error: response })
+            yield put({ type: TYPE.GETLISTCOMPARE.ERROR, error: response })
         }
     } catch (error) {
         yield all([
-            put({ type: TYPE.GETLISTCAR.ERROR, error })
+            put({ type: TYPE.GETLISTCOMPARE.ERROR, error })
         ])
     }
 }
 
+function* compareCarSaga(action) {
+    try {
+        const { params } = action
+        const response = (yield call(api.compareTwoCars, params))
+        if (response.status==="success") {
+            yield all([
+                put({ type: TYPE.COMPARETWOCAR.SUCCESS, ...response }),
+            ])
+        } else {
+            yield put({ type: TYPE.COMPARETWOCAR.ERROR, error: response })
+        }
+    } catch (error) {
+        yield all([
+            put({ type: TYPE.COMPARETWOCAR.ERROR, error })
+        ])
+    }
+}
+
+
 function* watcher() {
     yield all([
-        takeLatest(TYPE.GETLISTCAR.REQUEST, getListCarSaga)
+        takeLatest(TYPE.GETLISTCOMPARE.REQUEST, getListCarSaga),
+        takeLatest(TYPE.COMPARETWOCAR.REQUEST, compareCarSaga)
     ])
 }
 
