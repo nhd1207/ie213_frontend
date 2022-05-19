@@ -1,5 +1,5 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
+@import url("../../style/_variables.css");
 
 * {
   font-family: "Oswald", sans-serif;
@@ -14,9 +14,9 @@
 
 .heading {
   font-size: 3.2rem;
-  color: rgba(0, 0, 0, 0.9);
-  /* text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
-    1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; */
+  color: var(--black-color);
+  /* text-shadow: 2px 0 0 var(--black-color), -2px 0 0 var(--black-color), 0 2px 0 var(--black-color), 0 -2px 0 var(--black-color),
+    1px 1px var(--black-color), -1px -1px 0 var(--black-color), 1px -1px 0 var(--black-color), -1px 1px 0 var(--black-color); */
 }
 
 .main {
@@ -28,7 +28,7 @@
 }
 
 .mainColumn {
-  border: 1px solid #000;
+  border: 1px solid var(--black-color);
 }
 
 .column {
@@ -41,11 +41,11 @@
 
 .product {
   padding: 1rem;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--border-gray-color);
 }
 
 .productImgWrapper {
-  border: 1px solid rgb(255, 0, 0);
+  border: 1px solid var(--orange-color);
 }
 
 /* .product .productImg {
@@ -64,14 +64,15 @@
 }
 
 .product .productDetail .productName {
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: #000;
+  font-weight: normal;
+  font-size: var(--font-document);
+  color: var(--gray-color);
   padding: 0.5rem;
 }
 
 .product .productDetail .productDesc {
   font-weight: italic;
+  color: var(--gray-color);
   padding: 0.5rem;
 }
 
@@ -81,30 +82,32 @@
 
 .product .productQty .inputNumber {
   font-weight: bold;
-  height: 2.2rem;
+  height: 2.4rem;
   align-items: center;
   width: 60%;
   margin: 1rem 0;
-  border: 2px solid #000;
+  border: 1px solid var(--border-gray-color);
   border-radius: 4px;
 }
 
 .product .productQty .removeButton {
   width: 60%;
-  background-color: rgba(255, 255, 0, 0.9);
-  border: 1px solid #000;
-  color: #000;
+  background-color: var(--yellow-color);
+  border: 1px solid var(--yellow-color);
+  color: var(--black-color);
+  border-radius: 5px;
 }
 
 .product .productQty .removeButton:hover {
-  background-color: rgb(237, 70, 70);
+  background-color: var(--black-color);
+  color: var(--yellow-color);
 }
 
 .product .productPrice {
   /* text-align: center; */
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: rgba(0, 0, 0, 0.9);
+  font-weight: normal;
+  font-size: var(--font-document);
+  color: var(--gray-color);
   /* text-shadow: 2px 0 0 rgba(255, 255, 0, 0.9), -2px 0 0 rgba(255, 255, 0, 0.9),
     0 2px 0 rgba(255, 255, 0, 0.9), 0 -2px 0 rgba(255, 255, 0, 0.9),
     1px 1px rgba(255, 255, 0, 0.9), -1px -1px 0 rgba(255, 255, 0, 0.9),
@@ -115,9 +118,9 @@
 
 .cartSummary {
   padding: 0.5rem;
-  border: 1px solid #000;
+  border: 1px solid var(--border-gray-color);
 
-  box-shadow: 0px 16px 15px rgb(0 0 0 / 20%);
+  box-shadow: 0px 16px 15px var(--black-color);
 }
 
 .cartSummary div {
@@ -129,7 +132,7 @@
 }
 
 .shippingPolicy {
-  background-color: #eee;
+  background-color: var(--beige-color);
 }
 
 .shippingMessage {
@@ -158,17 +161,17 @@
 }
 
 .checkout .checkoutButton {
-  border: 0.5px solid #000;
-  background-color: rgba(255, 255, 0, 0.9);
-  color: #000;
+  border: 0.5px solid var(--black-color);
+  background-color: var(--yellow-color);
+  color: var(--black-color);
   font-weight: bold;
   height: 4rem;
   font-size: 1.5rem;
 }
 
 .checkout .checkoutButton:hover {
-  color: rgba(255, 255, 0, 0.9);
-  background-color: rgb(0, 94, 14);
+  color: var(--yellow-color);
+  background-color: var(--orange-color);
 }
 
 .couponCode {
@@ -178,6 +181,7 @@
 .couponCode .inputCoupon {
   width: 100%;
 }
+
 /* .couponCodeTitle {
   font-style: italic;
   height: 8vh;
@@ -186,14 +190,17 @@
 
 /* end  Main */
 .endMain {
-  font-size: 1.5rem;
+  font-size: var(--font-document);
+  font-weight: normal;
   margin: 2rem 0;
+  color: var(--gray-color);
 }
 
 .addToWishList {
   display: flex;
   align-items: center;
 }
+
 .continue {
   justify-content: flex-end;
   display: flex;
@@ -202,7 +209,7 @@
 
 .addToWishList:hover,
 .continue:hover {
-  color: rgb(129, 126, 3);
+  color: var(--orange-color);
 }
 
 /* responsive */
@@ -219,4 +226,31 @@
   .number {
     font-weight: bold;
   }
+}
+
+.deleteCart {
+  color: var(--white-color);
+  background-color: var(--gray-color);
+  border: 1px solid var(--gray-color);
+}
+
+.updateCart {
+  border: 1px solid var(--black-color);
+}
+
+.buttonCss {
+  border-radius: 5px;
+  padding: 4px 20px;
+  margin: 20px 20px 20px 0px;
+  font-size: var(--font-document);
+}
+
+.buttonCss:hover {
+  background-color: var(--black-color);
+  border-color: var(--black-color);
+  color: var(--yellow-color);
+}
+
+.buttonUD {
+  justify-content: flex-end;
 }

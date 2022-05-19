@@ -1,0 +1,12 @@
+:root {
+    --yellow-color: rgb(240, 165, 0);
+    --black-color: rgb(27, 26, 23);
+    --orange-color: rgb(228, 88, 38);
+    --beige-color: rgb(230, 213, 184);
+    --white-color: #fff;
+    --gray-color: #444;
+    --border-gray-color: #D8D8D8;
+    --font-title: 20px;
+    --font-document: 16px;
+    --font-note: 14px;
+}
