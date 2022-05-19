@@ -2,39 +2,40 @@ import { action_type as type } from './action'
 
 const initialState = {
     loading: false,
-    wishList: {}
+    cars: [],
+    compareCar: []
 }
 
 function reducer(state = initialState, action) {
     switch (action.type) {
-        case type.GETUSER.REQUEST:
+        case type.GETLISTCOMPARE.REQUEST:
             return {
                 ...state,
                 loading: true,
             }
-        case type.GETUSER.SUCCESS:
+        case type.GETLISTCOMPARE.SUCCESS:
             return {
                 ...state,
-                wishList: action.user.wishList,
+                cars: action.data,
                 loading: false,
             }
-        case type.GETUSER.ERROR:
+        case type.GETLISTCOMPARE.ERROR:
             return {
                 ...state,
                 loading: false,
             }
-        case type.DELETEWISHLIST.REQUEST:
+        case type.COMPARETWOCAR.REQUEST:
             return {
                 ...state,
                 loading: true,
             }
-        case type.DELETEWISHLIST.SUCCESS:
+        case type.COMPARETWOCAR.SUCCESS:
             return {
                 ...state,
-                wishList: action.user.wishList,
+                compareCar: action.data,
                 loading: false,
             }
-        case type.DELETEWISHLIST.ERROR:
+        case type.COMPARETWOCAR.ERROR:
             return {
                 ...state,
                 loading: false,

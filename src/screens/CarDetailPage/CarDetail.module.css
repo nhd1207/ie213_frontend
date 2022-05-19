@@ -252,3 +252,16 @@
 .buttonWrapper .compareButton:hover {
   background-color: #eee;
 }
+
+.colorContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.color {
+  width: 3rem;
+  height: 3rem;
+  border: 1px black solid;
+  margin-left: 1rem;
+}
