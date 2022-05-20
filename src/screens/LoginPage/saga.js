@@ -2,6 +2,7 @@ import { takeLatest, call, put, all } from "redux-saga/effects";
 import { action_type as TYPE } from "./action";
 import { push } from "react-router-redux";
 import * as api from "../../apis/Auth";
+import * as api2 from "../../apis/User"
 // import * as apiuser from "../../../apis/User";
 import Cookies from "js-cookie";
 
@@ -28,15 +29,30 @@ function* getListSaga(action) {
 function* verifySaga(action) {
   try {
     const { param } = action;
-    const response = yield call(api.verify, param);
-    if (response.status === "success" && response.data[0]?.id > 0) {
+    const response = yield call(api2.getMe, param);
+    if (response.status === "success") {
       yield all([put({ type: TYPE.VERIFY.SUCCESS, ...response })]);
     } else {
-      Cookies.set("web_token", null);
-      yield put(push("/login"));
+      // Cookies.set("jwt", null);
+      yield all([put({ type: TYPE.VERIFY.ERROR })]);
     }
   } catch (error) {
     yield all([put({ type: TYPE.VERIFY.ERROR, error })]);
+  }
+}
+
+function* logoutSaga(action) {
+  try {
+    const { param } = action;
+    const response = yield call(api.logout, param);
+    if (response.status === "success") {
+      yield all([put({ type: TYPE.LOGOUT.SUCCESS, ...response })]);
+      Cookies.set("jwt", null);
+    } else {
+      yield all([put({ type: TYPE.LOGOUT.ERROR })]);
+    }
+  } catch (error) {
+    yield all([put({ type: TYPE.LOGOUT.ERROR, error })]);
   }
 }
 
@@ -60,6 +76,7 @@ function* watcher() {
   yield all([
     takeLatest(TYPE.LOGIN.REQUEST, getListSaga),
     takeLatest(TYPE.VERIFY.REQUEST, verifySaga),
+    takeLatest(TYPE.LOGOUT.REQUEST, logoutSaga),
     // takeLatest(TYPE.USER.REQUEST, getListUserSaga)
   ]);
 }
