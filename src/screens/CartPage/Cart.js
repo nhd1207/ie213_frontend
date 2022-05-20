@@ -101,10 +101,10 @@ function Cart(props) {
               <div className={`${style.endMain} row`}>
                 <div className={`${style.addToWishList} endMainCol col-xl-6`}>
                   <PlusSquareOutlined /> &nbsp; &nbsp;
-                  <a> Thêm giỏ hàng vào danh sách yêu thích</a>
+                  <a> THÊM GIỎ HÀNG VÀO DANH SÁCH YÊU THÍCH</a>
                 </div>
                 <div className={`${style.continue} col-xl-6`}>
-                  <Link to="/home">Tiếp tục mua sắm</Link> &nbsp; &nbsp; <RightCircleOutlined />
+                  <Link to="/home">TIẾP TỤC MUA SẮM</Link> &nbsp; &nbsp; <RightCircleOutlined />
                 </div>
               </div>
             </div>
@@ -124,7 +124,7 @@ function Cart(props) {
                       </div> */}
                   </div>
                   <div className={`${style.number} col-xl-6 col-md-12`}>
-                    50 000
+                    50 000 VND
                   </div>
                 </div>
                 <div className={`${style.totalAllProduct} row`}>
@@ -144,7 +144,7 @@ function Cart(props) {
                     </div>
                   </div> */}
                 <div className={`${style.totalDue} row`}>
-                  <h3 className={`${style.subTitle} col-xl-6 col-md-12`}>
+                  <h3 className={` ${style.sumTitle} col-xl-6 col-md-12`}>
                     <CheckCircleOutlined /> TỔNG CỘNG
                   </h3>
                   <div className={`${style.number} col-xl-6 col-md-12`}>
@@ -157,7 +157,7 @@ function Cart(props) {
                     type="primary"
                     onClick={showModal}
                   >
-                    Thanh Toán
+                    THANH TOÁN
                   </Button>
                 </div>
                 {/* <div className={`${style.couponCode} row`}> */}
