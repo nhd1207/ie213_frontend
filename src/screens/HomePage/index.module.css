@@ -63,7 +63,7 @@
 .accessories-btn {
   margin-left: 6vw;
   width: 100px;
-  opacity: 60%;
+  opacity: 100%;
   padding: 0;
 }
 .accessories-btn a {
@@ -141,6 +141,10 @@
 
 .newsBtn {
   margin: 1rem 0;
+}
+
+.newsBtn:hover a {
+  color: #40a9ff;
 }
 
 /*  */

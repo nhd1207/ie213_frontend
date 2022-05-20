@@ -111,7 +111,7 @@ function Home(props) {
                           dangerouslySetInnerHTML={{ __html: item?.content }}
                         />
                         <button
-                          class={`${style.newsBtn} btn btn-outline-dark col-xl-3`}
+                          className={`${style.newsBtn} btn btn-outline-dark col-xl-3`}
                         >
                           <NavLink to={`news/${item._id}`}>ĐỌC THÊM</NavLink>
                         </button>
