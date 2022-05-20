@@ -88,58 +88,66 @@ function CartList(props) {
     return (
         <div>
             <Spin spinning={props.spinning}>
-                {cart.length===0? <Empty 
+                {cart.length === 0 ? <Empty
                     description={
                         <span>
-                          Giỏ hàng trống
+                            Giỏ hàng trống
                         </span>
-                      }
-                >
-                </Empty>:
-                cart?.map((item, index) => {
-                    let myStyle = {
-                        backgroundImage: `url(${item?.itemId?.image?.avatar})`
                     }
-                    return (
-                        <div style={item.disabled ? { pointerEvents: "none", opacity: "0.4" } : {}} className={`${style.product} row`}>
-                            <img className={`${style.productImg} col-xl-4 col-md-12`} style={myStyle} alt="abc"></img>
-                            <div className={`${style.productDetail} col-xl-4 col-md-12`}>
-                                <div className={`${style.productName} row`}> {item?.itemId?.name} </div>
-                                <div className={`${style.productDesc} row`}>
-                                    {item?.color}
+                >
+                </Empty> :
+                    cart?.map((item, index) => {
+                        let myStyle = {
+                            backgroundImage: `url(${item?.itemId?.image?.avatar})`
+                        }
+                        return (
+                            <div style={item.disabled ? { pointerEvents: "none", opacity: "0.4" } : {}} className={`${style.product} row`}>
+                                <img className={`${style.productImg} col-xl-4 col-md-12`} style={myStyle} alt="abc"></img>
+                                <div className={`${style.productDetail} col-xl-4 col-md-12`}>
+                                    <div className={`${style.productName} row`}> {item?.itemId?.name} </div>
+                                    <div className={`${style.productDesc} row`}>
+                                        {item?.color}
+                                    </div>
+                                </div>
+                                <div className={`${style.productQty} col-xl-2 col-md-12`}>
+                                    <Space>
+                                        <InputNumber
+                                            className={`${style.inputNumber}`}
+                                            defaultValue={item?.quantityTemp}
+                                            value={item?.quantity}
+                                            min="1"
+                                            onChange={(e) => handleAmount(e, index)}
+                                            formatter={(value) =>
+                                                `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                            }
+                                            parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                                        />
+                                    </Space>
+                                    <Button
+                                        className={`${style.removeButton}`}
+                                        type="primary"
+                                        danger
+                                        onClick={() => handleDeleteCartItem(index)}
+                                    >
+                                        XÓA
+                                    </Button>
+                                </div>
+                                <div className={`${style.productPrice} col-xl-2 col-md-12`}>
+                                    {money(item?.itemId?.price, "VND")}
                                 </div>
                             </div>
-                            <div className={`${style.productQty} col-xl-2 col-md-12`}>
-                                <Space>
-                                    <InputNumber
-                                        className={`${style.inputNumber}`}
-                                        defaultValue={item?.quantityTemp}
-                                        value={item?.quantity}
-                                        min="1"
-                                        onChange={(e) => handleAmount(e, index)}
-                                        formatter={(value) =>
-                                            `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                        }
-                                        parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                                    />
-                                </Space>
-                                <Button
-                                    className={`${style.removeButton}`}
-                                    type="primary"
-                                    danger
-                                    onClick={() => handleDeleteCartItem(index)}
-                                >
-                                    Xóa
-                                </Button>
-                            </div>
-                            <div className={`${style.productPrice} col-xl-2 col-md-12`}>
-                                {money(item?.itemId?.price, "VND")}
-                            </div>
-                        </div>
-                    )
-                })}
-                <button disabled={update} onClick={handleUpdateCart}>Cập nhật</button>
-                <button disabled={update} onClick={handleCancelUpdateCart}>Hủy</button>
+                        )
+                    })}
+                <div className={`${style.buttonUD} row`} >
+                    <button disabled={update}
+                        onClick={handleUpdateCart}
+                        className={`${style.buttonCss} ${style.updateCart} col-xl-2`}
+                    >CẬP NHẬT</button>
+                    <button disabled={update}
+                        onClick={handleCancelUpdateCart}
+                        className={`${style.buttonCss} ${style.deleteCart} col-xl-2`}
+                    >HỦY</button>
+                </div>
             </Spin>
         </div>
     );

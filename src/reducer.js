@@ -20,8 +20,11 @@ import news from "./screens/NewsPage/reducer";
 import newDetail from "./screens/NewsDetail/reducer";
 import wishList from "./screens/WishListPage/reducer";
 import carDetail from "./screens/CarDetailPage/reducer";
-import carList from "./screens/CarPage/reducer"
+import carList from "./screens/CarPage/reducer";
+import carOrderPage from "./screens/CarOrder/reducer"
 import compare from "./screens/ComparePage/reducer"
+import isLoggedIn from "./components/reducer"
+
 const Reducer = (history) =>
   combineReducers({
     form: formReducer,
@@ -46,7 +49,9 @@ const Reducer = (history) =>
     wishList,
     carList,
     carDetail,
-    compare
+    carOrderPage,
+    compare,
+    isLoggedIn
   })
   
 export default Reducer

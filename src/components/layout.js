@@ -1,7 +1,7 @@
-import React, { Component, useContext } from "react";
-import { Affix, Menu, Layout } from "antd";
+import React, { useEffect } from "react";
+import { Affix, Menu, Layout, Spin } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink, BrowserRouter } from "react-router-dom";
+import { NavLink, useRouteMatch } from "react-router-dom";
 import {
   faHeart,
   faCartShopping,
@@ -17,10 +17,21 @@ import {
 import "antd/dist/antd.css";
 import Cookies from "js-cookie";
 import "./layout.css";
+import { verify, logout } from "../screens/LoginPage/action";
+import { connect } from "react-redux";
 // import AuthenContext from "../components/context/AuthenContext";
 const { Header, Content, Footer } = Layout;
 
 function Layouts(props) {
+  let match = useRouteMatch();
+
+  function logoutHandler() {
+    props.logout();
+  }
+
+  useEffect(() => {
+    props.verify();
+  }, []);
   // let context = useContext(AuthenContext);
 
   // async function signoutHandler() {
@@ -147,11 +158,25 @@ function Layouts(props) {
             {/* )} */}
 
             {/* {!context.isLoggedIn && ( */}
+
             <Menu.Item key="login">
-              <NavLink to={"/login"} style={{ color: "#F3EA01" }}>
-                Đăng nhập
-              </NavLink>
+              <Spin spinning={props?.isLoggedIn?.loading}>
+                {props?.isLoggedIn?.isLoggedIn === true ? (
+                  <NavLink
+                    to={`${match.url}`}
+                    style={{ color: "#F3EA01" }}
+                    onClick={logoutHandler}
+                  >
+                    Đăng xuất
+                  </NavLink>
+                ) : (
+                  <NavLink to={"/login"} style={{ color: "#F3EA01" }}>
+                    Đăng nhập
+                  </NavLink>
+                )}
+              </Spin>
             </Menu.Item>
+
             {/* )} */}
 
             {/* {context.isLoggedIn && ( */}
@@ -176,7 +201,7 @@ function Layouts(props) {
           className="row"
           style={{ backgroundColor: "black", lineHeight: 2 }}
         >
-          <div className="col-9 text-white">
+          <div className="col-xl-9 col-sm-12 col-12 text-white">
             <span style={{ fontSize: 20 }}>Công ty cổ phần SEVEN</span>
             <br></br>
             Số GCNĐKDN: 20022001
@@ -190,7 +215,7 @@ function Layouts(props) {
             <br></br>
             Địa chỉ: Đường Hàn Thuyên, khu phố 6, TP Thủ Đức, TP Hồ Chí Minh
           </div>
-          <div className="col-3 text-white">
+          <div className="col-xl-3 col-sm-12 col-12 text-white">
             <strong style={{ fontSize: 20 }}>Contact Us</strong>
             <br></br>
             <FontAwesomeIcon icon={faEnvelope} style={{}} /> Email:
@@ -210,4 +235,17 @@ function Layouts(props) {
   );
 }
 
-export default Layouts;
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.isLoggedIn,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  verify: () => {
+    dispatch(verify());
+  },
+  logout: () => {
+    dispatch(logout());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layouts);

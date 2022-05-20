@@ -1,5 +1,5 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
+@import url("../../style/_variables.css");
 
 * {
   font-family: "Oswald", sans-serif;
@@ -13,10 +13,9 @@
 }
 
 .heading {
-  font-size: 3.2rem;
-  color: rgba(0, 0, 0, 0.9);
-  /* text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
-    1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; */
+  text-align: center;
+  font-size: 2.4rem;
+  color: var(--black-color);
 }
 
 .main {
@@ -27,28 +26,27 @@
   margin: 1rem 0;
 }
 
-.productsWrapper {
-}
-
 .mainColumn {
-  border: 1px solid #000;
+  border-bottom: 1px solid var(--border-gray-color);
 }
 
 .column {
   padding: 0.5rem;
   margin: 0;
-  font-size: 1.5rem;
+  font-size: var(--font-title);
+  color: var(--gray-color);
+  font-weight: normal;
 }
 
 /* product */
 
 .product {
   padding: 1rem;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--gray-color);
 }
 
 .productImgWrapper {
-  border: 1px solid rgb(255, 0, 0);
+  border: 1px solid var(--orange-color);
 }
 
 /* .product .productImg {
@@ -69,7 +67,7 @@
 .product .productDetail .productName {
   font-weight: bold;
   font-size: 1.5rem;
-  color: #000;
+  color: var(--black-color);
   padding: 0.5rem;
 }
 
@@ -88,41 +86,41 @@
   align-items: center;
   width: 60%;
   margin: 1rem 0;
-  border: 2px solid #000;
+  border: 2px solid var(--black-color);
   border-radius: 4px;
 }
 
 .product .productQty .removeButton {
   width: 60%;
-  background-color: rgba(255, 255, 0, 0.9);
-  border: 1px solid #000;
-  color: #000;
+  background-color: var(--yellow-color);
+  border: 1px solid var(--black-color);
+  color: var(--black-color);
 }
 
 .product .productQty .removeButton:hover {
-  background-color: rgb(237, 70, 70);
+  background-color: var(--orange-color);
 }
 
 .product .productPrice {
   /* text-align: center; */
   font-weight: bold;
   font-size: 1.5rem;
-  color: rgba(0, 0, 0, 0.9);
+  color: var(--black-color);
   /* text-shadow: 2px 0 0 rgba(255, 255, 0, 0.9), -2px 0 0 rgba(255, 255, 0, 0.9),
     0 2px 0 rgba(255, 255, 0, 0.9), 0 -2px 0 rgba(255, 255, 0, 0.9),
     1px 1px rgba(255, 255, 0, 0.9), -1px -1px 0 rgba(255, 255, 0, 0.9),
     1px -1px 0 rgba(255, 255, 0, 0.9), -1px 1px 0 rgba(255, 255, 0, 0.9); */
 }
 
+
 /* cart summary */
-.cartSummaryWrapper {
-}
+.cartSummaryWrapper {}
 
 .cartSummary {
   padding: 0.5rem;
-  border: 1px solid #000;
-
-  box-shadow: 0px 16px 15px rgb(0 0 0 / 20%);
+  border-left: 1px solid var(--border-gray-color);
+  /* border: 1px solid var(--black-color);
+  box-shadow: 0px 16px 15px var(--black-color); */
 }
 
 .cartSummary div {
@@ -130,17 +128,25 @@
 }
 
 .summaryTitle {
+  font-size: var(--font-title);
   font-weight: bold;
+  color: var(--gray-color);
+  margin-bottom: 10px;
 }
 
 .shippingPolicy {
-  background-color: #eee;
+  background-color: var(--beige-color);
 }
 
 .shippingMessage {
   font-style: normal;
 }
-.totalDue {
+
+.shippingPolicy,
+.totalAllProduct {
+  font-size: var(--font-document);
+  color: var(--gray-color);
+  margin: 10px 0px;
 }
 
 .subTitle {
@@ -149,6 +155,7 @@
 
 .totalDue .subTitle {
   font-style: normal;
+  color: var(--gray-color);
 }
 
 .number {
@@ -156,8 +163,20 @@
   text-align: right;
 }
 
-.totalDue .number {
-  font-size: 1.5rem;
+.sumTitle {
+  margin-top: 10px;
+}
+
+.totalDue .number,
+.totalDue .sumTitle {
+  font-style: normal;
+  font-weight: bold;
+  font-size: var(--font-title);
+  color: var(--black-color);
+}
+
+.totalDue {
+  margin: 20px 0px;
 }
 
 .checkout {
@@ -165,17 +184,19 @@
 }
 
 .checkout .checkoutButton {
-  border: 0.5px solid #000;
-  background-color: rgba(255, 255, 0, 0.9);
-  color: #000;
+  border-radius: 7px;
+  height: 40px;
+  font-size: var(--font-document);
+  border: 1px solid var(--yellow-color);
+  background-color: var(--yellow-color);
+  font-size: var(--font-document);
+  color: var(--black-color);
   font-weight: bold;
-  height: 4rem;
-  font-size: 1.5rem;
 }
 
 .checkout .checkoutButton:hover {
-  color: rgba(255, 255, 0, 0.9);
-  background-color: rgb(0, 94, 14);
+  color: var(--beige-color);
+  background-color: var(--orange-color);
 }
 
 .couponCode {
@@ -185,6 +206,7 @@
 .couponCode .inputCoupon {
   width: 100%;
 }
+
 /* .couponCodeTitle {
   font-style: italic;
   height: 8vh;
@@ -193,14 +215,17 @@
 
 /* end  Main */
 .endMain {
-  font-size: 1.5rem;
+  font-size: var(--font-document);
+  font-weight: normal;
   margin: 2rem 0;
+  color: var(--gray-color);
 }
 
 .addToWishList {
   display: flex;
   align-items: center;
 }
+
 .continue {
   justify-content: flex-end;
   display: flex;
@@ -209,7 +234,7 @@
 
 .addToWishList:hover,
 .continue:hover {
-  color: rgb(129, 126, 3);
+  color: var(--black-color);
 }
 
 /* responsive */

@@ -168,3 +168,15 @@
 .select {
   justify-content: space-evenly;
 }
+
+.colorContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.color {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px black solid;
+  margin-right: 0.5rem;
+}

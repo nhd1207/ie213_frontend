@@ -11,6 +11,7 @@ import {
     HeartFilled,
     ShoppingCartOutlined,
 } from "@ant-design/icons";
+import { Redirect } from "react-router-dom";
 
 function WishList(props) {
 
@@ -24,6 +25,7 @@ function WishList(props) {
 
     return (
         <Layout>
+        {props?.isLoggedIn?.isLoggedIn === false ? <Redirect to="/login"></Redirect> : 
             <div className={`${style.wishListContainer}`}>
                 <div className={`${style.imgWrapper}`}></div>
                 <div className={`${style.main}`}>
@@ -37,13 +39,15 @@ function WishList(props) {
                     </div>
                 </div>
             </div>
+        }
         </Layout>
     );
 }
 
 const mapStateToProps = state => ({
     wishList: state.wishList?.wishList,
-    loading: state.wishList.loading
+    loading: state.wishList.loading,
+    isLoggedIn: state.isLoggedIn
   })
   
   const mapDispatchToProps = dispatch => ({
