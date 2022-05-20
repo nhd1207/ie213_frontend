@@ -7,7 +7,6 @@ const initialState = {
 };
 
 function reducer(state = initialState, action) {
-  console.log(action.error);
   switch (action.type) {
     case type.LOGIN.REQUEST:
       return {

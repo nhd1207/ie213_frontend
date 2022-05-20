@@ -2,13 +2,19 @@ import React from "react";
 import { Select } from "antd";
 
 const { Option } = Select;
-function CarSelection() {
+function CarSelection(props) {
+
+  function carSelectHandler(id) {
+    console.log(id);
+    props.onChangeCar(id);
+  }
+
   return (
     <Select
-      listHeight={100}
+      listHeight={150}
       showSearch
       style={{ width: "400px", fontSize: "1.2rem" }}
-      placeholder="Tìm xe"
+      placeholder={props?.default}
       optionFilterProp="children"
       filterOption={(input, option) =>
         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -18,13 +24,17 @@ function CarSelection() {
           .toLowerCase()
           .localeCompare(optionB.children.toLowerCase())
       }
+      onChange={(value) => {
+        carSelectHandler(value);
+      }}
     >
-      <Option value="1">Not Identified</Option>
-      <Option value="2">Closed</Option>
-      <Option value="3">Communicated</Option>
-      <Option value="4">Identified</Option>
-      <Option value="5">Resolved</Option>
-      <Option value="6">Cancelled</Option>
+      {props?.data?.map((car) => {
+        return (
+          <Option key={car._id + props.carID} value={car._id}>
+            {car.name}
+          </Option>
+        );
+      })}
     </Select>
   );
 }
