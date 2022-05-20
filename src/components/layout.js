@@ -176,7 +176,7 @@ function Layouts(props) {
           className="row"
           style={{ backgroundColor: "black", lineHeight: 2 }}
         >
-          <div className="col-9 text-white">
+          <div className="col-xl-9 col-sm-12 col-12 text-white">
             <span style={{ fontSize: 20 }}>Công ty cổ phần SEVEN</span>
             <br></br>
             Số GCNĐKDN: 20022001
@@ -190,7 +190,7 @@ function Layouts(props) {
             <br></br>
             Địa chỉ: Đường Hàn Thuyên, khu phố 6, TP Thủ Đức, TP Hồ Chí Minh
           </div>
-          <div className="col-3 text-white">
+          <div className="col-xl-3 col-sm-12 col-12 text-white">
             <strong style={{ fontSize: 20 }}>Contact Us</strong>
             <br></br>
             <FontAwesomeIcon icon={faEnvelope} style={{}} /> Email:
