@@ -28,10 +28,10 @@ function Cart(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalValidate, setIsModalValidate] = useState(false);
 
-  useEffect(() => {
-    console.log(props.carts.carts);
-    setCart(props?.carts?.carts);
-  }, [props?.carts?.loading]);
+  // useEffect(() => {
+  //   console.log(props.carts.carts);
+  //   setCart(props?.carts?.carts);
+  // }, [props?.carts?.loading]);
 
   useEffect(() => {
     props.getCart();
@@ -109,51 +109,44 @@ function Cart(props) {
                     {" "}
                   </CartList>
 
-                  <div className={`${style.endMain} row`}>
-                    <div
-                      className={`${style.addToWishList} endMainCol col-xl-6`}
-                    >
-                      <PlusSquareOutlined /> &nbsp; &nbsp;
-                      <a> Thêm giỏ hàng vào danh sách yêu thích</a>
-                    </div>
-                    <div className={`${style.continue} col-xl-6`}>
-                      <Link to="/home">Tiếp tục mua sắm</Link> &nbsp; &nbsp;{" "}
-                      <RightCircleOutlined />
-                    </div>
-                  </div>
+              <div className={`${style.endMain} row`}>
+                <div className={`${style.addToWishList} endMainCol col-xl-6`}>
+                  <PlusSquareOutlined /> &nbsp; &nbsp;
+                  <a> THÊM GIỎ HÀNG VÀO DANH SÁCH YÊU THÍCH</a>
                 </div>
-                <div
-                  className={`${style.cartSummaryWrapper} col col-xl-4 col-md-4 col-12`}
-                >
-                  <div className={`${style.cartSummary} `}>
-                    <div className={`row`}>
-                      <h2
-                        className={`${style.summaryTitle} col-xl-12 col-md-12`}
-                      >
-                        TỔNG GIỎ HÀNG:
-                      </h2>
-                    </div>
-                    <div className={`${style.shippingPolicy} row`}>
-                      <div className={`${style.subTitle} col-xl-6 col-md-12`}>
-                        <CarOutlined /> Phí vận chuyển
-                        <br></br>
-                        {/* <div className={`${style.shippingMessage}`}>
+                <div className={`${style.continue} col-xl-6`}>
+                  <Link to="/home">TIẾP TỤC MUA SẮM</Link> &nbsp; &nbsp; <RightCircleOutlined />
+                </div>
+              </div>
+            </div>
+            <div className={`${style.cartSummaryWrapper} col col-xl-4 col-md-4 col-12`}>
+              <div className={`${style.cartSummary} `}>
+                <div className={`row`}>
+                  <h2 className={`${style.summaryTitle} col-xl-12 col-md-12`}>
+                    TỔNG GIỎ HÀNG:
+                  </h2>
+                </div>
+                <div className={`${style.shippingPolicy} row`}>
+                  <div className={`${style.subTitle} col-xl-6 col-md-12`}>
+                    <CarOutlined /> Phí vận chuyển
+                    <br></br>
+                    {/* <div className={`${style.shippingMessage}`}>
                         Bạn sẽ được miễn phí <br></br>nếu đơn hàng trên 2 000 000
                       </div> */}
-                      </div>
-                      <div className={`${style.number} col-xl-6 col-md-12`}>
-                        50 000
-                      </div>
-                    </div>
-                    <div className={`${style.totalAllProduct} row`}>
-                      <div className={`${style.subTitle} col-xl-6 col-md-12`}>
-                        <PlusCircleOutlined /> Tổng tiền sản phẩm
-                      </div>
-                      <div className={`${style.number} col-xl-6 col-md-12`}>
-                        {money(price, "VND")}
-                      </div>
-                    </div>
-                    {/* <div className={`${style.discount} row`}>
+                  </div>
+                  <div className={`${style.number} col-xl-6 col-md-12`}>
+                    50 000 VND
+                  </div>
+                </div>
+                <div className={`${style.totalAllProduct} row`}>
+                  <div className={`${style.subTitle} col-xl-6 col-md-12`}>
+                    <PlusCircleOutlined /> Tổng tiền sản phẩm
+                  </div>
+                  <div className={`${style.number} col-xl-6 col-md-12`}>
+                    {money(price, "VND")}
+                  </div>
+                </div>
+                {/* <div className={`${style.discount} row`}>
                     <div className={`${style.subTitle} col-xl-6 col-md-12`}>
                       <MinusCircleOutlined /> Giảm giá
                     </div>
@@ -161,25 +154,25 @@ function Cart(props) {
                       -200 000
                     </div>
                   </div> */}
-                    <div className={`${style.totalDue} row`}>
-                      <h3 className={`${style.subTitle} col-xl-6 col-md-12`}>
-                        <CheckCircleOutlined /> TỔNG CỘNG
-                      </h3>
-                      <div className={`${style.number} col-xl-6 col-md-12`}>
-                        {price ? money(price + 50000, "VND") : "0 VNĐ"}
-                      </div>
-                    </div>
-                    <div className={`${style.checkout} row`}>
-                      <Button
-                        className={`${style.checkoutButton} col-xl-11`}
-                        type="primary"
-                        onClick={showModal}
-                      >
-                        Thanh Toán
-                      </Button>
-                    </div>
-                    {/* <div className={`${style.couponCode} row`}> */}
-                    {/* <Menu
+                <div className={`${style.totalDue} row`}>
+                  <h3 className={` ${style.sumTitle} col-xl-6 col-md-12`}>
+                    <CheckCircleOutlined /> TỔNG CỘNG
+                  </h3>
+                  <div className={`${style.number} col-xl-6 col-md-12`}>
+                    {price ? money(price + 50000, "VND") : '0 VNĐ'}
+                  </div>
+                </div>
+                <div className={`${style.checkout} row`}>
+                  <Button
+                    className={`${style.checkoutButton} col-xl-11`}
+                    type="primary"
+                    onClick={showModal}
+                  >
+                    THANH TOÁN
+                  </Button>
+                </div>
+                {/* <div className={`${style.couponCode} row`}> */}
+                {/* <Menu
                       className={`${style.couponCodeTitle} col-xl-11`}
                       defaultSelectedKeys={["1"]}
                       defaultOpenKeys={["sub1"]}

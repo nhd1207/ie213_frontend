@@ -67,8 +67,7 @@ function Home(props) {
             </div>
             <button
               variant="dark"
-              class="btn btn-outline-dark"
-              className={style["accessories-btn"]}
+              className={`${style["accessories-btn" ]} btn btn-outline-dark`}
             >
               <a href="/accessory">
                 MORE{" "}
