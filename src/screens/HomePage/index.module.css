@@ -64,6 +64,18 @@
   margin-left: 6vw;
   width: 100px;
   opacity: 60%;
+  padding: 0;
+}
+.accessories-btn a {
+  display: block;
+  padding: .375rem .75rem
+}
+.accessories-btn:focus {
+  box-shadow: none !important;
+}
+
+.accessories-btn:hover a{
+  color: #40a9ff;
 }
 
 /* news */
