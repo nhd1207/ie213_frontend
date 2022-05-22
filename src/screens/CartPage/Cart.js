@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Button, message, Modal, Select } from "antd";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import {
   CarOutlined,
   PlusCircleOutlined,
@@ -9,94 +9,105 @@ import {
   PlusSquareOutlined,
   RightCircleOutlined,
 } from "@ant-design/icons";
-import { getCart, updateCart, createBill, getMe } from "./action"
-import money from "../../components/Share/functions/money"
-import Layout from "../../components/layout"
+import { getCart, updateCart, createBill, getMe } from "./action";
+import money from "../../components/Share/functions/money";
+import Layout from "../../components/layout";
 import style from "./Cart.module.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CartList from "../../components/Cart/CartList";
 import AddressSelect from "../../components/Share/AddressSelect";
+import { Redirect } from "react-router-dom";
 
 const { Option } = Select;
 
 function Cart(props) {
   const [cart, setCart] = useState([]);
   const [price, setPrice] = useState(5);
-  const [place, setPlace] = useState('');
+  const [place, setPlace] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalValidate, setIsModalValidate] = useState(false);
 
-  useEffect(() => {
-    console.log(props.carts.carts);
-    setCart(props?.carts?.carts);
-  }, [props?.carts?.loading]);
+  // useEffect(() => {
+  //   console.log(props.carts.carts);
+  //   setCart(props?.carts?.carts);
+  // }, [props?.carts?.loading]);
 
   useEffect(() => {
     props.getCart();
   }, []);
 
   const showModal = () => {
-    props.getMe()
+    props.getMe();
     setIsModalVisible(true);
-  }
+  };
 
   const handleModalValidate = (value) => {
     setIsModalValidate(value);
-  }
+  };
 
   const handleUpdateCart = (value) => {
     props.updateCart(value);
-  }
+  };
 
   const onChangePrice = (value) => {
-    setPrice(value)
-  }
+    setPrice(value);
+  };
 
   const handlePlace = (value) => {
-    setPlace(value)
-  }
+    setPlace(value);
+  };
 
   const handleCancel = () => {
     setIsModalVisible(false);
-  }
+  };
 
   const handleSubmitCart = () => {
     if (!isModalValidate) {
-      message.error('Chưa điền đầy đủ địa chỉ')
+      message.error("Chưa điền đầy đủ địa chỉ");
     } else {
       let params = {
         place: place,
         totalPrice: price,
-        deliveryMethod: "COD"
-      }
-      props.createBill(params)
-      handleCancel()
+        deliveryMethod: "COD",
+      };
+      props.createBill(params);
+      handleCancel();
     }
-  }
+  };
 
   return (
     <Layout>
-      <div className={`${style.cartContainer}`}>
-        <div className={`${style.imgWrapper}`}></div>
-        <div className={`${style.main}`}>
-          <div className={`${style.headingWrapper} row`}>
-            <h1 className={`${style.heading} col`}>Giỏ Hàng</h1>
-          </div>
-          <div className={`${style.caculationWrapper} row`}>
-            <div className={`${style.productsWrapper} col col-xl-8 col-md-8 col-12`}>
-              <div className={`${style.mainColumn} row d-xl-flex d-sm-none d-none`}>
-                <h3 className={`${style.column} col-xl-8`}>SẢN PHẨM</h3>
-                <h3 className={`${style.column} col-xl-2`}>SỐ LƯỢNG</h3>
-                <h3 className={`${style.column} col-xl-2`}>GIÁ</h3>
+      {props?.isLoggedIn?.isLoggedIn === false ? (
+        <Redirect to="/login"></Redirect>
+      ) : (
+        <>
+          <div className={`${style.cartContainer}`}>
+            <div className={`${style.imgWrapper}`}></div>
+            <div className={`${style.main}`}>
+              <div className={`${style.headingWrapper} row`}>
+                <h1 className={`${style.heading} col`}>Giỏ Hàng</h1>
               </div>
+              <div className={`${style.caculationWrapper} row`}>
+                <div
+                  className={`${style.productsWrapper} col col-xl-8 col-md-8 col-12`}
+                >
+                  <div
+                    className={`${style.mainColumn} row d-xl-flex d-sm-none d-none`}
+                  >
+                    <h3 className={`${style.column} col-xl-8`}>SẢN PHẨM</h3>
+                    <h3 className={`${style.column} col-xl-2`}>SỐ LƯỢNG</h3>
+                    <h3 className={`${style.column} col-xl-2`}>GIÁ</h3>
+                  </div>
 
-              <CartList
-                spinning={props.carts.loading}
-                data={props.carts.carts}
-                newCart={handleUpdateCart}
-                totalPrice={onChangePrice}
-              > </CartList>
+                  <CartList
+                    spinning={props.carts.loading}
+                    data={props.carts.carts}
+                    newCart={handleUpdateCart}
+                    totalPrice={onChangePrice}
+                  >
+                    {" "}
+                  </CartList>
 
               <div className={`${style.endMain} row`}>
                 <div className={`${style.addToWishList} endMainCol col-xl-6`}>
@@ -176,7 +187,7 @@ function Cart(props) {
                       placeholder="ĐIỀN MÃ GIẢM GIÁ"
                       enterButton="Search"
                     /> */}
-                {/* <Space
+                    {/* <Space
                           className={`${style.inputCoupon}`}
                           direction="vertical"
                         >
@@ -188,56 +199,59 @@ function Cart(props) {
                           />
                         </Space>
                       </SubMenu>
-                    </Menu> */ }
-                {/* </div> */}
+                    </Menu> */}
+                    {/* </div> */}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <Modal
-        title="Xác nhận thông tin"
-        visible={isModalVisible}
-        closable={true}
-        onOk={handleSubmitCart}
-        onCancel={handleCancel}
-      >
-        <p>Tên người nhận: {props?.carts?.userInfo?.name}</p>
-        <p>Số điện thoại: {props?.carts?.userInfo?.info?.phoneNumber}</p>
+          <Modal
+            title="Xác nhận thông tin"
+            visible={isModalVisible}
+            closable={true}
+            onOk={handleSubmitCart}
+            onCancel={handleCancel}
+          >
+            <p>Tên người nhận: {props?.carts?.userInfo?.name}</p>
+            <p>Số điện thoại: {props?.carts?.userInfo?.info?.phoneNumber}</p>
 
-        <AddressSelect
-          modalValidate={handleModalValidate}
-          address={handlePlace}
-        >
-        </AddressSelect>
+            <AddressSelect
+              modalValidate={handleModalValidate}
+              address={handlePlace}
+            ></AddressSelect>
 
-        <p>Phương thức vận chuyển*</p>
-        <Select defaultValue={'COD'} style={{ width: 200 }}>
-          <Option key='COD' disabled>COD</Option>
-        </Select>
-      </Modal>
+            <p>Phương thức vận chuyển*</p>
+            <Select defaultValue={"COD"} style={{ width: 200 }}>
+              <Option key="COD" disabled>
+                COD
+              </Option>
+            </Select>
+          </Modal>
+        </>
+      )}
     </Layout>
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   carts: state.cart,
-})
+  isLoggedIn: state.isLoggedIn,
+});
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getCart: (params) => {
-    dispatch(getCart(params))
+    dispatch(getCart(params));
   },
   updateCart: (params) => {
-    dispatch(updateCart(params))
+    dispatch(updateCart(params));
   },
   createBill: (params) => {
-    dispatch(createBill(params))
+    dispatch(createBill(params));
   },
   getMe: (params) => {
-    dispatch(getMe(params))
-  }
+    dispatch(getMe(params));
+  },
+});
 
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

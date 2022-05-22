@@ -4,6 +4,11 @@ export const action_type = {
         SUCCESS: "AUTH.LOGIN.SUCCESS",
         ERROR: "AUTH.LOGIN.ERROR"
     },
+    LOGOUT: {
+        REQUEST: "AUTH.LOGOUT.REQUEST",
+        SUCCESS: "AUTH.LOGOUT.SUCCESS",
+        ERROR: "AUTH.LOGOUT.ERROR"
+    },
     VERIFY: {
         REQUEST: "AUTH.VERIFY.REQUEST",
         SUCCESS: "AUTH.VERIFY.SUCCESS",
@@ -13,7 +18,8 @@ export const action_type = {
         REQUEST: "USER.REQUEST",
         SUCCESS: "USER.SUCCESS",
         ERROR: "USER.ERROR"
-    }
+    },
+
 }
 
 export function login (params)
@@ -23,6 +29,15 @@ export function login (params)
         params
     }
 }
+
+export function logout (params)
+{
+    return {
+        type: action_type.LOGOUT.REQUEST,
+        params
+    }
+}
+
 export function verify (params)
 {
     return {

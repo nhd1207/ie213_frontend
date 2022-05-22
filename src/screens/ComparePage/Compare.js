@@ -51,6 +51,10 @@ function CompareTwoCar(props) {
     } else history.push(`${location.pathname}`);
   }, [car1ID, car2ID]);
 
+  function placingOder(carID) {
+    history.push(`/order/${carID}`)
+  }
+
   return (
     <Layouts>
       <div className={`${style.main}`}>
@@ -77,19 +81,27 @@ function CompareTwoCar(props) {
             <div className={`${style.specRowHeading} row`}>
               <div className={`${style.rowHeading} col-xl-4`}>Thông số</div>
               <div className={`${style.rowHeading} col-xl-4`}>
-                {props?.car?.car1[0]?.name}
+                {props?.car?.car1[0]?.name
+                  ? props?.car?.car1[0]?.name
+                  : "Chọn xe để so sánh"}
               </div>
               <div className={`${style.rowHeading} col-xl-4`}>
-                {props?.car?.car2[0]?.name}
+                {props?.car?.car2[0]?.name
+                  ? props?.car?.car2[0]?.name
+                  : "Chọn xe để so sánh"}
               </div>
             </div>
             <div className={`${style.specRow} row`}>
               <div className={`${style.specRowTitle} col-xl-4`}>Mã lực</div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car1[0]?.specification.power + " HP"}
+                {props?.car?.car1[0]?.specification.power
+                  ? props?.car?.car1[0]?.specification.power + " HP"
+                  : ""}
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car2[0]?.specification.power + " HP"}
+                {props?.car?.car2[0]?.specification.power
+                  ? props?.car?.car2[0]?.specification.power + " HP"
+                  : ""}
               </div>
             </div>
             <div className={`${style.specRow} row`}>
@@ -97,10 +109,14 @@ function CompareTwoCar(props) {
                 Dung tích xi lanh
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car1[0]?.specification.displacement + " cc"}
+                {props?.car?.car1[0]?.specification.displacement
+                  ? props?.car?.car1[0]?.specification.displacement + " cc"
+                  : ""}
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car2[0]?.specification.displacement + " cc"}
+                {props?.car?.car2[0]?.specification.displacement
+                  ? props?.car?.car2[0]?.specification.displacement + " cc"
+                  : ""}
               </div>
             </div>
             <div className={`${style.specRow} row`}>
@@ -108,10 +124,14 @@ function CompareTwoCar(props) {
                 Tốc độ tối đa
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car1[0]?.specification?.maxSpeed + " km/h"}
+                {props?.car?.car1[0]?.specification?.maxSpeed
+                  ? props?.car?.car1[0]?.specification?.maxSpeed + " km/h"
+                  : ""}
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car2[0]?.specification?.maxSpeed + " km/h"}
+                {props?.car?.car2[0]?.specification?.maxSpeed
+                  ? props?.car?.car2[0]?.specification?.maxSpeed + " km/h"
+                  : ""}
               </div>
             </div>
             <div className={`${style.specRow} row`}>
@@ -119,19 +139,27 @@ function CompareTwoCar(props) {
                 Tăng tốc từ 0-100 km/h
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car1[0]?.specification?.acceleration + " giây"}
+                {props?.car?.car1[0]?.specification?.acceleration
+                  ? props?.car?.car1[0]?.specification?.acceleration + " giây"
+                  : ""}
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car2[0]?.specification?.acceleration + " giây"}
+                {props?.car?.car2[0]?.specification?.acceleration
+                  ? props?.car?.car2[0]?.specification?.acceleration + " giây"
+                  : ""}
               </div>
             </div>
             <div className={`${style.specRow} row`}>
               <div className={`${style.specRowTitle} col-xl-4`}>Khối lượng</div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car1[0]?.specification?.weight + " kg"}
+                {props?.car?.car1[0]?.specification?.weight
+                  ? props?.car?.car1[0]?.specification?.weight + " kg"
+                  : ""}
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car2[0]?.specification?.weight + " kg"}
+                {props?.car?.car2[0]?.specification?.weight
+                  ? props?.car?.car2[0]?.specification?.weight + " kg"
+                  : ""}
               </div>
             </div>
             <div className={`${style.specRow} row`}>
@@ -139,29 +167,43 @@ function CompareTwoCar(props) {
                 Năm sản xuất
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car1[0]?.year}
+                {props?.car?.car1[0]?.year ? props?.car?.car1[0]?.year : ""}
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car2[0]?.year}
+                {props?.car?.car2[0]?.year ? props?.car?.car2[0]?.year : ""}
               </div>
             </div>
             <div className={`${style.specRow} row`}>
-              <div className={`${style.specRowTitle} col-xl-4`}>
-                Màu có sẵn
-              </div>
-              <div className={`${style.specRowText} ${style.colorContainer} col-xl-4`}>
-                {props?.car?.car1[0]?.color.map(item => {
+              <div className={`${style.specRowTitle} col-xl-4`}>Màu có sẵn</div>
+              <div
+                className={`${style.specRowText} ${style.colorContainer} col-xl-4`}
+              >
+                {props?.car?.car1[0]?.color ? props?.car?.car1[0]?.color.map((item) => {
                   let key = 1;
-                key++;
-                  return (<div key={item + " car1 " + key} className={style.color} style={{backgroundColor: `${item}`}} />)
-                })}
+                  key++;
+                  return (
+                    <div
+                      key={item + " car1 " + key}
+                      className={style.color}
+                      style={{ backgroundColor: `${item}` }}
+                    />
+                  );
+                }) : ""}
               </div>
-              <div className={`${style.specRowText} ${style.colorContainer} col-xl-4`}>
-              {props?.car?.car2[0]?.color.map(item => {
-                let key = 1;
-                key++;
-                  return (<div key={item + " car2 " + key} className={style.color} style={{backgroundColor: `${item}`}} />)
-                })}
+              <div
+                className={`${style.specRowText} ${style.colorContainer} col-xl-4`}
+              >
+                {props?.car?.car2[0]?.color ? props?.car?.car2[0]?.color.map((item) => {
+                  let key = 1;
+                  key++;
+                  return (
+                    <div
+                      key={item + " car2 " + key}
+                      className={style.color}
+                      style={{ backgroundColor: `${item}` }}
+                    />
+                  );
+                }) : ""}
               </div>
             </div>
             <div className={`${style.specRow} ${style.specRowPrice} row`}>
@@ -169,10 +211,10 @@ function CompareTwoCar(props) {
                 Giá Tiêu Chuẩn
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {money(props?.car?.car1[0]?.price, "VND")}
+                {props?.car?.car1[0]?.price ? money(props?.car?.car1[0]?.price, "VND") : ""}
               </div>{" "}
               <div className={`${style.specRowText} col-xl-4`}>
-                {money(props?.car?.car2[0]?.price, "VND")}
+                {props?.car?.car2[0]?.price ? money(props?.car?.car2[0]?.price, "VND") : ""}
               </div>
             </div>
             <div className={`${style.specRow} row`}>
@@ -188,9 +230,11 @@ function CompareTwoCar(props) {
                   className={`${style.bookButton} col-xl-12`}
                   type="primary"
                   danger
+                  disabled={car1ID ? false : true}
+                  onClick={() => {placingOder(props?.car?.car1[0]?._id)}}
                 >
                   <CarOutlined />
-                  Đặt Xe 1 Ngay
+                  Đặt xe {props?.car?.car1[0]?.name}
                 </Button>
               </div>
               <div className={`${style.button} col-xl-6`}>
@@ -198,9 +242,11 @@ function CompareTwoCar(props) {
                   className={`${style.bookButton} col-xl-12`}
                   type="primary"
                   danger
+                  disabled={car2ID ? false : true}
+                  onClick={() => {placingOder(props?.car?.car2[0]?._id)}}
                 >
                   <CarOutlined />
-                  Đặt Xe 2 Ngay
+                  Đặt xe {props?.car?.car2[0]?.name}
                 </Button>
               </div>
             </div>

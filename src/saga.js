@@ -20,6 +20,7 @@ import newDetailSaga from './screens/NewsDetail/saga'
 import wishListSaga from './screens/WishListPage/saga'
 import carListSaga from './screens/CarPage/saga'
 import getListCarByIDSaga from "./screens/CarDetailPage/saga"
+import carOrderSaga from "./screens/CarOrder/saga"
 import compareSaga from "./screens/ComparePage/saga"
 
 const Saga = function* (){
@@ -44,6 +45,7 @@ const Saga = function* (){
       wishListSaga(),
       carListSaga(),
       getListCarByIDSaga(),
+      carOrderSaga(),
       compareSaga()
     ])
   }

@@ -69,14 +69,15 @@ function CarDetail(props) {
                   </div>
                 </div>
                 <div className={`col-xl-2 row`}>
-                  <Button
+                <Link
+                    to={`/order/${props?.carDetail.car[0]?._id}`}
                     className={`${style.bookButton} col-xl-12`}
                     type="primary"
                     danger
                   >
                     <CarOutlined />
                     Đặt Xe Ngay
-                  </Button>
+                  </Link>
                 </div>
                 <div className={`col-xl-2 row`}>
                   <HeartOutlined className={`${style.heartIcon}`} />
@@ -176,6 +177,7 @@ function CarDetail(props) {
               <div className={`${style.buttonWrapper} row`}>
                 <div className={`${style.button} col-xl-6`}>
                   <Link
+                    to={`/order/${props?.carDetail.car[0]?._id}`}
                     className={`${style.bookButton} col-xl-12`}
                     type="primary"
                     danger

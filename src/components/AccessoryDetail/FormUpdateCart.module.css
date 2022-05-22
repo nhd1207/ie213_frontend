@@ -1,0 +1,39 @@
+@import url("../../style/_variables.css");
+
+.buttomChoice {
+    background-color: var(--white-color);
+
+}
+
+.choice {
+    justify-content: right;
+    display: flex;
+}
+
+/* .choiceColor {
+    margin-right: 40px;
+} */
+
+.submit {
+    margin-top: 20px;
+}
+
+.buttonNumber {
+    font-size: var(--font-note);
+    margin-left: 20px;
+    height: 25px;
+    color: var(--gray-color);
+    font-size: var(--font-note);
+}
+
+.submit .document {
+    color: var(--yellow-color);
+    background-color: var(--black-color);
+}
+
+.choiceNumber .document,
+.choiceColor .document {
+    font-style: italic;
+    font-weight: normal;
+    color: var(--gray-color);
+}
