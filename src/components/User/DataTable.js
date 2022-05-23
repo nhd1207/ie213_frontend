@@ -3,6 +3,8 @@ import { Table, Spin, Space, Tooltip, List } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import money from '../Share/functions/money';
+import { HistoryOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
+
 
 const DataTable = ({ dataSource, loading, handleShowForm }) => {
 
@@ -57,9 +59,14 @@ const DataTable = ({ dataSource, loading, handleShowForm }) => {
       key: 'status',
       className: 'text-center',
       render: (value, record) =>
-        <div>
-          <span>{value}</span>
-        </div>
+      <div style={{ textAlign: 'center' }}>{
+        (value === 'Pending') ?
+          <span style={{ color: 'blue' }}>   {'Đang chờ' || ''} </span> :
+          (value === 'Success') ?
+            <span style={{ color: 'green' }}> {"Đã nhận" || ''} </span> :
+            <span style={{ color: 'red' }}  > {'Đã hủy' || ''} </span>
+      }
+      </div>
     },
 ]
   return (

@@ -3,6 +3,11 @@ export const action_type = {
         REQUEST: "GETACCESSORY.REQUEST",
         SUCCESS: "GETACCESSORY.SUCCESS",
         ERROR: "GETACCESSORY.ERROR"
+    },
+    ADDACCESSORYTOWISHLIST: {
+        REQUEST: "ADDACCESSORYTOWISHLIST.REQUEST",
+        SUCCESS: "ADDACCESSORYTOWISHLIST.SUCCESS",
+        ERROR: "ADDACCESSORYTOWISHLIST.ERROR",
     }
 }
 
@@ -11,5 +16,13 @@ export function getListAccessory (params)
     return {
         type: action_type.GETACCESSORY.REQUEST,
         params,
+    }
+}
+
+export function addAccessoryToWishlist (data)
+{
+    return {
+        type: action_type.ADDACCESSORYTOWISHLIST.REQUEST,
+        data
     }
 }

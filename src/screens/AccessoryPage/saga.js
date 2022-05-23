@@ -9,6 +9,7 @@ import {
 } from './action'
 
 import * as api from '../../apis/Accessory'
+import * as apiUser from '../../apis/User'
 
 function* getListAccessorySaga(action) {
     try {
@@ -28,9 +29,32 @@ function* getListAccessorySaga(action) {
     }
 }
 
+function* addAccessoryToWishlistSaga(action) {
+    try {
+        const { data } = action
+        let data1 = {
+            ...data,
+            type: "accessory"
+        }
+        console.log(data1);
+        const response = yield call(apiUser.addItemToWishlist, data1)
+        if(response.status==='success')
+                yield all([put({type: TYPE.ADDACCESSORYTOWISHLIST.SUCCESS, ...response})])
+        else{
+          yield put({type: TYPE.ADDACCESSORYTOWISHLIST.ERROR, error: response})
+        }
+    } catch (error) {
+        yield all([
+            put({type: TYPE.ADDACCESSORYTOWISHLIST.ERROR, error})
+        ])
+    }
+}
+
+
 function* watcher() {
     yield all([
-        takeLatest(TYPE.GETACCESSORY.REQUEST, getListAccessorySaga)
+        takeLatest(TYPE.GETACCESSORY.REQUEST, getListAccessorySaga),
+        takeLatest(TYPE.ADDACCESSORYTOWISHLIST.REQUEST, addAccessoryToWishlistSaga)
     ])
 }
 
