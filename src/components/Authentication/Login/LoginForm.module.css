@@ -1,49 +1,68 @@
+@import url("../../../style/_variables.css");
+
 .background {
   position: relative;
-  top: 200px;
+  top: 5rem;
   background-color: rgba(255, 255, 255, 0.75);
-  padding: 30px 100px;
-  max-width: 600px;
-  border-radius: 8px;
-  min-height: 500px;
+  /* background-image: linear-gradient(var(--black-color), var(--yellow-color)); */
+  /* background: rgb(121,29,9); */
+  /* background: linear-gradient(153deg, rgba(121, 29, 9, 1) 35%, rgba(255, 0, 0, 0.0651610986191351) 79%); */
+  /* border-radius: 1rem; */
+  min-height: 39rem;
   margin: auto;
 }
 
-.background h1 {
+.loginForm {
+  justify-content: center;
+}
+
+.background .titleLogin {
+  margin: 4rem 0rem 2rem 0rem;
   text-align: center;
+  font-size: var(--font-xl-h1);
+  font-weight: bold;
   opacity: initial;
-  margin-bottom: 30px;
 }
 
-.background .loginform {
-  margin: auto;
-  font-size: 20px !important;
-  color: black;
-  font-weight: 500;
+.loading {
+  justify-content: center;
 }
 
-.login-label {
-  margin-left: 10px;
+.background .loginForm .submit {
+  margin-top: 2rem;
 }
 
-.login-input {
-  padding: 10px !important;
-}
-
-#password {
-  padding: 15px;
-}
-
-.password-error, .email-error {
-  margin-left: 1rem;
-  font-size: 1rem;
-  color: red;
-}
-
-.loginform .login-button {
+.formGroup .loginButton {
+  background-color: var(--yellow-color);
+  color: var(--black-color);
+  border-radius: 0.5rem;
+  border: var(--yellow-color);
   display: block;
   margin: auto;
-  margin-top: 20px;
-  font-size: 20px !important;
-  min-width: 12rem;
+  padding: 0.5rem 2rem;
+  font-size: var(--font-title);
+}
+
+.formGroup .loginButton:hover {
+  background-color: var(--black-color);
+  color: var(--yellow-color);
+  border: var(--black-color);
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup .loginLabel {
+  font-size: var(--font-title);
+  padding-left: 0.4rem;
+}
+
+.formGroup .titleSignup {
+  font-size: var(--font-document);
+  color: var(--gray-color);
+}
+
+.background .loginForm .singup {
+  display: contents;
 }
