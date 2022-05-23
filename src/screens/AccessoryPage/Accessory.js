@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./AccessoryList.module.css";
 import { InputGroup } from "react-bootstrap";
 import "antd/dist/antd.css";
@@ -7,19 +7,13 @@ import Layout from "../../components/layout";
 import { Pagination } from "antd";
 import {
   Form,
-  Button,
-  FormGroup,
   FormControl,
-  ControlLabel,
-  Dropdown,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getListAccessory } from "./action";
+import { getListAccessory, addAccessoryToWishlist } from "./action";
 import { Menu, Spin } from "antd";
 import {
   HeartFilled,
-  AppstoreOutlined,
-  MailOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 import { Input, Space } from "antd";
@@ -31,19 +25,35 @@ const { Search } = Input;
 const { SubMenu } = Menu;
 
 function Accessory(props) {
+
+  const [totalPage, setTotalPage] = useState(0);
+  const [current, setCurrent] = useState(1);
+  const [minIndex, setMinIndex] = useState(0);
+  const [maxIndex, setMaxIndex] = useState(0);
+
+  var pageSize = 2;
+
   useEffect(() => {
     props.getListAccessory();
-    console.log(props.accessories);
+    setTotalPage(props.accessories?.accessories?.accessory?.length / pageSize);
+    setMinIndex(0);
+    setMaxIndex(pageSize)
   }, []);
 
   const handleClick = (e) => {
-    console.log("click ", e);
+    // console.log("click ", e);
   };
 
-  const toggleClass = (e) => {
-    console.log("click ", e.target.parentElement.parentElement);
+  const toggleClass = (e, value) => {
     let element = e.target.parentElement.parentElement;
     element.classList.toggle(`${style.heartIconClicked}`);
+    props.addAccessoryToWishlist({ itemId: value })
+  };
+
+  const handleChange = (page) => {
+    setCurrent(page);
+    setMinIndex((page - 1) * pageSize);
+    setMaxIndex(page * pageSize)
   };
 
   const onSearch = (value) => console.log(value);
@@ -106,10 +116,11 @@ function Accessory(props) {
               className={`${style.cardContainer} col col-xl-10 col-lg-9 col-md-8`}
             >
               <div className={`row no-gutters`}>
-                {props.accessories?.accessories?.accessory?.map((item) => {
+                {props.accessories?.accessories?.accessory?.map((item, index) => {
                   let myStyle = {
                     backgroundImage: `url(${item.image.avatar})`,
                   };
+                  if (index >= minIndex && index < maxIndex)
                   return (
                     <div className="col col-xl-4 col-md-6 col-12">
                       <Card className={`${style.card}`}>
@@ -128,7 +139,7 @@ function Accessory(props) {
                               Chi tiết phụ kiện
                             </NavLink>
                             <HeartFilled
-                              onClick={toggleClass}
+                              onClick={(e) => toggleClass(e, item._id)}
                               className={`${style.heartIcon}`}
                             />
                           </div>
@@ -137,6 +148,16 @@ function Accessory(props) {
                     </div>
                   );
                 })}
+                <div className={`${style.pagination} row`}>
+
+                  <Pagination
+                    pageSize={pageSize}
+                    current={current}
+                    total={props?.accessories?.accessories?.accessory?.length}
+                    onChange={handleChange}
+                    style={{ bottom: "0px" }}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -154,6 +175,9 @@ const mapDispatchToProps = (dispatch) => ({
   getListAccessory: (params) => {
     dispatch(getListAccessory(params));
   },
+  addAccessoryToWishlist: (data) => {
+    dispatch(addAccessoryToWishlist(data));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Accessory);

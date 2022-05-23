@@ -14,19 +14,43 @@ let ModalUpdateCar = props => {
         <form onSubmit={handleSubmit}>
             <div className='row bg-white m-3 pt-3' >
                 <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Tiêu đề</label>
+                    <label className="font-weight-bold text-muted">Tên</label>
                     <Field
-                        name="title"
+                        name="name"
                         component={RenderInputText}
-                        placeholder='Tiêu đề'
+                        placeholder='Tên'
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Nội Dung</label>
+                    <label className="font-weight-bold text-muted">Địa chỉ</label>
                     <Field
-                        name="content"
+                        name="address"
+                        component={RenderInputText}
+                        placeholder='Địa chỉ'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Kinh độ</label>
+                    <Field
+                        name="coordinate.longitude"
+                        component={RenderInputText}
+                        placeholder='Địa chỉ'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Vĩ độ:</label>
+                    <Field
+                        name="coordinate.latitude"
+                        component={RenderInputText}
+                        placeholder='Địa chỉ'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Mô tả</label>
+                    <Field
+                        name="description"
                         component={RenderTextareaAnt}
-                        placeholder='Nội dung'
+                        placeholder='Mô tả'
                     />
                 </div>
                 <div className='col-12 text-center'>

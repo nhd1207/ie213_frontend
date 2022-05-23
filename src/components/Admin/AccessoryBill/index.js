@@ -57,11 +57,11 @@ class index extends Component {
     this.setState({ showForm: false });
   };
 
-  handleUpdateAccessoryBillStatus = (value) => {
+  handleUpdateAccessoryBillStatus = (value,status) => {
     // let id = this.state.idAcc;
     let id = value._id;
     this.setState({ showForm: false })
-    let params = { status: 'Cancelled' }
+    let params = { status: status }
     this.props.updateAccessoryBill(id, params)
   }
 
@@ -84,35 +84,37 @@ class index extends Component {
           >
             <span className="h3 font-weight-bold ">Đơn hàng Phụ kiện</span>
           </div>
-          <FormFilter onSubmit={this.handleSubmitFilter} />
+          {/* <FormFilter onSubmit={this.handleSubmitFilter} /> */}
           
           <Tabs defaultActiveKey="1"  style={{marginLeft:10,marginRight:10}}
           ///onChange={callback}
           >
             <TabPane tab="Đang chờ duyệt" key="1">
-            <DataTable //done
-            dataSource={this.props?.accessoryBill?.data.accessoryBills.filter((item)=>{
-              return item.status =='Pending'
+            <DataTable
+            dataSource={this.props?.accessoryBill?.data?.accessoryBills?.filter((item)=>{
+              return item.status=='Pending'
             }) 
             || []} 
             loading={this.props.accessoryBill.loading}
             info={this.openModal}
+            type='Pending'
             cancelAccessory={this.handleUpdateAccessoryBillStatus}
           />
             </TabPane>
             <TabPane tab="Đã duyệt" key="2">
             <DataTable //done
-            dataSource={this.props?.accessoryBill?.data.accessoryBills.filter((item)=>{
+            dataSource={this.props?.accessoryBill?.data?.accessoryBills?.filter((item)=>{
               return item.status=='Accepted'
             })  || []}
             loading={this.props.accessoryBill.loading}
             info={this.openModal}
+            type='Accepted'
             cancelAccessory={this.handleUpdateAccessoryBillStatus}
           />
             </TabPane>
             <TabPane tab="Giao thành công" key="3">
             <DataTable //done
-            dataSource={this.props?.accessoryBill?.data.accessoryBills.filter((item)=>{
+            dataSource={this.props?.accessoryBill?.data?.accessoryBills?.filter((item)=>{
               return item.status=='Success'
             })  || []}
             loading={this.props.accessoryBill.loading}
@@ -122,7 +124,7 @@ class index extends Component {
             </TabPane>
             <TabPane tab="Đã hủy" key="4">
             <DataTable //done
-            dataSource={this.props?.accessoryBill?.data.accessoryBills.filter((item)=>{
+            dataSource={this.props?.accessoryBill?.data?.accessoryBills?.filter((item)=>{
               return item.status=='Cancelled'
             })  || []}
             loading={this.props.accessoryBill.loading}

@@ -39,11 +39,14 @@ export default function LayoutAdmin(props) {
                     <Menu.Item key="6" icon={<FontAwesomeIcon icon={faNewspaper} />}>
                         <Link to={`/admin/post`} > Bài viết </Link>
                     </Menu.Item>
-                    <Menu.Item key="7" icon={<TeamOutlined /> }>
+                    <Menu.Item key="7" icon={<FontAwesomeIcon icon={faNewspaper} />}>
+                        <Link to={`/admin/showroom`} > Showroom </Link>
+                    </Menu.Item>
+                    <Menu.Item key="8" icon={<TeamOutlined /> }>
                         <Link to={`/admin/user`} > Người dùng </Link>
                     </Menu.Item>
-                    <Menu.Item key="8" icon={<LogoutOutlined />}>
-                        <Link to={`/admin/logout`} > Đăng xuất </Link>
+                    <Menu.Item key="9" icon={<LogoutOutlined />}>
+                        <Link to={`/login`} > Đăng xuất </Link>
                     </Menu.Item>
                 </Menu>
             </Sider>

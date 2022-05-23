@@ -13,6 +13,7 @@ import accessory from "./components/Admin/Accessory/reducer";
 import accessoryBill from "./components/Admin/AccessoryBill/reducer";
 import postAdmin from "./components/Admin/Post/reducer";
 import carOrder from "./components/Admin/CarOrder/reducer";
+import showroomAdmin from "./components/Admin/Showroom/reducer";
 import accessoryPage from "./screens/AccessoryPage/reducer";
 import accessoryDetailPage from "./screens/AccessoryDetailPage/reducer";
 import news from "./screens/NewsPage/reducer";
@@ -40,6 +41,7 @@ const Reducer = (history) =>
     postAdmin,
     accessoryBill,
     carOrder,
+    showroomAdmin,
     accessoryPage,
     accessoryDetailPage,
     news,

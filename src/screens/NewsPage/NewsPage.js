@@ -1,25 +1,22 @@
-
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from 'react';
-import { List, Spin } from 'antd';
+import React, { useEffect, useState } from "react";
+import { List, Spin } from "antd";
 import style from "./index.module.css";
-import dateFormat from 'dateformat';
+import dateFormat from "dateformat";
 import { connect } from "react-redux";
-import { getListPost } from './action';
+import { getListPost } from "./action";
 import Layout from "../../components/layout";
+import { NavLink } from "react-router-dom";
 
 function NewsPage(props) {
-    useEffect(() => {
-        props.getListPost();
-        console.log(props);
-    }, [])
-    return (
-        <Layout>
-
-            <div>
-
-                <div className={`${style.news} `}>
-
+  useEffect(() => {
+    props.getListPost();
+    console.log(props);
+  }, []);
+  return (
+    <Layout>
+      <div>
+        {/* <div className={`${style.news} `}>
                     <div className={`${style.news_header} `}>TIN TỨC</div>
                     <div className={`${style.news_name} `}>THẾ GIỚI <br></br> SEVEN</div>
                     <Spin spinning={props.news.loading}>
@@ -52,21 +49,72 @@ function NewsPage(props) {
                             )}>
                         </List>
                     </Spin>
+                </div> */}
+        <div className={`${style.news} row`}>
+          <div className={`${style["news-header"]} col-xl-12`}>TIN TỨC</div>
+          <div className={`${style["news-name"]} col-xl-12`}>
+            THẾ GIỚI SEVEN
+          </div>
+          <List
+            className={`${style.newsList}`}
+            itemLayout="horizontal"
+            dataSource={props.news.posts?.post || []}
+            pagination={{
+              onChange: (page) => {
+                console.log(page);
+              },
+              pageSize: 3,
+              className: `${style.pagination} col-xl-12`,
+            }}
+            renderItem={(item) => (
+              <List.Item className={`${style.listItem} row`}>
+                <div className={`${style.avatar} col-xl-6 col-sm-12 col-12`}>
+                  <img
+                    className={`${style["news-image"]}`}
+                    src={item.image.avatar}
+                    alt="news img"
+                  />
                 </div>
-            </div>
-        </Layout>
-    )
+                <div
+                  className={`${style.content} col-xl-6 col-sm-12 col-12 row`}
+                >
+                  <div className={`${style["news-title"]} col-xl-12`}>
+                    {item.title}
+                  </div>
+                  <div className={`${style.newsSpec} col-xl-12`}>
+                    <div className={style["news-description"]}>
+                      {dateFormat(item.createdAt, "mmmm dS, yyyy")}
+
+                      <div
+                        className={`${style.news_content} `}
+                        dangerouslySetInnerHTML={{ __html: item?.content }}
+                      />
+                      <button
+                        class={`${style.newsBtn} btn btn-outline-dark col-xl-3`}
+                      >
+                        <NavLink to={`news/${item._id}`}>ĐỌC THÊM</NavLink>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </List.Item>
+            )}
+          ></List>
+        </div>
+      </div>
+    </Layout>
+  );
 }
 
-const mapStateToProps = state => ({
-    // posts: state.post
-    news: state.news
-})
+const mapStateToProps = (state) => ({
+  // posts: state.post
+  news: state.news,
+});
 
-const mapDispatchToProps = dispatch => ({
-    getListPost: (params) => {
-        dispatch(getListPost(params))
-    }
-})
+const mapDispatchToProps = (dispatch) => ({
+  getListPost: (params) => {
+    dispatch(getListPost(params));
+  },
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewsPage)
+export default connect(mapStateToProps, mapDispatchToProps)(NewsPage);

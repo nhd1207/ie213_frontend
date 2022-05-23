@@ -7,19 +7,19 @@ import classes from "../index.module.css";
 
 
 
-const DataTable = ({ dataSource, loading, updatePost, deletePost, showImage }) => {
+const DataTable = ({ dataSource, loading, updateShowroom, deleteShowroom }) => {
 
   const onSubmit = (values) => {
-    updatePost(values)
+    updateShowroom(values)
   }
 
   const onDelete = (values) => {
-    deletePost(values)
+    deleteShowroom(values)
   }
 
-  const onShowImage = (values) => {
-    showImage(values)
-  }
+  // const onShowImage = (values) => {
+  //   showImage(values)
+  // }
 
   const columns = [
     {
@@ -29,8 +29,8 @@ const DataTable = ({ dataSource, loading, updatePost, deletePost, showImage }) =
       render: (value, record, i) => <p>{i + 1}</p>,
     },
     {
-      title: 'Tiêu đề',
-      dataIndex: 'title',
+      title: 'Tên',
+      dataIndex: 'name',
       width: 200,
       key: 'title',
       className: 'text-left',
@@ -39,17 +39,18 @@ const DataTable = ({ dataSource, loading, updatePost, deletePost, showImage }) =
           <span> {value || ''} </span>
         </div>
     },
+    // {
+    //   title: 'Hình ảnh',
+    //   dataIndex: ['image'],
+    //   width: 140,
+    //   key: 'picture',
+    //   className: 'text-left',
+    //   render: (value, record) => <button className="btn btn-sm btn-primary" onClick={() => onShowImage(record)}>Quản lý hình ảnh</button>
+    // },
     {
-      title: 'Hình ảnh',
-      dataIndex: ['image'],
-      width: 140,
-      key: 'picture',
-      className: 'text-left',
-      render: (value, record) => <button className="btn btn-sm btn-primary" onClick={() => onShowImage(record)}>Quản lý hình ảnh</button>
-    },
-    {
-      title: 'Nội dung',
-      dataIndex: 'content',
+      title: 'Địa chỉ',
+      dataIndex: 'address',
+      key: 'address',
       className: 'text-left',
       width: 300,
       render: (value, record) =>
@@ -58,25 +59,26 @@ const DataTable = ({ dataSource, loading, updatePost, deletePost, showImage }) =
         </div>
     },
     {
-      title: 'Tác giả',
-      dataIndex: ['author', 'name'],
-      key: 'author',
+      title: 'Tọa độ',
+      dataIndex: ['coordinate'],
+      key: 'coordinate',
       className: 'text-left',
       render: (value, record) =>
         <div>
-          <span> {value || ''} </span>
+          <span>Kinh độ:  {value.longitude || ''} </span><br/>
+          <span>Vĩ độ:  {value.latitude || ''} </span>
         </div>
     },
     {
-      title: 'Thời gian tạo',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
-      className: 'text-left',
-      render: (value, record) =>
-        <div>
-          <span> {dateFormat(value, 'hh:mm:ss dd:mm:yyyy') || ''} </span>
-        </div>
-    },
+    title: 'Mô tả',
+    dataIndex: 'description',
+    key: 'description',
+    className: 'text-left',
+    render: (value, record) =>
+      <div>
+        <span>{value|| ''} </span><br/>
+      </div>
+  },
     {
       title: 'Hành động',
       key: 'action',

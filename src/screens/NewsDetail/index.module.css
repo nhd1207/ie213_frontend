@@ -1,43 +1,48 @@
 #components-layout-demo-fixed .logo {
-    float: left;
-    width: 120px;
-    height: 31px;
-    margin: 16px 24px 16px 0;
-    background: rgba(255, 255, 255, 0.2);
-  }
-  /* .site_layout .site_layout_background {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.2);
+}
+/* .site_layout .site_layout_background {
     background: #fff;
     padding: 24;
   } */
 
-  .site_layout_background {
-    margin: 0 3rem;
-  } 
-  
-  .news_title {
-    font-size: 4rem;
-    font-weight: bold;
-    line-height: 4.5rem;
-  }
+.site_layout_background {
+  margin: 0 3rem;
+}
 
-  .breadcrumb {
-    font-size: 1.3rem;
-    line-height: 3.5rem;
-  }
-  
-.img_position{
+.news_title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 4.5rem;
+}
+
+.breadcrumb {
+  font-size: 1.2rem;
+  /* line-height: 3.5rem; */
+  margin: 1rem 0;
+}
+
+.news_date {
+  margin: 1rem 0;
+}
+
+.img_position {
   flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-  .news_image {
-    width: 95%;
-    height: 100%;
-  }
+.news_image {
+  width: 80%;
+  height: 60%;
+}
 
-  .news_content {
-    font-size: 1rem;
-    line-height: 2rem;
-    padding: 3rem 0;
-  }
+.news_content {
+  font-size: 1rem;
+  line-height: 2rem;
+  padding: 3rem 0;
+}

@@ -13,8 +13,8 @@
 
 .heading {
   text-align: center;
-  font-size: 3.2rem;
-  color: rgba(0, 0, 0, 0.9);
+  font-size: var(--font-h1);
+  color: var(--black-color);
   /* text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
     1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; */
 }
@@ -24,7 +24,7 @@
 }
 
 .main .listHeading {
-  font-size: 2.2rem;
+  font-size: var(--font-h2);
   margin: 1rem 0;
 }
 
@@ -32,11 +32,11 @@
 
 .product {
   padding: 1rem;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--border-gray-color);
 }
 
 .productImgWrapper {
-  border: 1px solid rgb(255, 0, 0);
+  border: 1px solid var(--orange-color);
 }
 
 .product .productImg {
@@ -49,48 +49,56 @@
 .product .productDetail .productName {
   font-weight: bold;
   font-size: 1.5rem;
-  color: #000;
+  color: var(--black-color);
   padding: 0.5rem;
 }
 
 .productDetail .heartIcon {
   width: inherit;
-  font-size: 2rem;
-  color: red;
+  font-size: 1.2rem;
+  color: var(--orange-color);
 }
 
 .product .productDetail .productDesc {
   font-weight: italic;
-  padding: 0.5rem;
+  font-size: var(--font-document);
+  padding-left: 2rem;
 }
 
 .product .productPrice {
   font-weight: bold;
-  font-size: 1.5rem;
-  color: rgba(0, 0, 0, 0.9);
+  font-size: var(--font-title);
+  color: var(--black-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .product .productButton .addButton,
+.product .productButton .removeButton,
 .product .productButton .bookButton {
-  height: 3rem;
-  font-size: 1.4rem;
+  height: 2.5rem;
+  font-size: var(--font-document);
   width: 100%;
-  background-color: rgba(255, 255, 0, 0.9);
-  border: 1px solid #000;
-  color: #000;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0.8rem 0;
 }
 
+.product .productButton .bookButton,
+.product .productButton .addButton {
+  background-color: var(--yellow-color);
+  border: 1px solid var(--yellow-color);
+  color: var(--black-color);
+}
+
 .product .productButton .addButton:hover,
 .product .productButton .bookButton:hover {
-  background-color: rgb(0, 0, 0);
-  color: rgba(255, 255, 0, 0.9);
+  background-color: var(--black-color);
+  border: var(--black-color);
+  color: var(--yellow-color);
 }
 
 .product .productButton {
@@ -99,12 +107,9 @@
   justify-content: space-around;
 }
 
-.product .productButton .removeButton {
-  color: #000;
-  border: 1px solid #000;
-  margin: 0.8rem 0;
-}
 
 .product .productButton .removeButton:hover {
-  background-color: rgb(201, 115, 115);
+  background-color: var(--gray-color);
+  color: var(--white-color);
+  border: var(--gray-color);
 }
