@@ -6,7 +6,7 @@ import {
   faCheck,
   faInfo,
 } from "@fortawesome/free-solid-svg-icons";
-import { Popconfirm, message, Button } from "antd";
+import { Popconfirm } from "antd";
 import {
   HistoryOutlined,
   CheckOutlined,

@@ -10,25 +10,25 @@
 }
 
 .container {
-  margin: 40px;
+  margin: 2rem;
 }
 .headingContainer {
 }
 
 .headings {
-  /* display: grid;
-  grid-template-columns: 20% 80%; */
+  justify-content: space-between;
+  margin: 1.2rem 0;
 }
 
 .heading {
-  text-shadow: 2px 2px 5px rgb(157, 197, 1);
-  color: rgba(0, 0, 0, 0.9);
+  color: var(--black-color);
+  font-size: 2.5rem;
 }
 
 .searchGroup {
   padding: 0;
-  border-radius: 12px;
-  box-shadow: 6px 6px 4px 0px #ddd;
+  /* border-radius: 12px; */
+  box-shadow: 1px 4px 4px 0px #ddd;
   margin: 1rem 0;
 }
 
@@ -37,10 +37,10 @@
 }
 
 .searchTitle {
-  border-radius: 12px 0px 0px 12px;
+  /* border-radius: 12px 0px 0px 12px; */
 }
 .searchBox {
-  border-radius: 0px 12px 12px 0px;
+  /* border-radius: 0px 12px 12px 0px; */
 }
 
 .headingNumber {
@@ -58,8 +58,7 @@
 
 .filterContainer .filter {
   padding: 0.5rem;
-  border: 1px solid #ccc;
-  box-shadow: 0px 4px 10px 4px rgb(0 0 0 / 10%);
+  border: 1px solid #eee;
 }
 
 .rangeInput {

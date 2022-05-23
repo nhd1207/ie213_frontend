@@ -39,5 +39,9 @@ export const destroy =(id)=> {
     })
 }
 
-
-
+export const filter = (params) => {
+    return axios({
+        method:'GET',
+        url:`${prefix}/filter?${params}`
+    })
+}

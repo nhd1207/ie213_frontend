@@ -13,13 +13,14 @@ import dateFormat from "dateformat";
 import Cookies from "js-cookie";
 import DataTable from "../../components/User/DataTable";
 import { Redirect } from "react-router-dom";
+
 function User(props) {
   const [showForm, setShowForm] = useState(false);
   const [accessoryBill, setAccessoryBill] = useState({});
+  
   useEffect(() => {
     props.getUser();
     props.getListBill();
-    console.log(props);
   }, []);
 
   async function signoutHandler() {
@@ -51,8 +52,8 @@ function User(props) {
             <div
               className={`${style.sideMenu} col col-xl-3 d-none d-md-block d-inline-flex`}
             >
-              <img className={style.avatar} src={`${props.user?.photo}`}></img>
-              <div className={style.avatarName}>Hà Thủ Chuy</div>
+              <img className={style.avatar} src={`${props.user?.photo}`} alt="User avatar"></img>
+              <div className={style.avatarName}>{props.user.name}</div>
               <Menu
                 className={style.sideNav}
                 defaultSelectedKeys={["1"]}
@@ -69,7 +70,7 @@ function User(props) {
             <div className={`${style.content} col col-xl-9 d-none d-md-block`}>
               <Descriptions column={1}>
                 <Descriptions.Item
-                  labelStyle={{ fontSize: 50, fontWeight: "bold" }}
+                  labelStyle={{ fontSize: 50, fontWeight: "bold"}}
                   contentStyle={{ fontSize: 50 }}
                 >
                   THÔNG TIN
@@ -108,6 +109,7 @@ function User(props) {
                 handleShowForm={openModal}
               ></DataTable>
               <Modal
+                className={style.modalStyle}
                 footer={null}
                 cancelText=""
                 title="Thông tin các sản phẩm"
@@ -117,7 +119,7 @@ function User(props) {
                 onOk={handleCloseModal}
               >
                 <List
-                  pagination={{ pageSize: 1 }}
+                  pagination={{ pageSize: 4 }}
                   dataSource={accessoryBill.accessoryInfo || []}
                   renderItem={(item) => (
                     <List.Item key={item.id}>
