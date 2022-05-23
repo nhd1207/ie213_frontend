@@ -13,7 +13,6 @@ import FormFilter from './components/FormFilter';
 import FileInput from '../../Share/FileInput';
 import classes from "./index.module.css";
 
-
 class index extends Component {
     constructor(props) {
         super(props);
@@ -55,13 +54,6 @@ class index extends Component {
     handleCreateAccessory = (value) => {
         this.setState({ showForm2: false })
         let params = value
-        //     name: value.name,
-        //     deposit: value.deposit,
-        //     amount: value.amount,
-        //     price: value.price
-        // }
-        // if(params.name && params.deposit && params.amount && params.price)
-        // return console.log('loi')
         this.props.createAccessory(params)
     }
 
@@ -82,13 +74,6 @@ class index extends Component {
         let id = this.state.idAcc;
         this.setState({ showForm: false })
         let params = value
-        //     name: value.name,
-        //     deposit: value.deposit,
-        //     amount: value.amount,
-        //     price: value.price
-        // }
-        // if(params.name && params.deposit && params.amount && params.price)
-        // return console.log('loi')
         this.props.updateAccessory(id, params)
     }
 
@@ -97,7 +82,6 @@ class index extends Component {
         this.props.deleteAccessory(id);
     }
     openModal = (values) => {
-        console.log('openModal')
         this.handleShowForm(true);
         this.state.idAcc = values._id;
         this.state.acc= values;

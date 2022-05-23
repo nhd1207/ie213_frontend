@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Button, Spin, Modal, List } from 'antd';
+import { Modal, Tabs } from 'antd';
 import DataTable from './components/DataTable'
 import Layout from '../LayoutAdmin/LayoutAdmin'
 import queryString from 'query-string'
 import { createCarOrder, getList, updateCarOrder, deleteCarOrder } from './action';
-import { PlusOutlined } from '@ant-design/icons';
 import FormFilter from './components/FormFilter';
 import money from '../../Share/functions/money';
 import classes from "./index.module.css";
+const { TabPane } = Tabs;
 
 
 class index extends Component {
@@ -35,13 +35,13 @@ class index extends Component {
         }
         this.props.history.replace(window.location.pathname + '?' + queryString.stringify(params));
         this.props.getList(params)
-        console.log('handleSubmitFilter')
     }
 
     handleDeleteCarOrder = (value) => {
         let id = value;
         this.props.deleteCarOrder(id);
     }
+
     //update AccBill
     handleShowForm = (value) => {
         this.setState({ showForm: value || false })
@@ -51,27 +51,17 @@ class index extends Component {
         this.setState({ showForm: false })
     }
 
-    // handleUpdateAccessoryBill = (value) => {
-    //     let id = this.state.idAcc;
-    //     this.setState({ showForm: false })
-    //     let params = value
-    //     //     name: value.name,
-    //     //     deposit: value.deposit,
-    //     //     amount: value.amount,
-    //     //     price: value.price
-    //     // }
-    //     // if(params.name && params.deposit && params.amount && params.price)
-    //     // return console.log('loi')
-    //     this.props.updateAccessoryBill(id, params)
-    // }
+    handleUpdateCarOrder = (value, status) => {
+        let id = value._id;
+        this.setState({ showForm: false })
+        let params = { status: status }
+        this.props.updateCarOrder(id, params)
+    }
 
     openModal = (values) => {
-        console.log('openModal', values)
         this.handleShowForm(true);
         this.state.idCarOrder = values._id;
         this.state.carOrder = values;
-        console.log('this.state.accBill', this.state.carOrder)
-
     }
 
     render() {
@@ -79,19 +69,58 @@ class index extends Component {
         return (
             <div>
                 <Layout>
-                    {/* <Spin size='large' spinning={this.props.car.loading}> */}
                     <div className='container-fluid mb-3 text-left py-2' style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <span className='h3 font-weight-bold '>Đơn đặt cọc xe</span>
                     </div>
-                    <FormFilter
+                    {/* <FormFilter
                         onSubmit={this.handleSubmitFilter}
-                    />
-                    <DataTable //done
-                        dataSource={this.props?.carOrder?.data.carOrders || []}
-                        loading={this.props.carOrder.loading}
-                        info={this.openModal}
-                        // deleteAccessory={this.handleDeleteAccessoryBill}
-                    />
+                    /> */}
+                    <Tabs defaultActiveKey="1" style={{ marginLeft: 10, marginRight: 10 }}
+                    >
+                        <TabPane tab="Đang chờ duyệt" key="1">
+                            <DataTable
+                                dataSource={this.props?.carOrder?.data?.carOrders?.filter((item) => {
+                                    return item.status == 'Pending'
+                                })
+                                    || []}
+                                loading={this.props.carOrder.loading}
+                                info={this.openModal}
+                                type='Pending'
+                                changeStatus={this.handleUpdateCarOrder}
+                            />
+                        </TabPane>
+                        <TabPane tab="Đã duyệt" key="2">
+                            <DataTable
+                                dataSource={this.props?.carOrder?.data?.carOrders?.filter((item) => {
+                                    return item.status == 'Accepted'
+                                }) || []}
+                                loading={this.props.carOrder.loading}
+                                info={this.openModal}
+                                type='Accepted'
+                                changeStatus={this.handleUpdateCarOrder}
+                            />
+                        </TabPane>
+                        <TabPane tab="Nhận xe thành công" key="3">
+                            <DataTable
+                                dataSource={this.props?.carOrder?.data?.carOrders?.filter((item) => {
+                                    return item.status == 'Success'
+                                }) || []}
+                                loading={this.props.carOrder.loading}
+                                info={this.openModal}
+                                changeStatus={this.handleUpdateCarOrder}
+                            />
+                        </TabPane>
+                        <TabPane tab="Đã hủy" key="4">
+                            <DataTable
+                                dataSource={this.props?.carOrder?.data?.carOrders?.filter((item) => {
+                                    return item.status == 'Cancelled'
+                                }) || []}
+                                loading={this.props.carOrder.loading}
+                                info={this.openModal}
+                                changeStatus={this.handleUpdateCarOrder}
+                            />
+                        </TabPane>
+                    </Tabs>
                     <Modal
                         title="Thông tin xe"
                         visible={showForm}
@@ -99,18 +128,16 @@ class index extends Component {
                         onCancel={this.handleCloseModal}
                         onOk={this.handleCloseModal}
                         destroyOnClose={true}
-                    //onCancel={handleCancel}
                     >
-                        <img src={this.state.carOrder?.carInfo?.image.avatar} style={{width:100,height:100}}></img>
+                        <img src={this.state.carOrder?.carInfo?.image.avatar} style={{ width: 100, height: 100 }}></img>
                         <h4>Tên xe: {this.state.carOrder?.carInfo?.name}</h4>
                         <p>Dòng: {this.state.carOrder?.carInfo?.model}</p>
                         <p>Mã: {this.state.carOrder?.carInfo?.code}</p>
-                        <p>Giá tiền: {money(this.state.carOrder?.carInfo?.price,'VNĐ')}</p>
-                        <p>Tiền đặt cọc: {money(this.state.carOrder?.carInfo?.deposit,'VNĐ')}</p>
+                        <p>Giá tiền: {money(this.state.carOrder?.carInfo?.price, 'VNĐ')}</p>
+                        <p>Tiền đặt cọc: {money(this.state.carOrder?.carInfo?.deposit, 'VNĐ')}</p>
                         <p>Mô tả: {this.state.carOrder?.carInfo?.description}</p>
                         <p>Thông tin đặc biệt: {this.state.carOrder?.carInfo?.special}</p>
                     </Modal>
-                    {/* </Spin> */}
                 </Layout>
             </div>
         )

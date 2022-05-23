@@ -8,7 +8,7 @@ import {
     action_type as TYPE
 } from './action'
 
-import * as api from '../../../apis/Post'
+import * as api from '../../../apis/Showroom'
 import { message } from 'antd'
 
 function* getListSaga(action) {
@@ -17,14 +17,14 @@ function* getListSaga(action) {
         const response = yield call(api.getList, params)
         if (response.status === 'success') {
             yield all([
-                put({ type: TYPE.POSTADMIN.SUCCESS, ...response }),
+                put({ type: TYPE.SHOWROOM.SUCCESS, ...response }),
             ])
         } else {
-            yield put({ type: TYPE.POSTADMIN.ERROR, error: response })
+            yield put({ type: TYPE.SHOWROOM.ERROR, error: response })
         }
     } catch (error) {
         yield all([
-            put({ type: TYPE.POSTADMIN.ERROR, error })
+            put({ type: TYPE.SHOWROOM.ERROR, error })
         ])
     }
 }
@@ -35,18 +35,18 @@ function* CreateSaga(action) {
         let data = params
         const response = yield call(api.create, data)
         if (response.status === 'success') {
-            message.success('Tạo post thành công')
-            message.success('Hãy thêm ảnh cho post!!!')
+            message.success('Tạo showroom thành công')
+            message.success('Hãy thêm ảnh cho showrom!!!')
             yield all([
                 put({ type: TYPE.CREATE.SUCCESS, ...response }),
-                put({ type: TYPE.POSTADMIN.REQUEST, params: { status: 1 } })
+                put({ type: TYPE.SHOWROOM.REQUEST, params: { status: 1 } })
             ])
         } else {
-            message.error('Tạo bài viết thất bại')
+            message.error('Tạo showroom thất bại')
             yield put({ type: TYPE.CREATE.ERROR, error: response })
         }
     } catch (error) {
-        message.error('Xảy ra lỗi trong quá trình tạo bài viết')
+        message.error('Xảy ra lỗi trong quá trình tạo showroom')
         console.log(error)
         yield all([
             put({ type: TYPE.CREATE.ERROR, error })
@@ -59,17 +59,17 @@ function* UpdateSaga(action) {
         const { id, params } = action
         const response = yield call(api.update, id, params)
         if (response.status === 'success') {
-            message.success('Sửa thông tin bài viết thành công')
+            message.success('Sửa thông tin showroom thành công')
             yield all([
                 put({ type: TYPE.UPDATE.SUCCESS, ...response }),
-                put({ type: TYPE.POSTADMIN.REQUEST, params: { status: 1 } })
+                put({ type: TYPE.SHOWROOM.REQUEST, params: { status: 1 } })
             ])
         } else {
-            message.error('Sửa thông tin bài viết thất bại')
+            message.error('Sửa thông tin showroom thất bại')
             yield put({ type: TYPE.UPDATE.ERROR, error: response })
         }
     } catch (error) {
-        message.error('Sửa thông tin bài viết thất bại')
+        message.error('Sửa thông tin showroom thất bại')
         yield all([
             put({ type: TYPE.UPDATE.ERROR, error })
         ])
@@ -83,17 +83,17 @@ function* DeleteSaga(action) {
         const response = yield call(api.destroy, id)
         console.log(response)
         if (response.status === 'success') {
-            message.success('Xóa bài viết thành công')
+            message.success('Xóa showroom thành công')
             yield all([
                 put({ type: TYPE.DELETE.SUCCESS, ...response }),
-                put({ type: TYPE.POSTADMIN.REQUEST, params: { status: 1 } }),
+                put({ type: TYPE.SHOWROOM.REQUEST, params: { status: 1 } }),
             ])
         } else {
-            message.success('Xóa bài viết thất bại')
+            message.success('Xóa showroom thất bại')
             yield put({ type: TYPE.DELETE.ERROR, error: response })
         }
     } catch (error) {
-        message.success('Xóa bài viết thất bại')
+        message.success('Xóa showroom thất bại')
         yield all([
             put({ type: TYPE.DELETE.ERROR, error })
         ])
@@ -102,7 +102,7 @@ function* DeleteSaga(action) {
 
 function* watcher() {
     yield all([
-        takeLatest(TYPE.POSTADMIN.REQUEST, getListSaga),
+        takeLatest(TYPE.SHOWROOM.REQUEST, getListSaga),
         takeLatest(TYPE.CREATE.REQUEST, CreateSaga),
         takeLatest(TYPE.UPDATE.REQUEST, UpdateSaga),
         takeLatest(TYPE.DELETE.REQUEST, DeleteSaga),

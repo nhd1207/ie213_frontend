@@ -15,10 +15,42 @@ function reducer(state = initialState, action) {
         case type.GETLISTCAR.SUCCESS:
             return {
                 ...state,
-                cars: action.data,
+                cars: action.data.car,
                 loading: false,
             }
         case type.GETLISTCAR.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
+        case type.ADDCARTOWISHLIST.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case type.ADDCARTOWISHLIST.SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            }
+        case type.ADDCARTOWISHLIST.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
+        case type.FILTER.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case type.FILTER.SUCCESS:
+            return {
+                ...state,
+                cars: action.docs,
+                loading: false,
+            }
+        case type.FILTER.ERROR:
             return {
                 ...state,
                 loading: false,

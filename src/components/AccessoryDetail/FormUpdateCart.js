@@ -2,7 +2,7 @@ import style from './FormUpdateCart.module.css';
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faSave } from '@fortawesome/free-solid-svg-icons'
 import RenderSelect from "../Share/RenderSelect";
 import RenderNumberAnt from "../Share/RenderNumberAnt"
 import {
