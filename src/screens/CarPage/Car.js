@@ -4,23 +4,15 @@ import "antd/dist/antd.css";
 import Layout from "../../components/layout";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { getListCar } from "./action";
+import { getListCar, addCarToWishlist } from "./action";
 import { NavLink } from "react-router-dom";
 import {
   Form,
-  Button,
-  FormGroup,
-  FormControl,
-  ControlLabel,
-  Dropdown,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Menu, Spin, Pagination } from "antd";
 import {
   SettingOutlined,
-  DoubleRightOutlined,
-  LeftOutlined,
-  RightOutlined,
   HeartFilled,
   ThunderboltOutlined,
 } from "@ant-design/icons";
@@ -51,11 +43,12 @@ function Car(props) {
 
   const onSearch = (value) => console.log(value);
 
-  const toggleClass = (e) => {
+  const toggleClass = (e, value) => {
     e.preventDefault();
     console.log("click ", e.target.parentElement.parentElement);
     let element = e.target.parentElement.parentElement;
     element.classList.toggle(`${style.heartIconClicked}`);
+    props.addCarToWishlist({itemId: value})
   };
 
   const handleChange = (page) => {
@@ -180,7 +173,7 @@ function Car(props) {
                           />
                         </div>
                         <HeartFilled
-                          onClick={toggleClass}
+                          onClick={(e) => toggleClass(e,car._id)}
                           className={`${style.heartIcon}`}
                         />
                       </div>
@@ -214,6 +207,9 @@ const mapDispatchToProps = (dispatch) => ({
   getListCar: (params) => {
     dispatch(getListCar(params));
   },
+  addCarToWishlist: (data) => {
+    dispatch(addCarToWishlist(data));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Car);

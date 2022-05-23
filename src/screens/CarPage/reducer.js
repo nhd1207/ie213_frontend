@@ -23,6 +23,21 @@ function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
             }
+        case type.ADDCARTOWISHLIST.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case type.ADDCARTOWISHLIST.SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            }
+        case type.ADDCARTOWISHLIST.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
         default:
             return state
     }
