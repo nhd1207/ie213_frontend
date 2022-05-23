@@ -22,10 +22,12 @@ import {
   MailOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
+import { Input, Space } from "antd";
 
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+const { Search } = Input;
 const { SubMenu } = Menu;
 
 function Accessory(props) {
@@ -44,42 +46,41 @@ function Accessory(props) {
     element.classList.toggle(`${style.heartIconClicked}`);
   };
 
+  const onSearch = (value) => console.log(value);
+
   return (
     <Layout>
       <Spin size="large" spinning={props.accessories?.loading}>
         <div className={`${style.container}`}>
-          <div className={`${style.headingContainer} container`}>
-            <div className={`${style.headings} `}>
-              <h2 className={`${style.heading} `}>CÁC PHỤ KIỆN</h2>
-              <InputGroup className={`${style.searchGroup} mb-3 `}>
-                <InputGroup.Text
-                  id="basic-addon1"
-                  className={`${style.searchTitle}`}
-                >
-                  Search
-                </InputGroup.Text>
-                <FormControl
+          <div className={`${style.headingContainer}`}>
+            <div className={`${style.headings} row`}>
+              <h2 className={`${style.heading} col-xl-4`}>CÁC PHỤ KIỆN</h2>
+              <Space
+                direction="vertical"
+                className={`${style.searchGroup} col-xl-6`}
+              >
+                <Search
                   className={`${style.searchBox}`}
                   placeholder="Nhập tên phụ kiện"
-                  aria-label="Search"
-                  aria-describedby="basic-addon1"
+                  onSearch={onSearch}
+                  enterButton
                 />
-              </InputGroup>
+              </Space>
             </div>
-            <h3 className={`${style.headingNumber}`}>
-              {props.accessories?.accessories?.accessory?.length} sản phẩm
-            </h3>
           </div>
           <div className={`${style.main} row`}>
             <div
-              className={`${style.filterContainer} col col-xl-2 col-lg-3 col-md-4 d-none d-md-block`}
+              className={`${style.filterContainer} col col-xl-2 col-lg-3 col-md-4 d-none d-md-block row`}
             >
+              <h3 className={`${style.headingNumber} col-xl-12`}>
+                {props.accessories?.accessories?.accessory?.length} sản phẩm
+              </h3>
               <Menu
                 onClick={handleClick}
                 defaultSelectedKeys={["1"]}
                 defaultOpenKeys={["sub1"]}
                 mode="inline"
-                className={`${style.filter}`}
+                className={`${style.filter} col-xl-12`}
               >
                 <div className={`${style.rangeInput}`}>
                   <>
@@ -136,9 +137,6 @@ function Accessory(props) {
                     </div>
                   );
                 })}
-              </div>
-              <div className={`${style.pagination} row`}>
-                <Pagination defaultCurrent={6} total={100} />;
               </div>
             </div>
           </div>
