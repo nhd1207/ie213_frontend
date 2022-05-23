@@ -1,3 +1,5 @@
+@import url("../../style/_variables.css");
+
 .container {
   margin: 2rem;
 }
@@ -5,19 +7,19 @@
 }
 
 .headings {
-  /* display: grid;
-  grid-template-columns: 20% 80%; */
+  justify-content: space-between;
+  margin: 1.2rem 0;
 }
 
 .heading {
-  text-shadow: 2px 2px 5px rgb(157, 197, 1);
-  color: rgba(0, 0, 0, 0.9);
+  color: var(--black-color);
+  font-size: 2.5rem;
 }
 
 .searchGroup {
   padding: 0;
-  border-radius: 12px;
-  box-shadow: 6px 6px 4px 0px #ddd;
+  /* border-radius: 12px; */
+  box-shadow: 1px 4px 4px 0px #ddd;
   margin: 1rem 0;
 }
 
@@ -26,10 +28,10 @@
 }
 
 .searchTitle {
-  border-radius: 12px 0px 0px 12px;
+  /* border-radius: 12px 0px 0px 12px; */
 }
 .searchBox {
-  border-radius: 0px 12px 12px 0px;
+  /* border-radius: 0px 12px 12px 0px; */
 }
 
 .headingNumber {
@@ -47,8 +49,7 @@
 
 .filterContainer .filter {
   padding: 0.5rem;
-  border: 1px solid #ccc;
-  box-shadow: 0px 4px 10px 4px rgb(0 0 0 / 10%);
+  border: 1px solid #eee;
 }
 
 .rangeInput {
@@ -91,6 +92,7 @@
   transition: all 0.4s cubic-bezier(1, 0.4, 0.4, 1);
   border: 1px solid #ccc;
   border-radius: 2px;
+  position: relative;
 }
 
 .card:hover {
@@ -134,35 +136,43 @@
   background-position: center center;
 }
 .card .description {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  left: 0;
   display: flex;
-  padding: 0 3%;
-}
-.card .description h4,
-.description h5 {
-  margin: 0;
-  padding: 0;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.card .description .nameGroup {
-  width: 50%;
+.descGroup {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.card .description > div {
-  display: inline-block;
-  width: 25%;
-  margin: 0 3%;
+.card .description h4 {
+  margin: 0.8rem;
 }
-.card .description .sub {
-  color: #000;
-  font-size: 1rem;
-}
-.sub {
+
+.arrowIcon {
+  font-size: 2.5rem;
+  padding: 0;
+  margin: 0;
+  color: var(--white-color);
 }
 
 .text {
-  font-size: 1.2rem;
-  color: yellow;
-  text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
-    1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  font-size: 1rem;
+  color: var(--yellow-color);
+  text-transform: uppercase;
+}
+
+.carName {
+  font-size: 1.4rem;
 }
 .card .description h4 {
   white-space: nowrap;
@@ -188,12 +198,70 @@
   opacity: 1;
 }
 
-/* .container {
-  display: flex;
-  min-width: 300px;
-} */
+/* new css for card img */
 
-/* pagination */
-.pagination {
-  text-align: center;
+.imgMain {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.img1 {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.8) 50%,
+    rgb(0, 0, 0, 0.8) 100%
+  );
+  background-size: cover;
+  background-position: center center;
+  clip-path: polygon(0% 0%, 35% 0%, 0% 100%, 0 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: none;
+}
+
+.img2 {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    rgb(0, 0, 0, 0.7) 100%
+  );
+  background-size: cover;
+  background-position: center center;
+  clip-path: polygon(35% 0%, 70% 0%, 35% 100%, 0% 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.img3 {
+  width: 100%;
+  height: 100%;
+  /* background: linear-gradient(
+    rgba(0, 0, 0, 0.1) 100%,
+    rgba(0, 0, 0, 0.1) 1000%,
+    rgb(0, 0, 0, 0.1) 100%
+  ); */
+  background-size: cover;
+  background-position: center center;
+  clip-path: polygon(60% 0%, 100% 0%, 100% 100%, 30% 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.heartIcon {
+  width: inherit;
+  font-size: 2rem;
+  color: #ccc;
+}
+
+.heartIconClicked {
+  color: red;
 }
