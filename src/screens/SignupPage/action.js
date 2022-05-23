@@ -1,8 +1,8 @@
 export const action_type = {
     SIGNUP: {
-        REQUEST: "AUTH.SIGNUP.REQUEST",
-        SUCCESS: "AUTH.SIGNUP.SUCCESS",
-        ERROR: "AUTH.SIGNUP.ERROR"
+        REQUEST: "SIGNUP.REQUEST",
+        SUCCESS: "SIGNUP.SUCCESS",
+        ERROR: "SIGNUP.ERROR"
     },
 }
 
