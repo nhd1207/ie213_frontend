@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import style from "./AccessoryList.module.css";
 import { InputGroup } from "react-bootstrap";
 import "antd/dist/antd.css";
@@ -29,26 +29,10 @@ import { NavLink } from "react-router-dom";
 const { SubMenu } = Menu;
 
 function Accessory(props) {
-  var pageSize = 6;
-
-  const [totalPage, setTotalPage] = useState(0);
-  const [current, setCurrent] = useState(1);
-  const [minIndex, setMinIndex] = useState(0);
-  const [maxIndex, setMaxIndex] = useState(0);
-
   useEffect(() => {
     props.getListAccessory();
     console.log(props.accessories);
-    setTotalPage(props.accessories?.accessories?.accessory?.length / pageSize);
-    setMinIndex(0);
-    setMaxIndex(pageSize)
   }, []);
-
-  const handleChange = (page) => {
-    setCurrent(page);
-    setMinIndex((page - 1) * pageSize);
-    setMaxIndex(page * pageSize)
-  };
 
   const handleClick = (e) => {
     console.log("click ", e);
@@ -121,11 +105,10 @@ function Accessory(props) {
               className={`${style.cardContainer} col col-xl-10 col-lg-9 col-md-8`}
             >
               <div className={`row no-gutters`}>
-                {props.accessories?.accessories?.accessory?.map((item,index) => {
+                {props.accessories?.accessories?.accessory?.map((item) => {
                   let myStyle = {
                     backgroundImage: `url(${item.image.avatar})`,
                   };
-                  if (index >= minIndex && index < maxIndex)
                   return (
                     <div className="col col-xl-4 col-md-6 col-12">
                       <Card className={`${style.card}`}>
@@ -155,13 +138,7 @@ function Accessory(props) {
                 })}
               </div>
               <div className={`${style.pagination} row`}>
-                <Pagination
-                  pageSize={pageSize}
-                  current={current}
-                  total={props.accessories?.accessories?.accessory?.length}
-                  onChange={handleChange}
-                  style={{ bottom: "0px" }}
-                />              
+                <Pagination defaultCurrent={6} total={100} />;
               </div>
             </div>
           </div>
