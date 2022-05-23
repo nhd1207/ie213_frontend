@@ -127,7 +127,7 @@ function LoginForm(props) {
             />
             {invalidEmail && (
               <Form.Text className={`${style.mailError}`}>
-                Emai không hợp lệ
+                Email không hợp lệ
               </Form.Text>
             )}
           </Form.Group>

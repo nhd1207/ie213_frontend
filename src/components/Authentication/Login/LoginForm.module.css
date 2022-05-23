@@ -66,3 +66,8 @@
 .background .loginForm .singup {
   display: contents;
 }
+
+.formGroup .mailError,
+.formGroup .passwordError {
+  color: var(--red-color);
+}
