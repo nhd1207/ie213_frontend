@@ -2,31 +2,18 @@ import React from "react";
 import style from "./CarOrder.module.css";
 import { useState, useEffect } from "react";
 import "antd/dist/antd.css";
-import moment from 'moment'
-import money from "../../components/Share/functions/money"
+import moment from "moment";
+import money from "../../components/Share/functions/money";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getCarOrder, getListShowroom, createCarOrder } from "./action";
 import { connect } from "react-redux";
-import {
-  Form,
-  Input,
-  InputNumber,
-  Cascader,
-  Select,
-  Row,
-  Col,
-  Checkbox,
-  Button,
-  AutoComplete,
-  DatePicker,
-  Spin,
-} from "antd";
+import { Form, Input, Select, Checkbox, Button, DatePicker, Spin } from "antd";
 import Layouts from "../../components/layout";
+import { Modal } from "react-bootstrap";
 
 const { Option } = Select;
 
-
-const dateFormat = 'DD/MM/YYYY';
+const dateFormat = "DD/MM/YYYY";
 
 const formItemLayout = {
   labelCol: {
@@ -60,7 +47,7 @@ const tailFormItemLayout = {
   },
 };
 
-const customFormat = value => `custom format: ${value.format(dateFormat)}`;
+const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
 
 // const customWeekStartEndFormat = value =>
 //   `${moment(value).startOf('week').format(weekFormat)} ~ ${moment(value)
@@ -68,42 +55,31 @@ const customFormat = value => `custom format: ${value.format(dateFormat)}`;
 //     .format(weekFormat)}`;
 
 function CarOrder(props) {
+  const [modalShow, setModalShow] = useState(false);
 
-
-  let options = props?.car?.color?.map(d => {
-    return { label: d, value: d }
-  }) || []
-
+  let options =
+    props?.car?.color?.map((d) => {
+      return { label: d, value: d };
+    }) || [];
   useEffect(() => {
     props.getCarOrder(props.match.params.id);
     props.getListShowroom();
   }, []);
 
   const [carForm, setCarForm] = useState({
-    time: '',
     carInfo: props.match.params.id,
-    place: '',
-    deposit: props?.car[0]?.deposit
   });
 
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    let params= {
-      carInfo: props.match.params.id,
-      deposit: props?.car[0]?.deposit,
-      phone: values.prefix + values.phone,
-      place: values.place,
-      color: values.color,
-      time: moment(carForm.time).format("DD/MM/YYYY")
-    }
-    console.log(params);
-    console.log("Received values of form: ", values);
-  };
+  const onFinish = () => {
+    setModalShow(true);
+    setCarForm((prev) => {
+      return { ...prev, deposit: props?.car[0]?.deposit };
+    });
 
-  const handleDate = (value) => {
-    setCarForm({ ...carForm, time: value })
-  }
+    console.log(carForm);
+  };
 
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
@@ -127,6 +103,9 @@ function CarOrder(props) {
     ],
   };
 
+  function confirmOrderHandler() {
+    props.createCarOrder(carForm);
+  }
   return (
     <Layouts>
       <Spin spinning={props.loading} size="large">
@@ -141,23 +120,25 @@ function CarOrder(props) {
                     {props?.car[0]?.name}
                   </div>
                   <div className={`${style.modal} ${style.specText} col-xl-12`}>
-                    Dòng Xe: {props?.car[0]?.model}
+                    Dòng xe: {props?.car[0]?.model}
                   </div>
-                  <div className={`${style.warranty} ${style.specText} col-xl-12`}>
+                  <div
+                    className={`${style.warranty} ${style.specText} col-xl-12`}
+                  >
                     Thời hạn bảo hành: {props?.car[0]?.warrantyPeriod} năm
                   </div>
                   <div className={`${style.color} ${style.specText} col-xl-12`}>
-                    Màu Sắc:
-                    {props?.car[0]?.color.map(item => {
-                      return (
-                        <span> {item}</span>
-                      )
+                    Màu có sẵn:
+                    {props?.car[0]?.color.map((item) => {
+                      return <span> {item}</span>;
                     })}
                   </div>
                 </div>
                 <div className={`${style.deposit} col-xl-12`}>
-                  Đặt cọc trước để xem xe tại cửa hàng:{" "}
-                  <div className={`${style.de}`}>{money(props?.car[0]?.deposit, "VND")}</div>
+                  Đặt cọc trước và nhận xe tại cửa hàng:{" "}
+                  <div className={`${style.de}`}>
+                    {money(props?.car[0]?.deposit, "VND")}
+                  </div>
                 </div>
               </div>
               <div className={`${style.orderInfo} row`}>
@@ -172,24 +153,39 @@ function CarOrder(props) {
                   }}
                   scrollToFirstError
                 >
-                  <Form.Item name="time" label="Chọn Ngày" {...config}>
-                    <DatePicker defaultPickerValue={''} onChange={(value) => handleDate(value)} />
+                  <Form.Item name="time" label="Chọn ngày" {...config}>
+                    <DatePicker
+                      defaultPickerValue={""}
+                      onChange={(event) => {
+                        setCarForm((prev) => {
+                          return {
+                            ...prev,
+                            time: moment(event).format("MM/DD/YYYY"),
+                          };
+                        });
+                      }}
+                    />
                   </Form.Item>
                   <Form.Item
                     name="place"
-                    label="ShowRoom"
+                    label="Showroom"
                     rules={[
                       {
                         required: true,
-                        message: "Vui Lòng Chọn ShowRoom!",
+                        message: "Vui lòng chọn Showroom!",
                       },
                     ]}
                   >
-                    <Select placeholder="Chọn showroom">
-                      {props?.showroom?.showRoom?.map(item => {
-                        return (
-                          <Option value={item._id}>{item.address}</Option>
-                        )
+                    <Select
+                      placeholder="Chọn Showroom"
+                      onChange={(event) => {
+                        setCarForm((prev) => {
+                          return { ...prev, place: event };
+                        });
+                      }}
+                    >
+                      {props?.showroom?.showRoom?.map((item) => {
+                        return <Option key={item._id} value={item._id}>{item.address}</Option>;
                       })}
                     </Select>
                   </Form.Item>
@@ -204,11 +200,18 @@ function CarOrder(props) {
                       },
                     ]}
                   >
-                    <Select placeholder="Chọn Màu Sắc">
-                      {props?.car[0]?.color?.map(item => {
-                        return (
-                          <Option value={item}>{item}</Option>
-                        )
+                    <Select
+                      placeholder="Chọn Màu Sắc"
+                      onChange={(event) => {
+                        setCarForm((prev) => {
+                          return { ...prev, color: event };
+                        });
+                      }}
+                    >
+                      {props?.car[0]?.color?.map((item) => {
+                        let key = 1;
+                        key++;
+                        return <Option key={item + key} value={item}>{item}</Option>;
                       })}
                     </Select>
                   </Form.Item>
@@ -222,6 +225,11 @@ function CarOrder(props) {
                         message: "Vui Lòng Nhập Số Điện Thoại",
                       },
                     ]}
+                    onChange={(event) => {
+                      setCarForm((prev) => {
+                        return { ...prev, phone: event.target.value };
+                      });
+                    }}
                   >
                     <Input
                       addonBefore={prefixSelector}
@@ -230,8 +238,16 @@ function CarOrder(props) {
                       }}
                     />
                   </Form.Item>
-                  <Form.Item name="comment" label="Lời Nhắn">
-                    <Input.TextArea showCount maxLength={100} />
+                  <Form.Item name="note" label="Lời Nhắn">
+                    <Input.TextArea
+                      showCount
+                      maxLength={100}
+                      onChange={(event) => {
+                        setCarForm((prev) => {
+                          return { ...prev, note: event.target.value };
+                        });
+                      }}
+                    />
                   </Form.Item>
 
                   {/* <Form.Item label="Captcha" extra="Chúng tôi cần xác nhận từ bạn">
@@ -265,21 +281,28 @@ function CarOrder(props) {
                           value
                             ? Promise.resolve()
                             : Promise.reject(
-                              new Error(
-                                "Bạn nên đồng ý với điều khoản của chúng tôi"
-                              )
-                            ),
+                                new Error(
+                                  "Bạn nên đồng ý với điều khoản của chúng tôi"
+                                )
+                              ),
                       },
                     ]}
                     {...tailFormItemLayout}
                   >
                     <Checkbox>
-                      Tôi đã đọc <a onClick={() => { console.log('dieu khoan') }}>Điều Khoản</a>
+                      Tôi đã đọc{" "}
+                      <a
+                        onClick={() => {
+                          console.log("dieu khoan");
+                        }}
+                      >
+                        Điều Khoản
+                      </a>
                     </Checkbox>
                   </Form.Item>
                   <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit" >
-                      Thanh Toán
+                    <Button type="primary" htmlType="submit">
+                      Đặt hàng
                     </Button>
                   </Form.Item>
                 </Form>
@@ -288,26 +311,61 @@ function CarOrder(props) {
           </div>
         </div>
       </Spin>
+      <Modal
+        show={modalShow}
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header
+          closeButton
+          onHide={() => {
+            setModalShow(false);
+          }}
+        >
+          <Modal.Title id="contained-modal-title-vcenter">
+            Xác nhận đặt hàng
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>Tên xe: {props?.car[0]?.name}</h4>
+          <p></p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setModalShow(false);
+            }}
+          >
+            Huỷ bỏ
+          </Button>
+          <Button variant="primary" onClick={confirmOrderHandler}>
+            Xác nhận
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Layouts>
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   car: state.carOrderPage.car,
   loading: state.carOrderPage.loading,
-  showroom: state.carOrderPage.showroom
-})
+  showroom: state.carOrderPage.showroom,
+});
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getCarOrder: (params) => {
-    dispatch(getCarOrder(params))
+    dispatch(getCarOrder(params));
   },
   getListShowroom: (params) => {
-    dispatch(getListShowroom(params))
+    dispatch(getListShowroom(params));
   },
   createCarOrder: (params) => {
-    dispatch(createCarOrder(params))
-  }
-})
+    dispatch(createCarOrder(params));
+  },
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(CarOrder)
+export default connect(mapStateToProps, mapDispatchToProps)(CarOrder);
