@@ -52,8 +52,8 @@ function User(props) {
             <div
               className={`${style.sideMenu} col col-xl-3 d-none d-md-block d-inline-flex`}
             >
-              <img className={style.avatar} src={`${props.user?.photo}`} alt="abc"></img>
-              <div className={style.avatarName}>{props.user?.name}</div>
+              <img className={style.avatar} src={`${props.user?.photo}`}></img>
+              <div className={style.avatarName}>Hà Thủ Chuy</div>
               <Menu
                 className={style.sideNav}
                 defaultSelectedKeys={["1"]}

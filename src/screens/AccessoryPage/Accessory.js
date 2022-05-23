@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import style from "./AccessoryList.module.css";
 import { InputGroup } from "react-bootstrap";
 import "antd/dist/antd.css";
@@ -16,32 +16,21 @@ import {
   HeartFilled,
   SettingOutlined,
 } from "@ant-design/icons";
+import { Input, Space } from "antd";
 
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+const { Search } = Input;
 const { SubMenu } = Menu;
 
 function Accessory(props) {
-  var pageSize = 6;
-
-  const [totalPage, setTotalPage] = useState(0);
-  const [current, setCurrent] = useState(1);
-  const [minIndex, setMinIndex] = useState(0);
-  const [maxIndex, setMaxIndex] = useState(0);
-
   useEffect(() => {
     props.getListAccessory();
     setTotalPage(props.accessories?.accessories?.accessory?.length / pageSize);
     setMinIndex(0);
     setMaxIndex(pageSize)
   }, []);
-
-  const handleChange = (page) => {
-    setCurrent(page);
-    setMinIndex((page - 1) * pageSize);
-    setMaxIndex(page * pageSize)
-  };
 
   const handleClick = (e) => {
     // console.log("click ", e);
@@ -53,43 +42,41 @@ function Accessory(props) {
     props.addAccessoryToWishlist({itemId: value})
   };
 
+  const onSearch = (value) => console.log(value);
 
   return (
     <Layout>
       <Spin size="large" spinning={props.accessories?.loading}>
         <div className={`${style.container}`}>
-          <div className={`${style.headingContainer} container`}>
-            <div className={`${style.headings} `}>
-              <h2 className={`${style.heading} `}>CÁC PHỤ KIỆN</h2>
-              <InputGroup className={`${style.searchGroup} mb-3 `}>
-                <InputGroup.Text
-                  id="basic-addon1"
-                  className={`${style.searchTitle}`}
-                >
-                  Search
-                </InputGroup.Text>
-                <FormControl
+          <div className={`${style.headingContainer}`}>
+            <div className={`${style.headings} row`}>
+              <h2 className={`${style.heading} col-xl-4`}>CÁC PHỤ KIỆN</h2>
+              <Space
+                direction="vertical"
+                className={`${style.searchGroup} col-xl-6`}
+              >
+                <Search
                   className={`${style.searchBox}`}
                   placeholder="Nhập tên phụ kiện"
-                  aria-label="Search"
-                  aria-describedby="basic-addon1"
+                  onSearch={onSearch}
+                  enterButton
                 />
-              </InputGroup>
+              </Space>
             </div>
-            <h3 className={`${style.headingNumber}`}>
-              {props.accessories?.accessories?.accessory?.length} sản phẩm
-            </h3>
           </div>
           <div className={`${style.main} row`}>
             <div
-              className={`${style.filterContainer} col col-xl-2 col-lg-3 col-md-4 d-none d-md-block`}
+              className={`${style.filterContainer} col col-xl-2 col-lg-3 col-md-4 d-none d-md-block row`}
             >
+              <h3 className={`${style.headingNumber} col-xl-12`}>
+                {props.accessories?.accessories?.accessory?.length} sản phẩm
+              </h3>
               <Menu
                 onClick={handleClick}
                 defaultSelectedKeys={["1"]}
                 defaultOpenKeys={["sub1"]}
                 mode="inline"
-                className={`${style.filter}`}
+                className={`${style.filter} col-xl-12`}
               >
                 <div className={`${style.rangeInput}`}>
                   <>
@@ -115,11 +102,10 @@ function Accessory(props) {
               className={`${style.cardContainer} col col-xl-10 col-lg-9 col-md-8`}
             >
               <div className={`row no-gutters`}>
-                {props.accessories?.accessories?.accessory?.map((item,index) => {
+                {props.accessories?.accessories?.accessory?.map((item) => {
                   let myStyle = {
                     backgroundImage: `url(${item.image.avatar})`,
                   };
-                  if (index >= minIndex && index < maxIndex)
                   return (
                     <div className="col col-xl-4 col-md-6 col-12">
                       <Card className={`${style.card}`}>
@@ -147,15 +133,6 @@ function Accessory(props) {
                     </div>
                   );
                 })}
-              </div>
-              <div className={`${style.pagination} row`}>
-                <Pagination
-                  pageSize={pageSize}
-                  current={current}
-                  total={props.accessories?.accessories?.accessory?.length}
-                  onChange={handleChange}
-                  style={{ bottom: "0px" }}
-                />              
               </div>
             </div>
           </div>
