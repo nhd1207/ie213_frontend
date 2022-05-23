@@ -6,11 +6,12 @@
     --white-color: #fff;
     --gray-color: #444;
     --border-gray-color: #D8D8D8;
-    --font-title: 20px;
-    --font-document: 16px;
-    --font-note: 14px;
-    --font-h1: 32px;
-    --font-h2: 25px;
-    --font-xl-h1: 60px;
-    --font-xl-h2: 38px;
+    --black-background-color: rgb(56, 56, 56);
+    --font-title: 1.25rem;
+    --font-document: 1rem;
+    --font-note: 1.43rem;
+    --font-h1: 2rem;
+    --font-h2: 1.6rem;
+    --font-xl-h1: 3.75rem;
+    --font-xl-h2: 2.4rem;
 }

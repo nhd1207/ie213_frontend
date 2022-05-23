@@ -107,58 +107,63 @@ function LoginForm(props) {
   }
 
   return (
-    <div className={style.background}>
-      <h1>ĐĂNG NHẬP</h1>
-      <Form className={style.loginform} onSubmit={loginHandler}>
-        <Form.Group className={"mb-3"} controlId="formBasicEmail">
-          <div>
-            <FontAwesomeIcon icon={faEnvelope} />
-            <Form.Label className={style["login-label"]}>Email</Form.Label>
+    <div className={`row`}>
+      <div className={`${style.background} col-xl-4 col-9`}>
+        <h1 className={`${style.titleLogin}`}>ĐĂNG NHẬP</h1>
+        <Form className={`${style.loginForm} row`} onSubmit={loginHandler}>
+          <Form.Group className={`${style.formGroup} mb-3 col-xl-9 col-9`} controlId="formBasicEmail">
+            <div>
+              <FontAwesomeIcon icon={faEnvelope} />
+              <Form.Label className={`${style.loginLabel}`}>Email</Form.Label>
+            </div>
+            <Form.Control
+              className={`${style.loginInput}`}
+              type="email"
+              placeholder="Vpseven@example.org"
+              // value={email}
+              onChange={emailChangeHandler}
+              onBlur={emailValidation}
+            />
+            {invalidEmail && (
+              <Form.Text className={`${style.mailError}`}>
+                Emai không hợp lệ
+              </Form.Text>
+            )}
+          </Form.Group>
+          <Form.Group className={`${style.formGroup} mb-3 col-xl-9 col-9`} controlId="formBasicPassword">
+            <div>
+              <FontAwesomeIcon icon={faKey} />
+              <Form.Label className={`${style.loginLabel}`}>Mật khẩu</Form.Label>
+            </div>
+            <Form.Control
+              className={`${style.loginInput}`}
+              type="password"
+              placeholder="Ít nhất 8 ký tự"
+              onChange={passwordChangeHandler}
+            />
+            {wrongPassword && (
+              <Form.Text className={`${style.passwordError}`}>
+                Mật khẩu cần có ít nhất 8 ký tự
+              </Form.Text>
+            )}
+          </Form.Group>
+          <Form.Group className={`${style.formGroup} mb-3 col-xl-9 col-9`} controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Nhớ mật khẩu" />
+          </Form.Group>
+          <div className={`${style.spinButton} col-xl-9 col-9`}>
+            <Spin spinning={props.loading}>
+              <Button
+                className={`${style.loginButton}`}
+                variant="primary"
+                type="submit"
+
+              >
+                ĐĂNG NHẬP
+              </Button>
+            </Spin>
           </div>
-          <Form.Control
-            className={style["login-input"]}
-            type="email"
-            placeholder="Vpseven@example.org"
-            // value={email}
-            onChange={emailChangeHandler}
-            onBlur={emailValidation}
-          />
-          {invalidEmail && (
-            <Form.Text className={style["email-error"]}>
-              Emai không hợp lệ
-            </Form.Text>
-          )}
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <div>
-            <FontAwesomeIcon icon={faKey} />
-            <Form.Label className={style["login-label"]}>Mật khẩu</Form.Label>
-          </div>
-          <Form.Control
-            className={style["login-input"]}
-            type="password"
-            placeholder="Ít nhất 8 ký tự"
-            onChange={passwordChangeHandler}
-          />
-          {wrongPassword && (
-            <Form.Text className={style["password-error"]}>
-              Mật khẩu cần có ít nhất 8 ký tự
-            </Form.Text>
-          )}
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Nhớ mật khẩu" />
-        </Form.Group>
-        <Spin spinning={props.loading}>
-          <Button
-            className={style["login-button"]}
-            variant="primary"
-            type="submit"
-          >
-            Đăng nhập
-          </Button>
-        </Spin>
-      </Form>
+        </Form>
+      </div>
     </div>
   );
 }
