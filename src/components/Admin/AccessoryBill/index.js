@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, Spin, Modal, List, Avatar,Tabs } from "antd";
+import { Modal, List, Avatar,Tabs } from "antd";
 import DataTable from "./components/DataTable";
 import Layout from "../LayoutAdmin/LayoutAdmin";
 import queryString from "query-string";
@@ -10,7 +10,6 @@ import {
   updateAccessoryBill,
   deleteAccessoryBill,
 } from "./action";
-import { PlusOutlined } from "@ant-design/icons";
 import FormFilter from "./components/FormFilter";
 import classes from "./index.module.css";
 const { TabPane } = Tabs;
@@ -93,7 +92,7 @@ class index extends Component {
             <TabPane tab="Đang chờ duyệt" key="1">
             <DataTable //done
             dataSource={this.props?.accessoryBill?.data.accessoryBills.filter((item)=>{
-              return item.status=='Pending'
+              return item.status =='Pending'
             }) 
             || []} 
             loading={this.props.accessoryBill.loading}

@@ -5,23 +5,18 @@ import Layout from "../../components/layout";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { getListCar, filter } from "./action";
+import {  addCarToWishlist } from "./action";
 import { NavLink } from "react-router-dom";
 import {
   Form,
-  Button,
-  FormGroup,
-  FormControl,
-  ControlLabel,
-  Dropdown,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Menu, Spin, Slider } from "antd";
+import {  Pagination } from "antd";
 import {
   SettingOutlined,
-  DoubleRightOutlined,
-  LeftOutlined,
-  RightOutlined,
   HeartFilled,
+  ThunderboltOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { Input, Space } from "antd";
@@ -70,18 +65,29 @@ function Car(props) {
     },
   };
 
+  const [totalPage, setTotalPage] = useState(0);
+  const [current, setCurrent] = useState(1);
+  const [minIndex, setMinIndex] = useState(0);
+  const [maxIndex, setMaxIndex] = useState(0);
+
+  var pageSize = 6;
+
   useEffect(() => {
     props.getListCar();
     console.log(props.cars.cars);
+    setTotalPage(props?.cars?.cars?.length / pageSize);
+    setMinIndex(0);
+    setMaxIndex(pageSize)
   }, []);
 
   const onSearch = (value) => console.log(value);
 
-  const toggleClass = (e) => {
+  const toggleClass = (e, value) => {
     e.preventDefault();
     console.log("click ", e.target.parentElement.parentElement);
     let element = e.target.parentElement.parentElement;
     element.classList.toggle(`${style.heartIconClicked}`);
+    props.addCarToWishlist({itemId: value})
   };
 
   const handleFilterValue = (value, type) => {
@@ -101,6 +107,12 @@ function Car(props) {
         return;
     }
   }
+  const handleChange = (page) => {
+    setCurrent(page);
+    setMinIndex((page - 1) * pageSize);
+    setMaxIndex(page * pageSize)
+  };
+
 
   return (
     <Layout>
@@ -160,10 +172,11 @@ function Car(props) {
               className={`${style.cardContainer} col col-xl-10 col-lg-9 col-md-8`}
             >
               <div className={`row`}>
-                {props.cars?.cars?.map((car) => {
+                {props.cars?.cars?.map((car,index) => {
                   let myStyle = {
                     backgroundImage: `url(${car?.image?.avatar})`,
                   };
+                  if (index >= minIndex && index < maxIndex)
                   return (
                     <Link
                       className={"col col-xl-6 col-sm-12 col-12"}
@@ -200,33 +213,40 @@ function Car(props) {
                         <div className={`${style.img2}`}></div>
                         <div className={`${style.img3}`}></div>
                         <div className={`${style.description}`}>
-                          <LeftOutlined
+                          {/* <LeftOutlined
                             className={`${style.arrowIcon} d-none d-md-block`}
-                          />
+                          /> */}
                           <div className={`${style.descGroup}`}>
                             <h4 className={`${style.text} ${style.carName}`}>
                               {car.name}
                             </h4>
                             <h4 className={`${style.text}`}>{car?.model}</h4>
                             <h4 className={`${style.text}`}>{car?.price}</h4>
-                            <HeartFilled
-                              onClick={toggleClass}
-                              className={`${style.heartIcon}`}
-                            />
                           </div>
 
-                          <RightOutlined
+                          <ThunderboltOutlined
                             className={`${style.arrowIcon} d-none d-md-block`}
                           />
                         </div>
+                        <HeartFilled
+                          onClick={(e) => toggleClass(e,car._id)}
+                          className={`${style.heartIcon}`}
+                        />
                       </div>
                     </Link>
                   );
                 })}
               </div>
-              {/* <div className={`${style.pagination} row`}>
-                <Pagination defaultCurrent={6} total={100} />;
-              </div> */}
+              <div className={`${style.pagination} row`}>
+
+                <Pagination
+                  pageSize={pageSize}
+                  current={current}
+                  total={props?.cars?.cars?.length}
+                  onChange={handleChange}
+                  style={{ bottom: "0px" }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -246,6 +266,9 @@ const mapDispatchToProps = (dispatch) => ({
   filter: (params) => {
     dispatch(filter(params));
   },
+  addCarToWishlist: (data) => {
+    dispatch(addCarToWishlist(data));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Car);

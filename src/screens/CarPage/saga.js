@@ -9,6 +9,7 @@ import {
 } from './action'
 
 import * as api from '../../apis/Car'
+import * as apiUser from '../../apis/User'
 
 function* getListCarSaga(action) {
     try {
@@ -48,11 +49,34 @@ function* filterCarSaga(action) {
 }
 
 
+function* addCarToWishlistSaga(action) {
+    try {
+        const { data } = action
+        let data1 = {
+            ...data,
+            type: "car"
+        }
+        console.log(data1);
+        const response = yield call(apiUser.addItemToWishlist, data1)
+        if(response.status==='success')
+                yield all([put({type: TYPE.ADDCARTOWISHLIST.SUCCESS, ...response})])
+        else{
+          yield put({type: TYPE.ADDCARTOWISHLIST.ERROR, error: response})
+        }
+    } catch (error) {
+        yield all([
+            put({type: TYPE.ADDCARTOWISHLIST.ERROR, error})
+        ])
+    }
+}
+
+
 
 function* watcher() {
     yield all([
         takeLatest(TYPE.GETLISTCAR.REQUEST, getListCarSaga),
-        takeLatest(TYPE.FILTER.REQUEST, filterCarSaga)
+        takeLatest(TYPE.FILTER.REQUEST, filterCarSaga),
+        takeLatest(TYPE.ADDCARTOWISHLIST.REQUEST, addCarToWishlistSaga)
     ])
 }
 

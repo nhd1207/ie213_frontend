@@ -1,12 +1,11 @@
 import React from "react";
-import { Table, Spin, Space, Tooltip } from "antd";
+import { Table, Space, Tooltip } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDeleteLeft,
-  faEdit,
   faInfo,
 } from "@fortawesome/free-solid-svg-icons";
-import { Popconfirm, message, Button } from "antd";
+import { Popconfirm } from "antd";
 import {
   HistoryOutlined,
   CheckOutlined,
