@@ -38,14 +38,30 @@ function* addAccessoryToWishlistSaga(action) {
         }
         console.log(data1);
         const response = yield call(apiUser.addItemToWishlist, data1)
-        if(response.status==='success')
-                yield all([put({type: TYPE.ADDACCESSORYTOWISHLIST.SUCCESS, ...response})])
-        else{
-          yield put({type: TYPE.ADDACCESSORYTOWISHLIST.ERROR, error: response})
+        if (response.status === 'success')
+            yield all([put({ type: TYPE.ADDACCESSORYTOWISHLIST.SUCCESS, ...response })])
+        else {
+            yield put({ type: TYPE.ADDACCESSORYTOWISHLIST.ERROR, error: response })
         }
     } catch (error) {
         yield all([
-            put({type: TYPE.ADDACCESSORYTOWISHLIST.ERROR, error})
+            put({ type: TYPE.ADDACCESSORYTOWISHLIST.ERROR, error })
+        ])
+    }
+}
+
+function* searchAccessorySaga(action) {
+    try {
+        const { data } = action
+        const response = yield call(api.search, data)
+        if (response.status === 'success')
+            yield all([put({ type: TYPE.SEARCH.SUCCESS, ...response })])
+        else {
+            yield put({ type: TYPE.SEARCH.ERROR, error: response })
+        }
+    } catch (error) {
+        yield all([
+            put({ type: TYPE.SEARCH.ERROR, error })
         ])
     }
 }
@@ -54,7 +70,8 @@ function* addAccessoryToWishlistSaga(action) {
 function* watcher() {
     yield all([
         takeLatest(TYPE.GETACCESSORY.REQUEST, getListAccessorySaga),
-        takeLatest(TYPE.ADDACCESSORYTOWISHLIST.REQUEST, addAccessoryToWishlistSaga)
+        takeLatest(TYPE.ADDACCESSORYTOWISHLIST.REQUEST, addAccessoryToWishlistSaga),
+        takeLatest(TYPE.SEARCH.REQUEST, searchAccessorySaga),
     ])
 }
 
