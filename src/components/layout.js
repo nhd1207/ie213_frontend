@@ -160,7 +160,7 @@ function Layouts(props) {
             {/* {!context.isLoggedIn && ( */}
 
             <Menu.Item key="login">
-              <Spin spinning={props?.isLoggedIn?.loading}>
+              <Spin spinning={props?.isLoggedIn?.loading} size="small">
                 {props?.isLoggedIn?.isLoggedIn === true ? (
                   <NavLink
                     to={`${match.url}`}

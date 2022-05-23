@@ -61,6 +61,7 @@ function CarOrder(props) {
     props?.car?.color?.map((d) => {
       return { label: d, value: d };
     }) || [];
+    
   useEffect(() => {
     props.getCarOrder(props.match.params.id);
     props.getListShowroom();

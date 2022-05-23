@@ -15,7 +15,7 @@ import {
     Dropdown,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Menu, Spin } from "antd";
+import { Menu, Spin, Pagination } from "antd";
 import {
     AppstoreOutlined,
     MailOutlined,
@@ -30,10 +30,26 @@ function Car(props) {
     //     console.log("click ", e);
     // };
 
+    const [totalPage, setTotalPage] = useState(0);
+    const [current, setCurrent] = useState(1);
+    const [minIndex, setMinIndex] = useState(0);
+    const [maxIndex, setMaxIndex] = useState(0);
+
+    var pageSize = 6;
+
+
     useEffect(() => {
-        props.getListCar()
-        console.log(props.cars.car);
+        props.getListCar();
+        setTotalPage(props?.cars?.cars?.car?.length / pageSize);
+        setMinIndex(0);
+        setMaxIndex(pageSize)
     }, []);
+
+    const handleChange = (page) => {
+        setCurrent(page);
+        setMinIndex((page - 1) * pageSize);
+        setMaxIndex(page * pageSize)
+    };
 
     return (
         <Layout>
@@ -94,39 +110,51 @@ function Car(props) {
                         >
                             <div className={`row`}>
                                 {
-                                    props.cars?.cars?.car?.map(car => {
+                                    props.cars?.cars?.car?.map((car, index) => {
+
                                         let myStyle = {
                                             backgroundImage: `url(${car?.image?.avatar})`
                                         }
-                                        return (
-                                            <Link className={"col col-xl-6"} key={car?._id} to={`/car/${car?._id}`}>
-                                            <div className={`${style.card} `}>
-                                                {/* <NavLink to={`/car/${car._id}`}> */}
-                                                {/* </NavLink> */}
-                                                <div className={`${style.image}`} style={myStyle}>
-                                                </div>
-                                                <div className={`${style.description}`}>
-                                                    <div className={`${style.nameGroup}`}>
-                                                        <h5 className={`${style.sub}`}>Tên Xe</h5>
-                                                        <h4 className={`${style.text}`}>{car.name}</h4>
+                                        if (index >= minIndex && index < maxIndex)
+                                            return (
+                                                <Link className={"col col-xl-6"} key={car?._id} to={`/car/${car?._id}`}>
+                                                    <div className={`${style.card} `}>
+                                                        {/* <NavLink to={`/car/${car._id}`}> */}
+                                                        {/* </NavLink> */}
+                                                        <div className={`${style.image}`} style={myStyle}>
+                                                        </div>
+                                                        <div className={`${style.description}`}>
+                                                            <div className={`${style.nameGroup}`}>
+                                                                <h5 className={`${style.sub}`}>Tên Xe</h5>
+                                                                <h4 className={`${style.text}`}>{car.name}</h4>
+                                                            </div>
+                                                            <div>
+                                                                <h5 className={`${style.sub}`}>Công Suất</h5>
+                                                                <h4 className={`${style.text}`}>
+                                                                    {car?.specification?.power}
+                                                                </h4>
+                                                            </div>
+                                                            <div>
+                                                                <h5 className={`${style.sub}`}>Chỗ ngồi</h5>
+                                                                <h4 className={`${style.text}`}>
+                                                                    {car?.specification?.displacement} chỗ
+                                                                </h4>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <h5 className={`${style.sub}`}>Công Suất</h5>
-                                                        <h4 className={`${style.text}`}>
-                                                            {car?.specification?.power}
-                                                        </h4>
-                                                    </div>
-                                                    <div>
-                                                        <h5 className={`${style.sub}`}>Chỗ ngồi</h5>
-                                                        <h4 className={`${style.text}`}>
-                                                            {car?.specification?.displacement} chỗ
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </Link>
-                                        );
+                                                </Link>
+                                            );
                                     })}
+                                <div className={`${style.pagination} row`}>
+
+                                    <Pagination
+                                        pageSize={pageSize}
+                                        current={current}
+                                        total={props?.cars?.cars?.car?.length}
+                                        onChange={handleChange}
+                                        style={{ bottom: "0px" }}
+                                    />
+                                </div>
                             </div>
                             {/* <div className={`${style.pagination} row`}>
                 <Pagination defaultCurrent={6} total={100} />;
