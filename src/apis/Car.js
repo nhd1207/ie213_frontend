@@ -53,12 +53,11 @@ export const cloudinaryUpload = (fileToUpload) => {
         fileToUpload,
         url:`uploads/cloudinary-upload`
     })
-    
-    
-    // .post(link_api + 'uploads/cloudinary-upload', fileToUpload)
-    // .then(res => res.data)
-    // .catch(err => console.log(err))
 }
 
-
-
+export const filter = (params) => {
+    return axios({
+        method:'GET',
+        url:`${prefix}/filter?${params}`
+    })
+}
