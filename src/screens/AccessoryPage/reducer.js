@@ -15,7 +15,7 @@ function reducer(state = initialState, action) {
         case type.GETACCESSORY.SUCCESS:
             return {
                 ...state,
-                accessories: action.data,
+                accessories: action.data.accessory,
                 loading: false,
             }
         case type.GETACCESSORY.ERROR:
@@ -34,6 +34,22 @@ function reducer(state = initialState, action) {
                 loading: false,
             }
         case type.ADDACCESSORYTOWISHLIST.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
+        case type.SEARCH.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case type.SEARCH.SUCCESS:
+            return {
+                ...state,
+                accessories: action.data,
+                loading: false,
+            }
+        case type.SEARCH.ERROR:
             return {
                 ...state,
                 loading: false,
