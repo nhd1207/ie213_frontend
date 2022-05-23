@@ -74,3 +74,11 @@ export const updateWishlist =(data)=> {
     })
 }
 
+export const addItemToWishlist =(data)=> {
+    return axios({
+        method: 'PATCH',
+        data,
+        url: `${prefix}/addItemToWishlist`
+    })
+}
+

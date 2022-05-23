@@ -7,19 +7,13 @@ import Layout from "../../components/layout";
 import { Pagination } from "antd";
 import {
   Form,
-  Button,
-  FormGroup,
   FormControl,
-  ControlLabel,
-  Dropdown,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getListAccessory } from "./action";
+import { getListAccessory, addAccessoryToWishlist } from "./action";
 import { Menu, Spin } from "antd";
 import {
   HeartFilled,
-  AppstoreOutlined,
-  MailOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 
@@ -38,7 +32,6 @@ function Accessory(props) {
 
   useEffect(() => {
     props.getListAccessory();
-    console.log(props.accessories);
     setTotalPage(props.accessories?.accessories?.accessory?.length / pageSize);
     setMinIndex(0);
     setMaxIndex(pageSize)
@@ -51,14 +44,15 @@ function Accessory(props) {
   };
 
   const handleClick = (e) => {
-    console.log("click ", e);
+    // console.log("click ", e);
   };
 
-  const toggleClass = (e) => {
-    console.log("click ", e.target.parentElement.parentElement);
+  const toggleClass = (e,value) => {
     let element = e.target.parentElement.parentElement;
     element.classList.toggle(`${style.heartIconClicked}`);
+    props.addAccessoryToWishlist({itemId: value})
   };
+
 
   return (
     <Layout>
@@ -144,9 +138,9 @@ function Accessory(props) {
                               Chi tiết phụ kiện
                             </NavLink>
                             <HeartFilled
-                              onClick={toggleClass}
+                              onClick={(e)=>toggleClass(e,item._id)}
                               className={`${style.heartIcon}`}
-                            />
+                              />
                           </div>
                         </Card.Body>
                       </Card>
@@ -179,6 +173,9 @@ const mapDispatchToProps = (dispatch) => ({
   getListAccessory: (params) => {
     dispatch(getListAccessory(params));
   },
+  addAccessoryToWishlist: (data) => {
+    dispatch(addAccessoryToWishlist(data));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Accessory);
