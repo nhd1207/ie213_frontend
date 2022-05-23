@@ -13,8 +13,8 @@ import {
   } from "@ant-design/icons";
 
 const toggleClass = (e) => {
-    console.log("click ", e.target.parentElement);
-    let element = e.target.parentElement;
+    console.log("click ", e.target.parentElement.parentElement);
+    let element = e.target.parentElement.parentElement;
     element.classList.toggle(`${style.heartIconClicked}`);
   };
 
