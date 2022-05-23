@@ -22,6 +22,7 @@ import {
   LeftOutlined,
   RightOutlined,
   HeartFilled,
+  ThunderboltOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { Input, Space } from "antd";
@@ -146,25 +147,25 @@ function Car(props) {
                         <div className={`${style.img2}`}></div>
                         <div className={`${style.img3}`}></div>
                         <div className={`${style.description}`}>
-                          <LeftOutlined
+                          {/* <LeftOutlined
                             className={`${style.arrowIcon} d-none d-md-block`}
-                          />
+                          /> */}
                           <div className={`${style.descGroup}`}>
                             <h4 className={`${style.text} ${style.carName}`}>
                               {car.name}
                             </h4>
                             <h4 className={`${style.text}`}>{car?.model}</h4>
                             <h4 className={`${style.text}`}>{car?.price}</h4>
-                            <HeartFilled
-                              onClick={toggleClass}
-                              className={`${style.heartIcon}`}
-                            />
                           </div>
 
-                          <RightOutlined
+                          <ThunderboltOutlined
                             className={`${style.arrowIcon} d-none d-md-block`}
                           />
                         </div>
+                        <HeartFilled
+                          onClick={toggleClass}
+                          className={`${style.heartIcon}`}
+                        />
                       </div>
                     </Link>
                   );
