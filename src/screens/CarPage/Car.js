@@ -17,11 +17,15 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Menu, Spin } from "antd";
 import {
-  AppstoreOutlined,
-  MailOutlined,
   SettingOutlined,
+  DoubleRightOutlined,
+  LeftOutlined,
+  RightOutlined,
+  HeartFilled,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { Input, Space } from "antd";
+const { Search } = Input;
 
 const { SubMenu } = Menu;
 
@@ -35,42 +39,48 @@ function Car(props) {
     console.log(props.cars.car);
   }, []);
 
+  const onSearch = (value) => console.log(value);
+
+  const toggleClass = (e) => {
+    e.preventDefault();
+    console.log("click ", e.target.parentElement.parentElement);
+    let element = e.target.parentElement.parentElement;
+    element.classList.toggle(`${style.heartIconClicked}`);
+  };
+
   return (
     <Layout>
       <Spin size="large" spinning={props?.cars?.loading}>
         <div className={`${style.container}`}>
-          <div className={`${style.headingContainer} container`}>
-            <div className={`${style.headings} `}>
-              <h2 className={`${style.heading} `}>CÁC DÒNG XE</h2>
-              <InputGroup className={`${style.searchGroup} mb-3 `}>
-                <InputGroup.Text
-                  id="basic-addon1"
-                  className={`${style.searchTitle}`}
-                >
-                  Tìm kiếm
-                </InputGroup.Text>
-                <FormControl
+          <div className={`${style.headingContainer}`}>
+            <div className={`${style.headings} row`}>
+              <h2 className={`${style.heading} col-xl-4`}>CÁC DÒNG XE</h2>
+              <Space
+                direction="vertical"
+                className={`${style.searchGroup} col-xl-6`}
+              >
+                <Search
                   className={`${style.searchBox}`}
                   placeholder="Nhập tên xe"
-                  aria-label="Search"
-                  aria-describedby="basic-addon1"
+                  onSearch={onSearch}
+                  enterButton
                 />
-              </InputGroup>
+              </Space>
             </div>
-            <h3 className={`${style.headingNumber}`}>
-              {props.cars?.cars?.car?.length} chiếc
-            </h3>
           </div>
           <div className={`${style.main} row`}>
             <div
-              className={`${style.filterContainer} col col-xl-2 col-lg-3 col-md-4 d-none d-md-block`}
+              className={`${style.filterContainer} col col-xl-2 col-lg-3 col-md-4 d-none d-md-block row`}
             >
+              <h3 className={`${style.headingNumber} col-xl-12`}>
+                {props.cars?.cars?.car?.length} chiếc
+              </h3>
               <Menu
                 // onClick={handleClick}
                 defaultSelectedKeys={["1"]}
                 defaultOpenKeys={["sub1"]}
                 mode="inline"
-                className={`${style.filter}`}
+                className={`${style.filter} col-xl-12`}
               >
                 <div className={`${style.rangeInput}`}>
                   <>
@@ -102,7 +112,7 @@ function Car(props) {
                   };
                   return (
                     <Link
-                      className={"col col-xl-6"}
+                      className={"col col-xl-6 col-sm-12 col-12"}
                       key={car?._id}
                       to={`/car/${car?._id}`}
                     >
@@ -135,6 +145,26 @@ function Car(props) {
                         <div className={`${style.img1}`}></div>
                         <div className={`${style.img2}`}></div>
                         <div className={`${style.img3}`}></div>
+                        <div className={`${style.description}`}>
+                          <LeftOutlined
+                            className={`${style.arrowIcon} d-none d-md-block`}
+                          />
+                          <div className={`${style.descGroup}`}>
+                            <h4 className={`${style.text} ${style.carName}`}>
+                              {car.name}
+                            </h4>
+                            <h4 className={`${style.text}`}>{car?.model}</h4>
+                            <h4 className={`${style.text}`}>{car?.price}</h4>
+                            <HeartFilled
+                              onClick={toggleClass}
+                              className={`${style.heartIcon}`}
+                            />
+                          </div>
+
+                          <RightOutlined
+                            className={`${style.arrowIcon} d-none d-md-block`}
+                          />
+                        </div>
                       </div>
                     </Link>
                   );
