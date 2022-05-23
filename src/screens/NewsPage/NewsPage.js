@@ -21,7 +21,7 @@ function NewsPage(props) {
                 <div className={`${style.news} `}>
 
                     <div className={`${style.news_header} `}>TIN TỨC</div>
-                    <div className={`${style.news_name} `}>THẾ GIỚI <br></br> SEVEN</div>
+                    <div className={`${style.news_name} `}>THẾ GIỚI SEVEN</div>
                     <Spin spinning={props.news.loading}>
                         <List
                             pagination={{
@@ -39,7 +39,7 @@ function NewsPage(props) {
                                         description={
                                             <div className={`${style.news_items} `}>
                                                 <div className={`${style.news_date} `}>{dateFormat(post.createdAt, "mmmm dS, yyyy")}</div>
-                                                <div className={`${style.news_content} `} dangerouslySetInnerHTML={{__html: post?.content}}/>
+                                                <div className={`${style.news_content} `} dangerouslySetInnerHTML={{ __html: post?.content }} />
                                                 <a className={`${style.btn_title} `} href={`news/${post._id}`}>
                                                     <button className={`${style.btn_outline_dark} `}>
                                                         ĐỌC THÊM

@@ -56,7 +56,7 @@ function Accessory(props) {
                   id="basic-addon1"
                   className={`${style.searchTitle}`}
                 >
-                  Search
+                  Tìm kiếm
                 </InputGroup.Text>
                 <FormControl
                   className={`${style.searchBox}`}
@@ -67,7 +67,7 @@ function Accessory(props) {
               </InputGroup>
             </div>
             <h3 className={`${style.headingNumber}`}>
-              {props.accessories?.accessories?.accessory?.length} sản phẩm
+              {props.accessories?.accessories?.accessory?.length} SẢN PHẨM
             </h3>
           </div>
           <div className={`${style.main} row`}>
@@ -87,17 +87,17 @@ function Accessory(props) {
                     <Form.Range />
                   </>
                 </div>
-                <SubMenu key="sub1" icon={<SettingOutlined />} title="Dòng Xe">
-                  <Menu.Item key="1">Option 1</Menu.Item>
-                  <Menu.Item key="2">Option 2</Menu.Item>
-                  <Menu.Item key="3">Option 3</Menu.Item>
-                  <Menu.Item key="4">Option 4</Menu.Item>
+                <SubMenu key="sub1" icon={<SettingOutlined />} title="Dòng Xe" className={`${style.subMenuCss}`}>
+                  <Menu.Item key="1" className={`${style.subMenuOption}`}>Option 1</Menu.Item>
+                  <Menu.Item key="2" className={`${style.subMenuOption}`}>Option 2</Menu.Item>
+                  <Menu.Item key="3" className={`${style.subMenuOption}`}>Option 3</Menu.Item>
+                  <Menu.Item key="4" className={`${style.subMenuOption}`}>Option 4</Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub2" icon={<SettingOutlined />} title="Chỗ Ngồi">
-                  <Menu.Item key="5">Option 5</Menu.Item>
-                  <Menu.Item key="6">Option 6</Menu.Item>
-                  <Menu.Item key="7">Option 7</Menu.Item>
-                  <Menu.Item key="8">Option 8</Menu.Item>
+                <SubMenu key="sub2" icon={<SettingOutlined />} title="Chỗ Ngồi" className={`${style.subMenuCss}`}>
+                  <Menu.Item key="5" className={`${style.subMenuOption}`}>Option 5</Menu.Item>
+                  <Menu.Item key="6" className={`${style.subMenuOption}`}>Option 6</Menu.Item>
+                  <Menu.Item key="7" className={`${style.subMenuOption}`}>Option 7</Menu.Item>
+                  <Menu.Item key="8" className={`${style.subMenuOption}`}>Option 8</Menu.Item>
                 </SubMenu>
               </Menu>
             </div>

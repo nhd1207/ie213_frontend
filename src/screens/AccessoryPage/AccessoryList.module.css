@@ -3,33 +3,31 @@
     opacity: 0;
     transform: translateY(100%);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+@import url("../../style/_variables.css");
+
 .container {
   margin: 40px;
 }
-.headingContainer {
-}
-
-.headings {
-  /* display: grid;
-  grid-template-columns: 20% 80%; */
-}
 
 .heading {
-  text-shadow: 2px 2px 5px rgb(157, 197, 1);
-  color: rgba(0, 0, 0, 0.9);
+  font-size: var(--font-h1);
+  color: var(--black-color);
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .searchGroup {
   padding: 0;
-  border-radius: 12px;
-  box-shadow: 6px 6px 4px 0px #ddd;
+  border-radius: 5px;
   margin: 1rem 0;
+  width: 50rem;
 }
 
 #bootstrap-overrides .input-group {
@@ -39,12 +37,16 @@
 .searchTitle {
   border-radius: 12px 0px 0px 12px;
 }
+
 .searchBox {
   border-radius: 0px 12px 12px 0px;
 }
 
 .headingNumber {
-  font-size: 1.2rem;
+  margin-top: 30px;
+  font-size: var(--font-document);
+  color: var(--gray-color);
+  font-weight: initial;
 }
 
 .main {
@@ -56,14 +58,23 @@
   margin: 0 0;
 }
 
+.subMenuCss {
+  color: var(--gray-color);
+  font-size: var(--font-document);
+}
+
+/*   */
+
 .filterContainer .filter {
   padding: 0.5rem;
-  border: 1px solid #ccc;
-  box-shadow: 0px 4px 10px 4px rgb(0 0 0 / 10%);
+  border: 1px solid var(--border-gray-color);
+  /* box-shadow: 0px 4px 10px 4px rgb(0 0 0 / 10%); */
 }
 
 .rangeInput {
   margin: 12px 0;
+  color: var(--gray-color);
+  font-size: var(--font-document);
 }
 
 .cardContainer {
@@ -100,6 +111,7 @@
   border: none;
   border-bottom: 2px solid rgba(0, 0, 0, 0.125);
 }
+
 .card:hover {
   box-shadow: 0px 4px 10px 4px rgb(0 0 0 / 10%);
   transform: translateY(-4px);
@@ -107,14 +119,12 @@
   z-index: 10;
 }
 
-.card > .image {
+.card>.image {
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    rgba(255, 255, 255, 0) 50%,
-    rgba(252, 252, 252, 0) 70%,
-    rgba(246, 246, 246, 1) 100%
-  );
+  background: linear-gradient(rgba(255, 255, 255, 0) 50%,
+      rgba(252, 252, 252, 0) 70%,
+      rgba(246, 246, 246, 1) 100%);
   /* url(../../Images/andre-tan-79.jpg); */
   background-size: cover;
   background-position: center center;
@@ -132,7 +142,7 @@
 }
 
 .heartIconClicked {
-  color: red;
+  color: var(--orange-color);
 }
 
 .pagination {

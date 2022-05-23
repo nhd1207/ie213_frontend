@@ -29,7 +29,7 @@ function CarDetail(props) {
     console.log(location);
   }, []);
 
-  function compareHandler() {}
+  function compareHandler() { }
 
   return (
     <Layout>
@@ -75,7 +75,7 @@ function CarDetail(props) {
                     danger
                   >
                     <CarOutlined />
-                    Đặt Xe Ngay
+                    ĐẶT XE NGAY
                   </Button>
                 </div>
                 <div className={`col-xl-2 row`}>
@@ -177,7 +177,7 @@ function CarDetail(props) {
                     danger
                   >
                     <CarOutlined />
-                    Đặt Xe Ngay
+                    ĐẶT XE NGAY
                   </Link>
                 </div>
                 <div className={`${style.button} col-xl-6`}>
@@ -185,7 +185,7 @@ function CarDetail(props) {
                     className={`${style.compareButton} col-xl-12`}
                     to={`/compare?id1=${props?.carDetail?.car[0]?._id}`}
                   >
-                    So Sánh Xe
+                    SO SÁNH XE
                     <CaretRightOutlined />
                   </Link>
                 </div>
