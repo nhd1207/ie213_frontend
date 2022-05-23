@@ -13,8 +13,8 @@ import {
   } from "@ant-design/icons";
 
 const toggleClass = (e) => {
-    console.log("click ", e.target.parentElement.parentElement);
-    let element = e.target.parentElement.parentElement;
+    console.log("click ", e.target.parentElement);
+    let element = e.target.parentElement;
     element.classList.toggle(`${style.heartIconClicked}`);
   };
 
@@ -48,12 +48,12 @@ let FormUpdateCart = props => {
                         />
                     </div>
                 </div>
-                <div className={`${style.submit} col-xl-12 text-center`}>
-                    <button className={`${style.document} btn btn-primary mr-3`} type="submit"> <FontAwesomeIcon icon={faSave} /> THÊM VÀO GIỎ HÀNG</button>
+                <div className={`${style.submit} col-xl-12 text-center ${style.btnWrapper}`}>
+                    <button className={`${style.document} btn btn-primary mr-3 `} type="submit"> <FontAwesomeIcon icon={faSave} /> THÊM VÀO GIỎ HÀNG</button>
                     <HeartFilled
-                                        onClick={toggleClass}
-                                        className={`${style.heartIcon}`}
-                                    />
+                        onClick={toggleClass}
+                        className={`${style.heartIcon}`}
+                    />
                 </div>
             </div>
         </form>

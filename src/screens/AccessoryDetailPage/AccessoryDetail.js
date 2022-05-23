@@ -130,15 +130,12 @@ function AccessoryDetail(props) {
                                 {/* <div className={`${style.document} col-xl-3`}>Thông số: {props.data?.data[0]?.specification?.height} cm, {props.data?.data[0]?.specification.weight} kg</div>
                                 <div className={`${style.content_price} ${style.document} col-xl-3`}>
                                     Giá tiền: {money(props.data?.data[0]?.price, "VND")} */}
-                                <div className={`${style.btnWrapper}`}>
                                     <div className={`${style.FromUpdateCart}`}>
                                         <FormUpdateCart
                                             onSubmit={handleUpdateCart}
                                             colors={props.data?.data[0]?.color}
                                         />
                                     </div>
-                                    
-                                </div>
                             </div>
 
                         </div>

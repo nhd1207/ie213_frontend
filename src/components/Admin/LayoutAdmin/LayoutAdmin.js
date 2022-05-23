@@ -7,7 +7,8 @@ import {
     TeamOutlined,
     ShoppingCartOutlined,
     LogoutOutlined,
-    UnorderedListOutlined
+    UnorderedListOutlined,
+    RollbackOutlined
 } from '@ant-design/icons';
 import "antd/dist/antd.css";
 
@@ -44,6 +45,9 @@ export default function LayoutAdmin(props) {
                     </Menu.Item>
                     <Menu.Item key="8" icon={<LogoutOutlined />}>
                         <Link to={`/admin/logout`} > Đăng xuất </Link>
+                    </Menu.Item>
+                    <Menu.Item key="9" icon={<RollbackOutlined />}>
+                        <Link to={`/home`} > Quay lại </Link>
                     </Menu.Item>
                 </Menu>
             </Sider>
