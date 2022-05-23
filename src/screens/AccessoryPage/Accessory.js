@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./AccessoryList.module.css";
 import { InputGroup } from "react-bootstrap";
 import "antd/dist/antd.css";
@@ -25,6 +25,14 @@ const { Search } = Input;
 const { SubMenu } = Menu;
 
 function Accessory(props) {
+
+  const [totalPage, setTotalPage] = useState(0);
+  const [current, setCurrent] = useState(1);
+  const [minIndex, setMinIndex] = useState(0);
+  const [maxIndex, setMaxIndex] = useState(0);
+
+  var pageSize = 2;
+
   useEffect(() => {
     props.getListAccessory();
     setTotalPage(props.accessories?.accessories?.accessory?.length / pageSize);
@@ -36,10 +44,16 @@ function Accessory(props) {
     // console.log("click ", e);
   };
 
-  const toggleClass = (e,value) => {
+  const toggleClass = (e, value) => {
     let element = e.target.parentElement.parentElement;
     element.classList.toggle(`${style.heartIconClicked}`);
-    props.addAccessoryToWishlist({itemId: value})
+    props.addAccessoryToWishlist({ itemId: value })
+  };
+
+  const handleChange = (page) => {
+    setCurrent(page);
+    setMinIndex((page - 1) * pageSize);
+    setMaxIndex(page * pageSize)
   };
 
   const onSearch = (value) => console.log(value);
@@ -102,10 +116,11 @@ function Accessory(props) {
               className={`${style.cardContainer} col col-xl-10 col-lg-9 col-md-8`}
             >
               <div className={`row no-gutters`}>
-                {props.accessories?.accessories?.accessory?.map((item) => {
+                {props.accessories?.accessories?.accessory?.map((item, index) => {
                   let myStyle = {
                     backgroundImage: `url(${item.image.avatar})`,
                   };
+                  if (index >= minIndex && index < maxIndex)
                   return (
                     <div className="col col-xl-4 col-md-6 col-12">
                       <Card className={`${style.card}`}>
@@ -124,15 +139,25 @@ function Accessory(props) {
                               Chi tiết phụ kiện
                             </NavLink>
                             <HeartFilled
-                              onClick={(e)=>toggleClass(e,item._id)}
+                              onClick={(e) => toggleClass(e, item._id)}
                               className={`${style.heartIcon}`}
-                              />
+                            />
                           </div>
                         </Card.Body>
                       </Card>
                     </div>
                   );
                 })}
+                <div className={`${style.pagination} row`}>
+
+                  <Pagination
+                    pageSize={pageSize}
+                    current={current}
+                    total={props?.accessories?.accessories?.accessory?.length}
+                    onChange={handleChange}
+                    style={{ bottom: "0px" }}
+                  />
+                </div>
               </div>
             </div>
           </div>

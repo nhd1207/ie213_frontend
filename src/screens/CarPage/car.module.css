@@ -269,3 +269,7 @@
 .heartIconClicked {
   color: var(--orange-color);
 }
+
+.pagination {
+  text-align: center;
+}

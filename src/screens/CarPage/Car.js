@@ -15,7 +15,7 @@ import {
   Dropdown,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Menu, Spin } from "antd";
+import { Menu, Spin, Pagination } from "antd";
 import {
   SettingOutlined,
   DoubleRightOutlined,
@@ -35,9 +35,18 @@ function Car(props) {
   //     console.log("click ", e);
   // };
 
+  const [totalPage, setTotalPage] = useState(0);
+  const [current, setCurrent] = useState(1);
+  const [minIndex, setMinIndex] = useState(0);
+  const [maxIndex, setMaxIndex] = useState(0);
+
+  var pageSize = 6;
+
   useEffect(() => {
     props.getListCar();
-    console.log(props.cars.car);
+    setTotalPage(props?.cars?.cars?.car?.length / pageSize);
+    setMinIndex(0);
+    setMaxIndex(pageSize)
   }, []);
 
   const onSearch = (value) => console.log(value);
@@ -48,6 +57,13 @@ function Car(props) {
     let element = e.target.parentElement.parentElement;
     element.classList.toggle(`${style.heartIconClicked}`);
   };
+
+  const handleChange = (page) => {
+    setCurrent(page);
+    setMinIndex((page - 1) * pageSize);
+    setMaxIndex(page * pageSize)
+  };
+
 
   return (
     <Layout>
@@ -107,10 +123,11 @@ function Car(props) {
               className={`${style.cardContainer} col col-xl-10 col-lg-9 col-md-8`}
             >
               <div className={`row`}>
-                {props.cars?.cars?.car?.map((car) => {
+                {props.cars?.cars?.car?.map((car, index) => {
                   let myStyle = {
                     backgroundImage: `url(${car?.image?.avatar})`,
                   };
+                  if (index >= minIndex && index < maxIndex)
                   return (
                     <Link
                       className={"col col-xl-6 col-sm-12 col-12"}
@@ -171,9 +188,16 @@ function Car(props) {
                   );
                 })}
               </div>
-              {/* <div className={`${style.pagination} row`}>
-                <Pagination defaultCurrent={6} total={100} />;
-              </div> */}
+              <div className={`${style.pagination} row`}>
+
+                <Pagination
+                  pageSize={pageSize}
+                  current={current}
+                  total={props?.cars?.cars?.car?.length}
+                  onChange={handleChange}
+                  style={{ bottom: "0px" }}
+                />
+              </div>
             </div>
           </div>
         </div>
