@@ -29,7 +29,7 @@ function CarDetail(props) {
     console.log(location);
   }, []);
 
-  function compareHandler() {}
+  function compareHandler() { }
 
   return (
     <Layout>
@@ -48,7 +48,7 @@ function CarDetail(props) {
                   {money(props?.carDetail?.car[0]?.price, "vnd")}
                 </div>
                 <div className={`${style.carPower} col-xl-2`}>
-                  <div className={`${style.title}`}>Mã lực</div>
+                  <div className={`${style.title}`}>Công Suất</div>
                   <div className={`${style.text}`}>
                     {props?.carDetail?.car[0]?.specification?.power + " HP"}
                   </div>
@@ -69,15 +69,14 @@ function CarDetail(props) {
                   </div>
                 </div>
                 <div className={`col-xl-2 row`}>
-                <Link
-                    to={`/order/${props?.carDetail.car[0]?._id}`}
+                  <Button
                     className={`${style.bookButton} col-xl-12`}
                     type="primary"
                     danger
                   >
                     <CarOutlined />
-                    Đặt Xe Ngay
-                  </Link>
+                    ĐẶT XE NGAY
+                  </Button>
                 </div>
                 <div className={`col-xl-2 row`}>
                   <HeartOutlined className={`${style.heartIcon}`} />
@@ -125,8 +124,7 @@ function CarDetail(props) {
                   Tăng tốc từ 0-100 km/h
                 </p>
                 <p className={`${style.specRowText} col-xl-6`}>
-                  {props?.carDetail?.car[0]?.specification?.acceleration +
-                    " giây"}
+                  {props?.carDetail?.car[0]?.specification?.maxSpeed + " km/h"}
                 </p>
               </div>
               <div className={`${style.specRow} row`}>
@@ -147,11 +145,8 @@ function CarDetail(props) {
                   className={`${style.specRowText} ${style.colorContainer} col-xl-6`}
                 >
                   {props?.carDetail?.car[0]?.color.map((item) => {
-                    let key = 1;
-                    key++;
                     return (
                       <div
-                        key={item + " " + key}
                         className={`${style.color}`}
                         style={{ backgroundColor: `${item}` }}
                       ></div>
@@ -164,7 +159,7 @@ function CarDetail(props) {
                   Giá Tiêu Chuẩn
                 </p>
                 <p className={`${style.specRowText} col-xl-6`}>
-                  {money(props?.carDetail?.car[0]?.price, "VND")}
+                  3 600 000 000 VNĐ
                 </p>
               </div>
               <div className={`${style.specRow} row`}>
@@ -177,13 +172,12 @@ function CarDetail(props) {
               <div className={`${style.buttonWrapper} row`}>
                 <div className={`${style.button} col-xl-6`}>
                   <Link
-                    to={`/order/${props?.carDetail.car[0]?._id}`}
                     className={`${style.bookButton} col-xl-12`}
                     type="primary"
                     danger
                   >
                     <CarOutlined />
-                    Đặt Xe Ngay
+                    ĐẶT XE NGAY
                   </Link>
                 </div>
                 <div className={`${style.button} col-xl-6`}>
@@ -191,7 +185,7 @@ function CarDetail(props) {
                     className={`${style.compareButton} col-xl-12`}
                     to={`/compare?id1=${props?.carDetail?.car[0]?._id}`}
                   >
-                    So Sánh Xe
+                    SO SÁNH XE
                     <CaretRightOutlined />
                   </Link>
                 </div>
