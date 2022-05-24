@@ -128,10 +128,12 @@
   width: inherit;
   font-size: 2rem;
   color: #ccc;
+  transition: color 0.5s ease;
 }
 
 .heartIconClicked {
   color: red;
+  transition: color 0.5s ease;
 }
 
 .pagination {

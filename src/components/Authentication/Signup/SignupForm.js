@@ -1,35 +1,254 @@
-import React from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import classes from "./SignupForm.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
+import { FormControl, FormGroup, FormLabel, InputGroup } from "react-bootstrap";
+import { faWindows } from "@fortawesome/free-brands-svg-icons";
+function emailReducer(state, action) {
+  if (action.type === "EMAIL_CHANGE") {
+    return {
+      value: action.value,
+      isEmailValid: action.isEmailValid,
+      isEmailLostFocused: action.isEmailLostFocused,
+    };
+  } else if (action.type === "EMAIL_LOST_FOCUS") {
+    return {
+      value: state.value,
+      isEmailValid: state.isEmailValid,
+      isEmailLostFocused: true,
+    };
+  } else
+    return {
+      value: "",
+      isEmailValid: false,
+      isEmailLostFocused: false,
+    };
+}
 
-function SignupForm() {
+function passwordReducer(state, action) {
+  if (action.type === "PASSWORD_CHANGE") {
+    return {
+      value: action.value,
+      isPasswordValid: action.isPasswordValid,
+      isPasswordLostFocused: action.isPasswordLostFocused,
+    };
+  } else if (action.type === "PASSWORD_LOST_FOCUS") {
+    return {
+      value: state.value,
+      isPasswordValid: state.isPasswordValid,
+      isPasswordLostFocused: true,
+    };
+  } else
+    return {
+      value: "",
+      isPasswordValid: false,
+      isPasswordLostFocused: false,
+    };
+}
+
+function confirmPasswordReducer(state, action) {
+  if (action.type === "CONFIRM_CHANGE") {
+    return {
+      value: action.value,
+      isValid: action.isValid,
+      isLostFocused: action.isLostFocused,
+    };
+  } else if (action.type === "CONFIRM_LOST_FOCUS") {
+    return {
+      value: state.value,
+      isValid: state.isValid,
+      isLostFocused: true,
+    };
+  } else if (action.type === "COMPARE") {
+    return {
+      value: state.value,
+      isValid: action.isValid,
+      isLostFocused: true,
+    };
+  }
+    return {
+      value: "",
+      isValid: false,
+      isLostFocused: false,
+    };
+}
+
+function SignupForm(props) {
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, dispatchEmail] = useReducer(emailReducer, {
+    value: "",
+    isEmailValid: false,
+    isEmailLostFocused: false,
+  });
+  const [password, dispatchPassword] = useReducer(passwordReducer, {
+    value: "",
+    isPasswordValid: false,
+    isPasswordLostFocused: false,
+  });
+  const [confirmPassword, dispatchConfirmPassword] = useReducer(confirmPasswordReducer, {
+    value: "",
+    isValid: true ,
+    isLostFocused: false,
+  });
+
+  function signUpHandler(event) {
+    event.preventDefault();
+    let params={
+      name: name,
+      email: email.value,
+      password: password.value,
+      passwordConfirmation: confirmPassword.value,
+      info: {
+        phoneNumber: phoneNumber,
+        dateOfBirth: "01/01/1990"
+      }
+    }
+    console.log(params);
+
+    props.onSignUp(params);
+  }
+
+  function emailChangeHandler(event) {
+    let enteredEmail = event.target.value.trim();
+    function validateEmail(email) {
+      const result =
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; //regular expression
+      return result.test(email);
+    }
+    console.log(email.isEmailLostFocused);
+    dispatchEmail({
+      type: "EMAIL_CHANGE",
+      value: enteredEmail,
+      isEmailValid: validateEmail(enteredEmail),
+      isEmailLostFocused: true,
+    });
+  }
+  function emailBlurHandler() {
+    dispatchEmail({
+      type: "EMAIL_LOST_FOCUS",
+    });
+  }
+
+  function passwordChangeHandler(event) {
+    let enteredPassword = event.target.value;
+    function validatePassword(password) {
+      if (password.length >= 8) return true;
+    }
+    dispatchPassword({
+      type: "PASSWORD_CHANGE",
+      value: enteredPassword,
+      isPasswordValid: validatePassword(enteredPassword),
+      isPasswordLostFocused: true,
+    });
+    dispatchConfirmPassword({
+      type: "COMPARE",
+      isValid: confirmPassword.value === enteredPassword
+    })
+  }
+  function passwordBlurHandler() {
+    dispatchPassword({
+      type: "PASSWORD_LOST_FOCUS",
+    });
+  }
+
+  function confirmPasswordChangeHandler(event) {
+    let enteredConfirm = event.target.value;
+    console.log(enteredConfirm);
+    function validatePassword(confirm) {
+      if (confirm === password.value) return true;
+      return false;
+    }
+    dispatchConfirmPassword({
+      type: "CONFIRM_CHANGE",
+      value: enteredConfirm,
+      isValid: validatePassword(enteredConfirm),
+      isLostFocused: true,
+    });
+    console.log(confirmPassword.isValid)
+  }
+  
+  function confirmPasswordBlurHandler() {
+    dispatchConfirmPassword({type: "CONFIRM_LOST_FOCUS"})
+  }
+
+  let errorEmail = email.isEmailLostFocused && !email.isEmailValid;
+  let errorPassword = password.isPasswordLostFocused && !password.isPasswordValid;
+  let errorConfirm = confirmPassword.isLostFocused && !confirmPassword.isValid;
+  let [disabledButton, setDisabledButton] = useState(false);
+
+  useEffect(() => {
+    setDisabledButton(email.isEmailValid && password.isPasswordValid && confirmPassword.isValid) ;
+    console.log(disabledButton);
+  }, [email.isEmailValid, password.isPasswordValid, confirmPassword.isValid, disabledButton])
+  
+
   return (
     <div className={classes.container}>
       <h2>ĐĂNG KÝ</h2>
-      <Form className={classes.form}>
+      <Form className={classes.form} onSubmit={signUpHandler}>
         <FormGroup className={"mb-3"}>
-          <FormLabel>
-            Họ và tên
-          </FormLabel>
-          <FormControl id="name" type="text" />
+          <FormLabel>Họ và tên</FormLabel>
+          <FormControl
+            id="name"
+            type="text"
+            onChange={(event) => {
+              setName(event.target.value);
+            }}
+          />
         </FormGroup>
         <FormGroup className={"mb-3"}>
           <FormLabel>Số điện thoại</FormLabel>
-          <FormControl id="phoneNumber" type="text" />
+          <InputGroup>
+            <InputGroup.Text>+84</InputGroup.Text>
+            <FormControl
+              id="phoneNumber"
+              type="text"
+              onChange={(event) => {
+                setPhoneNumber(event.target.value);
+              }}
+            />
+          </InputGroup>
         </FormGroup>
         <Form.Group className={"mb-3"} controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="seven@example.org" />
+          <Form.Control
+            type="email"
+            placeholder="seven@example.org"
+            onChange={emailChangeHandler}
+            onBlur={emailBlurHandler}
+          />
+          {errorEmail && <Form.Text>Email sai định dạng</Form.Text>}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Mật khẩu</Form.Label>
-          <Form.Control type="password" placeholder="Mật khẩu ít nhất 8 ký tự" />
+          <Form.Control
+            type="password"
+            placeholder="Mật khẩu ít nhất 8 ký tự"
+            onChange={passwordChangeHandler}
+            onBlur={passwordBlurHandler}
+          />
+          {errorPassword && <Form.Text>Mật khẩu phải có ít nhất 8 ký tự</Form.Text>}
         </Form.Group>
-        <Button className={classes["signup-button"]}>Đăng ký</Button>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Xác nhận mật khẩu</Form.Label>
+          <Form.Control
+            type="password"
+            onChange={confirmPasswordChangeHandler}
+            onBlur={confirmPasswordBlurHandler}
+          />
+          {errorConfirm && <Form.Text>Mật khẩu không trùng khớp</Form.Text>}
+        </Form.Group>
+        <Button
+          className={classes["signup-button"]}
+          type="submit"
+          disabled={!disabledButton}
+
+        >
+          Đăng ký
+        </Button>
       </Form>
     </div>
   );

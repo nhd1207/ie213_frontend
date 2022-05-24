@@ -14,6 +14,7 @@ import * as api from '../../apis/Auth'
   
 function* getListSaga(action) {
       try {
+          console.log(123);
           const { params } = action
           let data = params
           const response = yield call(api.signup, data)
@@ -21,8 +22,8 @@ function* getListSaga(action) {
                   yield all([
                       put({type: TYPE.SIGNUP.SUCCESS, ...response}),
                   ])
-                  yield delay(1000)
                   yield put(push('/login'));
+                  window.location.reload();
           }else{
             yield put({type: TYPE.SIGNUP.ERROR, error: response})
           }

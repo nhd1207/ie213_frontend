@@ -10,7 +10,7 @@ import {
   FormControl,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getListAccessory, addAccessoryToWishlist } from "./action";
+import { getListAccessory, addAccessoryToWishlist, search } from "./action";
 import { Menu, Spin } from "antd";
 import {
   HeartFilled,
@@ -31,11 +31,11 @@ function Accessory(props) {
   const [minIndex, setMinIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(0);
 
-  var pageSize = 2;
+  var pageSize = 10;
 
   useEffect(() => {
     props.getListAccessory();
-    setTotalPage(props.accessories?.accessories?.accessory?.length / pageSize);
+    setTotalPage(props.accessories?.accessories?.length / pageSize);
     setMinIndex(0);
     setMaxIndex(pageSize)
   }, []);
@@ -56,7 +56,13 @@ function Accessory(props) {
     setMaxIndex(page * pageSize)
   };
 
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) => {
+    if (!value.trim()) {
+      props.getListAccessory();
+    }
+    else
+    props.search(value.trim());
+  }
 
   return (
     <Layout>
@@ -83,7 +89,7 @@ function Accessory(props) {
               className={`${style.filterContainer} col col-xl-2 col-lg-3 col-md-4 d-none d-md-block row`}
             >
               <h3 className={`${style.headingNumber} col-xl-12`}>
-                {props.accessories?.accessories?.accessory?.length} sản phẩm
+                {props.accessories?.accessories?.length} sản phẩm
               </h3>
               <Menu
                 onClick={handleClick}
@@ -116,7 +122,7 @@ function Accessory(props) {
               className={`${style.cardContainer} col col-xl-10 col-lg-9 col-md-8`}
             >
               <div className={`row no-gutters`}>
-                {props.accessories?.accessories?.accessory?.map((item, index) => {
+                {props.accessories?.accessories?.map((item, index) => {
                   let myStyle = {
                     backgroundImage: `url(${item.image.avatar})`,
                   };
@@ -153,7 +159,7 @@ function Accessory(props) {
                   <Pagination
                     pageSize={pageSize}
                     current={current}
-                    total={props?.accessories?.accessories?.accessory?.length}
+                    total={props?.accessories?.accessories?.length}
                     onChange={handleChange}
                     style={{ bottom: "0px" }}
                   />
@@ -177,6 +183,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addAccessoryToWishlist: (data) => {
     dispatch(addAccessoryToWishlist(data));
+  }  ,
+  search: (data) => {
+    dispatch(search(data));
   }
 });
 

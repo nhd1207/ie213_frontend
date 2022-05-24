@@ -8,15 +8,14 @@ import AccAdmin from "../../components/Admin/Accessory";
 import postAdmin from "../../components/Admin/Post";
 import AccBillAdmin from "../../components/Admin/AccessoryBill";
 import UserAdmin from "../../components/Admin/User";
+import ShowroomAdmin from "../../components/Admin/Showroom";
 import CarOrder from "../../components/Admin/CarOrder";
 import { Route } from "react-router-dom";
 import AdminHome from '../../components/Admin/AdminHome/AdminHome';
 
-
 //neu lam router tự sửa chứ không biết nhé
 function AdminPage(props) {
     useEffect(() => {
-        console.log('admin call')
         props.verify();
     }, [])
     return (
@@ -30,6 +29,7 @@ function AdminPage(props) {
                         <Route path="/admin/car" component={CarAdmin} />
                         <Route path="/admin/accessory" component={AccAdmin} />
                         <Route path="/admin/user" component={UserAdmin} />
+                        <Route path="/admin/showroom" component={ShowroomAdmin} />
                         <Route path="/admin/post" component={postAdmin} />
                         <Route path="/admin/home" component={AdminHome} />
                     </Fragment>
