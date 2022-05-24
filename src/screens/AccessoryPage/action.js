@@ -9,11 +9,11 @@ export const action_type = {
         SUCCESS: "ADDACCESSORYTOWISHLIST.SUCCESS",
         ERROR: "ADDACCESSORYTOWISHLIST.ERROR",
     },
-    SEARCH: {
-        REQUEST: "SEARCHACCESSORY.REQUEST",
-        SUCCESS: "SEARCHACCESSORY.SUCCESS",
-        ERROR: "SEARCHACCESSORY.ERROR",
-    }
+    FILTER: {
+        REQUEST: "ACCESSORYFILTER.REQUEST",
+        SUCCESS: "ACCESSORYFILTER.SUCCESS",
+        ERROR: "ACCESSORYFILTER.ERROR"
+    },
 }
 
 export function getListAccessory (params)
@@ -32,10 +32,10 @@ export function addAccessoryToWishlist (data)
     }
 }
 
-export function search (data)
+export function filter (params)
 {
     return {
-        type: action_type.SEARCH.REQUEST,
-        data
+        type: action_type.FILTER.REQUEST,
+        params,
     }
 }

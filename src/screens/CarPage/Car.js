@@ -75,11 +75,11 @@ function Car(props) {
     props.filter(params);
   };
 
-  const onSearch = (value) => {
-    if (!value.trim()) {
-      props.getListCar();
-    } else props.search(value.trim());
-  };
+  // const onSearch = (value) => {
+  //   if (!value.trim()) {
+  //     props.getListCar();
+  //   } else props.search(value.trim());
+  // };
 
   const toggleClass = (e, value) => {
     e.preventDefault();
