@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile, faHome,faCar,faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { faFile, faHome, faCar, faNewspaper } from '@fortawesome/free-solid-svg-icons';
 import {
     TeamOutlined,
     ShoppingCartOutlined,
@@ -12,13 +12,13 @@ import {
 } from '@ant-design/icons';
 import "antd/dist/antd.css";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 
 export default function LayoutAdmin(props) {
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Sider 
+            <Sider
             >
                 <div className="logo" />
                 <Menu theme="dark" mode="inline">
@@ -43,7 +43,7 @@ export default function LayoutAdmin(props) {
                     <Menu.Item key="7" icon={<FontAwesomeIcon icon={faNewspaper} />}>
                         <Link to={`/admin/showroom`} > Showroom </Link>
                     </Menu.Item>
-                    <Menu.Item key="8" icon={<TeamOutlined /> }>
+                    <Menu.Item key="8" icon={<TeamOutlined />}>
                         <Link to={`/admin/user`} > Người dùng </Link>
                     </Menu.Item>
                     <Menu.Item key="9" icon={<LogoutOutlined />}>
@@ -58,7 +58,7 @@ export default function LayoutAdmin(props) {
                 width: '100%',
                 minHeight: '100vh'
             }}>
-                 {props.children} 
+                {props.children}
             </Content>
         </Layout>
     );
