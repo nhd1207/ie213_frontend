@@ -70,13 +70,28 @@ function* addCarToWishlistSaga(action) {
     }
 }
 
-
+function* searchCarSaga(action) {
+    try {
+        const { data } = action
+        const response = yield call(api.search, data)
+        if (response.status === 'success')
+            yield all([put({ type: TYPE.SEARCH.SUCCESS, ...response })])
+        else {
+            yield put({ type: TYPE.SEARCH.ERROR, error: response })
+        }
+    } catch (error) {
+        yield all([
+            put({ type: TYPE.SEARCH.ERROR, error })
+        ])
+    }
+}
 
 function* watcher() {
     yield all([
         takeLatest(TYPE.GETLISTCAR.REQUEST, getListCarSaga),
         takeLatest(TYPE.FILTER.REQUEST, filterCarSaga),
-        takeLatest(TYPE.ADDCARTOWISHLIST.REQUEST, addCarToWishlistSaga)
+        takeLatest(TYPE.ADDCARTOWISHLIST.REQUEST, addCarToWishlistSaga),
+        takeLatest(TYPE.SEARCH.REQUEST, searchCarSaga)
     ])
 }
 

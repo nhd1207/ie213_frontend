@@ -61,3 +61,10 @@ export const filter = (params) => {
         url:`${prefix}/filter?${params}`
     })
 }
+
+export const search = (params) => {
+    return axios ({
+        method:'GET',
+        url:`${prefix}/search?keyword=${params}`
+    })
+}

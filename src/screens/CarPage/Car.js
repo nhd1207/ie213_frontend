@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import Layout from "../../components/layout";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { getListCar, filter, addCarToWishlist } from "./action";
+import { getListCar, filter, addCarToWishlist, search } from "./action";
 import { NavLink } from "react-router-dom";
 import {
   Form,
@@ -78,7 +78,13 @@ function Car(props) {
     props.filter(params)
   }
 
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) => {
+    if (!value.trim()) {
+      props.getListAccessory();
+    }
+    else
+    props.search(value.trim());
+  }
 
   const toggleClass = (e, value) => {
     e.preventDefault();
@@ -269,6 +275,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addCarToWishlist: (data) => {
     dispatch(addCarToWishlist(data));
+  },
+  search: (data) => {
+    dispatch(search(data));
   }
 });
 
