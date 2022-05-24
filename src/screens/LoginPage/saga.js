@@ -33,7 +33,9 @@ function* verifySaga(action) {
     const response = yield call(api2.getMe, param);
     if (response.status === "success") {
       yield all([put({ type: TYPE.VERIFY.SUCCESS, ...response })]);
-    } else {
+    } 
+    else 
+    {
       // Cookies.set("jwt", null);
       yield all([put({ type: TYPE.VERIFY.ERROR })]);
       yield put(push("/login"));

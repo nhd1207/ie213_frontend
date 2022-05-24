@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Button, message, Modal, Select } from "antd";
+import { Button, message, Modal, Select, Spin } from "antd";
 import { Link } from "react-router-dom";
 import {
   CarOutlined,
@@ -18,7 +18,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CartList from "../../components/Cart/CartList";
 import AddressSelect from "../../components/Share/AddressSelect";
 import { Redirect } from "react-router-dom";
-
+import {verify} from "../LoginPage/action"
 const { Option } = Select;
 
 function Cart(props) {
@@ -27,6 +27,7 @@ function Cart(props) {
   const [place, setPlace] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalValidate, setIsModalValidate] = useState(false);
+  const [loading, setLoading] = useState(true)
 
   // useEffect(() => {
   //   console.log(props.carts.carts);
@@ -34,8 +35,17 @@ function Cart(props) {
   // }, [props?.carts?.loading]);
 
   useEffect(() => {
+    props.verify();
     props.getCart();
   }, []);
+
+  useEffect(() => {
+    if (props.loading === false && props.loading2 === false)
+      setLoading(false);
+    else
+      setLoading(true);
+  }, [props.loading, props.loading2]);
+
 
   const showModal = () => {
     props.getMe();
@@ -78,9 +88,9 @@ function Cart(props) {
 
   return (
     <Layout>
-      {props?.isLoggedIn?.isLoggedIn === false ? (
-        <Redirect to="/login"></Redirect>
-      ) : (
+        <Spin size="large" spinning={loading}>
+        {loading ? <></> :
+          (
         <>
           <div className={`${style.cartContainer}`}>
             <div className={`${style.imgWrapper}`}></div>
@@ -230,6 +240,7 @@ function Cart(props) {
           </Modal>
         </>
       )}
+      </Spin>
     </Layout>
   );
 }
@@ -237,6 +248,8 @@ function Cart(props) {
 const mapStateToProps = (state) => ({
   carts: state.cart,
   isLoggedIn: state.isLoggedIn,
+  loading: state.cart.loading,
+  loading2: state.login.loading
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -251,6 +264,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getMe: (params) => {
     dispatch(getMe(params));
+  },
+  verify: (params) => {
+    dispatch(verify(params));
   },
 });
 

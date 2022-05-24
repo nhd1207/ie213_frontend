@@ -35,21 +35,21 @@ function* getUserSaga(action) {
         const response = (yield call(apiUser.getMe, params))
         if (response.status==="success") {
             yield all([
-                put({ type: TYPE.GETUSER.SUCCESS, ...response }),
+                put({ type: TYPE.GETINFOUSER.SUCCESS, ...response }),
             ])
         } else {
-            yield put({ type: TYPE.GETUSER.ERROR, error: response })
+            yield put({ type: TYPE.GETINFOUSER.ERROR, error: response })
         }
     } catch (error) {
         yield all([
-            put({ type: TYPE.GETUSER.ERROR, error })
+            put({ type: TYPE.GETINFOUSER.ERROR, error })
         ])
     }
 }
 
 function* watcher() {
     yield all([
-        takeLatest(TYPE.GETUSER.REQUEST, getUserSaga),
+        takeLatest(TYPE.GETINFOUSER.REQUEST, getUserSaga),
         takeLatest(TYPE.GETLISTBILL.REQUEST, getListBillSaga),
     ])
 }

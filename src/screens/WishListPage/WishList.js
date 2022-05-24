@@ -12,34 +12,46 @@ import {
     ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Redirect } from "react-router-dom";
-
+import { verify } from "../LoginPage/action"
 function WishList(props) {
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        props.verify();
         props.getWishList();
-      }, []);
+    }, []);
 
-      const handleDeleteItem = (value) => {
-          props.deleteWishList(value)
-      }
+    useEffect(() => {
+        if (props.loading === false && props.loading2 === false)
+            setLoading(false);
+        else
+            setLoading(true);
+    }, [props.loading, props.loading2]);
+
+    const handleDeleteItem = (value) => {
+        props.deleteWishList(value)
+    }
 
     return (
         <Layout>
-        {props?.isLoggedIn?.isLoggedIn === false ? <Redirect to="/login"></Redirect> : 
-            <div className={`${style.wishListContainer}`}>
-                <div className={`${style.imgWrapper}`}></div>
-                <div className={`${style.main}`}>
-                    <div className={`${style.headingWrapper} row`}>
-                        <h1 className={`${style.heading} col`}>SẢN PHẨM YÊU THÍCH</h1>
-                        <List 
-                        spinning={props.loading} 
-                        data={props.wishList}
-                        deleteItem={handleDeleteItem}
-                        ></List>
+            <Spin size="large" spinning={loading}>
+            {loading ? <></> :
+                (
+                    <div className={`${style.wishListContainer}`}>
+                        <div className={`${style.imgWrapper}`}></div>
+                        <div className={`${style.main}`}>
+                            <div className={`${style.headingWrapper} row`}>
+                                <h1 className={`${style.heading} col`}>SẢN PHẨM YÊU THÍCH</h1>
+                                <List
+                                    spinning={props.loading}
+                                    data={props.wishList}
+                                    deleteItem={handleDeleteItem}
+                                ></List>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        }
+            )
+}       </Spin>
         </Layout>
     );
 }
@@ -47,16 +59,20 @@ function WishList(props) {
 const mapStateToProps = state => ({
     wishList: state.wishList?.wishList,
     loading: state.wishList.loading,
-    isLoggedIn: state.isLoggedIn
-  })
-  
-  const mapDispatchToProps = dispatch => ({
+    isLoggedIn: state.isLoggedIn,
+    loading2: state.login.loading
+})
+
+const mapDispatchToProps = dispatch => ({
     getWishList: (params) => {
-      dispatch(getWishList(params))
+        dispatch(getWishList(params))
     },
     deleteWishList: (params) => {
         dispatch(deleteWishList(params))
+    },
+    verify: (params) => {
+        dispatch(verify(params))
     }
-  })
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(WishList)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(WishList)
