@@ -58,13 +58,7 @@ export const cloudinaryUpload = (fileToUpload) => {
 export const filter = (params) => {
   return axios({
     method: "GET",
-    url: `${prefix}/filter?${params}`,
+    url: `${prefix}/carFilter?${params}`,
   });
 };
 
-export const search = (params) => {
-  return axios({
-    method: "GET",
-    url: `${prefix}/searchCar?keyword=${params}`,
-  });
-};
