@@ -5,6 +5,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave } from '@fortawesome/free-solid-svg-icons'
 import RenderSelect from "../Share/RenderSelect";
 import RenderNumberAnt from "../Share/RenderNumberAnt"
+import {
+    HeartFilled,
+    AppstoreOutlined,
+    MailOutlined,
+    SettingOutlined,
+  } from "@ant-design/icons";
+
+const toggleClass = (e) => {
+    console.log("click ", e.target.parentElement.parentElement);
+    let element = e.target.parentElement.parentElement;
+    element.classList.toggle(`${style.heartIconClicked}`);
+  };
 
 let FormUpdateCart = props => {
     const { handleSubmit, colors } = props
@@ -36,8 +48,12 @@ let FormUpdateCart = props => {
                         />
                     </div>
                 </div>
-                <div className={`${style.submit} col-xl-12 text-center`}>
-                    <button className={`${style.document} btn btn-primary mr-3`} type="submit"> <FontAwesomeIcon icon={faSave} /> THÊM VÀO GIỎ HÀNG</button>
+                <div className={`${style.submit} col-xl-12 text-center ${style.btnWrapper}`}>
+                    <button className={`${style.document} btn btn-primary mr-3 `} type="submit"> <FontAwesomeIcon icon={faSave} /> THÊM VÀO GIỎ HÀNG</button>
+                    <HeartFilled
+                        onClick={toggleClass}
+                        className={`${style.heartIcon}`}
+                    />
                 </div>
             </div>
         </form>

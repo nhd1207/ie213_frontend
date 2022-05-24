@@ -2,15 +2,12 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import RenderNumberAnt from '../../../Share/RenderNumberAnt'
 //import RenderSelect from '../../../../share/components/RenderSelect'
-import RenderTextareaAnt from '../../../Share/RenderTextareaAnt'
-import FileInput from '../../../Share/FileInput'
 import RenderInputText from '../../../Share/RenderInputText'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Space } from 'antd'
-import renderImageDragAnt from '../../../Share/RenderImage'
 let ModalAddCar = props => {
-    const { handleSubmit, handleShowForm, initialValues } = props
+    const { handleSubmit, handleShowForm } = props
 
     return (
         <form onSubmit={handleSubmit}>
@@ -97,15 +94,46 @@ let ModalAddCar = props => {
                         placeholder='Đây là mô tả'
                     />
                 </div>
-                
-                {/* <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Hình ảnh: </label>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Dung tích xi lanh</label>
                     <Field
-                        type="file"
-                        name="poster"
-                        component={FileInput}
+                        name="specification.displacement"
+                        component={RenderNumberAnt}
+                        placeholder='0'
                     />
-                </div> */}
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Công suất</label>
+                    <Field
+                        name="specification.power"
+                        component={RenderNumberAnt}
+                        placeholder='0'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Tốc độ tối đa</label>
+                    <Field
+                        name="specification.maxSpeed"
+                        component={RenderNumberAnt}
+                        placeholder='0'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Gia tốc</label>
+                    <Field
+                        name="specification.acceleration"
+                        component={RenderNumberAnt}
+                        placeholder='0'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Tải trọng</label>
+                    <Field
+                        name="specification.weight"
+                        component={RenderNumberAnt}
+                        placeholder='0'
+                    />
+                </div>
                 <div className='col-12 text-center'>
                     <Space>
                         <button className='btn btn-primary mr-3' type='submit' > <FontAwesomeIcon icon={faSave} /> Lưu</button>

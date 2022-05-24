@@ -1,20 +1,27 @@
 import React from 'react';
-import { Table, Spin, Space, Tooltip } from 'antd';
+import { Table, Space, Tooltip, Popconfirm } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDeleteLeft, faEdit,faInfo } from '@fortawesome/free-solid-svg-icons'
-import { Popconfirm, message, Button } from 'antd';
+import { faDeleteLeft, faInfo, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { HistoryOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import dateFormat from 'dateformat'
 import money from '../../../Share/functions/money';
 
-const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
+const DataTable = ({ dataSource, loading, info, changeStatus,type }) => {
 
   const onSubmit = (values) => {
     info(values)
   }
 
-  const onDelete = (values) => {
-    deleteAccessory(values)
+  const onCancel = (values) => {
+    changeStatus(values,'Cancelled');
+  };
+
+  const onAccept = (values) => {
+    changeStatus(values,'Accepted');
+  }
+
+  const onSuccess = (values) => {
+    changeStatus(values,'Success');
   }
 
   const columns = [
@@ -26,7 +33,17 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
     },
     {
       title: 'Tên người dùng',
-      dataIndex: ['userInfo', 'name'],
+      dataIndex: ['userInfo'],//, 'name'],
+      key: 'name',
+      className: 'text-center',
+      render: (value, record) =>
+        <div style={{ textAlign: 'center' }}>
+          <span> {value?.name || ''} </span>
+        </div>
+    },
+    {
+      title: 'Số điện thoại',
+      dataIndex: ['userInfo', 'info','phoneNumber'],
       key: 'name',
       className: 'text-center',
       render: (value, record) =>
@@ -36,8 +53,8 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
     },
     {
       title: 'Giá xe',
-      dataIndex: 'totalPrice',
-      key: 'totalPrice',
+      dataIndex: ['carInfo','price'],
+      key: 'price',
       className: 'text-center',
       render: (value, record) =>
         <div style={{ textAlign: 'center' }}>
@@ -66,12 +83,13 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
     },
     {
       title: 'Địa điểm nhận xe',
-      dataIndex: ['place','address'],
+      dataIndex: ['place'],
       key: 'price',
       className: 'text-center',
       render: (value, record) =>
         <div style={{ textAlign: 'center' }}>
-          <span> {value || ''} </span>
+          <span style={{weight:"bold"}}> {value?.name || ''} </span><br/>
+          <span> {value?.address || ''} </span>
         </div>
     },
     {
@@ -85,7 +103,9 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
             <span style={{ color: 'blue' }}><HistoryOutlined />   {'Đang chờ' || ''} </span> :
             (value === 'Success') ?
               <span style={{ color: 'green' }}><CheckOutlined /> {"Đã nhận" || ''} </span> :
-              <span style={{ color: 'red' }}><CloseOutlined /> {value || ''} </span>
+              (value ==='Accepted')?
+              <span style={{ color: 'orange' }}><CheckOutlined /> {"Đã duyệt" || ''} </span>:
+              <span style={{ color: 'red' }}><CloseOutlined /> {"Đã hủy" || ''} </span>
         }
         </div>
     },
@@ -101,24 +121,61 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
               </span>
             </Tooltip>
           </button>
-          <Popconfirm disabled={(record.status==='Success')} placement="left" title='Bạn có muốn hủy?' onConfirm={() => onDelete(record?._id)} okText="Có" cancelText="Không">
-            <button
-              // onClick={() => onDelete(record?._id)} 
-              className="btn btn-sm btn-primary"
-              >
-              <Tooltip placement="top" tilte="Xóa">
+          {type === "Pending" ?
+            <Popconfirm
+              disabled={record.status === "Success"}
+              placement="left"
+              title="Xác nhận duyệt đơn?"
+              onConfirm={() => onAccept(record)}
+              okText="Có"
+              cancelText="Không">
+              <button className="btn btn-sm btn-primary" >
                 <span className="px-2">
-                  <FontAwesomeIcon icon={faDeleteLeft} />
+                <FontAwesomeIcon icon={faCheck} />
                 </span>
-              </Tooltip>
-            </button>
-          </Popconfirm>
+              </button>
+            </Popconfirm>
+            : <></>
+          }
+           {type === "Accepted" ?
+            <Popconfirm
+              disabled={record.status === "Success"}
+              placement="left"
+              title="Xác nhận giao hàng thành công?"
+              onConfirm={() => onSuccess(record)}
+              okText="Có"
+              cancelText="Không">
+              <button className="btn btn-sm btn-primary">
+                <span className="px-2">
+                <FontAwesomeIcon icon={faCheck} />
+                </span>
+              </button>
+            </Popconfirm>
+            : <></>
+          }
+          {type === "Pending" || type === "Accepted" ?
+            <Popconfirm
+              disabled={record.status === "Success"}
+              placement="left"
+              title="Bạn có muốn hủy?"
+              onConfirm={() => onCancel(record)}
+              okText="Có"
+              cancelText="Không"
+            >
+              <button className="btn btn-sm btn-primary">
+                <Tooltip placement="top" tilte="Hủy đơn đặt cọc">
+                  <span className="px-2">
+                    <FontAwesomeIcon icon={faDeleteLeft} />
+                  </span>
+                </Tooltip>
+              </button>
+            </Popconfirm> : <></>}
         </Space>
       ),
     },]
   return (
     <Table
-      rowKey="id"
+      rowKey="_id"
       columns={columns}
       dataSource={dataSource || []}
       loading={loading}
@@ -127,4 +184,3 @@ const DataTable = ({ dataSource, loading, info, deleteAccessory }) => {
 }
 
 export default DataTable;
-

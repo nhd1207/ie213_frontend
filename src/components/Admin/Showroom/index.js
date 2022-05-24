@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Button, Modal, Image, Empty } from 'antd';
+import { Button, Modal } from 'antd';
 import DataTable from './components/DataTable'
-import FormUpdateCar from './components/FormUpdateCar'
-import FormAddCar from './components/FormAddNew'
+import FormUpdateShowroom from './components/FormUpdatePost'
+import FormAddShowroom from './components/FormAddNew'
 import Layout from '../LayoutAdmin/LayoutAdmin'
-import FileInput from '../../Share/FileInput'
 import queryString from 'query-string'
-import { createCar, getList, updateCar, deleteCar } from './action';
+import { createShowroom, getList, updateShowroom, deleteShowroom } from './action';
 import { PlusOutlined } from '@ant-design/icons';
-const noImage = 'https://res.cloudinary.com/sevenimg/image/upload/v1652028058/no-image-available_yyhche.png';
 
+const noImage = 'https://res.cloudinary.com/sevenimg/image/upload/v1652028058/no-image-available_yyhche.png';
 
 class index extends Component {
     constructor(props) {
@@ -21,19 +20,18 @@ class index extends Component {
             showForm2: false,
             showFormImage: false,
             initial_filter_values: query_params,
-            idCar: 0,
-            car: {},
+            idShowroom: 0,
+            showroom: {},
             urlImage: ''
         }
     }
-
 
     componentDidMount = () => {
         let params = {};
         this.props.getList(params)
     }
 
-    //add car
+    //add post
     handleShowFormAdd = (value) => {
         this.setState({ showForm2: value || false })
     }
@@ -42,17 +40,17 @@ class index extends Component {
         this.setState({ showForm2: false })
     }
 
-    handleCreateCar = (value) => {
+    handleCreateShowroom = (value) => {
         this.setState({ showForm2: false })
-        let params = { ...value, image: { avatar: noImage, banner: noImage} }
-        this.props.createCar(params)
+        let params = { ...value, image: { avatar: noImage, banner: noImage } }
+        this.props.createShowroom(params)
     }
 
     openModalAdd = (values) => {
         this.handleShowFormAdd(true);
     }
 
-    //update car
+    //update post
     handleShowForm = (value) => {
         this.setState({ showForm: value || false })
     }
@@ -61,28 +59,29 @@ class index extends Component {
         this.setState({ showForm: false })
     }
 
-    handleUpdateCar = (value) => {
-        let id = this.state.idCar;
+    handleUpdateShowroom = (value) => {
+        let id = this.state.idShowroom;
         this.setState({ showForm: false })
         let params = value
-        this.props.updateCar(id, params)
+        this.props.updateShowroom(id, params)
     }
 
-    handleDeleteCar = (value) => {
+    handleDeleteShowroom = (value) => {
         let id = value;
-        this.props.deleteCar(id);
+        this.props.deleteShowroom(id);
     }
+
     openModal = (values) => {
         this.handleShowForm(true);
-        this.state.idCar = values._id;
-        this.state.car = values;
+        this.setState({idShowroom : values._id})
+        this.setState({showroom :values})
     }
 
-    // Image
+    // Image post
     openModalImage = (values) => {
         this.handleShowFormImage(true);
-        this.state.idCar = values._id;
-        this.state.car = values;
+        this.setState({idShowroom : values._id})
+        this.setState({showroom :values})
     }
 
     handleShowFormImage = (value) => {
@@ -96,14 +95,14 @@ class index extends Component {
     handleUrlImage = (value, type) => {
         switch (type) {
             case 'avatar':
-                this.state.car.image.avatar = value;
+                this.state.post.image.avatar = value;
                 break;
             case 'banner':
-                this.state.car.image.banner = value;
+                this.state.post.image.banner = value;
                 break;
-            case 'gallery':
-                this.state.car.image.gallery.push(value);
-                break;
+            // case 'gallery':
+            //     this.state.post.image.gallery.push(value);
+            //     break;
             default:
                 break;
         }
@@ -111,57 +110,57 @@ class index extends Component {
     }
 
     render() {
-        const { showForm, showForm2, showFormImage } = this.state;
+        const { showForm, showForm2 } = this.state;
         return (
             <div>
                 <Layout>
                     <div className='container-fluid mb-3 text-left py-2' style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span className='h3 font-weight-bold '>Xe</span>
-                        <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} title='Thêm xe' type="primary" >Thêm xe</Button></span>
+                        <span className='h3 font-weight-bold '>Showroom</span>
+                        <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} title='Thêm showroom' type="primary" >Thêm bài viết</Button></span>
                     </div>
                     {/* <FormFilter
                     onSubmit={()=>handleSubmitFilter}
                     /> */}
-                    <DataTable //done
-                        dataSource={this.props?.car?.data.car || []}
-                        loading={this.props.car.loading}
-                        updateCar={this.openModal}
-                        deleteCar={this.handleDeleteCar}
+                    <DataTable
+                        dataSource={this.props?.showroom?.data?.showRoom || []}
+                        loading={this.props?.showroom?.loading}
+                        updateShowroom={this.openModal}
+                        deleteShowroom={this.handleDeleteShowroom}
                         showImage={this.openModalImage}
                     />
                     <Modal
-                        title="Cập nhật xe"
+                        title="Cập nhật Showroom"
                         visible={showForm}
                         closable={true}
                         onCancel={this.handleCloseModal}
                         footer={null}
                     >
-                        <FormUpdateCar
+                        <FormUpdateShowroom
                             destroyOnClose={false}
                             keyboard={true}
                             maskClosable={true}
                             onCancel={() => this.handleShowForm(false)}
-                            onSubmit={this.handleUpdateCar}
+                            onSubmit={this.handleUpdateShowroom}
                             handleShowForm={this.handleShowForm}
-                            initialValues={this.state.car}
+                            initialValues={this.state.showroom}
                         />
                     </Modal>
                     <Modal
-                        title="Thêm xe"
+                        title="Thêm showroom"
                         visible={showForm2}
                         closable={true}
                         onCancel={this.handleCloseModalAdd}
                         footer={null}
                     >
-                        <FormAddCar
+                        <FormAddShowroom
                             keyboard={true}
                             maskClosable={true}
                             onCancel={() => this.handleShowFormAdd(false)}
-                            onSubmit={this.handleCreateCar}
+                            onSubmit={this.handleCreateShowroom}
                             handleShowForm={this.handleShowFormAdd}
                         />
                     </Modal>
-                    <Modal
+                    {/* <Modal
                         title="Quản lý hình ảnh"
                         visible={showFormImage}
                         closable={true}
@@ -170,27 +169,25 @@ class index extends Component {
                         destroyOnClose={true}
                     >
                         <Image.PreviewGroup>
-                            <p>Tải lên hình ảnh cho xe {this.state.car?.name}</p>
-                            <FileInput gallery={true} urlImage={this.handleUrlImage} update={() => this.handleUpdateCar(this.state.car)}></FileInput>
-                            <hr/>
-                            <p>Hình đại diện cho xe</p>{this.state.car.image?.avatar?
-                                <Image width={200} src={this.state.car.image?.avatar} /> : <Empty />
+                            <p>Tải lên hình ảnh cho {this.state.showroom?.title}</p>
+                            <FileInput gallery={false} urlImage={this.handleUrlImage} update={() => this.handleUpdateShowroom(this.state.post)}></FileInput>
+                            <hr />
+                            <p>Hình đại diện cho bài viết</p>{this.state.showroom?.image?.avatar ?
+                                <Image width={200} src={this.state.showroom.image?.avatar} /> : <Empty />
                             }
-                            <hr/>
-
-                            <p>Hình ảnh bìa cho xe</p>{this.state.car.image?.banner?
-                                <Image width={200} src={this.state.car.image?.banner} />: <Empty />
+                            <hr />
+                            <p>Hình ảnh bìa cho bài viết</p>{this.state.showroom?.image?.banner ?
+                                <Image width={200} src={this.state.showroom?.image?.banner} /> : <Empty />
                             }
-                            <hr/>
+                            {/* <hr/>
                             <p>Hình khác</p>
                             {this.state.car.image?.gallery[0]?
                                 this.state.car.image?.gallery.map(item => {
                                     return <Image key={item.id} width={200} src={item} />
                                 }): <Empty />
-
-                            }
+                            } *
                         </Image.PreviewGroup>
-                    </Modal>
+                    </Modal> */}
                 </Layout>
             </div>
         )
@@ -198,21 +195,21 @@ class index extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    car: state.car
+    showroom: state.showroomAdmin
 })
 
 const mapDispatchToProps = dispatch => ({
     getList: (params) => {
         dispatch(getList(params))
     },
-    updateCar: (id, params) => {
-        dispatch(updateCar(id, params))
+    updateShowroom: (id, params) => {
+        dispatch(updateShowroom(id, params))
     },
-    createCar: (params) => {
-        dispatch(createCar(params))
+    createShowroom: (params) => {
+        dispatch(createShowroom(params))
     },
-    deleteCar: (id) => {
-        dispatch(deleteCar(id))
+    deleteShowroom: (id) => {
+        dispatch(deleteShowroom(id))
     }
 })
 

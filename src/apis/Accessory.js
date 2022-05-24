@@ -39,5 +39,16 @@ export const destroy =(id)=> {
     })
 }
 
+export const filter = (params) => {
+    return axios({
+        method:'GET',
+        url:`${prefix}/filter?${params}`
+    })
+}
 
-
+export const search = (params) => {
+    return axios ({
+        method:'GET',
+        url:`${prefix}/searchAccessory?keyword=${params}`
+    })
+}

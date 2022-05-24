@@ -36,9 +36,11 @@ function Home(props) {
                   </div>
                   {/* <div className={style.header}>CÁC DÒNG XE</div> */}
                   <Carousel.Caption className={style.caption}>
-                    <h3 className={style.title}>{car?.name}</h3>
-                    <p className={style.attribute}>{car?.description}</p>
-                    <button class="btn btn-outline-dark" className={style.btn}>
+                    <div className={`${style.backgroundCaption}`}>
+                      <h3 className={style.title}>{car?.name}</h3>
+                      <p className={style.attribute}>{car?.description}</p>
+                    </div>
+                    {/* <button className={style.btn}>
                       <NavLink to="/car">
                         MORE{" "}
                         <FontAwesomeIcon
@@ -46,7 +48,7 @@ function Home(props) {
                           size={{ width: 100 }}
                         ></FontAwesomeIcon>
                       </NavLink>
-                    </button>
+                    </button> */}
                   </Carousel.Caption>
                 </Carousel.Item>
               );
@@ -67,7 +69,7 @@ function Home(props) {
             </div>
             <button
               variant="dark"
-              className={`${style["accessories-btn" ]} btn btn-outline-dark`}
+              className={`${style["accessories-btn"]}`}
             >
               <a href="/accessory">
                 MORE{" "}
@@ -89,7 +91,7 @@ function Home(props) {
               dataSource={props.posts?.post?.slice(0, 2)}
               renderItem={(item) => (
                 <List.Item className={`${style.listItem} row`}>
-                  <div className={`${style.avatar} col-xl-6 col-sm-12 col-12`}>
+                  <div className={`${style.avatar} col-xl-5 col-sm-12 col-12`}>
                     <img
                       className={`${style["news-image"]}`}
                       src={item.image.avatar}
@@ -97,7 +99,7 @@ function Home(props) {
                     />
                   </div>
                   <div
-                    className={`${style.content} col-xl-6 col-sm-12 col-12 row`}
+                    className={`${style.content} col-xl-7 col-sm-12 col-12 row`}
                   >
                     <div className={`${style["news-title"]} col-xl-12`}>
                       {item.title}

@@ -3,9 +3,14 @@ import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import classes from "./SignUp.module.css";
 import React from "react";
 import SignupForm from "../../components/Authentication/Signup/SignupForm";
+import { connect } from "react-redux";
+import { signup } from "./action";
 
+function SignUp(props) {
 
-function SignUp() {
+  function signUpHandler(params) {
+    props.signup(params)
+  }
   return (
     <>
       <div style={{ position: "absolute" }}>
@@ -29,11 +34,21 @@ function SignUp() {
           </div>
         </div>
         <div className={classes["signup-form"]}>
-          <SignupForm />
+          <SignupForm onSignUp={signUpHandler}/>
         </div>
       </div>
     </>
   );
 }
 
-export default SignUp;
+const mapStateToProps = (state) => ({
+  abc: state.signup,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  signup: (params) => {
+    dispatch(signup(params));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
