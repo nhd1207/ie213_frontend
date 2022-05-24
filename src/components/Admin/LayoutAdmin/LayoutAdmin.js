@@ -49,7 +49,7 @@ export default function LayoutAdmin(props) {
                     <Menu.Item key="9" icon={<LogoutOutlined />}>
                         <Link to={`/login`} > Đăng xuất </Link>
                     </Menu.Item>
-                    <Menu.Item key="9" icon={<RollbackOutlined />}>
+                    <Menu.Item key="10" icon={<RollbackOutlined />}>
                         <Link to={`/home`} > Quay lại </Link>
                     </Menu.Item>
                 </Menu>
