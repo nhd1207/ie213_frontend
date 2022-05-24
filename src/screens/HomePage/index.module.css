@@ -1,32 +1,43 @@
 .introduce {
   text-align: center;
-  padding: 5rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #eee;
-  margin: 0;
+  margin-bottom: 3rem;
 }
 
 .s {
-  position: relative;
+  /* position: relative;/ */
   display: inline-block;
   width: 157px;
   height: 200px;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 900;
-  font-size: 250px;
-  line-height: 200px;
-  color: #f3ea01;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: var(--font-logo);
+  line-height: var(--font-logo);
+  color: var(--yellow-color);
+  /* text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25); */
+}
+
+.caption .backgroundCaption {
+  background-color: var(--caption-background);
+  margin-bottom: 6rem;
+  padding: 1rem 0rem;
+}
+
+.carousel .btn {
+  color: var(--white-color);
+  border: var(--white-color);
+  opacity: 40%;
 }
 
 .introduce .header {
-  color: #f3ea01;
+  color: var(--yellow-color);
   font-size: 4rem;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 2rem;
 }
 
 .introduce .introduce-content {
@@ -36,13 +47,12 @@
 
 .accessories {
   width: 100%;
-  height: 90vh;
+  min-height: 90vh;
   background-image: url("../../Images/home_accessories.png");
-  background-size: 100% 100%;
+  background-size: 80% 80%;
   background-repeat: no-repeat;
-  /* background-size: cover;
-  background-position: center center; */
   flex-direction: column;
+  background-position: right top;
 }
 
 .accessories-header {
@@ -54,31 +64,37 @@
 }
 
 .accessories-content {
+  padding: 2rem;
   padding-left: 6vw;
   font-size: 2.2rem;
   text-transform: uppercase;
-  /* font-weight: bold; */
 }
 
-.accessories-btn {
+.accessories .accessories-btn {
   margin-left: 6vw;
+  margin-top: 3rem;
   width: 100px;
-  opacity: 100%;
-  padding: 0;
+  height: 40px;
+  border-radius: 5px;
 }
-.accessories-btn a {
-  display: block;
-  padding: .375rem .75rem
+
+.accessories .accessories-btn a {
+  display: inline-block;
+  border-radius: 5px;
 }
-.accessories-btn:focus {
+
+.accessories .accessories-btn:focus {
   box-shadow: none !important;
 }
 
-.accessories-btn:hover a{
-  color: #40a9ff;
+.accessories .accessories-btn:hover {
+  background-color: var(--black-color);
 }
 
-/* news */
+.accessories .accessories-btn:hover a {
+  color: var(--yellow-color);
+}
+
 
 .newsList {
   display: flex;
@@ -94,15 +110,12 @@
 }
 
 .content {
-  /* height: 40vh; */
   justify-content: space-around;
 }
 
 .news-image {
   width: 100%;
   height: 40vh;
-  /* object-fit: cover;
-  object-position: 50% 50%; */
 }
 
 .news-title {
@@ -112,10 +125,13 @@
 }
 
 .news-description {
+  padding-top: 1rem;
   font-size: 20px;
   font-weight: 300;
 }
+
 .news_content {
+  font-size: var(--font-document);
   text-overflow: ellipsis;
   overflow: hidden;
   max-height: 67px;
@@ -143,14 +159,16 @@
   margin: 1rem 0;
 }
 
-.newsBtn:hover a {
-  color: #40a9ff;
+.newsSpec .newsBtn:hover {
+  background-color: var(--black-color);
 }
 
-/*  */
+.newsSpec .newsBtn:hover a {
+  color: var(--yellow-color);
+}
 
 a {
-  color: black;
+  color: var(--black-color);
 }
 
 .carousel .container {
@@ -169,27 +187,17 @@ a {
   object-fit: cover;
   object-position: 50% 50%;
 }
-/* 
-.cover {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    color: rgb(0, 0, 0);
-}
 
-.container .img1 {
-    
-} */
 
 .carousel .container .caption {
-  color: white;
+  color: var(--white-color);
 }
 
 .carousel .container .header {
   font-size: 50px;
   position: absolute;
   top: 0;
-  color: white;
+  color: var(--white-color);
   margin-top: 50px;
   margin-left: 50px;
 }
@@ -197,26 +205,16 @@ a {
 .carousel .container .caption .title {
   font-size: 4.2rem;
   text-transform: uppercase;
-  color: white;
-  /* color: #f3ea01; */
-  text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
-    1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  color: var(--white-color);
+
 }
+
 .carousel .container .caption .attribute {
   text-transform: uppercase;
   font-size: 2rem;
-  margin-bottom: 200px;
-  /* color: #f3ea01; */
-  color: white;
-
-  text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
-    1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  color: var(--white-color);
 }
 
-.carousel .btn {
-  color: white;
-  opacity: 40%;
-}
 
-@media (min-width: 576px) and (max-width: 1200px) {
-}
+
+@media (min-width: 576px) and (max-width: 1200px) {}
