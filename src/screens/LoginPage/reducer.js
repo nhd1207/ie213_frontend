@@ -33,7 +33,6 @@ function reducer(state = initialState, action) {
         ...state,
         loading: true,
         response: action.response,
-
       };
     case type.VERIFY.SUCCESS:
       return {
@@ -41,14 +40,12 @@ function reducer(state = initialState, action) {
         loading: false,
         user: action?.data || {},
         response: action.response,
-
       };
     case type.VERIFY.ERROR:
       return {
         ...state,
         loading: false,
         response: action.response,
-
       };
     case type.USER.REQUEST:
       return {
