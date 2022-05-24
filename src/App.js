@@ -29,10 +29,13 @@ import AboutUs from "./screens/AboutUsPage/AboutUs";
 import Support from "./screens/SupportPage/Support";
 import Compare from "./screens/ComparePage/Compare";
 import CarOrderPage from "./screens/CarOrder/CarOrder"
+import { verify } from "./screens/LoginPage/action";
+import { connect } from "react-redux";
 
-function App() {
+function App(props) {
   useEffect(() => {
     document.title = "Seven";
+    props.verify();
   }, []);
 
   return (
@@ -68,4 +71,14 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  verify: (params) => {
+    dispatch(verify(params));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+

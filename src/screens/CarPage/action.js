@@ -14,6 +14,11 @@ export const action_type = {
         SUCCESS: "ADDCARTOWISHLIST.SUCCESS",
         ERROR: "ADDCARTOWISHLIST.ERROR"
     },
+    GETUSERFORWISHLISTCAR: {
+        REQUEST: "GETUSERFORWISHLISTCAR.REQUEST",
+        SUCCESS: "GETUSERFORWISHLISTCAR.SUCCESS",
+        ERROR: "GETUSERFORWISHLISTCAR.ERROR"
+    },
 }
 
 export function getListCar (params)
@@ -37,5 +42,13 @@ export function addCarToWishlist (data)
     return {
         type: action_type.ADDCARTOWISHLIST.REQUEST,
         data,
+    }
+}
+
+export function getUserForWishListCar (params)
+{
+    return {
+        type: action_type.GETUSERFORWISHLISTCAR.REQUEST,
+        params,
     }
 }

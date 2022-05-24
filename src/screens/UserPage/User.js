@@ -44,7 +44,7 @@ function User(props) {
 
   return (
     <Layout>
-      {props?.isLoggedIn.isLoggedIn === false ? (
+      {props?.isLoggedIn?.isLoggedIn === false ? (
         <Redirect to="/login"></Redirect>
       ) : (
         <Spin size="large" spinning={props.loading}>
