@@ -4,11 +4,9 @@ import "antd/dist/antd.css";
 import Layout from "../../components/layout";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { getListCar, filter, addCarToWishlist } from "./action";
+import { getListCar, filter, addCarToWishlist, search } from "./action";
 import { NavLink } from "react-router-dom";
-import {
-  Form,
-} from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Menu, Spin, Slider, Pagination } from "antd";
 import {
@@ -24,7 +22,7 @@ const { Search } = Input;
 const { SubMenu } = Menu;
 
 function Car(props) {
-  const [car, setCar] = useState([])
+  const [car, setCar] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
   const [current, setCurrent] = useState(1);
   const [minIndex, setMinIndex] = useState(0);
@@ -35,17 +33,17 @@ function Car(props) {
     page: null,
     priceMin: null,
     priceMax: null,
-    sort: 'name',
-    field: ['name', 'code', 'price', 'amount', 'image']
-  })
+    sort: "name",
+    field: ["name", "code", "price", "amount", "image"],
+  });
 
   var pageSize = 6;
 
   const marks = {
-    30: '0°C',
+    30: "0°C",
     100: {
       style: {
-        color: '#f50',
+        color: "#f50",
       },
       label: <strong>max</strong>,
     },
@@ -56,67 +54,69 @@ function Car(props) {
     console.log(props.cars.cars);
     setTotalPage(props?.cars?.cars?.length / pageSize);
     setMinIndex(0);
-    setMaxIndex(pageSize)
+    setMaxIndex(pageSize);
   }, []);
 
   const handleFilter = (filterValue) => {
-    let params = ''
+    let params = "";
     for (let key in filterValue) {
       if (filterValue[key] === null) {
-      } else
-        if (key === 'priceMin') {
-          params = params + 'price[gte]' + '=' + filterValue[key] + '&'
-        } else if (key === 'priceMax') {
-          params = params + 'price[lt]' + '=' + filterValue[key] + '&'
-
-        } else {
-          params = params + key + '=' + filterValue[key] + '&'
-        }
+      } else if (key === "priceMin") {
+        params = params + "price[gte]" + "=" + filterValue[key] + "&";
+      } else if (key === "priceMax") {
+        params = params + "price[lt]" + "=" + filterValue[key] + "&";
+      } else {
+        params = params + key + "=" + filterValue[key] + "&";
+      }
     }
-    params = params.slice(0, -1)
-    console.log('handleFilter', params)
-    props.filter(params)
-  }
+    params = params.slice(0, -1);
+    console.log("handleFilter", params);
+    props.filter(params);
+  };
 
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) => {
+    if (!value.trim()) {
+      props.getListCar();
+    } else props.search(value.trim());
+  };
 
   const toggleClass = (e, value) => {
     e.preventDefault();
     console.log("click ", e.target.parentElement.parentElement);
     let element = e.target.parentElement.parentElement;
     element.classList.toggle(`${style.heartIconClicked}`);
-    props.addCarToWishlist({ itemId: value })
+    props.addCarToWishlist({ itemId: value });
   };
 
   const handleFilterValue = (value, type) => {
-    let params
+    let params;
     switch (type) {
-      case 'name_asc':
-        params = { ...filterValue, sort: 'name' }
-        setFilterValue(params)
+      case "name_asc":
+        params = { ...filterValue, sort: "name" };
+        setFilterValue(params);
         break;
-      case 'name_desc':
-        params = { ...filterValue, sort: '-name' }
-        setFilterValue(params)
+      case "name_desc":
+        params = { ...filterValue, sort: "-name" };
+        setFilterValue(params);
         break;
-      case 'price_asc':
-        params = { ...filterValue, sort: 'price' }
-        setFilterValue(params)
+      case "price_asc":
+        params = { ...filterValue, sort: "price" };
+        setFilterValue(params);
         break;
-      case 'price_desc':
-        params = { ...filterValue, sort: '-price' }
-        setFilterValue(params)
+      case "price_desc":
+        params = { ...filterValue, sort: "-price" };
+        setFilterValue(params);
         //handleFilter(params)
         break;
       default:
         return;
     }
-    handleFilter(params)
-  }
+    handleFilter(params);
+  };
   const handleChange = (page) => {
     setCurrent(page);
     setMinIndex((page - 1) * pageSize);
-    setMaxIndex(page * pageSize)
+    setMaxIndex(page * pageSize);
   };
 
   return (
@@ -155,15 +155,31 @@ function Car(props) {
               >
                 <div className={`${style.rangeInput}`}>
                   <>
-                    <Form.Label>Công Suất: { }</Form.Label>
+                    <Form.Label>Công Suất: {}</Form.Label>
                   </>
                 </div>
-                <SubMenu key="sub1" icon={<SettingOutlined />} title="Tên xe" onClick={(e) => handleFilterValue(null, e.key)}>
+                <SubMenu
+                  key="sub1"
+                  icon={<SettingOutlined />}
+                  title="Tên xe"
+                  onClick={(e) => handleFilterValue(null, e.key)}
+                >
                   <Menu.Item key="name_asc">A-Z</Menu.Item>
                   <Menu.Item key="name_desc">Z-A</Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub2" icon={<SettingOutlined />} title="Giá" onClick={(e) => handleFilterValue(null, e.key)}>
-                <Slider defaultValue={0} min={30} max={100} marks={marks} onChange={(e) => handleFilterValue(e, 'power')} />
+                <SubMenu
+                  key="sub2"
+                  icon={<SettingOutlined />}
+                  title="Giá"
+                  onClick={(e) => handleFilterValue(null, e.key)}
+                >
+                  <Slider
+                    defaultValue={0}
+                    min={30}
+                    max={100}
+                    marks={marks}
+                    onChange={(e) => handleFilterValue(e, "power")}
+                  />
                   <Menu.Item key="price_asc">Tăng dần</Menu.Item>
                   <Menu.Item key="price_desc">Giảm dần</Menu.Item>
                 </SubMenu>
@@ -222,7 +238,9 @@ function Car(props) {
                                 {car.name}
                               </h4>
                               <h4 className={`${style.text}`}>{car?.model}</h4>
-                              <h4 className={`${style.text}`}>{money(car?.price, 'VNĐ')}</h4>
+                              <h4 className={`${style.text}`}>
+                                {money(car?.price, "VNĐ")}
+                              </h4>
                             </div>
 
                             <ThunderboltOutlined
@@ -239,7 +257,6 @@ function Car(props) {
                 })}
               </div>
               <div className={`${style.pagination} row`}>
-
                 <Pagination
                   pageSize={pageSize}
                   current={current}
@@ -269,7 +286,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addCarToWishlist: (data) => {
     dispatch(addCarToWishlist(data));
-  }
+  },
+  search: (data) => {
+    dispatch(search(data));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Car);

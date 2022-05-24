@@ -29,7 +29,7 @@ function CarDetail(props) {
     console.log(location);
   }, []);
 
-  function compareHandler() { }
+  function compareHandler() {}
 
   return (
     <Layout>
@@ -108,7 +108,8 @@ function CarDetail(props) {
                   Dung tích xi lanh
                 </p>
                 <p className={`${style.specRowText} col-xl-6`}>
-                  {props?.carDetail?.car[0]?.specification.displacement + " cc"}
+                  {props?.carDetail?.car[0]?.specification?.displacement +
+                    " cc"}
                 </p>
               </div>
               <div className={`${style.specRow} row`}>

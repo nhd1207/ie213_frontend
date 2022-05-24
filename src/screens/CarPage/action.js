@@ -14,6 +14,11 @@ export const action_type = {
         SUCCESS: "ADDCARTOWISHLIST.SUCCESS",
         ERROR: "ADDCARTOWISHLIST.ERROR"
     },
+    SEARCH: {
+        REQUEST: "SEARCHCAR.REQUEST",
+        SUCCESS: "SEARCHCAR.SUCCESS",
+        ERROR: "SEARCHCAR.ERROR"
+    },
 }
 
 export function getListCar (params)
@@ -36,6 +41,14 @@ export function addCarToWishlist (data)
 {
     return {
         type: action_type.ADDCARTOWISHLIST.REQUEST,
+        data,
+    }
+}
+
+export function search (data)
+{
+    return {
+        type: action_type.SEARCH.REQUEST,
         data,
     }
 }
