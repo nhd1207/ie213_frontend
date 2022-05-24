@@ -29,6 +29,7 @@ import AboutUs from "./screens/AboutUsPage/AboutUs";
 import Support from "./screens/SupportPage/Support";
 import Compare from "./screens/ComparePage/Compare";
 import CarOrderPage from "./screens/CarOrder/CarOrder"
+import UpdateUserPage from "./screens/UpdateUserPage/UpdateUser"
 
 function App() {
   useEffect(() => {
@@ -44,7 +45,7 @@ function App() {
         <Route path="/home" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/user" component={User} />
+        <Route path="/user" exact component={User} />
         <Route exact path="/car" component={Car} />
         <Route path="/car/:id" component={CarDetail}></Route>
         <Route path="/cart" component={Cart} />
@@ -57,9 +58,8 @@ function App() {
         <Route path="/wishlist" component={WishList}></Route>
         <Route path="/about_us" component={AboutUs}></Route>
         <Route path="/support" component={Support}></Route>
-        <Route path="/compare" component={Compare}>
-          
-        </Route>
+        <Route path="/compare" component={Compare}></Route>
+        <Route path="/user/update" component={UpdateUserPage}></Route>
         <Route path="/order/:id" component={CarOrderPage}></Route>
         <Route exact path="/" component={Home} />
         <Route component={Error404} />

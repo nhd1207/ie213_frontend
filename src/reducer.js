@@ -23,6 +23,7 @@ import carList from "./screens/CarPage/reducer";
 import carOrderPage from "./screens/CarOrder/reducer"
 import compare from "./screens/ComparePage/reducer"
 import isLoggedIn from "./components/reducer"
+import updateUserPage from "./screens/UpdateUserPage/reducer"
 
 const Reducer = (history) =>
   combineReducers({
@@ -49,7 +50,8 @@ const Reducer = (history) =>
     carDetail,
     carOrderPage,
     compare,
-    isLoggedIn
+    isLoggedIn,
+    updateUserPage
   })
   
 export default Reducer

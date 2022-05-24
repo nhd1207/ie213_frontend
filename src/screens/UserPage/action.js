@@ -8,7 +8,7 @@ export const action_type = {
         REQUEST: "GETLISTBILL.REQUEST",
         SUCCESS: "GETLISTBILL.SUCCESS",
         ERROR: "GETLISTBILL.ERROR"
-    },
+    }
 }
 
 export function getUser (params)

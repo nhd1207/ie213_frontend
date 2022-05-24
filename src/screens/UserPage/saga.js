@@ -50,7 +50,7 @@ function* getUserSaga(action) {
 function* watcher() {
     yield all([
         takeLatest(TYPE.GETUSER.REQUEST, getUserSaga),
-        takeLatest(TYPE.GETLISTBILL.REQUEST, getListBillSaga)
+        takeLatest(TYPE.GETLISTBILL.REQUEST, getListBillSaga),
     ])
 }
 

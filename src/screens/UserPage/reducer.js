@@ -25,7 +25,7 @@ function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
             }
-            case type.GETLISTBILL.REQUEST:
+        case type.GETLISTBILL.REQUEST:
             return {
                 ...state,
                 loading: true,
