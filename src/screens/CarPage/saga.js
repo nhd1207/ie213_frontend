@@ -29,13 +29,13 @@ function* getListCarSaga(action) {
     }
 }
 
-function* filterCarSaga(action) {
+function* filterAndSearchCarSaga(action) {
     try {
         const { params } = action
         const response = (yield call(api.filter, params))
         console.log('response',response)
         if (response.status=='success') {
-            yield all([
+            yield all([ 
                 put({ type: TYPE.FILTER.SUCCESS, ...response }),
             ])
         } else {
@@ -70,28 +70,12 @@ function* addCarToWishlistSaga(action) {
     }
 }
 
-function* searchCarSaga(action) {
-    try {
-        const { data } = action
-        const response = yield call(api.search, data)
-        if (response.status === 'success')
-            yield all([put({ type: TYPE.SEARCH.SUCCESS, ...response })])
-        else {
-            yield put({ type: TYPE.SEARCH.ERROR, error: response })
-        }
-    } catch (error) {
-        yield all([
-            put({ type: TYPE.SEARCH.ERROR, error })
-        ])
-    }
-}
 
 function* watcher() {
     yield all([
         takeLatest(TYPE.GETLISTCAR.REQUEST, getListCarSaga),
-        takeLatest(TYPE.FILTER.REQUEST, filterCarSaga),
-        takeLatest(TYPE.ADDCARTOWISHLIST.REQUEST, addCarToWishlistSaga),
-        takeLatest(TYPE.SEARCH.REQUEST, searchCarSaga)
+        takeLatest(TYPE.FILTER.REQUEST, filterAndSearchCarSaga),
+        takeLatest(TYPE.ADDCARTOWISHLIST.REQUEST, addCarToWishlistSaga)
     ])
 }
 

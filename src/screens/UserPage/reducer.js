@@ -4,28 +4,27 @@ const initialState = {
     loading: false,
     user: [],
     bills: []
-
 }
 
 function reducer(state = initialState, action) {
     switch (action.type) {
-        case type.GETUSER.REQUEST:
+        case type.GETINFOUSER.REQUEST:
             return {
                 ...state,
                 loading: true,
             }
-        case type.GETUSER.SUCCESS:
+        case type.GETINFOUSER.SUCCESS:
             return {
                 ...state,
                 user: action.user,
                 loading: false,
             }
-        case type.GETUSER.ERROR:
+        case type.GETINFOUSER.ERROR:
             return {
                 ...state,
                 loading: false,
             }
-            case type.GETLISTBILL.REQUEST:
+        case type.GETLISTBILL.REQUEST:
             return {
                 ...state,
                 loading: true,

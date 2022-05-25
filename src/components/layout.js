@@ -29,9 +29,9 @@ function Layouts(props) {
     props.logout();
   }
 
-  useEffect(() => {
-    props.verify();
-  }, []);
+  // useEffect(() => {
+  //   props.verify();
+  // }, []);
   // let context = useContext(AuthenContext);
 
   // async function signoutHandler() {

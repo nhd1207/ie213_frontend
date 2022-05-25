@@ -55,22 +55,7 @@ function reducer(state = initialState, action) {
         ...state,
         loading: false,
       };
-    case type.SEARCH.REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case type.SEARCH.SUCCESS:
-      return {
-        ...state,
-        cars: action.data,
-        loading: false,
-      };
-    case type.SEARCH.ERROR:
-      return {
-        ...state,
-        loading: false,
-      };
+    
     default:
       return state;
   }

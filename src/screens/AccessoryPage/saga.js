@@ -50,18 +50,22 @@ function* addAccessoryToWishlistSaga(action) {
     }
 }
 
-function* searchAccessorySaga(action) {
+
+function* filterAndSearchAcessorySaga(action) {
     try {
-        const { data } = action
-        const response = yield call(api.search, data)
-        if (response.status === 'success')
-            yield all([put({ type: TYPE.SEARCH.SUCCESS, ...response })])
-        else {
-            yield put({ type: TYPE.SEARCH.ERROR, error: response })
+        const { params } = action
+        const response = (yield call(api.filter, params))
+        console.log('response',response)
+        if (response.status=='success') {
+            yield all([ 
+                put({ type: TYPE.FILTER.SUCCESS, ...response }),
+            ])
+        } else {
+            yield put({ type: TYPE.FILTER.ERROR, error: response })
         }
     } catch (error) {
         yield all([
-            put({ type: TYPE.SEARCH.ERROR, error })
+            put({ type: TYPE.FILTER.ERROR, error })
         ])
     }
 }
@@ -71,7 +75,7 @@ function* watcher() {
     yield all([
         takeLatest(TYPE.GETACCESSORY.REQUEST, getListAccessorySaga),
         takeLatest(TYPE.ADDACCESSORYTOWISHLIST.REQUEST, addAccessoryToWishlistSaga),
-        takeLatest(TYPE.SEARCH.REQUEST, searchAccessorySaga),
+        takeLatest(TYPE.FILTER.REQUEST, filterAndSearchAcessorySaga),
     ])
 }
 
