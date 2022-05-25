@@ -2,21 +2,21 @@ import axios from '../requestV2'
 
 const prefix = '/car';
 
-export const getDetailByCode =(code)=> {
+export const getDetailByCode = (code) => {
     return axios({
         method: 'GET',
         url: `${prefix}/${code}`
     })
 }
 
-export const getList =()=> {
+export const getList = () => {
     return axios({
         method: 'GET',
         url: `${prefix}/`
     })
 }
 
-export const compareTwoCars =(data)=> {
+export const compareTwoCars = (data) => {
     return axios({
         method: 'GET',
         data,
@@ -24,7 +24,7 @@ export const compareTwoCars =(data)=> {
     })
 }
 
-export const create =(data)=> {
+export const create = (data) => {
     return axios({
         method: 'POST',
         data,
@@ -32,7 +32,7 @@ export const create =(data)=> {
     })
 }
 
-export const update =(id, data)=> {
+export const update = (id, data) => {
     return axios({
         method: 'PUT',
         data,
@@ -40,7 +40,7 @@ export const update =(id, data)=> {
     })
 }
 
-export const destroy =(id)=> {
+export const destroy = (id) => {
     return axios({
         method: 'DELETE',
         url: `${prefix}/${id}`
@@ -49,15 +49,21 @@ export const destroy =(id)=> {
 
 export const cloudinaryUpload = (fileToUpload) => {
     return axios({
-        method:'POST',
+        method: 'POST',
         fileToUpload,
-        url:`uploads/cloudinary-upload`
+        url: `uploads/cloudinary-upload`
     })
 }
 
 export const filter = (params) => {
     return axios({
-        method:'GET',
-        url:`${prefix}/filter?${params}`
+        method: 'GET',
+        url: `${prefix}/filter?${params}`
+    })
+}
+export const search = (params) => {
+    return axios({
+        method: 'GET',
+        url: `${prefix}/searchCar?keyword=${params}`
     })
 }

@@ -1,0 +1,33 @@
+@import url(../../style/_variables.css);
+
+.buttonMore {
+    border-radius: 3px;
+    background-color: var(--black-color);
+    color: var(--yellow-color);
+}
+
+.buttonMore:hover {
+    border-color: var(--gray-color);
+    background-color: var(--gray-color);
+    color: var(--white-color);
+}
+
+.buttonState {
+    font-weight: bold;
+}
+
+.buttonState .buttonStateC {
+    color: var(--yellow-color);
+}
+
+.buttonState .buttonStateH {
+    color: var(--red-color);
+}
+
+.buttonState .buttonStateN {
+    color: var(--green-color);
+}
+
+/* .text-center {
+    font-size: var(--font-document);
+} */

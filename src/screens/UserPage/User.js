@@ -17,7 +17,7 @@ import { Redirect } from "react-router-dom";
 function User(props) {
   const [showForm, setShowForm] = useState(false);
   const [accessoryBill, setAccessoryBill] = useState({});
-  
+
   useEffect(() => {
     props.getUser();
     props.getListBill();
@@ -68,42 +68,44 @@ function User(props) {
               </Menu>
             </div>
             <div className={`${style.content} col col-xl-9 d-none d-md-block`}>
-              <Descriptions column={1}>
-                <Descriptions.Item
-                  labelStyle={{ fontSize: 50, fontWeight: "bold"}}
-                  contentStyle={{ fontSize: 50 }}
-                >
-                  THÔNG TIN
-                </Descriptions.Item>
-                <Descriptions.Item
-                  labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                  contentStyle={{ fontSize: 30 }}
-                  label="Tên người dùng"
-                >
-                  {props.user?.name}
-                </Descriptions.Item>
-                <Descriptions.Item
-                  labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                  contentStyle={{ fontSize: 30 }}
-                  label="Số điện thoại"
-                >
-                  {props.user?.info?.phoneNumber}
-                </Descriptions.Item>
-                <Descriptions.Item
-                  labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                  contentStyle={{ fontSize: 30 }}
-                  label="Email"
-                >
-                  {props.user?.email}
-                </Descriptions.Item>
-                <Descriptions.Item
-                  labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                  contentStyle={{ fontSize: 30 }}
-                  label="Ngày sinh"
-                >
-                  {dateFormat(props.user?.info?.dateOfBirth, "mmmm dS, yyyy")}
-                </Descriptions.Item>
-              </Descriptions>
+              <div className={`${style.imformationUser}`}>
+                <Descriptions column={1}>
+                  <Descriptions.Item
+                    labelStyle={{ fontSize: 42, fontWeight: "bold" }}
+                    contentStyle={{ fontSize: 42 }}
+                  >
+                    THÔNG TIN
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                    contentStyle={{ fontSize: 20 }}
+                    label="Tên người dùng"
+                  >
+                    {props.user?.name}
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                    contentStyle={{ fontSize: 20 }}
+                    label="Số điện thoại"
+                  >
+                    {props.user?.info?.phoneNumber}
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                    contentStyle={{ fontSize: 20 }}
+                    label="Email"
+                  >
+                    {props.user?.email}
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                    contentStyle={{ fontSize: 20 }}
+                    label="Ngày sinh"
+                  >
+                    {dateFormat(props.user?.info?.dateOfBirth, "mmmm dS, yyyy")}
+                  </Descriptions.Item>
+                </Descriptions>
+              </div>
               <DataTable
                 dataSource={props.bills?.accessoryBill}
                 handleShowForm={openModal}

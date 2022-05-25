@@ -1,9 +1,10 @@
-.avatar 
-{
+@import url("../../style/_variables.css");
+
+.avatar {
     width: 100%;
     height: 50%;
     margin-top: 30px;
-    text-align: center;    
+    text-align: center;
     clip-path: circle(140px at 50% 50%);
 }
 
@@ -11,14 +12,14 @@
     background-color: white;
     padding-left: 0;
     padding-right: 0;
-    position: relative
+    position: relative;
+    box-shadow: 3px 3px var(--gray-light-color);
 }
 
-.avatarName
-{
+.avatarName {
     font-size: 35px;
     padding-top: 5px;
-    text-align: center;    
+    text-align: center;
     padding-bottom: 50px;
 }
 
@@ -33,7 +34,11 @@
     text-align: center;
 }
 
-.descriptions {
+.content .descriptions {
     text-align: center;
-    font-size:  50px;
+    font-size: var(--font-document);
+}
+
+.content .imformationUser {
+    padding-left: 2rem;
 }
