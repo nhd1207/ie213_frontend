@@ -109,11 +109,11 @@ function Car(props) {
         setFilterValue(params);
         //handleFilter(params)
         break;
-        case "search":
-          params = { ...filterValue, keyword: value.trim() };
-          setFilterValue(params);
-          //handleFilter(params)
-          break;
+      case "search":
+        params = { ...filterValue, keyword: value.trim() };
+        setFilterValue(params);
+        //handleFilter(params)
+        break;
       default:
         return;
     }
@@ -139,7 +139,7 @@ function Car(props) {
                 <Search
                   className={`${style.searchBox}`}
                   placeholder="Nhập tên xe"
-                  onSearch={(e) =>handleFilterValue(e,'search')}
+                  onSearch={(e) => handleFilterValue(e, "search")}
                   enterButton
                 />
               </Space>
@@ -161,7 +161,7 @@ function Car(props) {
               >
                 <div className={`${style.rangeInput}`}>
                   <>
-                    <Form.Label>Công Suất: {}</Form.Label>
+                    <Form.Label>Bộ Lọc: {}</Form.Label>
                   </>
                 </div>
                 <SubMenu
@@ -179,13 +179,13 @@ function Car(props) {
                   title="Giá"
                   onClick={(e) => handleFilterValue(null, e.key)}
                 >
-                  <Slider
+                  {/* <Slider
                     defaultValue={0}
                     min={30}
                     max={100}
                     marks={marks}
                     onChange={(e) => handleFilterValue(e, "power")}
-                  />
+                  /> */}
                   <Menu.Item key="price_asc">Tăng dần</Menu.Item>
                   <Menu.Item key="price_desc">Giảm dần</Menu.Item>
                 </SubMenu>
