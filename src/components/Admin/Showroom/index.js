@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Button, Modal, Image, Empty } from 'antd';
+import { Button, Modal } from 'antd';
 import DataTable from './components/DataTable'
 import FormUpdateShowroom from './components/FormUpdatePost'
 import FormAddShowroom from './components/FormAddNew'
@@ -8,8 +8,6 @@ import Layout from '../LayoutAdmin/LayoutAdmin'
 import queryString from 'query-string'
 import { createShowroom, getList, updateShowroom, deleteShowroom } from './action';
 import { PlusOutlined } from '@ant-design/icons';
-import FormFilter from './components/FormFilter'
-import FileInput from '../../Share/FileInput';
 
 const noImage = 'https://res.cloudinary.com/sevenimg/image/upload/v1652028058/no-image-available_yyhche.png';
 
@@ -42,8 +40,7 @@ class index extends Component {
         this.setState({ showForm2: false })
     }
 
-    handleCreatePost = (value) => {
-        let id = this.state.idShowroom;
+    handleCreateShowroom = (value) => {
         this.setState({ showForm2: false })
         let params = { ...value, image: { avatar: noImage, banner: noImage } }
         this.props.createShowroom(params)
@@ -62,29 +59,29 @@ class index extends Component {
         this.setState({ showForm: false })
     }
 
-    handleUpdatePost = (value) => {
+    handleUpdateShowroom = (value) => {
         let id = this.state.idShowroom;
         this.setState({ showForm: false })
         let params = value
         this.props.updateShowroom(id, params)
     }
 
-    handleDeletePost = (value) => {
+    handleDeleteShowroom = (value) => {
         let id = value;
         this.props.deleteShowroom(id);
     }
 
     openModal = (values) => {
         this.handleShowForm(true);
-        this.state.idShowroom = values._id;
-        this.state.showroom = values;
+        this.setState({idShowroom : values._id})
+        this.setState({showroom :values})
     }
 
     // Image post
     openModalImage = (values) => {
         this.handleShowFormImage(true);
-        this.state.idShowroom = values._id;
-        this.state.showroom = values;
+        this.setState({idShowroom : values._id})
+        this.setState({showroom :values})
     }
 
     handleShowFormImage = (value) => {
@@ -113,13 +110,13 @@ class index extends Component {
     }
 
     render() {
-        const { showForm, showForm2, showFormImage } = this.state;
+        const { showForm, showForm2 } = this.state;
         return (
             <div>
                 <Layout>
                     <div className='container-fluid mb-3 text-left py-2' style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <span className='h3 font-weight-bold '>Showroom</span>
-                        <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} title='Thêm bài viết' type="primary" >Thêm bài viết</Button></span>
+                        <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} title='Thêm showroom' type="primary" >Thêm bài viết</Button></span>
                     </div>
                     {/* <FormFilter
                     onSubmit={()=>handleSubmitFilter}
@@ -128,7 +125,7 @@ class index extends Component {
                         dataSource={this.props?.showroom?.data?.showRoom || []}
                         loading={this.props?.showroom?.loading}
                         updateShowroom={this.openModal}
-                        deleteShowroom={this.handleDeletePost}
+                        deleteShowroom={this.handleDeleteShowroom}
                         showImage={this.openModalImage}
                     />
                     <Modal
@@ -143,7 +140,7 @@ class index extends Component {
                             keyboard={true}
                             maskClosable={true}
                             onCancel={() => this.handleShowForm(false)}
-                            onSubmit={this.handleUpdatePost}
+                            onSubmit={this.handleUpdateShowroom}
                             handleShowForm={this.handleShowForm}
                             initialValues={this.state.showroom}
                         />
@@ -159,7 +156,7 @@ class index extends Component {
                             keyboard={true}
                             maskClosable={true}
                             onCancel={() => this.handleShowFormAdd(false)}
-                            onSubmit={this.handleCreatePost}
+                            onSubmit={this.handleCreateShowroom}
                             handleShowForm={this.handleShowFormAdd}
                         />
                     </Modal>
@@ -173,7 +170,7 @@ class index extends Component {
                     >
                         <Image.PreviewGroup>
                             <p>Tải lên hình ảnh cho {this.state.showroom?.title}</p>
-                            <FileInput gallery={false} urlImage={this.handleUrlImage} update={() => this.handleUpdatePost(this.state.post)}></FileInput>
+                            <FileInput gallery={false} urlImage={this.handleUrlImage} update={() => this.handleUpdateShowroom(this.state.post)}></FileInput>
                             <hr />
                             <p>Hình đại diện cho bài viết</p>{this.state.showroom?.image?.avatar ?
                                 <Image width={200} src={this.state.showroom.image?.avatar} /> : <Empty />

@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Button, Spin, Modal, Image, Empty } from 'antd';
+import { Button, Modal, Image, Empty } from 'antd';
 import DataTable from './components/DataTable'
 import FormUpdateCar from './components/FormUpdateCar'
 import FormAddCar from './components/FormAddNew'
 import Layout from '../LayoutAdmin/LayoutAdmin'
+import FileInput from '../../Share/FileInput'
 import queryString from 'query-string'
 import { createCar, getList, updateCar, deleteCar } from './action';
 import { PlusOutlined } from '@ant-design/icons';
-import FormFilter from './components/FormFilter'
-import classes from "./index.module.css"; import FileInput from '../../Share/FileInput';
-;
+const noImage = 'https://res.cloudinary.com/sevenimg/image/upload/v1652028058/no-image-available_yyhche.png';
 
 
 class index extends Component {
@@ -45,8 +44,7 @@ class index extends Component {
 
     handleCreateCar = (value) => {
         this.setState({ showForm2: false })
-        this.setState({ showFormImage: true })
-        let params = value
+        let params = { ...value, image: { avatar: noImage, banner: noImage} }
         this.props.createCar(params)
     }
 

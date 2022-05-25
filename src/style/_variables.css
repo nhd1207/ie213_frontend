@@ -8,6 +8,7 @@
     --red-color: red;
     --border-gray-color: #D8D8D8;
     --black-background-color: rgb(56, 56, 56);
+    --caption-background: rgb(0, 0, 0, 50%);
     --font-title: 1.25rem;
     --font-document: 1rem;
     --font-note: 0.875rem;
@@ -15,4 +16,5 @@
     --font-h2: 1.6rem;
     --font-xl-h1: 3.75rem;
     --font-xl-h2: 2.4rem;
+    --font-logo: 15rem;
 }

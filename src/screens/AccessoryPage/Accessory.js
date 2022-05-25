@@ -10,8 +10,8 @@ import {
   FormControl,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getListAccessory, addAccessoryToWishlist, search } from "./action";
-import { Menu, Spin } from "antd";
+import { getListAccessory, addAccessoryToWishlist, filter } from "./action";
+import { Menu, Spin, Slider } from "antd";
 import {
   HeartFilled,
   SettingOutlined,
@@ -30,8 +30,27 @@ function Accessory(props) {
   const [current, setCurrent] = useState(1);
   const [minIndex, setMinIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(0);
+  const [filterValue, setFilterValue] = useState({
+    color: null,
+    limit: null,
+    page: null,
+    priceMin: null,
+    priceMax: null,
+    sort: "name",
+    field: ["name", "code", "price", "amount", "image"],
+    keyword: null,
+  });
+  var pageSize = 4;
 
-  var pageSize = 10;
+  const marks = {
+    30: "0°C",
+    100: {
+      style: {
+        color: "#f50",
+      },
+      label: <strong>max</strong>,
+    },
+  };
 
   useEffect(() => {
     props.getListAccessory();
@@ -39,6 +58,23 @@ function Accessory(props) {
     setMinIndex(0);
     setMaxIndex(pageSize)
   }, []);
+
+  const handleFilter = (filterValue) => {
+    let params = "";
+    for (let key in filterValue) {
+      if (filterValue[key] === null) {
+      } else if (key === "priceMin") {
+        params = params + "price[gte]" + "=" + filterValue[key] + "&";
+      } else if (key === "priceMax") {
+        params = params + "price[lt]" + "=" + filterValue[key] + "&";
+      } else {
+        params = params + key + "=" + filterValue[key] + "&";
+      }
+    }
+    params = params.slice(0, -1);
+    console.log("handleFilter", params);
+    props.filter(params);
+  };
 
   const handleClick = (e) => {
     // console.log("click ", e);
@@ -50,19 +86,44 @@ function Accessory(props) {
     props.addAccessoryToWishlist({ itemId: value })
   };
 
+  const handleFilterValue = (value, type) => {
+    let params;
+    switch (type) {
+      case "name_asc":
+        params = { ...filterValue, sort: "name" };
+        setFilterValue(params);
+        break;
+      case "name_desc":
+        params = { ...filterValue, sort: "-name" };
+        setFilterValue(params);
+        break;
+      case "price_asc":
+        params = { ...filterValue, sort: "price" };
+        setFilterValue(params);
+        break;
+      case "price_desc":
+        params = { ...filterValue, sort: "-price" };
+        setFilterValue(params);
+        //handleFilter(params)
+        break;
+        case "search":
+          params = { ...filterValue, keyword: value.trim() };
+          setFilterValue(params);
+          //handleFilter(params)
+          break;
+      default:
+        return;
+    }
+    handleFilter(params);
+  };
+
   const handleChange = (page) => {
     setCurrent(page);
     setMinIndex((page - 1) * pageSize);
     setMaxIndex(page * pageSize)
   };
 
-  const onSearch = (value) => {
-    if (!value.trim()) {
-      props.getListAccessory();
-    }
-    else
-    props.search(value.trim());
-  }
+
 
   return (
     <Layout>
@@ -78,7 +139,7 @@ function Accessory(props) {
                 <Search
                   className={`${style.searchBox}`}
                   placeholder="Nhập tên phụ kiện"
-                  onSearch={onSearch}
+                  onSearch={(e) =>handleFilterValue(e,'search') }
                   enterButton
                 />
               </Space>
@@ -104,17 +165,30 @@ function Accessory(props) {
                     <Form.Range />
                   </>
                 </div>
-                <SubMenu key="sub1" icon={<SettingOutlined />} title="Dòng Xe">
-                  <Menu.Item key="1">Option 1</Menu.Item>
-                  <Menu.Item key="2">Option 2</Menu.Item>
-                  <Menu.Item key="3">Option 3</Menu.Item>
-                  <Menu.Item key="4">Option 4</Menu.Item>
+                <SubMenu
+                  key="sub1"
+                  icon={<SettingOutlined />}
+                  title="Tên xe"
+                  onClick={(e) => handleFilterValue(null, e.key)}
+                >
+                  <Menu.Item key="name_asc">A-Z</Menu.Item>
+                  <Menu.Item key="name_desc">Z-A</Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub2" icon={<SettingOutlined />} title="Chỗ Ngồi">
-                  <Menu.Item key="5">Option 5</Menu.Item>
-                  <Menu.Item key="6">Option 6</Menu.Item>
-                  <Menu.Item key="7">Option 7</Menu.Item>
-                  <Menu.Item key="8">Option 8</Menu.Item>
+                <SubMenu
+                  key="sub2"
+                  icon={<SettingOutlined />}
+                  title="Giá"
+                  onClick={(e) => handleFilterValue(null, e.key)}
+                >
+                  <Slider
+                    defaultValue={0}
+                    min={30}
+                    max={100}
+                    marks={marks}
+                    onChange={(e) => handleFilterValue(e, "power")}
+                  />
+                  <Menu.Item key="price_asc">Tăng dần</Menu.Item>
+                  <Menu.Item key="price_desc">Giảm dần</Menu.Item>
                 </SubMenu>
               </Menu>
             </div>
@@ -184,9 +258,9 @@ const mapDispatchToProps = (dispatch) => ({
   addAccessoryToWishlist: (data) => {
     dispatch(addAccessoryToWishlist(data));
   }  ,
-  search: (data) => {
-    dispatch(search(data));
-  }
+  filter: (params) => {
+    dispatch(filter(params));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Accessory);

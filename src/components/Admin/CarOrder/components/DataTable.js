@@ -1,8 +1,7 @@
 import React from 'react';
-import { Table, Spin, Space, Tooltip } from 'antd';
+import { Table, Space, Tooltip, Popconfirm } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDeleteLeft, faEdit,faInfo,faCheck } from '@fortawesome/free-solid-svg-icons'
-import { Popconfirm, message, Button } from 'antd';
+import { faDeleteLeft, faInfo, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { HistoryOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import dateFormat from 'dateformat'
 import money from '../../../Share/functions/money';
@@ -11,10 +10,6 @@ const DataTable = ({ dataSource, loading, info, changeStatus,type }) => {
 
   const onSubmit = (values) => {
     info(values)
-  }
-
-  const onDelete = (values) => {
-    changeStatus(values)
   }
 
   const onCancel = (values) => {
@@ -108,7 +103,9 @@ const DataTable = ({ dataSource, loading, info, changeStatus,type }) => {
             <span style={{ color: 'blue' }}><HistoryOutlined />   {'Đang chờ' || ''} </span> :
             (value === 'Success') ?
               <span style={{ color: 'green' }}><CheckOutlined /> {"Đã nhận" || ''} </span> :
-              <span style={{ color: 'red' }}><CloseOutlined /> {value || ''} </span>
+              (value ==='Accepted')?
+              <span style={{ color: 'orange' }}><CheckOutlined /> {"Đã duyệt" || ''} </span>:
+              <span style={{ color: 'red' }}><CloseOutlined /> {"Đã hủy" || ''} </span>
         }
         </div>
     },
@@ -124,7 +121,7 @@ const DataTable = ({ dataSource, loading, info, changeStatus,type }) => {
               </span>
             </Tooltip>
           </button>
-          {type == "Pending" ?
+          {type === "Pending" ?
             <Popconfirm
               disabled={record.status === "Success"}
               placement="left"
@@ -132,7 +129,7 @@ const DataTable = ({ dataSource, loading, info, changeStatus,type }) => {
               onConfirm={() => onAccept(record)}
               okText="Có"
               cancelText="Không">
-              <button className="btn btn-sm btn-primary" style={{color:'green'}}>
+              <button className="btn btn-sm btn-primary" >
                 <span className="px-2">
                 <FontAwesomeIcon icon={faCheck} />
                 </span>
@@ -140,7 +137,7 @@ const DataTable = ({ dataSource, loading, info, changeStatus,type }) => {
             </Popconfirm>
             : <></>
           }
-           {type == "Accepted" ?
+           {type === "Accepted" ?
             <Popconfirm
               disabled={record.status === "Success"}
               placement="left"
@@ -148,7 +145,7 @@ const DataTable = ({ dataSource, loading, info, changeStatus,type }) => {
               onConfirm={() => onSuccess(record)}
               okText="Có"
               cancelText="Không">
-              <button className="btn btn-sm btn-primary" style={{color:'green'}}>
+              <button className="btn btn-sm btn-primary">
                 <span className="px-2">
                 <FontAwesomeIcon icon={faCheck} />
                 </span>
@@ -156,7 +153,7 @@ const DataTable = ({ dataSource, loading, info, changeStatus,type }) => {
             </Popconfirm>
             : <></>
           }
-          {type == "Pending" || type == "Accepted" ?
+          {type === "Pending" || type === "Accepted" ?
             <Popconfirm
               disabled={record.status === "Success"}
               placement="left"

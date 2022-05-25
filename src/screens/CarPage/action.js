@@ -14,6 +14,7 @@ export const action_type = {
         SUCCESS: "ADDCARTOWISHLIST.SUCCESS",
         ERROR: "ADDCARTOWISHLIST.ERROR"
     },
+
 }
 
 export function getListCar (params)
