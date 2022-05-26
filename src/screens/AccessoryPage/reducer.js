@@ -38,22 +38,22 @@ function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
             }
-        case type.SEARCH.REQUEST:
+        case type.FILTER.REQUEST:
             return {
                 ...state,
                 loading: true,
-            }
-        case type.SEARCH.SUCCESS:
+            };
+        case type.FILTER.SUCCESS:
             return {
                 ...state,
-                accessories: action.data,
+                accessories: action.docs,
                 loading: false,
-            }
-        case type.SEARCH.ERROR:
+            };
+        case type.FILTER.ERROR:
             return {
                 ...state,
                 loading: false,
-            }
+            };
         default:
             return state
     }

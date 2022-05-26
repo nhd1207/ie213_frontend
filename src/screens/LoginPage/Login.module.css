@@ -1,9 +1,13 @@
 section.container {
-    height: 100vh;
-    background-image: url(../../Images/chuttersnap.jpg);
-    background-size: cover;
+  overflow: hidden;
+  height: 100vh;
+  background-image: url(../../Images/chuttersnap.jpg);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .message {
-    margin: auto;
+  margin: auto;
 }

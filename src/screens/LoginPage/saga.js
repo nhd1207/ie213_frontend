@@ -5,6 +5,7 @@ import * as api from "../../apis/Auth";
 import * as api2 from "../../apis/User"
 // import * as apiuser from "../../../apis/User";
 import Cookies from "js-cookie";
+import { message } from 'antd'
 
 function* getListSaga(action) {
   try {
@@ -32,12 +33,20 @@ function* verifySaga(action) {
     const response = yield call(api2.getMe, param);
     if (response.status === "success") {
       yield all([put({ type: TYPE.VERIFY.SUCCESS, ...response })]);
-    } else {
+    } 
+    else 
+    {
       // Cookies.set("jwt", null);
       yield all([put({ type: TYPE.VERIFY.ERROR })]);
+      yield put(push("/login"));
+      message.error('Bạn chưa đăng nhập')
+      window.location.reload();
     }
   } catch (error) {
     yield all([put({ type: TYPE.VERIFY.ERROR, error })]);
+    yield put(push("/login"));
+    message.error('Bạn chưa đăng nhập')
+    window.location.reload();
   }
 }
 
@@ -48,6 +57,9 @@ function* logoutSaga(action) {
     if (response.status === "success") {
       yield all([put({ type: TYPE.LOGOUT.SUCCESS, ...response })]);
       Cookies.set("jwt", null);
+      yield put(push("/login"));
+      message.success(`Xin mời bạn đăng nhập lại!`)
+      window.location.reload();
     } else {
       yield all([put({ type: TYPE.LOGOUT.ERROR })]);
     }

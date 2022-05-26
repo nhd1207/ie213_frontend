@@ -12,16 +12,26 @@ import { getUser, getListBill } from "./action";
 import dateFormat from "dateformat";
 import Cookies from "js-cookie";
 import DataTable from "../../components/User/DataTable";
-import { Redirect } from "react-router-dom";
-
+import { Redirect, Link } from "react-router-dom";
+import { verify } from "../LoginPage/action";
 function User(props) {
   const [showForm, setShowForm] = useState(false);
   const [accessoryBill, setAccessoryBill] = useState({});
+<<<<<<< HEAD
+=======
+  const [loading, setLoading] = useState(true);
+>>>>>>> master
 
   useEffect(() => {
+    props.verify();
     props.getUser();
     props.getListBill();
   }, []);
+
+  useEffect(() => {
+    if (props.loading === false && props.loading2 === false) setLoading(false);
+    else setLoading(true);
+  }, [props.loading, props.loading2]);
 
   async function signoutHandler() {
     Cookies.set("jwt", "");
@@ -44,15 +54,19 @@ function User(props) {
 
   return (
     <Layout>
-      {props?.isLoggedIn.isLoggedIn === false ? (
-        <Redirect to="/login"></Redirect>
-      ) : (
-        <Spin size="large" spinning={props.loading}>
+      <Spin size="large" spinning={loading}>
+        {loading ? (
+          <></>
+        ) : (
           <div className="row">
             <div
               className={`${style.sideMenu} col col-xl-3 d-none d-md-block d-inline-flex`}
             >
-              <img className={style.avatar} src={`${props.user?.photo}`} alt="User avatar"></img>
+              <img
+                className={style.avatar}
+                src={`${props.user?.photo}`}
+                alt="User avatar"
+              ></img>
               <div className={style.avatarName}>{props.user.name}</div>
               <Menu
                 className={style.sideNav}
@@ -63,11 +77,17 @@ function User(props) {
                   <div> Thông tin</div>
                 </Menu.Item>
                 <Menu.Item key="2">
+                  <Link to="/user/update">
+                    <div> Cập nhật thông tin</div>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="3">
                   <a onClick={signoutHandler}> {"Đăng xuất"}</a>
                 </Menu.Item>
               </Menu>
             </div>
             <div className={`${style.content} col col-xl-9 d-none d-md-block`}>
+<<<<<<< HEAD
               <div className={`${style.imformationUser}`}>
                 <Descriptions column={1}>
                   <Descriptions.Item
@@ -106,6 +126,44 @@ function User(props) {
                   </Descriptions.Item>
                 </Descriptions>
               </div>
+=======
+              <Descriptions column={1}>
+                <Descriptions.Item
+                  labelStyle={{ fontSize: 50, fontWeight: "bold" }}
+                  contentStyle={{ fontSize: 50 }}
+                >
+                  THÔNG TIN
+                </Descriptions.Item>
+                <Descriptions.Item
+                  labelStyle={{ fontSize: 30, fontWeight: "bold" }}
+                  contentStyle={{ fontSize: 30 }}
+                  label="Tên người dùng"
+                >
+                  {props.user?.name}
+                </Descriptions.Item>
+                <Descriptions.Item
+                  labelStyle={{ fontSize: 30, fontWeight: "bold" }}
+                  contentStyle={{ fontSize: 30 }}
+                  label="Số điện thoại"
+                >
+                  {props.user?.info?.phoneNumber}
+                </Descriptions.Item>
+                <Descriptions.Item
+                  labelStyle={{ fontSize: 30, fontWeight: "bold" }}
+                  contentStyle={{ fontSize: 30 }}
+                  label="Email"
+                >
+                  {props.user?.email}
+                </Descriptions.Item>
+                <Descriptions.Item
+                  labelStyle={{ fontSize: 30, fontWeight: "bold" }}
+                  contentStyle={{ fontSize: 30 }}
+                  label="Ngày sinh"
+                >
+                  {dateFormat(props.user?.info?.dateOfBirth, "mmmm dS, yyyy")}
+                </Descriptions.Item>
+              </Descriptions>
+>>>>>>> master
               <DataTable
                 dataSource={props.bills?.accessoryBill}
                 handleShowForm={openModal}
@@ -133,8 +191,8 @@ function User(props) {
               </Modal>
             </div>
           </div>
-        </Spin>
-      )}
+        )}
+      </Spin>
     </Layout>
   );
 }
@@ -143,7 +201,7 @@ const mapStateToProps = (state) => ({
   user: state.user.user,
   bills: state.user.bills,
   loading: state.user.loading,
-  isLoggedIn: state.isLoggedIn,
+  loading2: state.login.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -152,6 +210,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getListBill: (params) => {
     dispatch(getListBill(params));
+  },
+  verify: (params) => {
+    dispatch(verify(params));
   },
 });
 

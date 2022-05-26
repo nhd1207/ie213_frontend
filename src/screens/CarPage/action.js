@@ -14,11 +14,6 @@ export const action_type = {
         SUCCESS: "ADDCARTOWISHLIST.SUCCESS",
         ERROR: "ADDCARTOWISHLIST.ERROR"
     },
-    SEARCH: {
-        REQUEST: "SEARCHCAR.REQUEST",
-        SUCCESS: "SEARCHCAR.SUCCESS",
-        ERROR: "SEARCHCAR.ERROR"
-    }
 }
 
 export function getListCar(params) {
