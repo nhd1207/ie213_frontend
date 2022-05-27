@@ -7,7 +7,7 @@ import { getCarByID } from "./action";
 import { connect } from "react-redux";
 import { Button } from "antd";
 import { Spin } from "antd";
-import {NavLink} from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import Compare from "../../screens/ComparePage/Compare";
 import {
   CaretRightOutlined,
@@ -30,7 +30,7 @@ function CarDetail(props) {
     console.log(location);
   }, []);
 
-  function compareHandler() {}
+  function compareHandler() { }
   let myStyle = {
     backgroundImage: `url(${props?.carDetail?.car[0]?.image.banner})`,
     backgroundRepeat: "no-repeat",
@@ -74,15 +74,15 @@ function CarDetail(props) {
                   </div>
                 </div>
                 <div className={`col-xl-2 row`}>
-                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
-                  <Button
-                    className={`${style.bookButton} col-xl-12`}
-                    type="primary"
-                    danger
-                  >
-                    <CarOutlined />
-                    ĐẶT XE NGAY
-                  </Button>
+                  <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
+                    <Button
+                      className={`${style.bookButton} col-xl-12`}
+                      type="primary"
+                      danger
+                    >
+                      <CarOutlined />
+                      ĐẶT XE NGAY
+                    </Button>
                   </NavLink>
                 </div>
                 <div className={`col-xl-2 row`}>
@@ -167,7 +167,7 @@ function CarDetail(props) {
                   Giá Tiêu Chuẩn
                 </p>
                 <p className={`${style.specRowText} col-xl-6`}>
-                  3 600 000 000 VNĐ
+                  {money(props?.carDetail?.car[0]?.price, "VND")}
                 </p>
               </div>
               <div className={`${style.specRow} row`}>
@@ -179,15 +179,15 @@ function CarDetail(props) {
               </div>
               <div className={`${style.buttonWrapper} row`}>
                 <div className={`${style.button} col-xl-6`}>
-                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
-                  <Button
-                    className={`${style.bookButton} col-xl-12`}
-                    type="primary"
-                    danger
-                  >
-                    <CarOutlined />
-                    ĐẶT XE NGAY
-                  </Button>
+                  <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
+                    <Button
+                      className={`${style.bookButton} col-xl-12`}
+                      type="primary"
+                      danger
+                    >
+                      <CarOutlined />
+                      ĐẶT XE NGAY
+                    </Button>
                   </NavLink>
                 </div>
                 <div className={`${style.button} col-xl-6`}>
