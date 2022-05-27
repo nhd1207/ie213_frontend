@@ -1,37 +1,35 @@
 import React, { useEffect, useState } from "react";
 import style from "./AccessoryList.module.css";
-import { InputGroup } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import "antd/dist/antd.css";
 import Card from "react-bootstrap/Card";
 import Layout from "../../components/layout";
 import { Pagination } from "antd";
-import {
-  Form,
-} from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getWishList, deleteWishList } from "../WishListPage/action";
 import { getListAccessory, addAccessoryToWishlist, filter } from "./action";
 import { Menu, Spin, Slider } from "antd";
-import {
-  HeartFilled,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { HeartFilled, SettingOutlined } from "@ant-design/icons";
 import { Input, Space } from "antd";
 
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import money from "../../components/Share/functions/money";
+import { useHistory } from "react-router-dom";
+
 const { Search } = Input;
 const { SubMenu } = Menu;
 
 function Accessory(props) {
-
-  const [wishList, setWishList] = useState({})
+  const [wishList, setWishList] = useState({});
   const [loading, setLoading] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
   const [current, setCurrent] = useState(1);
   const [minIndex, setMinIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(0);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
   const [filterValue, setFilterValue] = useState({
     color: null,
     limit: null,
@@ -59,13 +57,13 @@ function Accessory(props) {
     props.getListAccessory();
     setTotalPage(props.accessories?.accessories?.length / pageSize);
     setMinIndex(0);
-    setMaxIndex(pageSize)
+    setMaxIndex(pageSize);
     console.log(props);
   }, []);
 
   useEffect(() => {
-    setWishList({...props?.wishList?.wishList})
-}, [props.wishList.wishList]);
+    setWishList({ ...props?.wishList?.wishList });
+  }, [props.wishList.wishList]);
 
   useEffect(() => {
     if (props.accessories.loading) {
@@ -84,7 +82,11 @@ function Accessory(props) {
         }
       });
     });
-  }, [props.accessories.loading, props?.wishList?.wishList?.accessories, props.wishList.loading]);
+  }, [
+    props.accessories.loading,
+    props?.wishList?.wishList?.accessories,
+    props.wishList.loading,
+  ]);
 
   const handleFilter = (filterValue) => {
     let params = "";
@@ -106,37 +108,50 @@ function Accessory(props) {
     // console.log("click ", e);
   };
 
-  const handleDeleteWishListItem = (index) => {
+  const handleDeleteWishListItem = (value) => {
     let wishList2;
-    wishList2 = {...wishList}
-    wishList2.accessories.splice(index,1)
+    let index1;
+    wishList2 = { ...wishList };
+    wishList2.accessories.map((item, index) => {
+      if (item._id === value) index1 = index;
+    });
+    wishList2.accessories.splice(index1, 1);
     let wishList3 = {
-        cars:[],
-        accessories:[]
-    }
-    wishList3.cars = wishList2.cars.map(item=>{
-        return item._id
-    })
-    wishList3.accessories = wishList2.accessories.map(item=>{
-        return item._id
-    })
-    props.deleteWishList({wishList: {...wishList3}})
-  }
+      cars: [],
+      accessories: [],
+    };
+    wishList3.cars = wishList2.cars.map((item) => {
+      return item._id;
+    });
+    wishList3.accessories = wishList2.accessories.map((item) => {
+      return item._id;
+    });
+    props.deleteWishList({ wishList: { ...wishList3 } });
+  };
 
   const toggleClass = (e, value, item, index) => {
-    if (!item.isLiked)
-    {
-      let element = e.target.parentElement.parentElement;
-      element.classList.toggle(`${style.heartIconClicked}`);
-      props.addAccessoryToWishlist({ itemId: value })
-    }
-    else {
+    if (props.isLoggedIn === false) {
+      setShow(true);
       e.preventDefault();
-      let element = e.target.parentElement.parentElement;
-      element.classList.toggle(`${style.heartIconClicked}`);
-      handleDeleteWishListItem(index);
+    } else {
+      if (!item.isLiked) {
+        let element = e.target.parentElement.parentElement;
+        element.classList.toggle(`${style.heartIconClicked}`);
+        props.addAccessoryToWishlist({ itemId: value });
+      } else {
+        e.preventDefault();
+        let element = e.target.parentElement.parentElement;
+        element.classList.toggle(`${style.heartIconClicked}`);
+        handleDeleteWishListItem(value);
+      }
     }
   };
+
+  const history = useHistory();
+
+  function loginHandler() {
+    history.push("/login");
+  }
 
   const handleFilterValue = (value, type) => {
     let params;
@@ -158,11 +173,11 @@ function Accessory(props) {
         setFilterValue(params);
         //handleFilter(params)
         break;
-        case "search":
-          params = { ...filterValue, keyword: value.trim() };
-          setFilterValue(params);
-          //handleFilter(params)
-          break;
+      case "search":
+        params = { ...filterValue, keyword: value.trim() };
+        setFilterValue(params);
+        //handleFilter(params)
+        break;
       default:
         return;
     }
@@ -172,10 +187,8 @@ function Accessory(props) {
   const handleChange = (page) => {
     setCurrent(page);
     setMinIndex((page - 1) * pageSize);
-    setMaxIndex(page * pageSize)
+    setMaxIndex(page * pageSize);
   };
-
-
 
   return (
     <Layout>
@@ -191,7 +204,7 @@ function Accessory(props) {
                 <Search
                   className={`${style.searchBox}`}
                   placeholder="Nhập tên phụ kiện"
-                  onSearch={(e) =>handleFilterValue(e,'search') }
+                  onSearch={(e) => handleFilterValue(e, "search")}
                   enterButton
                 />
               </Space>
@@ -253,44 +266,45 @@ function Accessory(props) {
                     backgroundImage: `url(${item.image.avatar})`,
                   };
                   if (index >= minIndex && index < maxIndex)
-                  return (
-                    <div className="col col-xl-4 col-md-6 col-12">
-                      <Card className={`${style.card}`}>
-                        <Card.Img
-                          className={`${style.image}`}
-                          style={myStyle}
-                        />
-                        <Card.Body>
-                          <Card.Title>{item.name}</Card.Title>
-                          <Card.Text>            
-                            {money(item?.price, "VNĐ")}
-                            </Card.Text>
-                          <div className={`${style.btnWrapper}`}>
-                            <NavLink
-                              to={`/accessory/${item._id}`}
-                              className="btn btn-sm btn-primary"
-                            >
-                              Chi tiết phụ kiện
-                            </NavLink>
-                            {item.isLiked ? (
-                            <HeartFilled
-                              onClick={(e) => toggleClass(e, item._id, item, index)}
-                              className={`${style.heartIcon} ${style.heartIconClicked}`}
-                            />
-                          ) : (
-                            <HeartFilled
-                              onClick={(e) => toggleClass(e, item._id, item, index)}
-                              className={`${style.heartIcon}`}
-                            />
-                          )}
-                          </div>
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  );
+                    return (
+                      <div className="col col-xl-4 col-md-6 col-12">
+                        <Card className={`${style.card}`}>
+                          <Card.Img
+                            className={`${style.image}`}
+                            style={myStyle}
+                          />
+                          <Card.Body>
+                            <Card.Title>{item.name}</Card.Title>
+                            <Card.Text>{money(item?.price, "VNĐ")}</Card.Text>
+                            <div className={`${style.btnWrapper}`}>
+                              <NavLink
+                                to={`/accessory/${item._id}`}
+                                className="btn btn-sm btn-primary"
+                              >
+                                Chi tiết phụ kiện
+                              </NavLink>
+                              {item.isLiked ? (
+                                <HeartFilled
+                                  onClick={(e) =>
+                                    toggleClass(e, item._id, item, index)
+                                  }
+                                  className={`${style.heartIcon} ${style.heartIconClicked}`}
+                                />
+                              ) : (
+                                <HeartFilled
+                                  onClick={(e) =>
+                                    toggleClass(e, item._id, item, index)
+                                  }
+                                  className={`${style.heartIcon}`}
+                                />
+                              )}
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      </div>
+                    );
                 })}
                 <div className={`${style.pagination} row`}>
-
                   <Pagination
                     pageSize={pageSize}
                     current={current}
@@ -304,13 +318,28 @@ function Accessory(props) {
           </div>
         </div>
       </Spin>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Chức năng này yêu cầu đăng nhập</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Vui lòng đăng nhập để tiếp tục</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Huỷ
+          </Button>
+          <Button variant="primary" onClick={loginHandler}>
+            Đăng nhập
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Layout>
   );
 }
 
 const mapStateToProps = (state) => ({
+  isLoggedIn: state.login.isLoggedIn,
   accessories: state.accessoryPage,
-  wishList: state.wishList
+  wishList: state.wishList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -319,7 +348,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addAccessoryToWishlist: (data) => {
     dispatch(addAccessoryToWishlist(data));
-  }  ,
+  },
   filter: (params) => {
     dispatch(filter(params));
   },
@@ -327,8 +356,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(getWishList(params));
   },
   deleteWishList: (params) => {
-    dispatch(deleteWishList(params))
-  }
+    dispatch(deleteWishList(params));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Accessory);

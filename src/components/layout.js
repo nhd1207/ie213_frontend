@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Affix, Menu, Layout, Spin } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink, useRouteMatch, useHistory } from "react-router-dom";
@@ -19,6 +19,7 @@ import Cookies from "js-cookie";
 import "./layout.css";
 import { verifyLayout, logout } from "../screens/LoginPage/action";
 import { connect } from "react-redux";
+import RouteContext from "../context/RouteContext";
 // import AuthenContext from "../components/context/AuthenContext";
 const { Header, Content, Footer } = Layout;
 
@@ -33,6 +34,11 @@ function Layouts(props) {
     }
     history.replace(`${match.url}`)
   }
+
+  const context = useContext(RouteContext);
+  useEffect(() => {
+    context.url = match.url;
+  }, [match])
 
   useEffect(() => {
     props.verifyLayout();

@@ -1,24 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import { reducer as formReducer } from 'redux-form';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { createStore, compose, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import createSagaMiddleware from "redux-saga";
 import reducer from "./reducer";
 import { createBrowserHistory } from "history";
 import saga from "./saga";
 import { routerMiddleware } from "connected-react-router";
+import RouteContext from "./context/RouteContext";
 const history = createBrowserHistory({ basename: "/" });
 const sagaMiddleware = createSagaMiddleware();
-const reduxRouterMiddleware = routerMiddleware(history)
+const reduxRouterMiddleware = routerMiddleware(history);
 const composeSetup =
   process.env.NODE_ENV !== "production" &&
-    typeof window === "object" &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  typeof window === "object" &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     : compose;
 
@@ -30,13 +30,15 @@ sagaMiddleware.run(saga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter >
-      {/* <React.StrictMode> */}
-      <App history={history} />
-      {/* </React.StrictMode> */}
-    </BrowserRouter>
+    <RouteContext.Provider value={{ url: "" }}>
+      <BrowserRouter>
+        {/* <React.StrictMode> */}
+        <App history={history} />
+        {/* </React.StrictMode> */}
+      </BrowserRouter>
+    </RouteContext.Provider>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

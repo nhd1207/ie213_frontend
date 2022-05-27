@@ -9,14 +9,14 @@ import { message } from 'antd'
 
 function* getListSaga(action) {
   try {
-    const { params } = action;
+    const { params, url } = action;
     // params.remember_me = true;
     const response = yield call(api.login, params);
     if (response.status === "success") {
       yield all([put({ type: TYPE.LOGIN.SUCCESS, ...response })]);
       Cookies.set("jwt", response.token);
       console.log(response);
-      yield put(push("/home"));
+      yield put(push(url));
       window.location.reload();
       // let param = {email: params.email};
       // yield put({type: TYPE.VERIFY.REQUEST, param})

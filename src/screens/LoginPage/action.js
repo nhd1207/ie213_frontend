@@ -27,11 +27,12 @@ export const action_type = {
 
 }
 
-export function login (params)
+export function login (params, url)
 {
     return {
         type: action_type.LOGIN.REQUEST,
-        params
+        params,
+        url
     }
 }
 
