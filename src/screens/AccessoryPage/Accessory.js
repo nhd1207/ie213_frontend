@@ -7,9 +7,9 @@ import Layout from "../../components/layout";
 import { Pagination } from "antd";
 import {
   Form,
-  FormControl,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getWishList, deleteWishList } from "../WishListPage/action";
 import { getListAccessory, addAccessoryToWishlist, filter } from "./action";
 import { Menu, Spin, Slider } from "antd";
 import {
@@ -20,12 +20,14 @@ import { Input, Space } from "antd";
 
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-
+import money from "../../components/Share/functions/money";
 const { Search } = Input;
 const { SubMenu } = Menu;
 
 function Accessory(props) {
 
+  const [wishList, setWishList] = useState({})
+  const [loading, setLoading] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
   const [current, setCurrent] = useState(1);
   const [minIndex, setMinIndex] = useState(0);
@@ -53,11 +55,36 @@ function Accessory(props) {
   };
 
   useEffect(() => {
+    props.getWishList();
     props.getListAccessory();
     setTotalPage(props.accessories?.accessories?.length / pageSize);
     setMinIndex(0);
     setMaxIndex(pageSize)
+    console.log(props);
   }, []);
+
+  useEffect(() => {
+    setWishList({...props?.wishList?.wishList})
+}, [props.wishList.wishList]);
+
+  useEffect(() => {
+    if (props.accessories.loading) {
+      if (props.wishList.loading) setLoading(true);
+      else setLoading(true);
+    } else setLoading(true);
+    if (props.accessories.loading === false && props.wishList.loading === false)
+      setLoading(false);
+  }, [props.accessories.loading, props.wishList.loading]);
+
+  useEffect(() => {
+    props?.accessories?.accessories?.map((accessory) => {
+      props?.wishList?.wishList?.accessories?.forEach((item) => {
+        if (item._id === accessory._id) {
+          return (accessory.isLiked = true);
+        }
+      });
+    });
+  }, [props.accessories.loading, props?.wishList?.wishList?.accessories, props.wishList.loading]);
 
   const handleFilter = (filterValue) => {
     let params = "";
@@ -72,7 +99,6 @@ function Accessory(props) {
       }
     }
     params = params.slice(0, -1);
-    console.log("handleFilter", params);
     props.filter(params);
   };
 
@@ -80,10 +106,36 @@ function Accessory(props) {
     // console.log("click ", e);
   };
 
-  const toggleClass = (e, value) => {
-    let element = e.target.parentElement.parentElement;
-    element.classList.toggle(`${style.heartIconClicked}`);
-    props.addAccessoryToWishlist({ itemId: value })
+  const handleDeleteWishListItem = (index) => {
+    let wishList2;
+    wishList2 = {...wishList}
+    wishList2.accessories.splice(index,1)
+    let wishList3 = {
+        cars:[],
+        accessories:[]
+    }
+    wishList3.cars = wishList2.cars.map(item=>{
+        return item._id
+    })
+    wishList3.accessories = wishList2.accessories.map(item=>{
+        return item._id
+    })
+    props.deleteWishList({wishList: {...wishList3}})
+  }
+
+  const toggleClass = (e, value, item, index) => {
+    if (!item.isLiked)
+    {
+      let element = e.target.parentElement.parentElement;
+      element.classList.toggle(`${style.heartIconClicked}`);
+      props.addAccessoryToWishlist({ itemId: value })
+    }
+    else {
+      e.preventDefault();
+      let element = e.target.parentElement.parentElement;
+      element.classList.toggle(`${style.heartIconClicked}`);
+      handleDeleteWishListItem(index);
+    }
   };
 
   const handleFilterValue = (value, type) => {
@@ -127,7 +179,7 @@ function Accessory(props) {
 
   return (
     <Layout>
-      <Spin size="large" spinning={props.accessories?.loading}>
+      <Spin size="large" spinning={loading}>
         <div className={`${style.container}`}>
           <div className={`${style.headingContainer}`}>
             <div className={`${style.headings} row`}>
@@ -210,7 +262,9 @@ function Accessory(props) {
                         />
                         <Card.Body>
                           <Card.Title>{item.name}</Card.Title>
-                          <Card.Text>{item.description}</Card.Text>
+                          <Card.Text>            
+                            {money(item?.price, "VNĐ")}
+                            </Card.Text>
                           <div className={`${style.btnWrapper}`}>
                             <NavLink
                               to={`/accessory/${item._id}`}
@@ -218,10 +272,17 @@ function Accessory(props) {
                             >
                               Chi tiết phụ kiện
                             </NavLink>
+                            {item.isLiked ? (
                             <HeartFilled
-                              onClick={(e) => toggleClass(e, item._id)}
+                              onClick={(e) => toggleClass(e, item._id, item, index)}
+                              className={`${style.heartIcon} ${style.heartIconClicked}`}
+                            />
+                          ) : (
+                            <HeartFilled
+                              onClick={(e) => toggleClass(e, item._id, item, index)}
                               className={`${style.heartIcon}`}
                             />
+                          )}
                           </div>
                         </Card.Body>
                       </Card>
@@ -249,6 +310,7 @@ function Accessory(props) {
 
 const mapStateToProps = (state) => ({
   accessories: state.accessoryPage,
+  wishList: state.wishList
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -261,6 +323,12 @@ const mapDispatchToProps = (dispatch) => ({
   filter: (params) => {
     dispatch(filter(params));
   },
+  getWishList: (params) => {
+    dispatch(getWishList(params));
+  },
+  deleteWishList: (params) => {
+    dispatch(deleteWishList(params))
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Accessory);

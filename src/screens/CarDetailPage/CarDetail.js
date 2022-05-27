@@ -7,6 +7,7 @@ import { getCarByID } from "./action";
 import { connect } from "react-redux";
 import { Button } from "antd";
 import { Spin } from "antd";
+import {NavLink} from "react-router-dom"
 import Compare from "../../screens/ComparePage/Compare";
 import {
   CaretRightOutlined,
@@ -73,6 +74,7 @@ function CarDetail(props) {
                   </div>
                 </div>
                 <div className={`col-xl-2 row`}>
+                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
                   <Button
                     className={`${style.bookButton} col-xl-12`}
                     type="primary"
@@ -81,6 +83,7 @@ function CarDetail(props) {
                     <CarOutlined />
                     ĐẶT XE NGAY
                   </Button>
+                  </NavLink>
                 </div>
                 <div className={`col-xl-2 row`}>
                   <HeartOutlined className={`${style.heartIcon}`} />
@@ -176,14 +179,16 @@ function CarDetail(props) {
               </div>
               <div className={`${style.buttonWrapper} row`}>
                 <div className={`${style.button} col-xl-6`}>
-                  <Link
+                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
+                  <Button
                     className={`${style.bookButton} col-xl-12`}
                     type="primary"
                     danger
                   >
                     <CarOutlined />
                     ĐẶT XE NGAY
-                  </Link>
+                  </Button>
+                  </NavLink>
                 </div>
                 <div className={`${style.button} col-xl-6`}>
                   <Link
