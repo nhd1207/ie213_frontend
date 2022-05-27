@@ -74,7 +74,7 @@ function CarDetail(props) {
                   </div>
                 </div>
                 <div className={`col-xl-2 row`}>
-                <NavLink to={`/order/${props?.carDetail?.car[0]._id}`}>
+                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
                   <Button
                     className={`${style.bookButton} col-xl-12`}
                     type="primary"
@@ -179,7 +179,7 @@ function CarDetail(props) {
               </div>
               <div className={`${style.buttonWrapper} row`}>
                 <div className={`${style.button} col-xl-6`}>
-                <NavLink to={`/order/${props.carDetail.car[0]._id}`}>
+                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
                   <Button
                     className={`${style.bookButton} col-xl-12`}
                     type="primary"
