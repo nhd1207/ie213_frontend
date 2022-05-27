@@ -8,8 +8,9 @@ import {
   getListCar,
   filter,
   addCarToWishlist,
-  getUserForWishListCar,
+  getUserForWishListCar
 } from "./action";
+import { deleteWishList } from "../WishListPage/action"
 import { NavLink } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -27,6 +28,7 @@ const { Search } = Input;
 const { SubMenu } = Menu;
 
 function Car(props) {
+  const [wishList, setWishList] = useState({})
   const [car, setCar] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
   const [current, setCurrent] = useState(1);
@@ -64,17 +66,38 @@ function Car(props) {
   }, []);
 
   useEffect(() => {
+    setWishList({...props?.user?.wishList})
+}, [props.user.wishList]);
+
+const handleDeleteWishListItem = (index) => {
+  let wishList2;
+  wishList2 = {...wishList}
+  wishList2.cars.splice(index,1)
+  let wishList3 = {
+      cars:[],
+      accessories:[]
+  }
+  wishList3.cars = wishList2.cars.map(item=>{
+      return item._id
+  })
+  wishList3.accessories = wishList2.accessories.map(item=>{
+      return item._id
+  })
+  props.deleteWishList({wishList: {...wishList3}})
+}
+
+  useEffect(() => {
     props?.cars?.cars?.map((car) => {
       props?.user?.wishList?.cars.forEach((item) => {
-        console.log("run ");
         if (item._id === car._id) {
-          console.log(props?.cars?.cars);
           return (car.isLiked = true);
         }
       });
     });
   }, [props.cars.loading, props?.user?.wishList?.cars, props.cars.loading2]);
+
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     if (props.cars.loading) {
       if (props.cars.loading2) setLoading(true);
@@ -97,7 +120,6 @@ function Car(props) {
       }
     }
     params = params.slice(0, -1);
-    console.log("handleFilter", params);
     props.filter(params);
   };
 
@@ -107,12 +129,21 @@ function Car(props) {
   //   } else props.search(value.trim());
   // };
 
-  const toggleClass = (e, value) => {
-    e.preventDefault();
-    console.log("click ", e.target.parentElement.parentElement);
-    let element = e.target.parentElement.parentElement;
-    element.classList.toggle(`${style.heartIconClicked}`);
-    props.addCarToWishlist({ itemId: value });
+  const toggleClass = (e, value, car,index) => {
+    if (!car.isLiked)
+    {
+      e.preventDefault();
+      let element = e.target.parentElement.parentElement;
+      element.classList.toggle(`${style.heartIconClicked}`);
+      props.addCarToWishlist({ itemId: value });
+    }
+    else {
+      console.log("delete car");
+      e.preventDefault();
+      let element = e.target.parentElement.parentElement;
+      element.classList.toggle(`${style.heartIconClicked}`);
+      handleDeleteWishListItem(index);
+    }
   };
 
   const handleFilterValue = (value, type) => {
@@ -260,12 +291,12 @@ function Car(props) {
                           </div>
                           {car.isLiked ? (
                             <HeartFilled
-                              onClick={(e) => toggleClass(e, car._id)}
+                              onClick={(e) => toggleClass(e, car._id, car, index)}
                               className={`${style.heartIcon} ${style.heartIconClicked}`}
                             />
                           ) : (
                             <HeartFilled
-                              onClick={(e) => toggleClass(e, car._id)}
+                              onClick={(e) => toggleClass(e, car._id, car, index)}
                               className={`${style.heartIcon}`}
                             />
                           )}
@@ -309,6 +340,9 @@ const mapDispatchToProps = (dispatch) => ({
   getUserForWishListCar: (params) => {
     dispatch(getUserForWishListCar(params));
   },
+  deleteWishList: (params) => {
+    dispatch(deleteWishList(params));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Car);
