@@ -1,5 +1,4 @@
 import style from "./car.module.css";
-import { InputGroup } from "react-bootstrap";
 import "antd/dist/antd.css";
 import Layout from "../../components/layout";
 import { connect } from "react-redux";
@@ -11,10 +10,9 @@ import {
   getUserForWishListCar
 } from "./action";
 import { deleteWishList } from "../WishListPage/action"
-import { NavLink } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Menu, Spin, Slider, Pagination } from "antd";
+import { Menu, Spin, Pagination } from "antd";
 import {
   SettingOutlined,
   HeartFilled,
@@ -129,7 +127,7 @@ const handleDeleteWishListItem = (index) => {
   //   } else props.search(value.trim());
   // };
 
-  const toggleClass = (e, value, car,index) => {
+  const toggleClass = (e, value, car, index) => {
     if (!car.isLiked)
     {
       e.preventDefault();
