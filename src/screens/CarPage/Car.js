@@ -4,7 +4,12 @@ import "antd/dist/antd.css";
 import Layout from "../../components/layout";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { getListCar, filter, addCarToWishlist } from "./action";
+import {
+  getListCar,
+  filter,
+  addCarToWishlist,
+  getUserForWishListCar,
+} from "./action";
 import { NavLink } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -51,12 +56,33 @@ function Car(props) {
   };
 
   useEffect(() => {
+    props.getUserForWishListCar();
     props.getListCar();
-    console.log(props.cars.cars);
     setTotalPage(props?.cars?.cars?.length / pageSize);
     setMinIndex(0);
     setMaxIndex(pageSize);
   }, []);
+
+  useEffect(() => {
+    props?.cars?.cars?.map((car) => {
+      props?.user?.wishList?.cars.forEach((item) => {
+        console.log("run ");
+        if (item._id === car._id) {
+          console.log(props?.cars?.cars);
+          return (car.isLiked = true);
+        }
+      });
+    });
+  }, [props.cars.loading, props?.user?.wishList?.cars, props.cars.loading2]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    if (props.cars.loading) {
+      if (props.cars.loading2) setLoading(true);
+      else setLoading(true);
+    } else setLoading(true);
+    if (props.cars.loading === false && props.cars.loading2 === false)
+      setLoading(false);
+  }, [props.cars.loading, props.cars.loading2]);
 
   const handleFilter = (filterValue) => {
     let params = "";
@@ -127,7 +153,7 @@ function Car(props) {
 
   return (
     <Layout>
-      <Spin size="large" spinning={props?.cars?.loading}>
+      <Spin size="large" spinning={loading}>
         <div className={`${style.container}`}>
           <div className={`${style.headingContainer}`}>
             <div className={`${style.headings} row`}>
@@ -206,27 +232,6 @@ function Car(props) {
                         key={car?._id}
                         to={`/car/${car?._id}`}
                       >
-                        {/* <div className={`${style.card} `}>
-                        <div className={`${style.image}`} style={myStyle}></div>
-                        <div className={`${style.description}`}>
-                          <div className={`${style.nameGroup}`}>
-                            <h5 className={`${style.sub}`}>Tên Xe</h5>
-                            <h4 className={`${style.text}`}>{car.name}</h4>
-                          </div>
-                          <div>
-                            <h5 className={`${style.sub}`}>Công Suất</h5>
-                            <h4 className={`${style.text}`}>
-                              {car?.specification?.power}
-                            </h4>
-                          </div>
-                          <div>
-                            <h5 className={`${style.sub}`}>Chỗ ngồi</h5>
-                            <h4 className={`${style.text}`}>
-                              {car?.specification?.displacement} chỗ
-                            </h4>
-                          </div>
-                        </div>
-                      </div> */}
                         <div className={`${style.card}`}>
                           <div
                             className={`${style.imgMain}`}
@@ -253,10 +258,17 @@ function Car(props) {
                               className={`${style.arrowIcon} d-none d-md-block`}
                             />
                           </div>
-                          <HeartFilled
-                            onClick={(e) => toggleClass(e, car._id)}
-                            className={`${style.heartIcon}`}
-                          />
+                          {car.isLiked ? (
+                            <HeartFilled
+                              onClick={(e) => toggleClass(e, car._id)}
+                              className={`${style.heartIcon} ${style.heartIconClicked}`}
+                            />
+                          ) : (
+                            <HeartFilled
+                              onClick={(e) => toggleClass(e, car._id)}
+                              className={`${style.heartIcon}`}
+                            />
+                          )}
                         </div>
                       </Link>
                     );
@@ -281,6 +293,7 @@ function Car(props) {
 
 const mapStateToProps = (state) => ({
   cars: state.carList,
+  user: state.carList.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -292,6 +305,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addCarToWishlist: (data) => {
     dispatch(addCarToWishlist(data));
+  },
+  getUserForWishListCar: (params) => {
+    dispatch(getUserForWishListCar(params));
   },
 });
 
