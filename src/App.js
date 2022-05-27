@@ -31,7 +31,7 @@ import Compare from "./screens/ComparePage/Compare";
 import CarOrderPage from "./screens/CarOrder/CarOrder"
 import UpdateUserPage from "./screens/UpdateUserPage/UpdateUser"
 
-function App() {
+function App(props) {
   useEffect(() => {
     document.title = "Seven";
   }, []);
@@ -69,3 +69,4 @@ function App() {
 }
 
 export default App;
+

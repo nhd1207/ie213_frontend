@@ -90,7 +90,7 @@
   bottom: -20%;
   height: 100%;
   min-height: 20vh;
-  background: url(../../Images/campbell.jpg);
+  background: url(../../Images/thomas-haas.jpg);
   background-size: cover;
   background-position: center center;
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3);
@@ -118,15 +118,16 @@
 
 /* activity */
 .activityWrapper {
+  background-color: var(--beige-color);
 }
 
 .activityHeading {
   text-transform: uppercase;
   font-size: 2rem;
   font-weight: bold;
-  color: #000;
-  text-shadow: 2px 0 0 yellow, -2px 0 0 yellow, 0 2px 0 yellow, 0 -2px 0 yellow,
-    1px 1px yellow, -1px -1px 0 yellow, 1px -1px 0 yellow, -1px 1px 0 yellow;
+  color: var(--black-color);
+  /* text-shadow: 2px 0 0 yellow, -2px 0 0 yellow, 0 2px 0 yellow, 0 -2px 0 yellow,
+    1px 1px yellow, -1px -1px 0 yellow, 1px -1px 0 yellow, -1px 1px 0 yellow; */
   text-align: center;
   margin: 1rem;
 }
@@ -138,7 +139,7 @@
   animation-duration: 1s;
 }
 .activityImg .Img1 {
-  background: url(../../Images/campbell.jpg);
+  background: url(../../Images/Showroom1.png);
   background-size: cover;
   background-position: center center;
   height: 30vh;
@@ -147,7 +148,7 @@
 }
 
 .activityImg .Img2 {
-  background: url(../../Images/campbell.jpg);
+  background: url(../../Images/Showroom2.png);
   background-size: cover;
   background-position: center center;
   height: 30vh;
@@ -156,7 +157,7 @@
 }
 
 .activityImg .Img3 {
-  background: url(../../Images/campbell.jpg);
+  background: url(../../Images/Showroom3.png);
   background-size: cover;
   background-position: center center;
   height: 30vh;
@@ -192,6 +193,7 @@
 /* evolution */
 
 .evolutionRow {
+  background-color: var(--beige-color);
   display: flex;
   justify-content: space-around;
   align-items: center;

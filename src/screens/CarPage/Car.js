@@ -4,7 +4,13 @@ import "antd/dist/antd.css";
 import Layout from "../../components/layout";
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { getListCar, filter, addCarToWishlist } from "./action";
+import {
+  getListCar,
+  filter,
+  addCarToWishlist,
+  getUserForWishListCar
+} from "./action";
+import { deleteWishList } from "../WishListPage/action"
 import { NavLink } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,6 +28,7 @@ const { Search } = Input;
 const { SubMenu } = Menu;
 
 function Car(props) {
+  const [wishList, setWishList] = useState({})
   const [car, setCar] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
   const [current, setCurrent] = useState(1);
@@ -51,12 +58,54 @@ function Car(props) {
   };
 
   useEffect(() => {
+    props.getUserForWishListCar();
     props.getListCar();
-    console.log(props.cars.cars);
     setTotalPage(props?.cars?.cars?.length / pageSize);
     setMinIndex(0);
     setMaxIndex(pageSize);
   }, []);
+
+  useEffect(() => {
+    setWishList({...props?.user?.wishList})
+}, [props.user.wishList]);
+
+const handleDeleteWishListItem = (index) => {
+  let wishList2;
+  wishList2 = {...wishList}
+  wishList2.cars.splice(index,1)
+  let wishList3 = {
+      cars:[],
+      accessories:[]
+  }
+  wishList3.cars = wishList2.cars.map(item=>{
+      return item._id
+  })
+  wishList3.accessories = wishList2.accessories.map(item=>{
+      return item._id
+  })
+  props.deleteWishList({wishList: {...wishList3}})
+}
+
+  useEffect(() => {
+    props?.cars?.cars?.map((car) => {
+      props?.user?.wishList?.cars.forEach((item) => {
+        if (item._id === car._id) {
+          return (car.isLiked = true);
+        }
+      });
+    });
+  }, [props.cars.loading, props?.user?.wishList?.cars, props.cars.loading2]);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (props.cars.loading) {
+      if (props.cars.loading2) setLoading(true);
+      else setLoading(true);
+    } else setLoading(true);
+    if (props.cars.loading === false && props.cars.loading2 === false)
+      setLoading(false);
+  }, [props.cars.loading, props.cars.loading2]);
 
   const handleFilter = (filterValue) => {
     let params = "";
@@ -71,7 +120,6 @@ function Car(props) {
       }
     }
     params = params.slice(0, -1);
-    console.log("handleFilter", params);
     props.filter(params);
   };
 
@@ -81,12 +129,21 @@ function Car(props) {
   //   } else props.search(value.trim());
   // };
 
-  const toggleClass = (e, value) => {
-    e.preventDefault();
-    console.log("click ", e.target.parentElement.parentElement);
-    let element = e.target.parentElement.parentElement;
-    element.classList.toggle(`${style.heartIconClicked}`);
-    props.addCarToWishlist({ itemId: value });
+  const toggleClass = (e, value, car,index) => {
+    if (!car.isLiked)
+    {
+      e.preventDefault();
+      let element = e.target.parentElement.parentElement;
+      element.classList.toggle(`${style.heartIconClicked}`);
+      props.addCarToWishlist({ itemId: value });
+    }
+    else {
+      console.log("delete car");
+      e.preventDefault();
+      let element = e.target.parentElement.parentElement;
+      element.classList.toggle(`${style.heartIconClicked}`);
+      handleDeleteWishListItem(index);
+    }
   };
 
   const handleFilterValue = (value, type) => {
@@ -109,11 +166,11 @@ function Car(props) {
         setFilterValue(params);
         //handleFilter(params)
         break;
-        case "search":
-          params = { ...filterValue, keyword: value.trim() };
-          setFilterValue(params);
-          //handleFilter(params)
-          break;
+      case "search":
+        params = { ...filterValue, keyword: value.trim() };
+        setFilterValue(params);
+        //handleFilter(params)
+        break;
       default:
         return;
     }
@@ -127,7 +184,7 @@ function Car(props) {
 
   return (
     <Layout>
-      <Spin size="large" spinning={props?.cars?.loading}>
+      <Spin size="large" spinning={loading}>
         <div className={`${style.container}`}>
           <div className={`${style.headingContainer}`}>
             <div className={`${style.headings} row`}>
@@ -139,7 +196,7 @@ function Car(props) {
                 <Search
                   className={`${style.searchBox}`}
                   placeholder="Nhập tên xe"
-                  onSearch={(e) =>handleFilterValue(e,'search')}
+                  onSearch={(e) => handleFilterValue(e, "search")}
                   enterButton
                 />
               </Space>
@@ -161,7 +218,7 @@ function Car(props) {
               >
                 <div className={`${style.rangeInput}`}>
                   <>
-                    <Form.Label>Công Suất: {}</Form.Label>
+                    <Form.Label>Bộ Lọc: {}</Form.Label>
                   </>
                 </div>
                 <SubMenu
@@ -179,13 +236,13 @@ function Car(props) {
                   title="Giá"
                   onClick={(e) => handleFilterValue(null, e.key)}
                 >
-                  <Slider
+                  {/* <Slider
                     defaultValue={0}
                     min={30}
                     max={100}
                     marks={marks}
                     onChange={(e) => handleFilterValue(e, "power")}
-                  />
+                  /> */}
                   <Menu.Item key="price_asc">Tăng dần</Menu.Item>
                   <Menu.Item key="price_desc">Giảm dần</Menu.Item>
                 </SubMenu>
@@ -206,27 +263,6 @@ function Car(props) {
                         key={car?._id}
                         to={`/car/${car?._id}`}
                       >
-                        {/* <div className={`${style.card} `}>
-                        <div className={`${style.image}`} style={myStyle}></div>
-                        <div className={`${style.description}`}>
-                          <div className={`${style.nameGroup}`}>
-                            <h5 className={`${style.sub}`}>Tên Xe</h5>
-                            <h4 className={`${style.text}`}>{car.name}</h4>
-                          </div>
-                          <div>
-                            <h5 className={`${style.sub}`}>Công Suất</h5>
-                            <h4 className={`${style.text}`}>
-                              {car?.specification?.power}
-                            </h4>
-                          </div>
-                          <div>
-                            <h5 className={`${style.sub}`}>Chỗ ngồi</h5>
-                            <h4 className={`${style.text}`}>
-                              {car?.specification?.displacement} chỗ
-                            </h4>
-                          </div>
-                        </div>
-                      </div> */}
                         <div className={`${style.card}`}>
                           <div
                             className={`${style.imgMain}`}
@@ -253,10 +289,17 @@ function Car(props) {
                               className={`${style.arrowIcon} d-none d-md-block`}
                             />
                           </div>
-                          <HeartFilled
-                            onClick={(e) => toggleClass(e, car._id)}
-                            className={`${style.heartIcon}`}
-                          />
+                          {car.isLiked ? (
+                            <HeartFilled
+                              onClick={(e) => toggleClass(e, car._id, car, index)}
+                              className={`${style.heartIcon} ${style.heartIconClicked}`}
+                            />
+                          ) : (
+                            <HeartFilled
+                              onClick={(e) => toggleClass(e, car._id, car, index)}
+                              className={`${style.heartIcon}`}
+                            />
+                          )}
                         </div>
                       </Link>
                     );
@@ -281,6 +324,7 @@ function Car(props) {
 
 const mapStateToProps = (state) => ({
   cars: state.carList,
+  user: state.carList.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -293,6 +337,12 @@ const mapDispatchToProps = (dispatch) => ({
   addCarToWishlist: (data) => {
     dispatch(addCarToWishlist(data));
   },
+  getUserForWishListCar: (params) => {
+    dispatch(getUserForWishListCar(params));
+  },
+  deleteWishList: (params) => {
+    dispatch(deleteWishList(params));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Car);

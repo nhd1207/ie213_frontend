@@ -78,7 +78,7 @@ function List(props) {
                                 </div>
                                 <div className={`${style.productButton} col-xl-2 col-md-12`}>
                                     <div className={`row`}>
-                                        <NavLink to={`"/car"`}>
+                                        <NavLink to={`/order/${item._id}`}>
                                         <Button
                                             className={`${style.bookButton} col-xl-12`}
                                             type="primary"

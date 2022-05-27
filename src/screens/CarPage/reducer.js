@@ -2,7 +2,9 @@ import { action_type as type } from "./action";
 
 const initialState = {
   loading: false,
+  loading2: false,
   cars: [],
+  user: [],
 };
 
 function reducer(state = initialState, action) {
@@ -55,7 +57,22 @@ function reducer(state = initialState, action) {
         ...state,
         loading: false,
       };
-    
+    case type.GETUSERFORWISHLISTCAR.REQUEST:
+      return {
+        ...state,
+        loading2: true,
+      };
+    case type.GETUSERFORWISHLISTCAR.SUCCESS:
+      return {
+        ...state,
+        user: action.user,
+        loading2: false,
+      };
+    case type.GETUSERFORWISHLISTCAR.ERROR:
+      return {
+        ...state,
+        loading2: false,
+      };
     default:
       return state;
   }
