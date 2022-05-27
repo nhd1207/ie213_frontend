@@ -19,6 +19,11 @@ export const action_type = {
         SUCCESS: "USER.SUCCESS",
         ERROR: "USER.ERROR"
     },
+    LAYOUT: {
+        REQUEST: "LAYOUT.REQUEST",
+        SUCCESS: "LAYOUT.SUCCESS",
+        ERROR: "LAYOUT.ERROR"
+    }
 
 }
 
@@ -42,6 +47,14 @@ export function verify (params)
 {
     return {
         type: action_type.VERIFY.REQUEST,
+        params
+    }
+}
+
+export function verifyLayout (params)
+{
+    return {
+        type: action_type.LAYOUT.REQUEST,
         params
     }
 }

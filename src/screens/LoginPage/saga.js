@@ -39,14 +39,32 @@ function* verifySaga(action) {
       // Cookies.set("jwt", null);
       yield all([put({ type: TYPE.VERIFY.ERROR })]);
       yield put(push("/login"));
-      message.error('Bạn chưa đăng nhập')
+      message.error('Vui lòng đăng nhập để tiếp tục')
       window.location.reload();
     }
   } catch (error) {
     yield all([put({ type: TYPE.VERIFY.ERROR, error })]);
     yield put(push("/login"));
-    message.error('Bạn chưa đăng nhập')
+    message.error('Vui lòng đăng nhập để tiếp tục')
     window.location.reload();
+  }
+}
+
+function* verifyLayoutSaga(action) {
+  try {
+    const { param } = action;
+    const response = yield call(api2.getMe, param);
+    if (response.status === "success") {
+      yield all([put({ type: TYPE.LAYOUT.SUCCESS, ...response })]);
+    } 
+    else 
+    {
+      // Cookies.set("jwt", null);
+      yield all([put({ type: TYPE.LAYOUT.ERROR })]);
+    }
+  } catch (error) {
+    yield all([put({ type: TYPE.LAYOUT.ERROR, error })]);
+
   }
 }
 
@@ -57,8 +75,8 @@ function* logoutSaga(action) {
     if (response.status === "success") {
       yield all([put({ type: TYPE.LOGOUT.SUCCESS, ...response })]);
       Cookies.set("jwt", null);
-      yield put(push("/login"));
-      message.success(`Xin mời bạn đăng nhập lại!`)
+      // yield put(push("/login"));
+      // message.success(`Xin mời bạn đăng nhập lại!`)
       window.location.reload();
     } else {
       yield all([put({ type: TYPE.LOGOUT.ERROR })]);
@@ -89,6 +107,8 @@ function* watcher() {
     takeLatest(TYPE.LOGIN.REQUEST, getListSaga),
     takeLatest(TYPE.VERIFY.REQUEST, verifySaga),
     takeLatest(TYPE.LOGOUT.REQUEST, logoutSaga),
+    takeLatest(TYPE.LAYOUT.REQUEST, verifyLayoutSaga),
+
     // takeLatest(TYPE.USER.REQUEST, getListUserSaga)
   ]);
 }

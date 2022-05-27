@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Affix, Menu, Layout, Spin } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink, useRouteMatch } from "react-router-dom";
+import { NavLink, useRouteMatch, useHistory } from "react-router-dom";
 import {
   faHeart,
   faCartShopping,
@@ -17,21 +17,26 @@ import {
 import "antd/dist/antd.css";
 import Cookies from "js-cookie";
 import "./layout.css";
-import { verify, logout } from "../screens/LoginPage/action";
+import { verifyLayout, logout } from "../screens/LoginPage/action";
 import { connect } from "react-redux";
 // import AuthenContext from "../components/context/AuthenContext";
 const { Header, Content, Footer } = Layout;
 
 function Layouts(props) {
   let match = useRouteMatch();
+  let history = useHistory();
 
   function logoutHandler() {
     props.logout();
+    if (match.url.contain("wishlist") || match.url.contain("cart") || match.url.contain("user")) {
+      history.replace(`login`)
+    }
+    history.replace(`${match.url}`)
   }
 
-  // useEffect(() => {
-  //   props.verify();
-  // }, []);
+  useEffect(() => {
+    props.verifyLayout();
+  }, []);
   // let context = useContext(AuthenContext);
 
   // async function signoutHandler() {
@@ -160,21 +165,21 @@ function Layouts(props) {
             {/* {!context.isLoggedIn && ( */}
 
             <Menu.Item key="login">
-              <Spin spinning={props?.isLoggedIn?.loading}>
-                {props?.isLoggedIn?.isLoggedIn === true ? (
-                  <NavLink
-                    to={`${match.url}`}
-                    style={{ color: "#F3EA01" }}
-                    onClick={logoutHandler}
-                  >
-                    Đăng xuất
-                  </NavLink>
-                ) : (
-                  <NavLink to={"/login"} style={{ color: "#F3EA01" }}>
-                    Đăng nhập
-                  </NavLink>
-                )}
-              </Spin>
+              {/* <Spin spinning={props?.isLoggedIn?.loading}> */}
+              {props?.isLoggedIn === true ? (
+                <NavLink
+                  to={`${match.url}`}
+                  style={{ color: "#F3EA01" }}
+                  onClick={logoutHandler}
+                >
+                  Đăng xuất
+                </NavLink>
+              ) : (
+                <NavLink to={"/login"} style={{ color: "#F3EA01" }}>
+                  Đăng nhập
+                </NavLink>
+              )}
+              {/* </Spin> */}
             </Menu.Item>
 
             {/* )} */}
@@ -236,12 +241,12 @@ function Layouts(props) {
 }
 
 const mapStateToProps = (state) => ({
-  isLoggedIn: state.isLoggedIn,
+  isLoggedIn: state.login.isLoggedIn,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  verify: () => {
-    dispatch(verify());
+  verifyLayout: () => {
+    dispatch(verifyLayout());
   },
   logout: () => {
     dispatch(logout());

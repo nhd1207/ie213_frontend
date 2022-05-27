@@ -66,9 +66,7 @@ function Car(props) {
   useEffect(() => {
     props?.cars?.cars?.map((car) => {
       props?.user?.wishList?.cars.forEach((item) => {
-        console.log("run ");
         if (item._id === car._id) {
-          console.log(props?.cars?.cars);
           return (car.isLiked = true);
         }
       });
