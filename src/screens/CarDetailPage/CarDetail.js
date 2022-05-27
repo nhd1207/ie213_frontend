@@ -29,13 +29,17 @@ function CarDetail(props) {
     console.log(location);
   }, []);
 
-  function compareHandler() { }
-
+  function compareHandler() {}
+  let myStyle = {
+    backgroundImage: `url(${props?.carDetail?.car[0]?.image.banner})`,
+    backgroundRepeat: "no-repeat",
+  };
+  console.log(myStyle);
   return (
     <Layout>
       <Spin spinning={props.carDetail.loading}>
         <div className={`${style.main}`}>
-          <div className={`${style.bannerContainer} row`}>
+          <div className={`${style.bannerContainer} row`} style={myStyle}>
             <div className={`${style.bannerImg} col-xl-12`}></div>
             <div className={`${style.carDetailContainer} col-xl-12`}>
               <div className={`row`}>
@@ -108,7 +112,8 @@ function CarDetail(props) {
                   Dung tích xi lanh
                 </p>
                 <p className={`${style.specRowText} col-xl-6`}>
-                  {props?.carDetail?.car[0]?.specification.displacement + " cc"}
+                  {props?.carDetail?.car[0]?.specification?.displacement +
+                    " cc"}
                 </p>
               </div>
               <div className={`${style.specRow} row`}>

@@ -36,7 +36,7 @@ const DataTable = ({ dataSource, loading, info, cancelAccessory, type }) => {
       title: "#",
       width: 100,
       className: "text-center",
-      render: (value, record, i) => <a>{i + 1}</a>,
+      render: (value, record, i) => <p>{i + 1}</p>,
     },
     {
       title: "Tên người dùng",
@@ -135,7 +135,7 @@ const DataTable = ({ dataSource, loading, info, cancelAccessory, type }) => {
               </span>
             </Tooltip>
           </button>
-          {type == "Pending" ?
+          {type === "Pending" ?
             <Popconfirm
               disabled={record.status === "Success"}
               placement="left"
@@ -143,7 +143,7 @@ const DataTable = ({ dataSource, loading, info, cancelAccessory, type }) => {
               onConfirm={() => onAccept(record)}
               okText="Có"
               cancelText="Không">
-              <button className="btn btn-sm btn-primary" style={{color:'green'}}>
+              <button className="btn btn-sm btn-primary">
                 <span className="px-2">
                 <FontAwesomeIcon icon={faCheck} />
                 </span>
@@ -151,7 +151,7 @@ const DataTable = ({ dataSource, loading, info, cancelAccessory, type }) => {
             </Popconfirm>
             : <></>
           }
-           {type == "Accepted" ?
+           {type === "Accepted" ?
             <Popconfirm
               disabled={record.status === "Success"}
               placement="left"
@@ -159,7 +159,7 @@ const DataTable = ({ dataSource, loading, info, cancelAccessory, type }) => {
               onConfirm={() => onSuccess(record)}
               okText="Có"
               cancelText="Không">
-              <button className="btn btn-sm btn-primary" style={{color:'green'}}>
+              <button className="btn btn-sm btn-primary" >
                 <span className="px-2">
                 <FontAwesomeIcon icon={faCheck} />
                 </span>
@@ -167,7 +167,7 @@ const DataTable = ({ dataSource, loading, info, cancelAccessory, type }) => {
             </Popconfirm>
             : <></>
           }
-          {type == "Pending" || type == "Accepted" ?
+          {type === "Pending" || type === "Accepted" ?
             <Popconfirm
               disabled={record.status === "Success"}
               placement="left"

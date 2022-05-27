@@ -29,13 +29,11 @@ import AboutUs from "./screens/AboutUsPage/AboutUs";
 import Support from "./screens/SupportPage/Support";
 import Compare from "./screens/ComparePage/Compare";
 import CarOrderPage from "./screens/CarOrder/CarOrder"
-import { verify } from "./screens/LoginPage/action";
-import { connect } from "react-redux";
+import UpdateUserPage from "./screens/UpdateUserPage/UpdateUser"
 
 function App(props) {
   useEffect(() => {
     document.title = "Seven";
-    props.verify();
   }, []);
 
   return (
@@ -47,7 +45,7 @@ function App(props) {
         <Route path="/home" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/user" component={User} />
+        <Route path="/user" exact component={User} />
         <Route exact path="/car" component={Car} />
         <Route path="/car/:id" component={CarDetail}></Route>
         <Route path="/cart" component={Cart} />
@@ -60,9 +58,8 @@ function App(props) {
         <Route path="/wishlist" component={WishList}></Route>
         <Route path="/about_us" component={AboutUs}></Route>
         <Route path="/support" component={Support}></Route>
-        <Route path="/compare" component={Compare}>
-          
-        </Route>
+        <Route path="/compare" component={Compare}></Route>
+        <Route path="/user/update" component={UpdateUserPage}></Route>
         <Route path="/order/:id" component={CarOrderPage}></Route>
         <Route exact path="/" component={Home} />
         <Route component={Error404} />
@@ -71,14 +68,5 @@ function App(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  verify: (params) => {
-    dispatch(verify(params));
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
 

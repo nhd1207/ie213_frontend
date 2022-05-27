@@ -47,12 +47,13 @@ function* getUserForWishListCarSaga(action) {
     }
 }
 
-function* filterCarSaga(action) {
+function* filterAndSearchCarSaga(action) {
     try {
         const { params } = action
         const response = (yield call(api.filter, params))
-        if (response.status === 'success') {
-            yield all([
+        console.log('response',response)
+        if (response.status=='success') {
+            yield all([ 
                 put({ type: TYPE.FILTER.SUCCESS, ...response }),
             ])
         } else {
@@ -88,11 +89,10 @@ function* addCarToWishlistSaga(action) {
 }
 
 
-
 function* watcher() {
     yield all([
         takeLatest(TYPE.GETLISTCAR.REQUEST, getListCarSaga),
-        takeLatest(TYPE.FILTER.REQUEST, filterCarSaga),
+        takeLatest(TYPE.FILTER.REQUEST, filterAndSearchCarSaga),
         takeLatest(TYPE.ADDCARTOWISHLIST.REQUEST, addCarToWishlistSaga),
         takeLatest(TYPE.GETUSERFORWISHLISTCAR.REQUEST, getUserForWishListCarSaga)
     ])

@@ -14,8 +14,6 @@ import { Redirect } from "react-router-dom";
 
 const { Option } = Select;
 
-const dateFormat = "DD/MM/YYYY";
-
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -48,8 +46,6 @@ const tailFormItemLayout = {
   },
 };
 
-const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
-
 // const customWeekStartEndFormat = value =>
 //   `${moment(value).startOf('week').format(weekFormat)} ~ ${moment(value)
 //     .endOf('week')
@@ -62,6 +58,7 @@ function CarOrder(props) {
     props?.car?.color?.map((d) => {
       return { label: d, value: d };
     }) || [];
+    
   useEffect(() => {
     props.getCarOrder(props.match.params.id);
     props.getListShowroom();
@@ -78,8 +75,6 @@ function CarOrder(props) {
     setCarForm((prev) => {
       return { ...prev, deposit: props?.car[0]?.deposit };
     });
-
-    console.log(carForm);
   };
 
   const prefixSelector = (
@@ -107,6 +102,7 @@ function CarOrder(props) {
   function confirmOrderHandler() {
     props.createCarOrder(carForm);
   }
+  
   return (
     <Layouts>
       {props?.isLoggedIn?.isLoggedIn === false ? (
