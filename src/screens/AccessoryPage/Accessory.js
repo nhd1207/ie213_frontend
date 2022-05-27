@@ -20,7 +20,7 @@ import { Input, Space } from "antd";
 
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-
+import money from "../../components/Share/functions/money";
 const { Search } = Input;
 const { SubMenu } = Menu;
 
@@ -262,7 +262,9 @@ function Accessory(props) {
                         />
                         <Card.Body>
                           <Card.Title>{item.name}</Card.Title>
-                          <Card.Text>{item.description}</Card.Text>
+                          <Card.Text>            
+                            {money(item?.price, "VNĐ")}
+                            </Card.Text>
                           <div className={`${style.btnWrapper}`}>
                             <NavLink
                               to={`/accessory/${item._id}`}
