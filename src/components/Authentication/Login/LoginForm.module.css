@@ -2,7 +2,7 @@
 
 .background {
   position: relative;
-  top: 5rem;
+  /* top: 5rem; */
   background-color: rgba(255, 255, 255, 0.75);
   /* background-image: linear-gradient(var(--black-color), var(--yellow-color)); */
   /* background: rgb(121,29,9); */
@@ -38,9 +38,10 @@
   border-radius: 0.5rem;
   border: var(--yellow-color);
   display: block;
-  margin: auto;
+  /* margin: auto; */
   padding: 0.5rem 2rem;
   font-size: var(--font-title);
+  width: 100%;
 }
 
 .formGroup .loginButton:hover {

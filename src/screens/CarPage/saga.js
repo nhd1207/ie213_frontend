@@ -29,6 +29,24 @@ function* getListCarSaga(action) {
     }
 }
 
+function* getUserForWishListCarSaga(action) {
+    try {
+        const { params } = action
+        const response = (yield call(apiUser.getMe, params))
+        if (response.status==="success") {
+            yield all([
+                put({ type: TYPE.GETUSERFORWISHLISTCAR.SUCCESS, ...response }),
+            ])
+        } else {
+            yield put({ type: TYPE.GETUSERFORWISHLISTCAR.ERROR, error: response })
+        }
+    } catch (error) {
+        yield all([
+            put({ type: TYPE.GETUSERFORWISHLISTCAR.ERROR, error })
+        ])
+    }
+}
+
 function* filterAndSearchCarSaga(action) {
     try {
         const { params } = action
@@ -75,7 +93,8 @@ function* watcher() {
     yield all([
         takeLatest(TYPE.GETLISTCAR.REQUEST, getListCarSaga),
         takeLatest(TYPE.FILTER.REQUEST, filterAndSearchCarSaga),
-        takeLatest(TYPE.ADDCARTOWISHLIST.REQUEST, addCarToWishlistSaga)
+        takeLatest(TYPE.ADDCARTOWISHLIST.REQUEST, addCarToWishlistSaga),
+        takeLatest(TYPE.GETUSERFORWISHLISTCAR.REQUEST, getUserForWishListCarSaga)
     ])
 }
 

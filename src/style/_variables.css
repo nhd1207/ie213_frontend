@@ -6,9 +6,11 @@
     --white-color: #fff;
     --gray-color: #444;
     --red-color: red;
+    --green-color: green;
     --border-gray-color: #D8D8D8;
     --black-background-color: rgb(56, 56, 56);
     --caption-background: rgb(0, 0, 0, 50%);
+    --gray-light-color: #D3D3D3;
     --font-title: 1.25rem;
     --font-document: 1rem;
     --font-note: 0.875rem;

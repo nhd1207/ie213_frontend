@@ -1,11 +1,10 @@
+import style from "./DataTable.module.css";
 import React from 'react';
 import { Table, Spin, Space, Tooltip, List } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import money from '../Share/functions/money';
 import { HistoryOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
-
-
 const DataTable = ({ dataSource, loading, handleShowForm }) => {
 
   const columns = [
@@ -31,7 +30,7 @@ const DataTable = ({ dataSource, loading, handleShowForm }) => {
       key: 'accessoryInfo',
       className: 'text-center',
       render: (value, record) =>
-        <button onClick= {()=>handleShowForm(record)}> Xem thêm </button>
+        <button onClick={() => handleShowForm(record)} className={`${style.buttonMore}`}> Xem thêm </button>
     },
     {
       title: 'Phương thức vận chuyển',
@@ -50,7 +49,7 @@ const DataTable = ({ dataSource, loading, handleShowForm }) => {
       className: 'text-center',
       render: (value, record) =>
         <div>
-          <span> {money(value,"VND") || ''} </span>
+          <span> {money(value, "VND") || ''} </span>
         </div>
     },
     {
@@ -59,16 +58,16 @@ const DataTable = ({ dataSource, loading, handleShowForm }) => {
       key: 'status',
       className: 'text-center',
       render: (value, record) =>
-      <div style={{ textAlign: 'center' }}>{
-        (value === 'Pending') ?
-          <span style={{ color: 'blue' }}>   {'Đang chờ' || ''} </span> :
-          (value === 'Success') ?
-            <span style={{ color: 'green' }}> {"Đã nhận" || ''} </span> :
-            <span style={{ color: 'red' }}  > {'Đã hủy' || ''} </span>
-      }
-      </div>
+        <div className={`${style.buttonState}`} style={{ textAlign: 'center' }}>{
+          (value === 'Pending') ?
+            <span className={`${style.buttonStateC}`}>   {'Đang chờ' || ''} </span> :
+            (value === 'Success') ?
+              <span className={`${style.buttonStateN}`}> {"Đã nhận" || ''} </span> :
+              <span className={`${style.buttonStateH}`} > {'Đã hủy' || ''} </span>
+        }
+        </div>
     },
-]
+  ]
   return (
     <Table
       rowKey="id"
