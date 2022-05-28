@@ -8,6 +8,14 @@ import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 import { Spin } from "antd";
 import AuthContext from "../../../context/AuthContext";
 import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import IconButton from "@material-ui/core/IconButton";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControl from "@material-ui/core/FormControl";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 function emailReducer(state, action) {
   if (action.type === "EMAIL_LOGIN") {
     return {
@@ -120,6 +128,11 @@ function LoginForm(props) {
     };
     props.onSendLoginData(params);
   }
+  const [passwordShown, setPasswordShown] = useState(false)
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown)
+  }
 
   return (
     <div className={`row`}>
@@ -160,7 +173,7 @@ function LoginForm(props) {
             </div>
             <Form.Control
               className={`${style.loginInput}`}
-              type="password"
+              type={passwordShown ? "text" : "password"}
               placeholder="Mật Khẩu"
               onChange={passwordChangeHandler}
             />
@@ -169,6 +182,16 @@ function LoginForm(props) {
                 Mật khẩu cần có ít nhất 8 ký tự
               </Form.Text>
             )}
+           <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={togglePassword}
+                  // onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {passwordShown ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
           </Form.Group>
           <Form.Group
             className={`${style.formGroup} mb-3 col-xl-9 col-9`}
