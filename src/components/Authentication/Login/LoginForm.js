@@ -1,21 +1,15 @@
 import React, { useReducer, useContext, useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import style from "./LoginForm.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faKey, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Spin } from "antd";
 import AuthContext from "../../../context/AuthContext";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
 function emailReducer(state, action) {
   if (action.type === "EMAIL_LOGIN") {
     return {
@@ -134,6 +128,9 @@ function LoginForm(props) {
     setPasswordShown(!passwordShown)
   }
 
+  const handleMouseDownPassword = (e) => {
+    e.preventDefault();
+  }
   return (
     <div className={`row`}>
       <div className={`${style.background} col-xl-6 col-9`}>
@@ -171,27 +168,39 @@ function LoginForm(props) {
                 Mật khẩu
               </Form.Label>
             </div>
-            <Form.Control
-              className={`${style.loginInput}`}
-              type={passwordShown ? "text" : "password"}
-              placeholder="Mật Khẩu"
-              onChange={passwordChangeHandler}
-            />
+            <InputGroup>
+              <FormControl
+                className={`${style.loginInput}`}
+                type={passwordShown ? "text" : "password"}
+                placeholder="Mật Khẩu"
+                onChange={passwordChangeHandler}
+              // endAdornment={
+              //   <InputAdornment position="end">
+              //     <IconButton
+              //       aria-label="toggle password visibility"
+              //       onClick={togglePassword}
+              //       onMouseDown={handleMouseDownPassword}
+              //       edge="end"
+              //     >
+              //       {passwordShown ? <Visibility /> : <VisibilityOff />}
+              //     </IconButton>
+              //   </InputAdornment>
+              // }
+              >
+              </FormControl>
+            
+              <InputGroup.Text  
+                    className={`${style.eyeIcon}`}
+                    onClick={togglePassword}
+                    onMouseDown={handleMouseDownPassword}>
+                    {passwordShown ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+              </InputGroup.Text>
+            </InputGroup>
             {wrongPassword && (
               <Form.Text className={`${style.passwordError}`}>
                 Mật khẩu cần có ít nhất 8 ký tự
               </Form.Text>
             )}
-           <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={togglePassword}
-                  // onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {passwordShown ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
           </Form.Group>
           <Form.Group
             className={`${style.formGroup} mb-3 col-xl-9 col-9`}

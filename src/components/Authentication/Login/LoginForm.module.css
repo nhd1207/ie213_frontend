@@ -16,6 +16,9 @@
   justify-content: center;
 }
 
+.eyeIcon:hover {
+  cursor: pointer;  
+}
 .background .titleLogin {
   margin: 4rem 0rem 2rem 0rem;
   text-align: center;
