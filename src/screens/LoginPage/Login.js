@@ -15,7 +15,7 @@ function Login(props) {
 
   const countDown = () => {
     let secondsToGo = 5;
-    const modal = Modal.success({
+    const modal = Modal.error({
       title: `${props?.user?.response?.message}`,
       // content: `This modal will be destroyed after ${secondsToGo} second.`,
     });
