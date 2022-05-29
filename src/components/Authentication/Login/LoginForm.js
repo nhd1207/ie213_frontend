@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useState, useEffect } from "react";
+import React, { useReducer, useContext, useState, useEffect, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -127,9 +127,13 @@ function LoginForm(props) {
   const togglePassword = () => {
     setPasswordShown(!passwordShown)
   }
-
-  const handleMouseDownPassword = (e) => {
-    e.preventDefault();
+  const passwordInput = useRef(null)
+  const HandleMouseDownPassword = (e) => {
+    e.preventDefault()
+    const endPassword = passwordInput.current.value.length
+    passwordInput.current.setSelectionRange(endPassword, endPassword)
+    passwordInput.current.focus()
+    console.log(endPassword);
   }
   return (
     <div className={`row`}>
@@ -173,26 +177,15 @@ function LoginForm(props) {
                 className={`${style.loginInput}`}
                 type={passwordShown ? "text" : "password"}
                 placeholder="Mật Khẩu"
+                ref={passwordInput}
+                autoFocus
                 onChange={passwordChangeHandler}
-              // endAdornment={
-              //   <InputAdornment position="end">
-              //     <IconButton
-              //       aria-label="toggle password visibility"
-              //       onClick={togglePassword}
-              //       onMouseDown={handleMouseDownPassword}
-              //       edge="end"
-              //     >
-              //       {passwordShown ? <Visibility /> : <VisibilityOff />}
-              //     </IconButton>
-              //   </InputAdornment>
-              // }
               >
               </FormControl>
-            
               <InputGroup.Text  
                     className={`${style.eyeIcon}`}
                     onClick={togglePassword}
-                    onMouseDown={handleMouseDownPassword}>
+                    onMouseUp={HandleMouseDownPassword}>
                     {passwordShown ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
               </InputGroup.Text>
             </InputGroup>
