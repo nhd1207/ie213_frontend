@@ -3,8 +3,7 @@
 .container {
   margin: 2rem;
 }
-.headingContainer {
-}
+
 
 .headings {
   justify-content: space-between;
@@ -27,12 +26,6 @@
   width: auto;
 }
 
-.searchTitle {
-  /* border-radius: 12px 0px 0px 12px; */
-}
-.searchBox {
-  /* border-radius: 0px 12px 12px 0px; */
-}
 
 .headingNumber {
   font-size: 1.2rem;

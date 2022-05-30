@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { connect } from "react-redux";
 import LoginForm from "../../components/Authentication/Login/LoginForm";
 import classes from "./Login.module.css";
 import { login } from "./action";
 import { Button, Modal } from "antd";
+import RouteContext from "../../context/RouteContext";
 
 function Login(props) {
+  let context = useContext(RouteContext);
+
   function sendLoginData(params) {
-    props.login(params);
+    props.login(params, context.url);
   }
 
   const countDown = () => {
     let secondsToGo = 5;
-    const modal = Modal.success({
+    const modal = Modal.error({
       title: `${props?.user?.response?.message}`,
       // content: `This modal will be destroyed after ${secondsToGo} second.`,
     });
@@ -52,8 +55,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (params) => {
-    dispatch(login(params));
+  login: (params, url) => {
+    dispatch(login(params, url));
   },
 });
 

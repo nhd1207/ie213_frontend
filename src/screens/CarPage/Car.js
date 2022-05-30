@@ -1,5 +1,4 @@
 import style from "./car.module.css";
-import { InputGroup } from "react-bootstrap";
 import "antd/dist/antd.css";
 import Layout from "../../components/layout";
 import { connect } from "react-redux";
@@ -8,13 +7,12 @@ import {
   getListCar,
   filter,
   addCarToWishlist,
-  getUserForWishListCar
+  getUserForWishListCar,
 } from "./action";
-import { deleteWishList } from "../WishListPage/action"
-import { NavLink } from "react-router-dom";
-import { Form } from "react-bootstrap";
+import { deleteWishList } from "../WishListPage/action";
+import { Button, Form, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Menu, Spin, Slider, Pagination } from "antd";
+import { Menu, Spin, Pagination } from "antd";
 import {
   SettingOutlined,
   HeartFilled,
@@ -23,17 +21,18 @@ import {
 import { Link } from "react-router-dom";
 import { Input, Space } from "antd";
 import money from "../../components/Share/functions/money";
+import { useHistory } from "react-router-dom";
 const { Search } = Input;
 
 const { SubMenu } = Menu;
 
 function Car(props) {
-  const [wishList, setWishList] = useState({})
-  const [car, setCar] = useState([]);
+  const [wishList, setWishList] = useState({});
   const [totalPage, setTotalPage] = useState(0);
   const [current, setCurrent] = useState(1);
   const [minIndex, setMinIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(0);
+  const history = useHistory();
   const [filterValue, setFilterValue] = useState({
     color: null,
     limit: null,
@@ -66,25 +65,30 @@ function Car(props) {
   }, []);
 
   useEffect(() => {
-    setWishList({...props?.user?.wishList})
-}, [props.user.wishList]);
+    setWishList({ ...props?.user?.wishList });
+  }, [props.user.wishList]);
 
-const handleDeleteWishListItem = (index) => {
-  let wishList2;
-  wishList2 = {...wishList}
-  wishList2.cars.splice(index,1)
-  let wishList3 = {
-      cars:[],
-      accessories:[]
-  }
-  wishList3.cars = wishList2.cars.map(item=>{
-      return item._id
-  })
-  wishList3.accessories = wishList2.accessories.map(item=>{
-      return item._id
-  })
-  props.deleteWishList({wishList: {...wishList3}})
-}
+  const handleDeleteWishListItem = (value) => {
+    let wishList2;
+    let index1;
+    wishList2 = { ...wishList };
+    wishList2.cars.map((item, index) => {
+      if (item._id === value)
+        index1 = index
+    })
+    wishList2.cars.splice(index1, 1);
+    let wishList3 = {
+      cars: [],
+      accessories: [],
+    };
+    wishList3.cars = wishList2.cars.map((item) => {
+      return item._id;
+    });
+    wishList3.accessories = wishList2.accessories.map((item) => {
+      return item._id;
+    });
+    props.deleteWishList({ wishList: { ...wishList3 } });
+  };
 
   useEffect(() => {
     props?.cars?.cars?.map((car) => {
@@ -129,20 +133,25 @@ const handleDeleteWishListItem = (index) => {
   //   } else props.search(value.trim());
   // };
 
-  const toggleClass = (e, value, car,index) => {
-    if (!car.isLiked)
-    {
+  const toggleClass = (e, value, car, index) => {
+    // console.log(props);
+    if (props.isLoggedIn === false) {
       e.preventDefault();
+      setShow(true);
       let element = e.target.parentElement.parentElement;
-      element.classList.toggle(`${style.heartIconClicked}`);
-      props.addCarToWishlist({ itemId: value });
-    }
-    else {
-      console.log("delete car");
-      e.preventDefault();
-      let element = e.target.parentElement.parentElement;
-      element.classList.toggle(`${style.heartIconClicked}`);
-      handleDeleteWishListItem(index);
+      element.classList.className = `${style.heartIcon}`;
+    } else {
+      if (!car.isLiked) {
+        e.preventDefault();
+        let element = e.target.parentElement.parentElement;
+        element.classList.toggle(`${style.heartIconClicked}`);
+        props.addCarToWishlist({ itemId: value });
+      } else {
+        e.preventDefault();
+        let element = e.target.parentElement.parentElement;
+        element.classList.toggle(`${style.heartIconClicked}`);
+        handleDeleteWishListItem(value);
+      }
     }
   };
 
@@ -176,11 +185,20 @@ const handleDeleteWishListItem = (index) => {
     }
     handleFilter(params);
   };
+
   const handleChange = (page) => {
     setCurrent(page);
     setMinIndex((page - 1) * pageSize);
     setMaxIndex(page * pageSize);
   };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+
+  function loginHandler() {
+    history.replace("/login");
+  }
 
   return (
     <Layout>
@@ -291,12 +309,16 @@ const handleDeleteWishListItem = (index) => {
                           </div>
                           {car.isLiked ? (
                             <HeartFilled
-                              onClick={(e) => toggleClass(e, car._id, car, index)}
+                              onClick={(e) =>
+                                toggleClass(e, car._id, car, index)
+                              }
                               className={`${style.heartIcon} ${style.heartIconClicked}`}
                             />
                           ) : (
                             <HeartFilled
-                              onClick={(e) => toggleClass(e, car._id, car, index)}
+                              onClick={(e) =>
+                                toggleClass(e, car._id, car, index)
+                              }
                               className={`${style.heartIcon}`}
                             />
                           )}
@@ -318,11 +340,26 @@ const handleDeleteWishListItem = (index) => {
           </div>
         </div>
       </Spin>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Chức năng này yêu cầu đăng nhập</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Vui lòng đăng nhập để tiếp tục</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Huỷ
+          </Button>
+          <Button variant="primary" onClick={loginHandler}>
+            Đăng nhập
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Layout>
   );
 }
 
 const mapStateToProps = (state) => ({
+  isLoggedIn: state.login.isLoggedIn,
   cars: state.carList,
   user: state.carList.user,
 });
@@ -342,7 +379,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   deleteWishList: (params) => {
     dispatch(deleteWishList(params));
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Car);
