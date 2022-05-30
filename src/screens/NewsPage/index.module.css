@@ -95,7 +95,9 @@ a {
 } */
 
 /* news */
-
+button:hover a {
+  color: var(--yellow-color);
+}
 .newsList {
   display: flex;
   flex-direction: column;
