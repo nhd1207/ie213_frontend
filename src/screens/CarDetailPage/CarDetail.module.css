@@ -99,12 +99,16 @@
 .carDetailContainer .heartIcon {
   width: inherit;
   font-size: 2rem;
-  color: var(--orange-color);
+  color: #ccc;
 
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.carDetailContainer .heartIconClicked {
+  color: var(--orange-color);
 }
 
 .carDetail {

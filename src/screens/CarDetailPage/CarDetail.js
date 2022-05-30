@@ -25,6 +25,7 @@ import { useLocation } from "react-router-dom";
 function CarDetail(props) {
   const params = useParams();
   const location = useLocation();
+
   useEffect(() => {
     props.getCarByID(params.id);
     console.log(location);
@@ -35,7 +36,13 @@ function CarDetail(props) {
     backgroundImage: `url(${props?.carDetail?.car[0]?.image.banner})`,
     backgroundRepeat: "no-repeat",
   };
-  console.log(myStyle);
+
+  const toggleClass = (e) => {
+        e.preventDefault();
+        let element = e.target.parentElement.parentElement;
+        element.classList.toggle(`${style.heartIconClicked}`);
+    }
+
   return (
     <Layout>
       <Spin spinning={props.carDetail.loading}>
@@ -86,9 +93,14 @@ function CarDetail(props) {
                   </NavLink>
                 </div>
                 <div className={`col-xl-2 row`}>
-                  <HeartOutlined className={`${style.heartIcon}`} />
-                  {/* <HeartFilled className={`${style.heartIcon}`} /> */}
-                </div>
+                  {/* <HeartOutlined className={`${style.heartIcon}`} /> */}
+                            <HeartFilled
+                              onClick={(e) =>
+                                toggleClass(e)
+                              }
+                              className={`${style.heartIcon}`}
+                            />
+                            </div>
               </div>
             </div>
           </div>

@@ -141,71 +141,8 @@ function User(props) {
                     )} />
                 </Modal>
               </div>
-            </div><div className={`${style.content} col col-xl-9 d-none d-md-block`}>
-                <div className={`${style.imformationUser}`}>
-                  <Descriptions column={1}>
-                    <Descriptions.Item
-                      labelStyle={{ fontSize: 42, fontWeight: "bold" }}
-                      contentStyle={{ fontSize: 42 }}
-                    >
-                      THÔNG TIN
-                    </Descriptions.Item>
-                    <Descriptions.Item
-                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
-                      contentStyle={{ fontSize: 20 }}
-                      label="Tên người dùng"
-                    >
-                      {props.user?.name}
-                    </Descriptions.Item>
-                    <Descriptions.Item
-                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
-                      contentStyle={{ fontSize: 20 }}
-                      label="Số điện thoại"
-                    >
-                      {props.user?.info?.phoneNumber}
-                    </Descriptions.Item>
-                    <Descriptions.Item
-                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
-                      contentStyle={{ fontSize: 20 }}
-                      label="Email"
-                    >
-                      {props.user?.email}
-                    </Descriptions.Item>
-                    <Descriptions.Item
-                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
-                      contentStyle={{ fontSize: 20 }}
-                      label="Ngày sinh"
-                    >
-                      {dateFormat(props.user?.info?.dateOfBirth, "mmmm dS, yyyy")}
-                    </Descriptions.Item>
-                  </Descriptions>
-                </div>
-                <DataTable
-                  dataSource={props.bills?.accessoryBill}
-                  handleShowForm={openModal}
-                ></DataTable>
-                <Modal
-                  className={style.modalStyle}
-                  footer={null}
-                  cancelText=""
-                  title="Thông tin các sản phẩm"
-                  visible={showForm}
-                  closable={true}
-                  onCancel={handleCloseModal}
-                  onOk={handleCloseModal}
-                >
-                  <List
-                    pagination={{ pageSize: 4 }}
-                    dataSource={accessoryBill.accessoryInfo || []}
-                    renderItem={(item) => (
-                      <List.Item key={item.id}>
-                        <List.Item.Meta title={item?.itemId?.name} />
-                        <div>Số lượng: {item?.quantity}</div>
-                      </List.Item>
-                    )} />
-                </Modal>
-              </div></>
-            // </div>
+            </div>
+            </>
           )}
       </Spin>
     </Layout>
