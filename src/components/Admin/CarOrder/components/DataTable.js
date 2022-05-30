@@ -148,9 +148,11 @@ const DataTable = ({ dataSource, loading, info, changeStatus,type }) => {
               okText="Có"
               cancelText="Không">
               <button className="btn btn-sm btn-primary">
-                <span className="px-2">
+              <Tooltip placement="top" title="Xác nhận giao hàng">
+              <span className="px-2">
                 <FontAwesomeIcon icon={faCheck} />
-                </span>
+              </span>
+            </Tooltip>
               </button>
             </Popconfirm>
             : <></>
