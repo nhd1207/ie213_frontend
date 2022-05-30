@@ -129,7 +129,7 @@ function Accessory(props) {
     props.deleteWishList({ wishList: { ...wishList3 } });
   };
 
-  const toggleClass = (e, value, item, index) => {
+  const toggleClass = (e, value, item) => {
     if (props.isLoggedIn === false) {
       setShow(true);
       e.preventDefault();

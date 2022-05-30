@@ -107,7 +107,7 @@
   width: 100%;
 }
 
-.carDetailContainer .heartIconClicked {
+.carDetailContainer .heartIcon.heartIconClicked {
   color: var(--orange-color);
 }
 

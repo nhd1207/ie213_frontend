@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./CarDetail.module.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useParams } from "react-router-dom";
 import { getCarByID } from "./action";
 import { connect } from "react-redux";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 import { Spin } from "antd";
 import { NavLink } from "react-router-dom"
 import Compare from "../../screens/ComparePage/Compare";
@@ -16,32 +16,95 @@ import {
   ShoppingCartOutlined,
   CarOutlined,
 } from "@ant-design/icons";
+import { deleteWishList } from "../WishListPage/action";
+import { addCarToWishlist, getUserForWishListCar } from "../CarPage/action";
 import Layout from "../../components/layout";
 import { Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import money from "../../components/Share/functions/money";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 function CarDetail(props) {
+  const [wishList, setWishList] = useState({});
+  const [carId, setCarId] = useState();
+  const [isLiked, setIsLiked] = useState(false)
+
   const params = useParams();
-  const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
+    setWishList({ ...props?.user?.wishList });
+  }, [props.user.wishList]);
+
+  useEffect(() => {
+    props.getUserForWishListCar();
     props.getCarByID(params.id);
-    console.log(location);
+    setCarId(params.id)
   }, []);
 
-  function compareHandler() { }
+  useEffect(() => {
+      props?.user?.wishList?.cars.forEach((item) => {
+        if (item._id === carId) {
+          setIsLiked(true);
+        }
+      })
+  }, [props.carDetail.loading, props?.user?.wishList?.cars]);
+
   let myStyle = {
     backgroundImage: `url(${props?.carDetail?.car[0]?.image.banner})`,
     backgroundRepeat: "no-repeat",
   };
 
-  const toggleClass = (e) => {
+  const handleDeleteWishListItem = (value) => {
+    let wishList2;
+    let index1;
+    wishList2 = { ...wishList };
+    wishList2.cars.map((item, index) => {
+      if (item._id === value)
+        index1 = index
+    })
+    wishList2.cars.splice(index1, 1);
+    let wishList3 = {
+      cars: [],
+      accessories: [],
+    };
+    wishList3.cars = wishList2.cars.map((item) => {
+      return item._id;
+    });
+    wishList3.accessories = wishList2.accessories.map((item) => {
+      return item._id;
+    });
+    props.deleteWishList({ wishList: { ...wishList3 } });
+  };
+
+  const toggleClass = (e, value, car, index) => {
+    if (props.isLoggedIn === false) {
+      e.preventDefault();
+      setShow(true);
+      let element = e.target.parentElement.parentElement;
+      element.classList.className = `${style.heartIcon}`;
+    } else {
+      if (!isLiked) {
         e.preventDefault();
         let element = e.target.parentElement.parentElement;
         element.classList.toggle(`${style.heartIconClicked}`);
+        props.addCarToWishlist({ itemId: value });
+      } else {
+        e.preventDefault();
+        let element = e.target.parentElement.parentElement;
+        element.classList.toggle(`${style.heartIconClicked}`);
+        handleDeleteWishListItem(value);
+      }
     }
+  };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+
+  function loginHandler() {
+    history.replace("/login");
+  }
 
   return (
     <Layout>
@@ -94,13 +157,22 @@ function CarDetail(props) {
                 </div>
                 <div className={`col-xl-2 row`}>
                   {/* <HeartOutlined className={`${style.heartIcon}`} /> */}
+                  {isLiked === true ? (
                             <HeartFilled
                               onClick={(e) =>
-                                toggleClass(e)
+                                toggleClass(e, carId)
+                              }
+                              className={`${style.heartIcon} ${style.heartIconClicked}`}
+                            />
+                          ) : (
+                            <HeartFilled
+                              onClick={(e) =>
+                                toggleClass(e, carId)
                               }
                               className={`${style.heartIcon}`}
                             />
-                            </div>
+                          )}
+                </div>
               </div>
             </div>
           </div>
@@ -216,19 +288,44 @@ function CarDetail(props) {
           </div>
         </div>
       </Spin>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Chức năng này yêu cầu đăng nhập</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Vui lòng đăng nhập để tiếp tục</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Huỷ
+          </Button>
+          <Button variant="primary" onClick={loginHandler}>
+            Đăng nhập
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Route to="/order/:id"></Route>
     </Layout>
   );
 }
 
 const mapStateToProps = (state) => ({
+  isLoggedIn: state.login.isLoggedIn,
   carDetail: state.carDetail,
+  user: state.carList.user
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getCarByID: (params) => {
     dispatch(getCarByID(params));
   },
+  addCarToWishlist: (data) => {
+    dispatch(addCarToWishlist(data));
+  },
+  getUserForWishListCar: (params) => {
+    dispatch(getUserForWishListCar(params));
+  },
+  deleteWishList: (params) => {
+    dispatch(deleteWishList(params));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarDetail);
