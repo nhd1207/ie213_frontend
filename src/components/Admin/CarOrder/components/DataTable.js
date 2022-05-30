@@ -130,9 +130,11 @@ const DataTable = ({ dataSource, loading, info, changeStatus,type }) => {
               okText="Có"
               cancelText="Không">
               <button className="btn btn-sm btn-primary" >
-                <span className="px-2">
+              <Tooltip placement="top" title="Duyệt đơn">
+              <span className="px-2">
                 <FontAwesomeIcon icon={faCheck} />
-                </span>
+              </span>
+            </Tooltip>
               </button>
             </Popconfirm>
             : <></>
@@ -163,11 +165,12 @@ const DataTable = ({ dataSource, loading, info, changeStatus,type }) => {
               cancelText="Không"
             >
               <button className="btn btn-sm btn-primary">
-                <Tooltip placement="top" tilte="Hủy đơn đặt cọc">
+                <Tooltip placement="top" title="Hủy đơn đặt cọc">
                   <span className="px-2">
                     <FontAwesomeIcon icon={faDeleteLeft} />
                   </span>
                 </Tooltip>
+
               </button>
             </Popconfirm> : <></>}
         </Space>
