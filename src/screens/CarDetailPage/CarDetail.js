@@ -40,12 +40,10 @@ function CarDetail(props) {
     props.getUserForWishListCar();
     props.getCarByID(params.id);
     setCarId(params.id)
+    props.getCarByID(params.id);
+    console.log(location);
   }, []);
-  const toggleClass = (e) => {
-    console.log("click ", e.target.parentElement.parentElement);
-    let element = e.target.parentElement.parentElement;
-    element.classList.toggle(`${style.heartIconClicked}`);
-  };
+
 
   useEffect(() => {
       props?.user?.wishList?.cars.forEach((item) => {
