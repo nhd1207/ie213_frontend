@@ -20,15 +20,21 @@ import Layout from "../../components/layout";
 import { Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import money from "../../components/Share/functions/money";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 function CarDetail(props) {
   const params = useParams();
   const location = useLocation();
+  const history = useHistory();
   useEffect(() => {
     props.getCarByID(params.id);
     console.log(location);
   }, []);
+  const toggleClass = (e) => {
+    console.log("click ", e.target.parentElement.parentElement);
+    let element = e.target.parentElement.parentElement;
+    element.classList.toggle(`${style.heartIconClicked}`);
+  };
 
   function compareHandler() {}
   let myStyle = {
@@ -74,20 +80,25 @@ function CarDetail(props) {
                   </div>
                 </div>
                 <div className={`col-xl-2 row`}>
-                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
-                  <Button
+                <Button
                     className={`${style.bookButton} col-xl-12`}
                     type="primary"
                     danger
+                    onClick={() => {history.push(`/order/${props?.carDetail?.car[0]?._id}`)}}
                   >
-                    <CarOutlined />
-                    ĐẶT XE NGAY
+                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
+                ĐẶT XE NGAY
+                
+                </NavLink>
+                <CarOutlined />
                   </Button>
-                  </NavLink>
+                  
                 </div>
                 <div className={`col-xl-2 row`}>
-                  <HeartOutlined className={`${style.heartIcon}`} />
-                  {/* <HeartFilled className={`${style.heartIcon}`} /> */}
+                    <HeartFilled
+                        onClick={toggleClass}
+                        className={`${style.heartIcon}`}
+                    />
                 </div>
               </div>
             </div>
@@ -179,16 +190,17 @@ function CarDetail(props) {
               </div>
               <div className={`${style.buttonWrapper} row`}>
                 <div className={`${style.button} col-xl-6`}>
-                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
                   <Button
                     className={`${style.bookButton} col-xl-12`}
                     type="primary"
                     danger
+                    onClick={() => history.push(`/order/${props?.carDetail?.car[0]?._id}`)}
                   >
-                    <CarOutlined />
+                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
                     ĐẶT XE NGAY
-                  </Button>
                   </NavLink>
+                  <CarOutlined />
+                  </Button>
                 </div>
                 <div className={`${style.button} col-xl-6`}>
                   <Link
