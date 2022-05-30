@@ -12,14 +12,16 @@ import {
 import { deleteWishList } from "../WishListPage/action";
 import { Button, Form, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Menu, Spin, Pagination } from "antd";
+import { Menu, Spin, Pagination, Input, Row, Col, Tag } from "antd";
 import {
   SettingOutlined,
   HeartFilled,
   ThunderboltOutlined,
+  DollarOutlined,
+  MenuOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { Input, Space } from "antd";
+import { Space } from "antd";
 import money from "../../components/Share/functions/money";
 import { useHistory } from "react-router-dom";
 const { Search } = Input;
@@ -39,22 +41,19 @@ function Car(props) {
     page: null,
     priceMin: null,
     priceMax: null,
-    sort: "name",
+    sort: null,
     field: ["name", "code", "price", "amount", "image"],
     keyword: null,
   });
 
-  var pageSize = 6;
+  const [tags, setTags] = useState([]);
+  const [isFilterPrice, setIsFilterPrice] = useState(false);
+  const [priceFilter, setPriceFilter] = useState({
+    priceMin:null,
+    priceMax:null
+  });
 
-  const marks = {
-    30: "0°C",
-    100: {
-      style: {
-        color: "#f50",
-      },
-      label: <strong>max</strong>,
-    },
-  };
+  var pageSize = 6;
 
   useEffect(() => {
     props.getUserForWishListCar();
@@ -68,14 +67,48 @@ function Car(props) {
     setWishList({ ...props?.user?.wishList });
   }, [props.user.wishList]);
 
+  useEffect(() => {
+    let tagAray = [];
+    for (let key in filterValue) {
+      if (filterValue[key] === null || key === "keyword" || key === "field") {
+      } else {
+        tagAray.push(
+          <Tag
+            closable
+            onClose={(e) => {
+              e.preventDefault();
+              handleTag(key);
+            }}
+          >
+            {key === "priceMax"
+              ? "Giá tối đa"
+              : key === "priceMin"
+              ? "Giá tối thiểu"
+              : key === "sort"
+              ? filterValue[key] === "name"
+                ? "Tên tăng dần"
+                : filterValue[key] === "-name"
+                ? "Tên giảm dần"
+                : filterValue[key] === "price"
+                ? "Giá tăng dần"
+                : "Giá giảm dần"
+              : ""}
+            {key === "sort" ? "" : ": " + money(filterValue[key], "VNĐ")}
+          </Tag>
+        );
+      }
+    }
+    console.log("tagAray", tagAray);
+    setTags([...tagAray]);
+  }, [filterValue]);
+
   const handleDeleteWishListItem = (value) => {
     let wishList2;
     let index1;
     wishList2 = { ...wishList };
     wishList2.cars.map((item, index) => {
-      if (item._id === value)
-        index1 = index
-    })
+      if (item._id === value) index1 = index;
+    });
     wishList2.cars.splice(index1, 1);
     let wishList3 = {
       cars: [],
@@ -127,12 +160,6 @@ function Car(props) {
     props.filter(params);
   };
 
-  // const onSearch = (value) => {
-  //   if (!value.trim()) {
-  //     props.getListCar();
-  //   } else props.search(value.trim());
-  // };
-
   const toggleClass = (e, value, car, index) => {
     // console.log(props);
     if (props.isLoggedIn === false) {
@@ -180,6 +207,11 @@ function Car(props) {
         setFilterValue(params);
         //handleFilter(params)
         break;
+      case "price":
+        console.log("value", value);
+        params = { ...filterValue };
+        setFilterValue(params);
+        break;
       default:
         return;
     }
@@ -199,6 +231,35 @@ function Car(props) {
   function loginHandler() {
     history.replace("/login");
   }
+
+  const setPrice = (e, type) => {
+    if (!priceFilter.priceMin && !priceFilter.priceMax ) {
+      setIsFilterPrice(false);
+    } else {
+      setIsFilterPrice(true);
+    }
+    let params;
+    if (type === "min") {
+      params = { ...filterValue, priceMin: e.target.value };
+      setPriceFilter({...priceFilter,priceMin:e.target.value})
+    } else if (type === "max") {
+      params = { ...filterValue, priceMax: e.target.value };
+      setPriceFilter({...priceFilter,priceMax:e.target.value})
+    } else {
+      return;
+    }
+    console.log("params", params);
+    setFilterValue(params);
+  };
+
+  const handleTag = (keys) => {
+    let params = { ...filterValue };
+    for (let key in params) {
+      if (key === keys) params[key] = null;
+    }
+    setFilterValue(params);
+    handleFilter(params);
+  };
 
   return (
     <Layout>
@@ -236,12 +297,13 @@ function Car(props) {
               >
                 <div className={`${style.rangeInput}`}>
                   <>
-                    <Form.Label>Bộ Lọc: {}</Form.Label>
+                    <Form.Label>Bộ Lọc: </Form.Label>
+                    {tags?.map((item) => item)}
                   </>
                 </div>
                 <SubMenu
                   key="sub1"
-                  icon={<SettingOutlined />}
+                  icon={<MenuOutlined />}
                   title="Tên xe"
                   onClick={(e) => handleFilterValue(null, e.key)}
                 >
@@ -250,17 +312,41 @@ function Car(props) {
                 </SubMenu>
                 <SubMenu
                   key="sub2"
-                  icon={<SettingOutlined />}
+                  icon={<DollarOutlined />}
                   title="Giá"
                   onClick={(e) => handleFilterValue(null, e.key)}
                 >
-                  {/* <Slider
-                    defaultValue={0}
-                    min={30}
-                    max={100}
-                    marks={marks}
-                    onChange={(e) => handleFilterValue(e, "power")}
-                  /> */}
+                  <Input.Group size="medium">
+                    <Row>
+                      <Input
+                        type={"number"}
+                        value={priceFilter.priceMin}
+                        //defaultValue={null}
+                        placeholder={"Giá tối thiểu"}
+                        onChange={(e) => {
+                          setPrice(e, "min");
+                        }}
+                      />
+                    </Row>
+                    <Row>
+                      <Input
+                        type={"number"}
+                        value={priceFilter.priceMax}
+                        //defaultValue={null}
+                        placeholder={"Giá tối đa"}
+                        onChange={(e) => {
+                          setPrice(e, "max");
+                        }}
+                      />
+                    </Row>
+                    <p>(VNĐ)</p>
+                  </Input.Group>
+                  <Button
+                    disabled={!isFilterPrice}
+                    onClick={(e) => handleFilterValue(e, "price")}
+                  >
+                    Lọc giá
+                  </Button>
                   <Menu.Item key="price_asc">Tăng dần</Menu.Item>
                   <Menu.Item key="price_desc">Giảm dần</Menu.Item>
                 </SubMenu>
