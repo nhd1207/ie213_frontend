@@ -123,6 +123,17 @@
   display: flex;
   justify-content: space-between;
 }
+.btnWrapper a {
+  background: var(--white-color);
+  color: var(--black-color);
+  border-color: var(--back-color);
+}
+
+.btnWrapper a:hover {
+  background: var(--black-color);
+  color: var(--yellow-color);
+  border-color: var(--back-color);
+}
 
 .heartIcon {
   width: inherit;
