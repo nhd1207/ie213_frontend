@@ -106,14 +106,14 @@ function CarOrder(props) {
 
   let history = useHistory();
 
-  useEffect(() => {
-    if (props?.status === "success") {
-      history.push(
-        `/order-result/${props?.carOrder?._id}?re=successful`,
-        [props?.carOrder]
-      );
-    }
-  }, [props.orderLoading, props?.status]);
+  // useEffect(() => {
+  //   console.log(props?.status === "success" && props.go);
+  //   if (props?.status === "success" && props.go) {
+  //     history.push(`/order-result/${props?.carOrder?._id}?re=successful`, [
+  //       { ...props?.carOrder },
+  //     ]);
+  //   }
+  // }, [props.orderLoading, props?.status, props.go]);
   return (
     <Layouts>
       {props?.isLoggedIn?.isLoggedIn === false ? (
@@ -405,6 +405,7 @@ const mapStateToProps = (state) => ({
   response: state.carOrderPage.response,
   status: state.carOrderPage.status,
   carOrder: state.carOrderPage.carOrder,
+  go: state.carOrderPage.go,
 });
 
 const mapDispatchToProps = (dispatch) => ({

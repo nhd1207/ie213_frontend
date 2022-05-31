@@ -21,11 +21,11 @@ import newDetail from "./screens/NewsDetail/reducer";
 import wishList from "./screens/WishListPage/reducer";
 import carDetail from "./screens/CarDetailPage/reducer";
 import carList from "./screens/CarPage/reducer";
-import carOrderPage from "./screens/CarOrder/reducer"
-import compare from "./screens/ComparePage/reducer"
-import isLoggedIn from "./components/reducer"
-import updateUserPage from "./screens/UpdateUserPage/reducer"
-
+import carOrderPage from "./screens/CarOrder/reducer";
+import compare from "./screens/ComparePage/reducer";
+import isLoggedIn from "./components/reducer";
+import updateUserPage from "./screens/UpdateUserPage/reducer";
+import carsHistory from "./screens/CarOrderHistory/reducer";
 const Reducer = (history) =>
   combineReducers({
     form: formReducer,
@@ -53,7 +53,8 @@ const Reducer = (history) =>
     carOrderPage,
     compare,
     isLoggedIn,
-    updateUserPage
-  })
-  
-export default Reducer
+    updateUserPage,
+    carsHistory,
+  });
+
+export default Reducer;
