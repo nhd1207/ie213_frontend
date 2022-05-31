@@ -29,15 +29,15 @@ const store = createStore(
 sagaMiddleware.run(saga);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <RouteContext.Provider value={{ url: "" }}>
-      <BrowserRouter>
+  <BrowserRouter>
+    <Provider store={store}>
+      <RouteContext.Provider value={{ url: "" }}>
         {/* <React.StrictMode> */}
         <App history={history} />
         {/* </React.StrictMode> */}
-      </BrowserRouter>
-    </RouteContext.Provider>
-  </Provider>,
+      </RouteContext.Provider>
+    </Provider>
+  </BrowserRouter>,
   document.getElementById("root")
 );
 

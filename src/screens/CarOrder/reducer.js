@@ -3,10 +3,13 @@ import { action_type as type } from './action'
 const initialState = {
     loading: false,
     car: {},
-    showroom: []
+    showroom: [],
+    orderLoading: false,
+    status: ""
 }
 
 function reducer(state = initialState, action) {
+    console.log(action);
     switch (action.type) {
         case type.GETCARORDER.REQUEST:
             return {
@@ -43,17 +46,19 @@ function reducer(state = initialState, action) {
         case type.CREATECARORDER.REQUEST:
             return {
                 ...state,
-                loading: true,
+                orderLoading: true,
             }
         case type.CREATECARORDER.SUCCESS:
             return {
                 ...state,
-                loading: false,
+                status: action.status,
+                carOrder: action.carOrder,
+                orderLoading: false,
             }
         case type.CREATECARORDER.ERROR:
             return {
                 ...state,
-                loading: false,
+                orderLoading: false,
             }
         default:
             return state

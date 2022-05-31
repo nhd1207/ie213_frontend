@@ -5,24 +5,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useParams } from "react-router-dom";
 import { getCarByID } from "./action";
 import { connect } from "react-redux";
-import { Button, Modal } from "antd";
+import { Button } from "antd";
 import { Spin } from "antd";
-import { NavLink } from "react-router-dom"
-import Compare from "../../screens/ComparePage/Compare";
+import { NavLink } from "react-router-dom";
 import {
   CaretRightOutlined,
   HeartFilled,
-  HeartOutlined,
-  ShoppingCartOutlined,
   CarOutlined,
 } from "@ant-design/icons";
 import { deleteWishList } from "../WishListPage/action";
 import { addCarToWishlist, getUserForWishListCar } from "../CarPage/action";
 import Layout from "../../components/layout";
-import { Route } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import money from "../../components/Share/functions/money";
-import { useLocation, useHistory } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 function CarDetail(props) {
   const [wishList, setWishList] = useState({});
@@ -30,8 +27,8 @@ function CarDetail(props) {
   const [isLiked, setIsLiked] = useState(false)
 
   const params = useParams();
+
   const location = useLocation();
-  const history = useHistory();
   useEffect(() => {
     setWishList({ ...props?.user?.wishList });
   }, [props.user.wishList]);
@@ -54,6 +51,8 @@ function CarDetail(props) {
     backgroundImage: `url(${props?.carDetail?.car[0]?.image.banner})`,
     backgroundRepeat: "no-repeat",
   };
+
+  let history = useHistory();
 
   const handleDeleteWishListItem = (value) => {
     let wishList2;
@@ -101,11 +100,17 @@ function CarDetail(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-
-  function loginHandler() {
-    history.replace("/login");
+  function orderCarHandler() {
+    if (props.isLoggedIn)
+      history.push(`/order/${props?.carDetail?.car[0]?._id}`);
+    else {
+      setShow(true);
+    }
   }
 
+  function loginHandler() {
+    history.push("/login");
+  }
   return (
     <Layout>
       <Spin spinning={props.carDetail.loading}>
@@ -144,25 +149,22 @@ function CarDetail(props) {
                   </div>
                 </div>
                 <div className={`col-xl-2 row`}>
-                <Button
+                  <Button
                     className={`${style.bookButton} col-xl-12`}
                     type="primary"
+                    onClick={orderCarHandler}
                     danger
-                    onClick={() => {history.push(`/order/${props?.carDetail?.car[0]?._id}`)}}
                   >
-                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
-                ĐẶT XE NGAY
-                
-                </NavLink>
-                <CarOutlined />
+                    <CarOutlined />
+                    ĐẶT XE NGAY
                   </Button>
-                  
                 </div>
                 <div className={`col-xl-2 row`}>
-                    <HeartFilled
-                        onClick={toggleClass}
-                        className={`${style.heartIcon}`}
-                    />
+                  {/* <HeartOutlined className={`${style.heartIcon}`} /> */}
+                  <HeartFilled
+                    onClick={(e) => toggleClass(e)}
+                    className={`${style.heartIcon}`}
+                  />
                 </div>
               </div>
             </div>
@@ -256,14 +258,12 @@ function CarDetail(props) {
                 <div className={`${style.button} col-xl-6`}>
                   <Button
                     className={`${style.bookButton} col-xl-12`}
+                    onClick={orderCarHandler}
                     type="primary"
                     danger
-                    onClick={() => history.push(`/order/${props?.carDetail?.car[0]?._id}`)}
                   >
-                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
+                    <CarOutlined />
                     ĐẶT XE NGAY
-                  </NavLink>
-                  <CarOutlined />
                   </Button>
                 </div>
                 <div className={`${style.button} col-xl-6`}>
@@ -294,7 +294,6 @@ function CarDetail(props) {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Route to="/order/:id"></Route>
     </Layout>
   );
 }

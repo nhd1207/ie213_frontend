@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Button, Spin, Modal,Image,Empty } from 'antd';
 import queryString from 'query-string'
 import { PlusOutlined } from '@ant-design/icons';
-
 import DataTable from './components/DataTable'
 import FormUpdateAccessory from './components/FormUpdateAccessory'
 import FormAddAccessory from './components/FormAddNew'
@@ -128,9 +127,9 @@ class index extends Component {
                         <span className='h3 font-weight-bold '>Phụ kiện</span>
                         <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} text='Thêm phụ kiện' type="primary" >Thêm phụ kiện</Button></span>
                     </div>
-                    <FormFilter
+                    {/* <FormFilter
                     onSubmit={this.handleSubmitFilter}
-                    />
+                    /> */}
                     <DataTable //done
                         dataSource={this.props?.accessory?.data.accessory || []}
                         loading={this.props.accessory.loading}
