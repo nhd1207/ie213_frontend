@@ -127,3 +127,67 @@
   animation-name: appearBottom;
   animation-duration: 2s;
 }
+
+.bookButton {
+  height: 3rem;
+  font-size: var(--font-title);
+  width: 60%;
+  background-color: var(--yellow-color);
+  border: 1px solid var(--border-gray-color);
+  color: var(--black-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.8rem 0;
+}
+
+.bookButton:hover {
+  color: var(--yellow-color);
+  background-color: var(--black-color);
+}
+
+.bookButton:focus {
+  background-color: var(--yellow-color);
+  color: var(--black-color);
+  outline: none;
+  box-shadow: none;
+}
+
+.bookButton:active {
+  background-color: var(--yellow-color);
+  color: var(--black-color);
+  outline: none;
+  box-shadow: none;
+}
+
+.confirmButton {
+  background-color: var(--yellow-color);
+  border: 1px solid var(--border-gray-color);
+  color: var(--black-color);
+}
+
+.confirmButton:hover {
+  color: var(--yellow-color);
+  background-color: var(--black-color);
+}
+.confirmButton:focus {
+  color: var(--yellow-color);
+  background-color: var(--black-color);
+}
+.confirmButton:active {
+  color: var(--yellow-color);
+  background-color: var(--black-color);
+}
+
+.cancelButton:hover {
+  color: var(--yellow-color);
+  background-color: var(--black-color);
+}
+.cancelButton:focus {
+  color: var(--yellow-color);
+  background-color: var(--black-color);
+}
+.cancelButton:active {
+  color: var(--yellow-color);
+  background-color: var(--black-color);
+}

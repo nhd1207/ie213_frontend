@@ -30,8 +30,8 @@ function CarDetail(props) {
   const [isLiked, setIsLiked] = useState(false)
 
   const params = useParams();
+  const location = useLocation();
   const history = useHistory();
-
   useEffect(() => {
     setWishList({ ...props?.user?.wishList });
   }, [props.user.wishList]);
@@ -144,34 +144,25 @@ function CarDetail(props) {
                   </div>
                 </div>
                 <div className={`col-xl-2 row`}>
-                  <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
-                    <Button
-                      className={`${style.bookButton} col-xl-12`}
-                      type="primary"
-                      danger
-                    >
-                      <CarOutlined />
-                      ĐẶT XE NGAY
-                    </Button>
-                  </NavLink>
+                <Button
+                    className={`${style.bookButton} col-xl-12`}
+                    type="primary"
+                    danger
+                    onClick={() => {history.push(`/order/${props?.carDetail?.car[0]?._id}`)}}
+                  >
+                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
+                ĐẶT XE NGAY
+                
+                </NavLink>
+                <CarOutlined />
+                  </Button>
+                  
                 </div>
                 <div className={`col-xl-2 row`}>
-                  {/* <HeartOutlined className={`${style.heartIcon}`} /> */}
-                  {isLiked === true ? (
-                            <HeartFilled
-                              onClick={(e) =>
-                                toggleClass(e, carId)
-                              }
-                              className={`${style.heartIcon} ${style.heartIconClicked}`}
-                            />
-                          ) : (
-                            <HeartFilled
-                              onClick={(e) =>
-                                toggleClass(e, carId)
-                              }
-                              className={`${style.heartIcon}`}
-                            />
-                          )}
+                    <HeartFilled
+                        onClick={toggleClass}
+                        className={`${style.heartIcon}`}
+                    />
                 </div>
               </div>
             </div>
@@ -263,16 +254,17 @@ function CarDetail(props) {
               </div>
               <div className={`${style.buttonWrapper} row`}>
                 <div className={`${style.button} col-xl-6`}>
-                  <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
-                    <Button
-                      className={`${style.bookButton} col-xl-12`}
-                      type="primary"
-                      danger
-                    >
-                      <CarOutlined />
-                      ĐẶT XE NGAY
-                    </Button>
+                  <Button
+                    className={`${style.bookButton} col-xl-12`}
+                    type="primary"
+                    danger
+                    onClick={() => history.push(`/order/${props?.carDetail?.car[0]?._id}`)}
+                  >
+                <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
+                    ĐẶT XE NGAY
                   </NavLink>
+                  <CarOutlined />
+                  </Button>
                 </div>
                 <div className={`${style.button} col-xl-6`}>
                   <Link

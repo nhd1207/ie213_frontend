@@ -233,8 +233,8 @@ function CompareTwoCar(props) {
                   disabled={car1ID ? false : true}
                   onClick={() => {placingOder(props?.car?.car1[0]?._id)}}
                 >
-                  <CarOutlined />
                   Đặt xe {props?.car?.car1[0]?.name}
+                  <CarOutlined />
                 </Button>
               </div>
               <div className={`${style.button} col-xl-6`}>
@@ -245,8 +245,8 @@ function CompareTwoCar(props) {
                   disabled={car2ID ? false : true}
                   onClick={() => {placingOder(props?.car?.car2[0]?._id)}}
                 >
-                  <CarOutlined />
                   Đặt xe {props?.car?.car2[0]?.name}
+                  <CarOutlined />
                 </Button>
               </div>
             </div>
