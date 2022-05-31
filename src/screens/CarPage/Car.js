@@ -233,22 +233,26 @@ function Car(props) {
   }
 
   const setPrice = (e, type) => {
+    let params;
+    let paramForPriceFilter;
+    if (type === "min") {
+      params = { ...filterValue, priceMin: e.target.value };
+      paramForPriceFilter={...priceFilter,priceMin:e.target.value}
+      setPriceFilter({...paramForPriceFilter})
+    } else if (type === "max") {
+      params = { ...filterValue, priceMax: e.target.value };
+      paramForPriceFilter={...priceFilter,priceMax:e.target.value}
+      setPriceFilter({...paramForPriceFilter})
+    } else {
+      return;
+    }
     if (!priceFilter.priceMin && !priceFilter.priceMax ) {
       setIsFilterPrice(false);
     } else {
       setIsFilterPrice(true);
     }
-    let params;
-    if (type === "min") {
-      params = { ...filterValue, priceMin: e.target.value };
-      setPriceFilter({...priceFilter,priceMin:e.target.value})
-    } else if (type === "max") {
-      params = { ...filterValue, priceMax: e.target.value };
-      setPriceFilter({...priceFilter,priceMax:e.target.value})
-    } else {
-      return;
-    }
-    console.log("params", params);
+    console.log("priceFilter", priceFilter);
+    console.log("paramForPriceFilter", paramForPriceFilter);
     setFilterValue(params);
   };
 
