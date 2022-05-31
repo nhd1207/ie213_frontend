@@ -14,6 +14,7 @@ import postAdminSaga from './components/Admin/Post/saga'
 import accessoryBillAdminSaga from './components/Admin/AccessoryBill/saga'
 import carOrderAdminSaga from './components/Admin/CarOrder/saga'
 import AdminSaga from './screens/AdminPage/saga'
+import AdminHomeSaga from './components/Admin/AdminHome/saga'
 import accessorySaga from './screens/AccessoryPage/saga'
 import accessoryDetailSaga from './screens/AccessoryDetailPage/saga'
 import newSaga from './screens/NewsPage/saga'
@@ -50,7 +51,8 @@ const Saga = function* (){
       getListCarByIDSaga(),
       carOrderSaga(),
       compareSaga(),
-      updateUserSaga()
+      updateUserSaga(),
+      AdminHomeSaga()
     ])
   }
   

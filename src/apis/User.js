@@ -61,11 +61,6 @@ export const addItemToCart =(data)=> {
     })
 }
 
-//{
-//    itemId:'',
-//   quantity:
-//}
-
 export const updateWishlist =(data)=> {
     return axios({
         method: 'PATCH',
@@ -82,3 +77,9 @@ export const addItemToWishlist =(data)=> {
     })
 }
 
+export const adminData =(data)=> {
+    return axios({
+        method: 'GET',
+        url: `${prefix}/admindata`
+    })
+}
