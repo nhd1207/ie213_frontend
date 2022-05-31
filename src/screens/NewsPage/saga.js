@@ -10,12 +10,11 @@ import {
 
 import * as apiPost from '../../apis/Post'
 
-
 function* getListPostSaga(action) {
     try {
         const { params } = action
         const response = yield call(apiPost.getList, params)
-        if (response.status==='success') {
+        if (response.status === 'success') {
             yield all([
                 put({ type: TYPE.GETPOST.SUCCESS, ...response }),
             ])
