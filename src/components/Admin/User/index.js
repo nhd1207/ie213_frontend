@@ -48,21 +48,8 @@ class index extends Component {
         let id = this.state.idUser;
         this.setState({ showForm: false })
         let params = value
-        //     name: value.name,
-        //     deposit: value.deposit,
-        //     amount: value.amount,
-        //     price: value.price
-        // }
-        // if(params.name && params.deposit && params.amount && params.price)
-        // return console.log('loi')
         this.props.updateUser(id, params)
     }
-
-    // handleDeleteAccessory = (value) => {
-    //     let id = value;
-    //     this.props.deleteAccessory(id);
-    // }
-
 
     deleteUser = (value) => {
         this.props.deleteUser(value)
@@ -84,9 +71,9 @@ class index extends Component {
                     <div className='container-fluid mb-3 text-left py-2'>
                         <span className='h5 font-weight-bold '>Users</span>
                     </div>
-                    <FormFilter
+                    {/* <FormFilter
                         onSubmit={this.handleSubmitFilter}
-                    />
+                    /> */}
                     <DataTable
                         dataSource={
                             user?.data ||
