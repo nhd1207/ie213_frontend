@@ -44,5 +44,6 @@
 .news_content {
   font-size: 1rem;
   line-height: 2rem;
-  padding: 3rem 0;
+  padding: 3rem 7rem;
+  text-align: justify; 
 }
