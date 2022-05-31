@@ -30,6 +30,7 @@ import Support from "./screens/SupportPage/Support";
 import Compare from "./screens/ComparePage/Compare";
 import CarOrderPage from "./screens/CarOrder/CarOrder"
 import UpdateUserPage from "./screens/UpdateUserPage/UpdateUser"
+import OrderResult from "./screens/OrderResult/OrderResult";
 
 function App(props) {
   useEffect(() => {
@@ -61,6 +62,7 @@ function App(props) {
         <Route path="/compare" component={Compare}></Route>
         <Route path="/user/update" component={UpdateUserPage}></Route>
         <Route path="/order/:id" component={CarOrderPage}></Route>
+        <Route path="/order-result/:id" component={OrderResult}></Route>
         <Route exact path="/" component={Home} />
         <Route component={Error404} />
       </Switch>

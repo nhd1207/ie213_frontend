@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./CarDetail.module.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,42 +7,50 @@ import { getCarByID } from "./action";
 import { connect } from "react-redux";
 import { Button } from "antd";
 import { Spin } from "antd";
-import { NavLink } from "react-router-dom"
-import Compare from "../../screens/ComparePage/Compare";
+import { NavLink } from "react-router-dom";
 import {
   CaretRightOutlined,
   HeartFilled,
-  HeartOutlined,
-  ShoppingCartOutlined,
   CarOutlined,
 } from "@ant-design/icons";
 import Layout from "../../components/layout";
-import { Route } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import money from "../../components/Share/functions/money";
-import { useLocation } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 
 function CarDetail(props) {
   const params = useParams();
-  const location = useLocation();
 
   useEffect(() => {
     props.getCarByID(params.id);
-    console.log(location);
   }, []);
 
-  function compareHandler() { }
+  function compareHandler() {}
   let myStyle = {
     backgroundImage: `url(${props?.carDetail?.car[0]?.image.banner})`,
     backgroundRepeat: "no-repeat",
   };
 
   const toggleClass = (e) => {
-        e.preventDefault();
-        let element = e.target.parentElement.parentElement;
-        element.classList.toggle(`${style.heartIconClicked}`);
-    }
+    e.preventDefault();
+    let element = e.target.parentElement.parentElement;
+    element.classList.toggle(`${style.heartIconClicked}`);
+  };
+  let history = useHistory();
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  function orderCarHandler() {
+    if (props.isLoggedIn)
+      history.push(`/order/${props?.carDetail?.car[0]?._id}`);
+    else {
+      setShow(true);
+    }
+  }
+
+  function loginHandler() {
+    history.push("/login");
+  }
   return (
     <Layout>
       <Spin spinning={props.carDetail.loading}>
@@ -81,26 +89,23 @@ function CarDetail(props) {
                   </div>
                 </div>
                 <div className={`col-xl-2 row`}>
-                  <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
-                    <Button
-                      className={`${style.bookButton} col-xl-12`}
-                      type="primary"
-                      danger
-                    >
-                      <CarOutlined />
-                      ĐẶT XE NGAY
-                    </Button>
-                  </NavLink>
+                  <Button
+                    className={`${style.bookButton} col-xl-12`}
+                    type="primary"
+                    onClick={orderCarHandler}
+                    danger
+                  >
+                    <CarOutlined />
+                    ĐẶT XE NGAY
+                  </Button>
                 </div>
                 <div className={`col-xl-2 row`}>
                   {/* <HeartOutlined className={`${style.heartIcon}`} /> */}
-                            <HeartFilled
-                              onClick={(e) =>
-                                toggleClass(e)
-                              }
-                              className={`${style.heartIcon}`}
-                            />
-                            </div>
+                  <HeartFilled
+                    onClick={(e) => toggleClass(e)}
+                    className={`${style.heartIcon}`}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -191,16 +196,15 @@ function CarDetail(props) {
               </div>
               <div className={`${style.buttonWrapper} row`}>
                 <div className={`${style.button} col-xl-6`}>
-                  <NavLink to={`/order/${props?.carDetail?.car[0]?._id}`}>
-                    <Button
-                      className={`${style.bookButton} col-xl-12`}
-                      type="primary"
-                      danger
-                    >
-                      <CarOutlined />
-                      ĐẶT XE NGAY
-                    </Button>
-                  </NavLink>
+                  <Button
+                    className={`${style.bookButton} col-xl-12`}
+                    onClick={orderCarHandler}
+                    type="primary"
+                    danger
+                  >
+                    <CarOutlined />
+                    ĐẶT XE NGAY
+                  </Button>
                 </div>
                 <div className={`${style.button} col-xl-6`}>
                   <Link
@@ -216,13 +220,27 @@ function CarDetail(props) {
           </div>
         </div>
       </Spin>
-      <Route to="/order/:id"></Route>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Chức năng này yêu cầu đăng nhập</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Vui lòng đăng nhập để tiếp tục</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Huỷ
+          </Button>
+          <Button variant="primary" onClick={loginHandler}>
+            Đăng nhập
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Layout>
   );
 }
 
 const mapStateToProps = (state) => ({
   carDetail: state.carDetail,
+  isLoggedIn: state.login.isLoggedIn,
 });
 
 const mapDispatchToProps = (dispatch) => ({
