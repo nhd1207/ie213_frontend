@@ -7,6 +7,8 @@ function OrderDetail(props) {
 
       <div>
         <p>Họ và tên: <span>{props.name}</span></p>
+        <p>Địa chỉ nhận hàng: <span></span></p>
+        <p>Số điện thoại: <span></span></p>
       </div>
     </div>
   );

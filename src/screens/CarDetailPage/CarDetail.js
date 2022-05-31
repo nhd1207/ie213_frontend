@@ -98,9 +98,6 @@ function CarDetail(props) {
   };
 
   const [show, setShow] = useState(false);
-  function loginHandler() {
-    history.replace("/login");
-  }
 
   const handleClose = () => setShow(false);
   function orderCarHandler() {
@@ -304,7 +301,6 @@ function CarDetail(props) {
 const mapStateToProps = (state) => ({
   isLoggedIn: state.login.isLoggedIn,
   carDetail: state.carDetail,
-  isLoggedIn: state.login.isLoggedIn,
   user: state.carList.user
 });
 
