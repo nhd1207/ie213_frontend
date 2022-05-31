@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import style from "./Support.module.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "../../components/layout"
+import { send } from 'emailjs-com';
 
 import { MailOutlined, PhoneOutlined, CarOutlined } from "@ant-design/icons";
 
@@ -35,9 +36,45 @@ const validateMessages = {
 /* eslint-enable no-template-curly-in-string */
 
 export default function Support() {
+
+  const [toSend, setToSend] = useState({
+    from_name: '',
+    to_name: '',
+    message: '',
+    reply_to: '',
+    address: '',
+    from_email: ''
+  });
+
   const onFinish = (values) => {
     console.log(values);
+    // e.preventDefault();
+    setToSend({
+      from_name: values.user.name,
+      to_name: 'Seven',
+      address: values.user.address,
+      message: 'Câu hỏi: ' + values.user.comment,
+      from_email: values.user.email,
+      reply_to: values.user.email
+    })
+    send(
+      'service_6nktika',
+      'template_8ghgt6g',
+      toSend,
+      'Ykjj7Wn1OrFZUmA72'
+    )
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      })
+      .catch((err) => {
+        console.log('FAILED...', err);
+      });
   };
+
+  const handleChange = (e) => {
+    setToSend({ ...toSend, [e.target.name]: e.target.value });
+  };
+
   return (
     <Layout>
       <div className={`${style.main}`}>
@@ -153,7 +190,7 @@ export default function Support() {
                   },
                 ]}
               >
-                <Input />
+                <Input onChange={handleChange}/>
               </Form.Item>
               <Form.Item
                 name={["user", "email"]}
@@ -164,13 +201,13 @@ export default function Support() {
                   },
                 ]}
               >
-                <Input />
+                <Input onChange={handleChange} />
               </Form.Item>
               <Form.Item name={["user", "address"]} label="Address">
-                <Input />
+                <Input onChange={handleChange} />
               </Form.Item>
               <Form.Item name={["user", "comment"]} label="Thông tin cần hỗ trợ">
-                <Input.TextArea />
+                <Input.TextArea onChange={handleChange} />
               </Form.Item>
               <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                 <Button type="primary" htmlType="submit">
