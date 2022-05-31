@@ -108,7 +108,10 @@ function CarOrder(props) {
 
   useEffect(() => {
     if (props?.status === "success") {
-      history.push(`/order-result/${props?.carOrder?._id}?re=successful`);
+      history.push(
+        `/order-result/${props?.carOrder?._id}?re=successful`,
+        [props?.carOrder]
+      );
     }
   }, [props.orderLoading, props?.status]);
   return (
@@ -169,7 +172,7 @@ function CarOrder(props) {
                         prefix: "84",
                       }}
                       scrollToFirstError
-                      style={{fontSize: "2rem"}}
+                      style={{ fontSize: "2rem" }}
                     >
                       <Form.Item name="time" label="Chọn ngày" {...config}>
                         <DatePicker
@@ -331,10 +334,10 @@ function CarOrder(props) {
                         </Checkbox>
                       </Form.Item>
                       <Form.Item {...tailFormItemLayout}>
-                        <Button 
-                        type="primary"
-                        htmlType="submit"
-                        className={`${style.bookButton} col-xl-12`}
+                        <Button
+                          type="primary"
+                          htmlType="submit"
+                          className={`${style.bookButton} col-xl-12`}
                         >
                           Đặt hàng
                         </Button>
@@ -358,9 +361,7 @@ function CarOrder(props) {
                 setModalShow(false);
               }}
             >
-              <Modal.Title 
-              id="contained-modal-title-vcenter"
-              >
+              <Modal.Title id="contained-modal-title-vcenter">
                 Xác nhận đặt hàng
               </Modal.Title>
             </Modal.Header>
@@ -372,39 +373,22 @@ function CarOrder(props) {
               <Modal.Footer>
                 <Button
                   variant="secondary"
+                  className={`${style.cancelButton}`}
                   onClick={() => {
                     setModalShow(false);
                   }}
                 >
                   Huỷ bỏ
                 </Button>
-                <Button variant="primary" onClick={confirmOrderHandler}>
+                <Button
+                  variant="primary"
+                  onClick={confirmOrderHandler}
+                  className={`${style.confirmButton}`}
+                >
                   Xác nhận
                 </Button>
               </Modal.Footer>
             </Spin>
-            <Modal.Body>
-              <h4>Tên xe: {props?.car[0]?.name}</h4>
-              <p></p>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                variant="secondary"
-                className={`${style.cancelButton}`}
-                onClick={() => {
-                  setModalShow(false);
-                }}
-              >
-                Huỷ bỏ
-              </Button>
-              <Button
-               variant="primary" 
-               onClick={confirmOrderHandler}
-               className={`${style.confirmButton}`}
-               >
-                Xác nhận
-              </Button>
-            </Modal.Footer>
           </Modal>
         </>
       )}
@@ -420,7 +404,7 @@ const mapStateToProps = (state) => ({
   isLoggedIn: state.isLoggedIn.isLoggedIn,
   response: state.carOrderPage.response,
   status: state.carOrderPage.status,
-  carOrder: state.carOrderPage.carOrder
+  carOrder: state.carOrderPage.carOrder,
 });
 
 const mapDispatchToProps = (dispatch) => ({

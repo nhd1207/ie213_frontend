@@ -6,15 +6,17 @@ import { getListShowroom } from "./action";
 import { connect } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "../../components/layout";
-
+import {Spin} from "antd"
 function Showroom(props) {
   useEffect(() => {
-    let params = {};
-    props.getListShowroom(params);
-    console.log(props);
+    // let params = {};
+    props.getListShowroom();
+    console.log("props", props);
   }, []);
   return (
     <Layout>
+      <Spin spinning={props.loading}>
+
       <div className={`${style.SHcon} `}>
         <div className={`${style.Banner}`}>
           <h2 className={`${style.title}`}>CHUỖI</h2>
@@ -39,12 +41,18 @@ function Showroom(props) {
               <br />
             </div>
             <div className={`${style.leftContent__desc} col-xl-12`}>
-              123, đường 567, Q1, Tp.HCM
+              
+            {props?.showrooms?.filter(item=>  item.address.includes('Hồ Chí Minh')).map(item=>{
+              return <>
+              <hr className={`${style.line}`}></hr> 
+              {item.name}: {item.address}
+              </>
+            })}
+             
+              {/* {props.showRoom?.adress[0]}
               <hr className={`${style.line}`}></hr>
               123, đường 567, Q1, Tp.HCM
-              <hr className={`${style.line}`}></hr>
-              123, đường 567, Q1, Tp.HCM
-              <hr className={`${style.line}`}></hr>
+              <hr className={`${style.line}`}></hr> */}
             </div>
           </div>
           <div
@@ -87,22 +95,24 @@ function Showroom(props) {
               <br />
             </div>
             <div className={`${style.rightContent__desc} col-xl-12 `}>
-              123, đường 567, Q1, Tp.HCM
-              <hr className={`${style.line}`}></hr>
-              123, đường 567, Q1, Tp.HCM
-              <hr className={`${style.line}`}></hr>
-              123, đường 567, Q1, Tp.HCM
-              <hr className={`${style.line}`}></hr>
+            {props?.showrooms?.filter(item=>  item.address.includes('Đà Nẵng')).map(item=>{
+              return <>
+              <hr className={`${style.line}`}></hr> 
+              {item.name}: {item.address}
+              </>
+            })}
             </div>
           </div>
         </div>
       </div>
+      </Spin>
     </Layout>
   );
 }
 
 const mapStateToProps = (state) => ({
-  data: state.showroom,
+  loading: state.showroom.loading,
+  showrooms: state.showroom.showrooms.showRoom
 });
 
 const mapDispatchToProps = (dispatch) => ({

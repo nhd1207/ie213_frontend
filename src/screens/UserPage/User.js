@@ -81,42 +81,51 @@ function User(props) {
                 </Menu>
               </div>
               <div className={`${style.content} col col-xl-9 d-none d-md-block`}>
-                <Descriptions column={1}>
-                  <Descriptions.Item
+                <div className={`${style.descriptions}`}>
+ 
+                <Descriptions 
+                labelStyle={{ fontSize: 50, fontWeight: "bold" }}
+                title="THÔNG TIN"
+                column={2}
+                >
+                  
+                  {/* <Descriptions.Item
                     labelStyle={{ fontSize: 50, fontWeight: "bold" }}
                     contentStyle={{ fontSize: 50 }}
                   >
                     THÔNG TIN
-                  </Descriptions.Item>
+                  </Descriptions.Item> */}
                   <Descriptions.Item
-                    labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                    contentStyle={{ fontSize: 30 }}
+                    labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                    contentStyle={{ fontSize: 20 }}
                     label="Tên người dùng"
                   >
                     {props.user?.name}
                   </Descriptions.Item>
                   <Descriptions.Item
-                    labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                    contentStyle={{ fontSize: 30 }}
+                    labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                    contentStyle={{ fontSize: 20 }}
                     label="Số điện thoại"
                   >
                     {props.user?.info?.phoneNumber}
                   </Descriptions.Item>
                   <Descriptions.Item
-                    labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                    contentStyle={{ fontSize: 30 }}
+                    labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                    contentStyle={{ fontSize: 20 }}
                     label="Email"
                   >
                     {props.user?.email}
                   </Descriptions.Item>
                   <Descriptions.Item
-                    labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                    contentStyle={{ fontSize: 30 }}
+                    labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                    contentStyle={{ fontSize: 20 }}
                     label="Ngày sinh"
                   >
                     {dateFormat(props.user?.info?.dateOfBirth, "mmmm dS, yyyy")}
                   </Descriptions.Item>
                 </Descriptions>
+                                 
+                </div>
                 <DataTable
                   dataSource={props.bills?.accessoryBill}
                   handleShowForm={openModal}

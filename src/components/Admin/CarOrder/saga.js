@@ -10,6 +10,7 @@ import {
 } from './action'
 
 import * as api from '../../../apis/CarOrder'
+import { message } from 'antd'
 
 function* getListSaga(action) {
     try {
@@ -54,14 +55,51 @@ function* UpdateSaga(action) {
         const { id, params } = action
         const response = yield call(api.update, id, params)
         if (response.status==='success') {
+            switch(params.status){
+                case 'Cancelled':
+                    message.success('Hủy đơn thành công')
+                break;
+                case 'Accepted':
+                    message.success('Duyệt đơn thành công')
+                break;
+                case 'Success':
+                    message.success('Xác nhận đơn được giao thành công')
+                break;
+                default:break;
+            }
             yield all([
                 put({ type: TYPE.UPDATE.SUCCESS, ...response }),
                 put({ type: TYPE.CARORDERADMIN.REQUEST, params: { status: 1 } })
             ])
         } else {
+            switch(params.status){
+                case 'Cancelled':
+                    message.error('Hủy đơn thất bại')
+                break;
+                case 'Accepted':
+                    message.error('Duyệt đơn thất bại')
+                break;
+                case 'Success':
+                    message.error('Xác nhận đơn được giao thất bại')
+                break;
+                default:break;
+            }
             yield put({ type: TYPE.UPDATE.ERROR, error: response })
         }
     } catch (error) {
+        const { id, params } = action
+        switch(params.status){
+            case 'Cancelled':
+                message.error('Hủy đơn thất bại')
+            break;
+            case 'Accepted':
+                message.error('Duyệt đơn thất bại')
+            break;
+            case 'Success':
+                message.error('Xác nhận đơn được giao thất bại')
+            break;
+            default:break;
+        }
         yield all([
             put({ type: TYPE.UPDATE.ERROR, error })
         ])
