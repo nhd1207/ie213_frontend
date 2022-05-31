@@ -26,6 +26,8 @@ import compare from "./screens/ComparePage/reducer";
 import isLoggedIn from "./components/reducer";
 import updateUserPage from "./screens/UpdateUserPage/reducer";
 import carsHistory from "./screens/CarOrderHistory/reducer";
+import showroom from "./screens/ShowroomPage/reducer"
+
 const Reducer = (history) =>
   combineReducers({
     form: formReducer,
@@ -55,6 +57,7 @@ const Reducer = (history) =>
     isLoggedIn,
     updateUserPage,
     carsHistory,
+    showroom
   });
-
-export default Reducer;
+  
+export default Reducer

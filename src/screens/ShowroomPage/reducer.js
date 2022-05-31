@@ -2,7 +2,7 @@ import { action_type as type } from './action'
 
 const initialState = {
     loading: false,
-    data: [],
+    showrooms: [],
 }
 
 function reducer(state = initialState, action) {
@@ -15,7 +15,7 @@ function reducer(state = initialState, action) {
         case type.GETSHOWROOM.SUCCESS:
             return {
                 ...state,
-                data: action.data,
+                showrooms: action.data,
                 loading: false,
             }
         case type.GETSHOWROOM.ERROR:

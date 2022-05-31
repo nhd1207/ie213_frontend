@@ -25,6 +25,7 @@ import carOrderSaga from "./screens/CarOrder/saga"
 import compareSaga from "./screens/ComparePage/saga"
 import updateUserSaga from "./screens/UpdateUserPage/saga"
 import carHistorySaga from "./screens/CarOrderHistory/saga";
+import showroomSaga from './screens/ShowroomPage/saga'
 
 const Saga = function* (){
     yield all([
@@ -52,7 +53,8 @@ const Saga = function* (){
       carOrderSaga(),
       compareSaga(),
       updateUserSaga(),
-      carHistorySaga()
+      carHistorySaga(),
+      showroomSaga()
     ])
   }
   
