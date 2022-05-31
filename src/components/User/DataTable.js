@@ -4,6 +4,7 @@ import { Table, Spin, Space, Tooltip, List } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import money from '../Share/functions/money';
+import dateFormat from 'dateformat'
 import { HistoryOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 const DataTable = ({ dataSource, loading, handleShowForm }) => {
 
@@ -50,6 +51,16 @@ const DataTable = ({ dataSource, loading, handleShowForm }) => {
       render: (value, record) =>
         <div>
           <span> {money(value, "VND") || ''} </span>
+        </div>
+    },
+    {
+      title: 'Ngày tạo',
+      dataIndex: 'createAt',
+      key: 'createAt',
+      className: 'text-center',
+      render: (value, record) =>
+        <div>
+          <span> {dateFormat(value,'HH:MM dddd, mmmm d, yyyy') || ''} </span>
         </div>
     },
     {
