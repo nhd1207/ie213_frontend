@@ -14,6 +14,7 @@ import Cookies from "js-cookie";
 import DataTable from "../../components/User/DataTable";
 import { Redirect, Link } from "react-router-dom";
 import { verify } from "../LoginPage/action"
+
 function User(props) {
   const [showForm, setShowForm] = useState(false);
   const [accessoryBill, setAccessoryBill] = useState({});

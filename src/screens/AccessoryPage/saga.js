@@ -7,7 +7,7 @@ import {
 import {
     action_type as TYPE
 } from './action'
-
+import { message } from 'antd'
 import * as api from '../../apis/Accessory'
 import * as apiUser from '../../apis/User'
 
@@ -36,14 +36,17 @@ function* addAccessoryToWishlistSaga(action) {
             ...data,
             type: "accessory"
         }
-        console.log(data1);
         const response = yield call(apiUser.addItemToWishlist, data1)
-        if (response.status === 'success')
+        if (response.status === 'success'){
+            message.success("Chúc mừng, bạn đã thêm phụ kiện vào danh sách yêu thích thành công!")
             yield all([put({ type: TYPE.ADDACCESSORYTOWISHLIST.SUCCESS, ...response })])
+        }
         else {
+            message.error("Đã có lỗi xảy ra: " + response)
             yield put({ type: TYPE.ADDACCESSORYTOWISHLIST.ERROR, error: response })
         }
     } catch (error) {
+        message.error("Đã có lỗi xảy ra: " + error)
         yield all([
             put({ type: TYPE.ADDACCESSORYTOWISHLIST.ERROR, error })
         ])
