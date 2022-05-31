@@ -12,14 +12,26 @@ import {
     SettingOutlined,
   } from "@ant-design/icons";
 
-const toggleClass = (e) => {
-    console.log("click ", e.target.parentElement.parentElement);
-    let element = e.target.parentElement.parentElement;
-    element.classList.toggle(`${style.heartIconClicked}`);
-  };
-
 let FormUpdateCart = props => {
     const { handleSubmit, colors } = props
+
+    const toggleClass = (e) => {
+        if (props.isLoggedIn === false) {
+          props.setShow(true);
+          e.preventDefault();
+        } else {
+          if (!props.isLiked) {
+            let element = e.target.parentElement.parentElement;
+            element.classList.toggle(`${style.heartIconClicked}`);
+            props.addAccessoryToWishlist();
+          } else {
+            e.preventDefault();
+            let element = e.target.parentElement.parentElement;
+            element.classList.toggle(`${style.heartIconClicked}`);
+            props.handleDeleteWishListItem();
+          }
+        }
+      };
 
     let options = colors?.map(d => {
         return { label: d, value: d }
@@ -50,10 +62,21 @@ let FormUpdateCart = props => {
                 </div>
                 <div className={`${style.submit} col-xl-12 text-center ${style.btnWrapper}`}>
                     <button className={`${style.document} btn btn-primary mr-3 `} type="submit"> <FontAwesomeIcon icon={faSave} /> THÊM VÀO GIỎ HÀNG</button>
-                    <HeartFilled
-                        onClick={toggleClass}
-                        className={`${style.heartIcon}`}
-                    />
+                    {props.isLiked ? (
+                                <HeartFilled
+                                  onClick={(e) =>
+                                    toggleClass(e)
+                                  }
+                                  className={`${style.heartIcon} ${style.heartIconClicked}`}
+                                />
+                              ) : (
+                                <HeartFilled
+                                  onClick={(e) =>
+                                    toggleClass(e)
+                                  }
+                                  className={`${style.heartIcon}`}
+                                />
+                              )}
                 </div>
             </div>
         </form>
