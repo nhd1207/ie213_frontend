@@ -331,7 +331,11 @@ function CarOrder(props) {
                         </Checkbox>
                       </Form.Item>
                       <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">
+                        <Button 
+                        type="primary"
+                        htmlType="submit"
+                        className={`${style.bookButton} col-xl-12`}
+                        >
                           Đặt hàng
                         </Button>
                       </Form.Item>
@@ -354,7 +358,9 @@ function CarOrder(props) {
                 setModalShow(false);
               }}
             >
-              <Modal.Title id="contained-modal-title-vcenter">
+              <Modal.Title 
+              id="contained-modal-title-vcenter"
+              >
                 Xác nhận đặt hàng
               </Modal.Title>
             </Modal.Header>
@@ -377,6 +383,28 @@ function CarOrder(props) {
                 </Button>
               </Modal.Footer>
             </Spin>
+            <Modal.Body>
+              <h4>Tên xe: {props?.car[0]?.name}</h4>
+              <p></p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                className={`${style.cancelButton}`}
+                onClick={() => {
+                  setModalShow(false);
+                }}
+              >
+                Huỷ bỏ
+              </Button>
+              <Button
+               variant="primary" 
+               onClick={confirmOrderHandler}
+               className={`${style.confirmButton}`}
+               >
+                Xác nhận
+              </Button>
+            </Modal.Footer>
           </Modal>
         </>
       )}

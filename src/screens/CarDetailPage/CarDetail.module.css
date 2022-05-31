@@ -60,10 +60,12 @@
   /* url(../../Images/Rectangle12.png); */
   background-size: cover;
   background-position: center center;
-  background-repeat: no-repeat;
   animation-name: appear;
   animation-duration: 1s;
 }
+
+
+
 
 .carDetailContainer {
   margin: 1rem 2rem;
@@ -100,17 +102,16 @@
   width: inherit;
   font-size: 2rem;
   color: #ccc;
-
+  transition: color 0.5s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
-
 .carDetailContainer .heartIconClicked {
-  color: var(--orange-color);
+  color: red;
+  transition: color 0.5s ease;
 }
-
 .carDetail {
   margin-top: 1rem;
 }

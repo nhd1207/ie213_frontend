@@ -12,7 +12,8 @@
 
 .heading {
   color: var(--black-color);
-  font-size: 2.5rem;
+  font-size: 2.3rem;
+  padding: 0;
 }
 
 .searchGroup {
@@ -22,6 +23,28 @@
   margin: 1rem 0;
 }
 
+.searchBox button  {
+  color: black ;
+  background-color: white ;
+  border-color: black ;
+  background-size: cover;
+}
+
+.searchBox button:hover {
+  background-color: var(--black-color);
+  color: var(--yellow-color);
+}
+
+.searchBox button:active {
+  background-color: var(--black-color);
+  color: var(--yellow-color);
+}
+
+.searchBox button:focus {
+  background-color: var(--black-color);
+  color: var(--yellow-color);
+}
+
 #bootstrap-overrides .input-group {
   width: auto;
 }
@@ -29,6 +52,7 @@
 
 .headingNumber {
   font-size: 1.2rem;
+  padding: 0;
 }
 
 .main {
@@ -260,7 +284,7 @@
 }
 
 .heartIconClicked {
-  color: var(--orange-color);
+  color: var(--red-color);
 }
 
 .pagination {

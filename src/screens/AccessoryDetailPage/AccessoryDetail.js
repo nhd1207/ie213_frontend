@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import Layout from "../../components/layout"
 import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 import {
     Form,
     Button,
@@ -13,17 +13,67 @@ import {
     Dropdown,
     CarouselItem,
 } from "react-bootstrap";
-
+import { getWishList, deleteWishList } from "../WishListPage/action";
+import { addAccessoryToWishlist } from "../AccessoryPage/action";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Spin, Carousel } from "antd";
 import money from '../../components/Share/functions/money'
 import { getDetailAccessory, updateCart } from "./action";
 import FormUpdateCart from "../../components/AccessoryDetail/FormUpdateCart";
+import {useHistory, useParams} from "react-router-dom"
 
 function AccessoryDetail(props) {
+    const [wishList, setWishList] = useState({});
+    const [accessoryId, setAccessoryId] = useState();
+    const [isLiked, setIsLiked] = useState(false);
+
+    const params = useParams();
+
     useEffect(() => {
-        props.getDetailAccessory(props.match.params.id)
+        props.getWishList();
+        props.getDetailAccessory(params.id)
+        setAccessoryId(params.id)
     }, []);
+
+  useEffect(() => {
+    setWishList({ ...props?.wishList?.wishList });
+  }, [props.wishList.wishList]);
+
+  useEffect(() => {
+      props?.wishList?.wishList?.accessories?.forEach((item) => {
+        if (item._id === accessoryId) {
+            setIsLiked(true)
+        }
+    });
+  }, [
+    props.data.loading,
+    props?.wishList?.wishList?.accessories,
+  ]);
+
+  const handleAddAccessoryToWishlist = () => {
+    props.addAccessoryToWishlist({itemId: params.id})
+  }
+
+  const handleDeleteWishListItem = () => {
+    let wishList2;
+    let index1;
+    wishList2 = { ...wishList };
+    wishList2.accessories.map((item, index) => {
+      if (item._id === accessoryId) index1 = index;
+    });
+    wishList2.accessories.splice(index1, 1);
+    let wishList3 = {
+      cars: [],
+      accessories: [],
+    };
+    wishList3.cars = wishList2.cars.map((item) => {
+      return item._id;
+    });
+    wishList3.accessories = wishList2.accessories.map((item) => {
+      return item._id;
+    });
+    props.deleteWishList({ wishList: { ...wishList3 } });
+  };
 
     const handleUpdateCart = (value) => {
         if (value.color == null) {
@@ -39,7 +89,6 @@ function AccessoryDetail(props) {
             //color: null,
             itemId: props.match.params.id
         }
-        console.log('value.quantity', value.quantity);
         props.updateCart(data)
     }
     const contentStyle = {
@@ -54,6 +103,16 @@ function AccessoryDetail(props) {
         console.log(a, b, c);
     }
 
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+
+    const history = useHistory();
+
+    function loginHandler() {
+      history.push("/login");
+    }
+
+    
     return (
         <Layout>
             <Spin size='large' spinning={props.data.loading}>
@@ -130,23 +189,43 @@ function AccessoryDetail(props) {
                                 {/* <div className={`${style.document} col-xl-3`}>Thông số: {props.data?.data[0]?.specification?.height} cm, {props.data?.data[0]?.specification.weight} kg</div>
                                 <div className={`${style.content_price} ${style.document} col-xl-3`}>
                                     Giá tiền: {money(props.data?.data[0]?.price, "VND")} */}
-                                    <div className={`${style.FromUpdateCart}`}>
-                                        <FormUpdateCart
-                                            onSubmit={handleUpdateCart}
-                                            colors={props.data?.data[0]?.color}
-                                        />
-                                    </div>
+                                <div className={`${style.FromUpdateCart}`}>
+                                    <FormUpdateCart
+                                        onSubmit={handleUpdateCart}
+                                        colors={props.data?.data[0]?.color}
+                                        isLiked={isLiked}
+                                        addAccessoryToWishlist={handleAddAccessoryToWishlist}
+                                        handleDeleteWishListItem={handleDeleteWishListItem}
+                                        setShow={setShow}
+                                    />
+                                </div>
                             </div>
 
                         </div>
                     </div>
                 </div>
             </Spin>
+            <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Chức năng này yêu cầu đăng nhập</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Vui lòng đăng nhập để tiếp tục</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Huỷ
+          </Button>
+          <Button variant="primary" onClick={loginHandler}>
+            Đăng nhập
+          </Button>
+        </Modal.Footer>
+      </Modal>
         </Layout >
     );
 }
 
 const mapStateToProps = state => ({
+    isLoggedIn: state.login.isLoggedIn,
+    wishList: state.wishList,
     data: state.accessoryDetailPage
 })
 
@@ -156,6 +235,15 @@ const mapDispatchToProps = dispatch => ({
     },
     updateCart: (data) => {
         dispatch(updateCart(data))
+    },
+    addAccessoryToWishlist: (data) => {
+        dispatch(addAccessoryToWishlist(data));
+    },
+    getWishList: (params) => {
+        dispatch(getWishList(params));
+    },
+    deleteWishList: (params) => {
+        dispatch(deleteWishList(params));
     },
 })
 

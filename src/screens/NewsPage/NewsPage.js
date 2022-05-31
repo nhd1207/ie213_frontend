@@ -6,13 +6,14 @@ import dateFormat from "dateformat";
 import { connect } from "react-redux";
 import { getListPost } from "./action";
 import Layout from "../../components/layout";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 function NewsPage(props) {
   useEffect(() => {
     props.getListPost();
     console.log(props);
   }, []);
+  const history = useHistory()
   return (
     <Layout>
       <div>
@@ -90,7 +91,8 @@ function NewsPage(props) {
                         dangerouslySetInnerHTML={{ __html: item?.content }}
                       />
                       <button
-                        class={`${style.newsBtn} btn btn-outline-dark col-xl-3`}
+                        onClick={() => {history.push(`news/${item._id}`)}}
+                        className={`${style.newsBtn} btn btn-outline-dark col-xl-3`}
                       >
                         <NavLink to={`news/${item._id}`}>ĐỌC THÊM</NavLink>
                       </button>
