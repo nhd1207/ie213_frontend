@@ -112,10 +112,9 @@ const DataTable = ({ dataSource, loading, updateUser, deleteUser }) => {
             cancelText="Không"
           >
             <button 
-              //onClick={() => onDelete(record?._id)}
               className="btn btn-sm btn-primary"
             >
-              <Tooltip placement="top" title="Delete User">
+              <Tooltip placement="top" title="Chuyển trạng thái người dùng">
                 <span className="px-2">
                   <FontAwesomeIcon icon={faExclamation} />
                 </span>
