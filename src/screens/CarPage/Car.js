@@ -206,16 +206,16 @@ function Car(props) {
         <div className={`${style.container}`}>
           <div className={`${style.headingContainer}`}>
             <div className={`${style.headings} row`}>
-              <h2 className={`${style.heading} col-xl-4`}>CÁC DÒNG XE</h2>
+              <h2 className={`${style.heading} col-xl-2`}>CÁC DÒNG XE</h2>
               <Space
                 direction="vertical"
-                className={`${style.searchGroup} col-xl-6`}
+                className={`${style.searchGroup} col-xl-10`}
               >
                 <Search
-                  className={`${style.searchBox}`}
+                  className={`${style.searchBox} `}
                   placeholder="Nhập tên xe"
                   onSearch={(e) => handleFilterValue(e, "search")}
-                  enterButton
+                  enterButton="Tìm kiếm"
                 />
               </Space>
             </div>
