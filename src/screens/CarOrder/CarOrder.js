@@ -11,6 +11,7 @@ import { Form, Input, Select, Checkbox, Button, DatePicker, Spin } from "antd";
 import Layouts from "../../components/layout";
 import { Modal } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const { Option } = Select;
 
@@ -58,7 +59,7 @@ function CarOrder(props) {
     props?.car?.color?.map((d) => {
       return { label: d, value: d };
     }) || [];
-    
+
   useEffect(() => {
     props.getCarOrder(props.match.params.id);
     props.getListShowroom();
@@ -102,7 +103,14 @@ function CarOrder(props) {
   function confirmOrderHandler() {
     props.createCarOrder(carForm);
   }
-  
+
+  let history = useHistory();
+
+  useEffect(() => {
+    if (props?.status === "success") {
+      history.push(`/order-result/${props?.carOrder?._id}?re=successful`);
+    }
+  }, [props.orderLoading, props?.status]);
   return (
     <Layouts>
       {props?.isLoggedIn?.isLoggedIn === false ? (
@@ -113,7 +121,9 @@ function CarOrder(props) {
             <div className={`${style.main}`}>
               <div className={`${style.formWrapper} row`}>
                 <div className={`${style.formCol} col-xl-8`}>
-                  <div className={`${style.heading} row`}>Đặt Cọc Xe</div>
+                  <div className={`${style.heading} row`}>
+                    XÁC NHẬN ĐƠN HÀNG
+                  </div>
                   <div className={`${style.carDetail} row`}>
                     <div className={`${style.carImg} col-xl-6`}></div>
                     <div className={`${style.carSpec} col-xl-6 row`}>
@@ -159,9 +169,11 @@ function CarOrder(props) {
                         prefix: "84",
                       }}
                       scrollToFirstError
+                      style={{fontSize: "2rem"}}
                     >
                       <Form.Item name="time" label="Chọn ngày" {...config}>
                         <DatePicker
+                          placeholder="Chọn ngày nhận xe"
                           defaultPickerValue={""}
                           onChange={(event) => {
                             setCarForm((prev) => {
@@ -207,7 +219,7 @@ function CarOrder(props) {
                         rules={[
                           {
                             required: true,
-                            message: "Vui Lòng Chọn Màu Sắc Của Xe!",
+                            message: "Chọn màu sắc để tiếp tục",
                           },
                         ]}
                       >
@@ -224,7 +236,10 @@ function CarOrder(props) {
                             key++;
                             return (
                               <Option key={item + key} value={item}>
-                                {item}
+                                <div
+                                  style={{ backgroundColor: item }}
+                                  className={style.colorbox}
+                                />
                               </Option>
                             );
                           })}
@@ -297,7 +312,7 @@ function CarOrder(props) {
                                 ? Promise.resolve()
                                 : Promise.reject(
                                     new Error(
-                                      "Bạn nên đồng ý với điều khoản của chúng tôi"
+                                      "Vui lòng đồng ý điều khoản trước khi tiếp tục"
                                     )
                                   ),
                           },
@@ -349,6 +364,25 @@ function CarOrder(props) {
                 Xác nhận đặt hàng
               </Modal.Title>
             </Modal.Header>
+            <Spin spinning={props.orderLoading}>
+              <Modal.Body>
+                <h4>Tên xe: {props?.car[0]?.name}</h4>
+                <p></p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setModalShow(false);
+                  }}
+                >
+                  Huỷ bỏ
+                </Button>
+                <Button variant="primary" onClick={confirmOrderHandler}>
+                  Xác nhận
+                </Button>
+              </Modal.Footer>
+            </Spin>
             <Modal.Body>
               <h4>Tên xe: {props?.car[0]?.name}</h4>
               <p></p>
@@ -382,7 +416,11 @@ const mapStateToProps = (state) => ({
   car: state.carOrderPage.car,
   loading: state.carOrderPage.loading,
   showroom: state.carOrderPage.showroom,
+  orderLoading: state.carOrderPage.orderLoading,
   isLoggedIn: state.isLoggedIn.isLoggedIn,
+  response: state.carOrderPage.response,
+  status: state.carOrderPage.status,
+  carOrder: state.carOrderPage.carOrder
 });
 
 const mapDispatchToProps = (dispatch) => ({
