@@ -7,7 +7,7 @@ import { send } from 'emailjs-com';
 
 import { MailOutlined, PhoneOutlined, CarOutlined } from "@ant-design/icons";
 
-import { Form, Input, InputNumber, Button } from "antd";
+import { Form, Input, InputNumber, Button, message } from "antd";
 
 import { Menu } from "antd";
 const { SubMenu } = Menu;
@@ -64,9 +64,11 @@ export default function Support() {
       'Ykjj7Wn1OrFZUmA72'
     )
       .then((response) => {
+        message.success("Bạn đã gửi đơn thông tin hỗ trợ thành công, chúng tôi sẽ liên hệ đến bạn sớm nhất có thể!")
         console.log('SUCCESS!', response.status, response.text);
       })
       .catch((err) => {
+        message.error("Đã có lỗi xảy ra!!!" + err);
         console.log('FAILED...', err);
       });
   };
@@ -197,6 +199,7 @@ export default function Support() {
                 label="Email"
                 rules={[
                   {
+                    required: true,
                     type: "email",
                   },
                 ]}
@@ -206,7 +209,11 @@ export default function Support() {
               <Form.Item name={["user", "address"]} label="Address">
                 <Input onChange={handleChange} />
               </Form.Item>
-              <Form.Item name={["user", "comment"]} label="Thông tin cần hỗ trợ">
+              <Form.Item name={["user", "comment"]} label="Thông tin cần hỗ trợ" rules={[
+                  {
+                    required: true,
+                  },
+                ]}>
                 <Input.TextArea onChange={handleChange} />
               </Form.Item>
               <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
