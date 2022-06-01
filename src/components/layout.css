@@ -9,3 +9,7 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.activeNav {
+  background-color: aqua;
+}
