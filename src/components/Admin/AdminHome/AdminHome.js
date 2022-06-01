@@ -7,7 +7,7 @@ import { getData } from './action'
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { PureComponent } from 'react';
-import { CartesianGrid, XAxis, YAxis, Bar, LabelList, Label, PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend , Label, PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 
 function AdminHome(props) {
     const history = useHistory()
@@ -18,7 +18,7 @@ function AdminHome(props) {
         {
             name: 'Group A', value: props?.adminData?.user?.filter(item => {
                 return item.active === true
-            }).length
+            }).length,
         },
         {
             name: 'Group B', value: props?.adminData?.user?.filter(item => {
@@ -27,10 +27,14 @@ function AdminHome(props) {
         },
     ];
 
-    const reduce1 = props.carOrder.reduce((sum, element) => {
-        
-    }, 0)
+    // const reduce1 = props.carOrder.reduce((sum, element) => {
 
+    // }, 0)
+    const formatXAxis = (tickItem) => {
+
+        const d = new Date(tickItem);
+        return d.toLocaleString('default', { month: 'long' });
+    };
     const COLORS = ['#008000', '#FF0000'];
 
     const RADIAN = Math.PI / 180;
@@ -59,16 +63,16 @@ function AdminHome(props) {
                                             title="Số lượng người dùng"
                                             value={props?.adminData?.user?.length}
 
-                                            prefix={<LikeOutlined className={`${style.userIcon}`}/>}
+                                            prefix={<LikeOutlined className={`${style.userIcon}`} />}
                                         />
                                         <Statistic
                                             title="Số lượng người dùng hoạt động"
                                             value={props?.adminData?.user?.filter(item => {
                                                 return item.active === true
                                             }).length}
-                                   
-                                            prefix={<CheckSquareFilled className={`${style.ActiveUserIcon}`}  />}
-                                            style={{color: "008000" }}
+
+                                            prefix={<CheckSquareFilled className={`${style.ActiveUserIcon}`} />}
+                                            style={{ color: "008000" }}
                                             className="activeUser"
                                         />
                                         <Statistic
@@ -76,7 +80,7 @@ function AdminHome(props) {
                                             value={props?.adminData?.user?.filter(item => {
                                                 return item.active === false
                                             }).length}
-                                            style={{color: "FF0000" }}
+                                            style={{ color: "FF0000" }}
                                             className="inactiveUser"
                                             prefix={<CloseSquareFilled className={`${style.inactiveUserIcon}`} />}
                                         />
@@ -100,7 +104,7 @@ function AdminHome(props) {
                                                         <Cell label={renderCustomizedLabel} key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                                     ))}
                                                 </Pie>
-                                            <Label></Label>
+                                                <Label></Label>
                                             </PieChart>
                                             {/* </ResponsiveContainer> */}
                                         </div>
@@ -124,7 +128,15 @@ function AdminHome(props) {
                                 </Button>
                             </Card>
                         </Col>
-
+                        <LineChart width={800} height={400} data={props?.adminData?.carOrder || []}
+                            margin={{ top: 5, right: 30, left: 50, bottom: 5 }}>
+                            <XAxis interval={30} tickFormatter={formatXAxis} dataKey="time" />
+                            <YAxis />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Tooltip/>
+                            <Legend />
+                            <Line type="monotone" dataKey="deposit" stroke="#8884d8" activeDot={{ r: 8 }} />
+                        </LineChart>
                     </Row>
 
                 </div>

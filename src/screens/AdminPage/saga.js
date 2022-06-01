@@ -25,16 +25,16 @@ function* verifyAdminSaga(action) {
         } else {
             message.error('Bạn không có quyền')
             yield put({ type: TYPE.VERIFY.ERROR, error: response })
-            //yield put(push("/login"));
-            //window.location.reload();
+            yield put(push("/login"));
+            window.location.reload();
         }
     } catch (error) {
         message.error('Bạn không không có quyền')
         yield all([
             put({ type: TYPE.VERIFY.ERROR, error })
         ])
-        //yield put(push("/login"));
-        //window.location.reload();
+        yield put(push("/login"));
+        window.location.reload();
     }
 }
 
