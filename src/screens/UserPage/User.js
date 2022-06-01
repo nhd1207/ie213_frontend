@@ -18,6 +18,7 @@ function User(props) {
 
   useEffect(() => {
     props.verify();
+    props.getUser();
     props.getListBill();
   }, []);
 
