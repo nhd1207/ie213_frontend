@@ -56,7 +56,7 @@ function ACcessoryOrderHistory(props) {
           <div className={style.avatarName}>{props.user.name}</div>
           <Menu
             className={style.sideNav}
-            defaultSelectedKeys={["4"]}
+            defaultSelectedKeys={["3"]}
           >
             <Menu.Item key="1">
               <Link to="/user">
@@ -64,15 +64,12 @@ function ACcessoryOrderHistory(props) {
               </Link>
             </Menu.Item>
             <Menu.Item key="2">
-              <Link to="/user/update">Cập nhật thông tin</Link>
-            </Menu.Item>
-            <Menu.Item key="3">
               <Link to="/user/my-order/cars">Lịch sử đặt hàng xe</Link>
             </Menu.Item>
-            <Menu.Item key="4">
+            <Menu.Item key="3">
               <Link to="/user/my-order/accessories">Lịch sử đặt hàng phụ kiện</Link>
             </Menu.Item>
-            <Menu.Item key="5">
+            <Menu.Item key="4">
               <a onClick={signoutHandler}> {"Đăng xuất"}</a>
             </Menu.Item>
           </Menu>

@@ -47,10 +47,32 @@ function* getUserSaga(action) {
     }
 }
 
+function* updateUserSaga(action) {
+    try {
+        const { params } = action
+        const response = (yield call(apiUser.updateInfo, params))
+        if (response.status==="success") {
+            yield all([
+                put({ type: TYPE.UPDATEUSER.SUCCESS, ...response }),
+                put({ type: TYPE.GETINFOUSER.REQUEST, ...response })
+            ]);
+            // yield put(push("/user"));
+            // window.location.reload();
+        } else {
+            yield put({ type: TYPE.UPDATEUSER.ERROR, error: response })
+        }
+    } catch (error) {
+        yield all([
+            put({ type: TYPE.UPDATEUSER.ERROR, error })
+        ])
+    }
+}
+
 function* watcher() {
     yield all([
         takeLatest(TYPE.GETINFOUSER.REQUEST, getUserSaga),
         takeLatest(TYPE.GETLISTBILL.REQUEST, getListBillSaga),
+        takeLatest(TYPE.UPDATEUSER.REQUEST, updateUserSaga)
     ])
 }
 

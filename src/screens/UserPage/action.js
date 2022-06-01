@@ -8,6 +8,11 @@ export const action_type = {
         REQUEST: "GETLISTBILL.REQUEST",
         SUCCESS: "GETLISTBILL.SUCCESS",
         ERROR: "GETLISTBILL.ERROR"
+    },
+    UPDATEUSER: {
+        REQUEST: "UPDATEUSER.REQUEST",
+        SUCCESS: "UPDATEUSER.SUCCESS",
+        ERROR: "UPDATEUSER.ERROR"
     }
 }
 
@@ -23,6 +28,14 @@ export function getListBill (params)
 {
     return {
         type: action_type.GETLISTBILL.REQUEST,
+        params,
+    }
+}
+
+export function updateUser (params)
+{
+    return {
+        type: action_type.UPDATEUSER.REQUEST,
         params,
     }
 }
