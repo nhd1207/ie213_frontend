@@ -31,7 +31,6 @@ function reducer(state = initialState, action) {
         case type.DELETEWISHLIST.SUCCESS:
             return {
                 ...state,
-                wishList: action.user.wishList,
                 loading: false,
             }
         case type.DELETEWISHLIST.ERROR:

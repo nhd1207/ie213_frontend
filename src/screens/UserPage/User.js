@@ -1,19 +1,16 @@
 import { Menu, Button, Descriptions, Modal, List } from "antd";
 import style from "./index.module.css";
-import { NavLink } from "react-router-dom";
 import Layout from "../../components/layout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { Spin, Table } from "antd";
 import { getUser, getListBill } from "./action";
 import dateFormat from "dateformat";
 import Cookies from "js-cookie";
 import DataTable from "../../components/User/DataTable";
-import { Redirect, Link } from "react-router-dom";
-import { verify } from "../LoginPage/action"
+import { verify } from "../LoginPage/action";
+import { useHistory, Link } from "react-router-dom";
 function User(props) {
   const [showForm, setShowForm] = useState(false);
   const [accessoryBill, setAccessoryBill] = useState({});
@@ -25,10 +22,8 @@ function User(props) {
   }, []);
 
   useEffect(() => {
-    if (props.loading === false && props.loading2 === false)
-      setLoading(false);
-    else
-      setLoading(true);
+    if (props.loading === false && props.loading2 === false) setLoading(false);
+    else setLoading(true);
   }, [props.loading, props.loading2]);
 
   async function signoutHandler() {
@@ -53,70 +48,89 @@ function User(props) {
   return (
     <Layout>
       <Spin size="large" spinning={loading}>
-        {loading ? <></> :
-          (
-            <><div className="row">
+        {loading ? (
+          <></>
+        ) : (
+          <>
+            <div className="row">
               <div
                 className={`${style.sideMenu} col col-xl-3 d-none d-md-block d-inline-flex`}
               >
-                <img className={style.avatar} src={`${props.user?.photo}`} alt="User avatar"></img>
+                <img
+                  className={style.avatar}
+                  src={`${props.user?.photo}`}
+                  alt="User avatar"
+                ></img>
                 <div className={style.avatarName}>{props.user.name}</div>
                 <Menu
                   className={style.sideNav}
                   defaultSelectedKeys={["1"]}
                   defaultOpenKeys={["sub1"]}
                 >
-                  <Menu.Item key="1">
-                    <div> Thông tin</div>
-                  </Menu.Item>
+                  <Menu.Item key="1">Thông tin</Menu.Item>
                   <Menu.Item key="2">
-                    <Link to="/user/update">
-                      <div> Cập nhật thông tin</div>
-                    </Link>
+                    <Link to="/user/update">Cập nhật thông tin</Link>
                   </Menu.Item>
                   <Menu.Item key="3">
+                    <Link to="/user/my-order/cars">Lịch sử đặt hàng xe</Link>
+                  </Menu.Item>
+                  <Menu.Item key="4">
+                    <Link to="/user/my-order/accessories">Lịch sử đặt hàng phụ kiện</Link>
+                  </Menu.Item>
+                  <Menu.Item key="5">
                     <a onClick={signoutHandler}> {"Đăng xuất"}</a>
                   </Menu.Item>
                 </Menu>
               </div>
-              <div className={`${style.content} col col-xl-9 d-none d-md-block`}>
-                <Descriptions column={1}>
-                  <Descriptions.Item
+              <div
+                className={`${style.content} col col-xl-9 d-none d-md-block`}
+              >
+                <div className={`${style.descriptions}`}>
+                  <Descriptions
+                    labelStyle={{ fontSize: 50, fontWeight: "bold" }}
+                    title="THÔNG TIN"
+                    column={2}
+                  >
+                    {/* <Descriptions.Item
                     labelStyle={{ fontSize: 50, fontWeight: "bold" }}
                     contentStyle={{ fontSize: 50 }}
                   >
                     THÔNG TIN
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                    contentStyle={{ fontSize: 30 }}
-                    label="Tên người dùng"
-                  >
-                    {props.user?.name}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                    contentStyle={{ fontSize: 30 }}
-                    label="Số điện thoại"
-                  >
-                    {props.user?.info?.phoneNumber}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                    contentStyle={{ fontSize: 30 }}
-                    label="Email"
-                  >
-                    {props.user?.email}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    labelStyle={{ fontSize: 30, fontWeight: "bold" }}
-                    contentStyle={{ fontSize: 30 }}
-                    label="Ngày sinh"
-                  >
-                    {dateFormat(props.user?.info?.dateOfBirth, "mmmm dS, yyyy")}
-                  </Descriptions.Item>
-                </Descriptions>
-                <DataTable
+                  </Descriptions.Item> */}
+                    <Descriptions.Item
+                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                      contentStyle={{ fontSize: 20 }}
+                      label="Tên người dùng"
+                    >
+                      {props.user?.name}
+                    </Descriptions.Item>
+                    <Descriptions.Item
+                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                      contentStyle={{ fontSize: 20 }}
+                      label="Số điện thoại"
+                    >
+                      {props.user?.info?.phoneNumber}
+                    </Descriptions.Item>
+                    <Descriptions.Item
+                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                      contentStyle={{ fontSize: 20 }}
+                      label="Email"
+                    >
+                      {props.user?.email}
+                    </Descriptions.Item>
+                    <Descriptions.Item
+                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                      contentStyle={{ fontSize: 20 }}
+                      label="Ngày sinh"
+                    >
+                      {dateFormat(
+                        props.user?.info?.dateOfBirth,
+                        "mmmm dS, yyyy"
+                      )}
+                    </Descriptions.Item>
+                  </Descriptions>
+                </div>
+                {/* <DataTable
                   dataSource={props.bills?.accessoryBill}
                   handleShowForm={openModal}
                 ></DataTable>
@@ -138,12 +152,13 @@ function User(props) {
                         <List.Item.Meta title={item?.itemId?.name} />
                         <div>Số lượng: {item?.quantity}</div>
                       </List.Item>
-                    )} />
-                </Modal>
+                    )}
+                  />
+                </Modal> */}
               </div>
             </div>
-            </>
-          )}
+          </>
+        )}
       </Spin>
     </Layout>
   );
@@ -153,7 +168,7 @@ const mapStateToProps = (state) => ({
   user: state.user.user,
   bills: state.user.bills,
   loading: state.user.loading,
-  loading2: state.login.loading
+  loading2: state.login.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

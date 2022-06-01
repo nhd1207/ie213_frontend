@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./Support.module.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "../../components/layout"
+import { send } from 'emailjs-com';
 
 import { MailOutlined, PhoneOutlined, CarOutlined } from "@ant-design/icons";
 
-import { Form, Input, InputNumber, Button } from "antd";
+import { Form, Input, InputNumber, Button, message } from "antd";
 
 import { Menu } from "antd";
 const { SubMenu } = Menu;
@@ -34,10 +35,49 @@ const validateMessages = {
 
 /* eslint-enable no-template-curly-in-string */
 
-export default function Support() {
+export default function Support(props) {
+  const [form] = Form.useForm();
+
+  const [toSend, setToSend] = useState({
+    from_name: '',
+    to_name: '',
+    message: '',
+    reply_to: '',
+    address: '',
+    from_email: ''
+  });
+
   const onFinish = (values) => {
-    console.log(values);
+    setToSend({
+      from_name: values.user.name,
+      to_name: 'Seven',
+      address: values.user.address,
+      message: 'Câu hỏi: ' + values.user.comment,
+      from_email: values.user.email,
+      reply_to: values.user.email
+    })
+    console.log(props);
+    send(
+      'service_6nktika',
+      'template_8ghgt6g',
+      toSend,
+      'Ykjj7Wn1OrFZUmA72'
+    )
+      .then((response) => {
+        message.success("Bạn đã gửi đơn thông tin hỗ trợ thành công, chúng tôi sẽ liên hệ đến bạn sớm nhất có thể!")
+        console.log('SUCCESS!', response.status, response.text);
+        form.resetFields();
+      })
+      .catch((err) => {
+        message.error("Đã có lỗi xảy ra!!!" + err);
+        console.log('FAILED...', err);
+      });
   };
+
+  const handleChange = (e) => {
+    setToSend({ ...toSend, [e.target.id]: e.target.value });
+  };
+
   return (
     <Layout>
       <div className={`${style.main}`}>
@@ -142,8 +182,10 @@ export default function Support() {
               {...layout}
               name="nest-messages"
               onFinish={onFinish}
+              onSubmit={e => e.preventDefault()}
               validateMessages={validateMessages}
-            >
+              form={form}
+              >
               <Form.Item
                 name={["user", "name"]}
                 label="Name"
@@ -153,24 +195,29 @@ export default function Support() {
                   },
                 ]}
               >
-                <Input />
+                <Input id="from_name" onChange={handleChange} />
               </Form.Item>
               <Form.Item
                 name={["user", "email"]}
                 label="Email"
                 rules={[
                   {
+                    required: true,
                     type: "email",
                   },
                 ]}
               >
-                <Input />
+                <Input id="email" onChange={handleChange} />
               </Form.Item>
               <Form.Item name={["user", "address"]} label="Address">
-                <Input />
+                <Input id="address" onChange={handleChange} />
               </Form.Item>
-              <Form.Item name={["user", "comment"]} label="Thông tin cần hỗ trợ">
-                <Input.TextArea />
+              <Form.Item name={["user", "comment"]} label="Thông tin cần hỗ trợ" rules={[
+                {
+                  required: true,
+                },
+              ]}>
+                <Input.TextArea id="message" onChange={handleChange} />
               </Form.Item>
               <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                 <Button type="primary" htmlType="submit">

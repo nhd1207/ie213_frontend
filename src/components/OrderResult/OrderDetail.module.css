@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.4rem;
+}
+
+.detail p {
+    font-size: 1.2rem;
+}
+
+.bar {
+    margin: 1rem auto;
+    width: 15rem;
+    height: 3px;
+    background-color: black;
+}
+
+.productDetail {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.break {
+    width: 100vw;
+    height: 1px;
+    background-color: #b1b1b1;
+}

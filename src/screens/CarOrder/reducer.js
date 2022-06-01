@@ -5,16 +5,17 @@ const initialState = {
     car: {},
     showroom: [],
     orderLoading: false,
-    status: ""
+    status: "",
+    go: false
 }
 
 function reducer(state = initialState, action) {
-    console.log(action);
     switch (action.type) {
         case type.GETCARORDER.REQUEST:
             return {
                 ...state,
                 loading: true,
+                go: false
             }
         case type.GETCARORDER.SUCCESS:
             return {
@@ -54,6 +55,7 @@ function reducer(state = initialState, action) {
                 status: action.status,
                 carOrder: action.carOrder,
                 orderLoading: false,
+                go: true
             }
         case type.CREATECARORDER.ERROR:
             return {

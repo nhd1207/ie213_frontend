@@ -53,7 +53,8 @@ function List(props) {
     }
 
     return (
-        <Spin spinning={props.spinning}>
+        // <Spin spinning={props.spinning}>
+        <div>
             <div className={`${style.carWrapper} row`}>
                 <h2 className={`${style.listHeading}`}>Danh Sách Xe</h2>
                 {props.data?.cars?.map((item, index) => {
@@ -151,7 +152,8 @@ function List(props) {
                     )
                 })}
             </div>
-        </Spin >
+            </div>
+        // </Spin >
     );
 }
 

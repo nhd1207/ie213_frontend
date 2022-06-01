@@ -22,10 +22,13 @@ import newDetail from "./screens/NewsDetail/reducer";
 import wishList from "./screens/WishListPage/reducer";
 import carDetail from "./screens/CarDetailPage/reducer";
 import carList from "./screens/CarPage/reducer";
-import carOrderPage from "./screens/CarOrder/reducer"
-import compare from "./screens/ComparePage/reducer"
-import isLoggedIn from "./components/reducer"
-import updateUserPage from "./screens/UpdateUserPage/reducer"
+import carOrderPage from "./screens/CarOrder/reducer";
+import compare from "./screens/ComparePage/reducer";
+import isLoggedIn from "./components/reducer";
+import updateUserPage from "./screens/UpdateUserPage/reducer";
+import carsHistory from "./screens/CarOrderHistory/reducer";
+import showroom from "./screens/ShowroomPage/reducer"
+import accessoriesHistory from "./screens/AccessoryOrderHistory/reducer";
 
 const Reducer = (history) =>
   combineReducers({
@@ -55,7 +58,10 @@ const Reducer = (history) =>
     compare,
     isLoggedIn,
     updateUserPage,
-    adminData
-  })
+    adminData,
+    carsHistory,
+    showroom,
+    accessoriesHistory
+  });
   
 export default Reducer

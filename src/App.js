@@ -28,10 +28,11 @@ import AdminPage from "./screens/AdminPage/AdminPage";
 import AboutUs from "./screens/AboutUsPage/AboutUs";
 import Support from "./screens/SupportPage/Support";
 import Compare from "./screens/ComparePage/Compare";
-import CarOrderPage from "./screens/CarOrder/CarOrder"
-import UpdateUserPage from "./screens/UpdateUserPage/UpdateUser"
+import CarOrderPage from "./screens/CarOrder/CarOrder";
+import UpdateUserPage from "./screens/UpdateUserPage/UpdateUser";
 import OrderResult from "./screens/OrderResult/OrderResult";
-
+import CarOrderHistory from "./screens/CarOrderHistory/CarOrderHistory";
+import AccessoryOrderHistory from './screens/AccessoryOrderHistory/AccessoryOrderHistory'
 function App(props) {
   useEffect(() => {
     document.title = "Seven";
@@ -63,6 +64,17 @@ function App(props) {
         <Route path="/user/update" component={UpdateUserPage}></Route>
         <Route path="/order/:id" component={CarOrderPage}></Route>
         <Route path="/order-result/:id" component={OrderResult}></Route>
+        <Route
+          path="/user/my-order/cars"
+          component={CarOrderHistory}
+          exact
+        ></Route>
+        <Route
+          path="/user/my-order/accessories"
+          component={AccessoryOrderHistory}
+          exact
+        ></Route>
+
         <Route exact path="/" component={Home} />
         <Route component={Error404} />
       </Switch>
@@ -71,4 +83,3 @@ function App(props) {
 }
 
 export default App;
-
