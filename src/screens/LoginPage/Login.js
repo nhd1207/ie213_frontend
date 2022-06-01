@@ -10,7 +10,9 @@ function Login(props) {
   let context = useContext(RouteContext);
 
   function sendLoginData(params) {
-    props.login(params, context.url);
+    let url = context.url;
+    if (url === "/signup") url = "/home";
+    props.login(params, url);
   }
 
   const countDown = () => {
