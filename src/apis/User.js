@@ -83,3 +83,17 @@ export const adminData =(data)=> {
         url: `${prefix}/admindata`
     })
 }
+
+export const adminDataOrderCount =(data)=> {
+    return axios({
+        method: 'GET',
+        url: `${prefix}/adminData/countOrder`
+    })
+}
+
+export const adminDataBillCount =(data)=> {
+    return axios({
+        method: 'GET',
+        url: `${prefix}/admindata/countBill`
+    })
+}

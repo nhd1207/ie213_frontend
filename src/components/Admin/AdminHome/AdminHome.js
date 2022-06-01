@@ -7,7 +7,7 @@ import { getData } from './action'
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { PureComponent } from 'react';
-import { Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend , Label, PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend , Label, Text ,PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 
 function AdminHome(props) {
     const history = useHistory()
@@ -128,14 +128,15 @@ function AdminHome(props) {
                                 </Button>
                             </Card>
                         </Col>
-                        <LineChart width={800} height={400} data={props?.adminData?.carOrder || []}
+                        <LineChart width={800} height={400} data={props?.adminData?.orderCount || []}
                             margin={{ top: 5, right: 30, left: 50, bottom: 5 }}>
-                            <XAxis interval={30} tickFormatter={formatXAxis} dataKey="time" />
+                            <XAxis tickFormatter={formatXAxis} dataKey="_id" />
                             <YAxis />
                             <CartesianGrid strokeDasharray="3 3" />
                             <Tooltip/>
                             <Legend />
-                            <Line type="monotone" dataKey="deposit" stroke="#8884d8" activeDot={{ r: 8 }} />
+                            <Text text={'aaaaaa'}/>
+                            <Line type="monotone" interval={10} dataKey="total_order" stroke="#8884d8" activeDot={{ r: 8 }} />
                         </LineChart>
                     </Row>
 
