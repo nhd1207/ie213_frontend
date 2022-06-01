@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/layout";
 import OrderDetail from "../../components/OrderResult/OrderDetail";
 import { connect } from "react-redux";
@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import DataTable from "../../components/CarOrderHistory/DataTable";
 import { useHistory } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
-import {verify} from "../LoginPage/action"
+import { verify } from "../LoginPage/action";
 
 function CarOrderHistory(props) {
   function signoutHandler() {
@@ -29,8 +29,10 @@ function CarOrderHistory(props) {
   let history = useHistory();
   let match = useRouteMatch();
 
-  function moreDetailHandler(id) {
-    history.push(`${match.url}?id=${id}`);
+
+  async function moreDetailHandler(record) {
+    // let data = props?.carsHistory?.carOrder.find((item) => item._id === id);
+    history.push(`${match.url}/${record._id}`, [record]);
   }
 
   return (
@@ -47,15 +49,15 @@ function CarOrderHistory(props) {
           <div className={style.avatarName}>{props?.user?.name}</div>
           <Menu className={style.sideNav} defaultSelectedKeys={["2"]}>
             <Menu.Item key="1">
-              <Link to="/user">
-                Thông tin
-              </Link>
-            </Menu.Item>              
+              <Link to="/user">Thông tin</Link>
+            </Menu.Item>
             <Menu.Item key="2">
               <Link to="/user/my-order/cars">Lịch sử đặt hàng xe</Link>
             </Menu.Item>
             <Menu.Item key="3">
-              <Link to="/user/my-order/accessories">Lịch sử đặt hàng phụ kiện</Link>
+              <Link to="/user/my-order/accessories">
+                Lịch sử đặt hàng phụ kiện
+              </Link>
             </Menu.Item>
             <Menu.Item key="4">
               <a onClick={signoutHandler}> {"Đăng xuất"}</a>
@@ -91,7 +93,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   verify: (params) => {
     dispatch(verify(params));
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarOrderHistory);

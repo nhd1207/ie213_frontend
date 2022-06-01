@@ -9,7 +9,7 @@ function OrderDetail(props) {
         status: "Đang chờ",
         bg: "warning",
       };
-    else if (status === "cancelled")
+    else if (status === "Cancelled")
       return {
         status: "Đã huỷ",
         bg: "danger",
@@ -52,11 +52,11 @@ function OrderDetail(props) {
                   </Badge>
                 </h4>{" "}
                 <p>
-                  Họ và tên: <span>{props.user.name}</span>
+                  Họ và tên: <span>{item?.userInfo?.name}</span>
                 </p>
                 <p>
                   Địa chỉ nhận xe:{" "}
-                  <span>{item.place.name + ", " + item.place.address}</span>
+                  <span>{item?.place?.name + ", " + item?.place?.address}</span>
                 </p>
                 <p>
                   Số điện thoại: <span>{item.phone}</span>

@@ -40,7 +40,6 @@ function OrderResult(props) {
         </h3>
         <OrderDetail
           data={history.location.state}
-          user={props?.user}
           cancelOrder={props.cancelOrder}
           cancelAction={setAction}
         />
