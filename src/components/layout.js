@@ -188,6 +188,18 @@ function Layouts(props) {
               {/* </Spin> */}
             </Menu.Item>
 
+              {/* <Spin spinning={props?.isLoggedIn?.loading}> */}
+              {props?.isLoggedIn === true ? (
+                <></>
+              ) : (
+                <Menu.Item key="signup">
+                <NavLink to={"/signup"} style={{ color: "#F3EA01" }}>
+                  Đăng ký
+                </NavLink>
+            </Menu.Item>
+              )}
+              {/* </Spin> */}
+
             {/* )} */}
 
             {/* {context.isLoggedIn && ( */}
