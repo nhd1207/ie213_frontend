@@ -32,7 +32,7 @@ import CarOrderPage from "./screens/CarOrder/CarOrder";
 import UpdateUserPage from "./screens/UpdateUserPage/UpdateUser";
 import OrderResult from "./screens/OrderResult/OrderResult";
 import CarOrderHistory from "./screens/CarOrderHistory/CarOrderHistory";
-
+import AccessoryOrderHistory from './screens/AccessoryOrderHistory/AccessoryOrderHistory'
 function App(props) {
   useEffect(() => {
     document.title = "Seven";
@@ -71,7 +71,7 @@ function App(props) {
         ></Route>
         <Route
           path="/user/my-order/accessories"
-          component={CarOrderHistory}
+          component={AccessoryOrderHistory}
           exact
         ></Route>
 
