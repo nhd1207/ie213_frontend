@@ -106,8 +106,6 @@ function SignupForm(props) {
         dateOfBirth: "01/01/1990"
       }
     }
-    console.log(params);
-
     props.onSignUp(params);
   }
 
@@ -118,7 +116,6 @@ function SignupForm(props) {
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; //regular expression
       return result.test(email);
     }
-    console.log(email.isEmailLostFocused);
     dispatchEmail({
       type: "EMAIL_CHANGE",
       value: enteredEmail,
@@ -156,7 +153,6 @@ function SignupForm(props) {
 
   function confirmPasswordChangeHandler(event) {
     let enteredConfirm = event.target.value;
-    console.log(enteredConfirm);
     function validatePassword(confirm) {
       if (confirm === password.value) return true;
       return false;
@@ -167,7 +163,6 @@ function SignupForm(props) {
       isValid: validatePassword(enteredConfirm),
       isLostFocused: true,
     });
-    console.log(confirmPassword.isValid)
   }
   
   function confirmPasswordBlurHandler() {
@@ -180,9 +175,8 @@ function SignupForm(props) {
   let [disabledButton, setDisabledButton] = useState(false);
 
   useEffect(() => {
-    setDisabledButton(email.isEmailValid && password.isPasswordValid && confirmPassword.isValid) ;
-    console.log(disabledButton);
-  }, [email.isEmailValid, password.isPasswordValid, confirmPassword.isValid, disabledButton])
+    setDisabledButton(email.isEmailValid && password.isPasswordValid && confirmPassword.isValid && name.trim().length > 0) ;
+  }, [email.isEmailValid, password.isPasswordValid, confirmPassword.isValid, disabledButton, name])
   
 
   return (
@@ -190,7 +184,7 @@ function SignupForm(props) {
       <h2>ĐĂNG KÝ</h2>
       <Form className={classes.form} onSubmit={signUpHandler}>
         <FormGroup className={"mb-3"}>
-          <FormLabel>Họ và tên</FormLabel>
+          <FormLabel>Họ và tên <span style={{color: "red"}}>*</span></FormLabel>
           <FormControl
             id="name"
             type="text"
@@ -200,7 +194,7 @@ function SignupForm(props) {
           />
         </FormGroup>
         <FormGroup className={"mb-3"}>
-          <FormLabel>Số điện thoại</FormLabel>
+          <FormLabel>Số điện thoại <span style={{color: "red"}}>*</span></FormLabel>
           <InputGroup>
             <InputGroup.Text>+84</InputGroup.Text>
             <FormControl
@@ -213,33 +207,33 @@ function SignupForm(props) {
           </InputGroup>
         </FormGroup>
         <Form.Group className={"mb-3"} controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Email <span style={{color: "red"}}>*</span></Form.Label>
           <Form.Control
             type="email"
             placeholder="seven@example.org"
             onChange={emailChangeHandler}
             onBlur={emailBlurHandler}
           />
-          {errorEmail && <Form.Text>Email sai định dạng</Form.Text>}
+          {errorEmail && <Form.Text className={classes.error}>Email sai định dạng</Form.Text>}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Mật khẩu</Form.Label>
+          <Form.Label>Mật khẩu <span style={{color: "red"}}>*</span></Form.Label>
           <Form.Control
             type="password"
             placeholder="Mật khẩu ít nhất 8 ký tự"
             onChange={passwordChangeHandler}
             onBlur={passwordBlurHandler}
           />
-          {errorPassword && <Form.Text>Mật khẩu phải có ít nhất 8 ký tự</Form.Text>}
+          {errorPassword && <Form.Text className={classes.error}>Mật khẩu phải có ít nhất 8 ký tự</Form.Text>}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Xác nhận mật khẩu</Form.Label>
+          <Form.Label>Xác nhận mật khẩu <span style={{color: "red"}}>*</span></Form.Label>
           <Form.Control
             type="password"
             onChange={confirmPasswordChangeHandler}
             onBlur={confirmPasswordBlurHandler}
           />
-          {errorConfirm && <Form.Text>Mật khẩu không trùng khớp</Form.Text>}
+          {errorConfirm && <Form.Text className={classes.error}>Mật khẩu không trùng khớp</Form.Text>}
         </Form.Group>
         <Button
           className={classes["signup-button"]}

@@ -1,18 +1,43 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPhone,
+  faCircleCheck,
+  faCircleXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import classes from "./SignUp.module.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SignupForm from "../../components/Authentication/Signup/SignupForm";
 import { connect } from "react-redux";
 import { signup } from "./action";
-
+import { Button, Modal } from "react-bootstrap";
+import { Spin } from "antd";
+import Layout from "../../components/layout";
+import { useHistory } from "react-router-dom";
 function SignUp(props) {
-
   function signUpHandler(params) {
-    props.signup(params)
+    setShow(true);
+    props.signup(params);
   }
+  let [show, setShow] = useState(false);
+
+  function closeModal() {
+    setShow(false);
+  }
+  let history = useHistory();
+
+  let [permission, setPermission ]= useState(false);
+
+  // useEffect(() => {
+  //   if (props?.status === "success")
+  //   setPermission(true);
+  //   else setPermission(false);
+  // }, [props?.status])
+  function loginHandler() {
+    history.push("/login");
+  }
+
   return (
-    <>
+    <Layout>
       <div style={{ position: "absolute" }}>
         <div className={classes.rectangle} />
         <div className={classes.triangle} />
@@ -34,15 +59,48 @@ function SignUp(props) {
           </div>
         </div>
         <div className={classes["signup-form"]}>
-          <SignupForm onSignUp={signUpHandler}/>
+          <SignupForm onSignUp={signUpHandler} />
         </div>
       </div>
-    </>
+      <Modal show={show}>
+        <Spin spinning={props.abc.loading}>
+          <Modal.Header>
+            <Modal.Title>
+              {props.abc.loading
+                ? "Đang xử lý..."
+                : props?.status === "success"
+                ? "Đăng ký thành công"
+                : "Đăng ký thất bại"}
+              {props?.status === "success" ? (
+                <FontAwesomeIcon color={"#008000"} icon={faCircleCheck} />
+              ) : props?.status === "" ? (
+                <></>
+              ) : (
+                <FontAwesomeIcon color={"#FF0000"} icon={faCircleXmark} />
+              )}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {props?.status === "success"
+              ? "Chào mừng bạn đến với Seven - Nhà phân phối xe lớn nhất Việt Nam.\n Đăng nhập để tiếp tục"
+              : "Vui lòng thử lại"}
+          </Modal.Body>
+          <Modal.Footer>
+            {props?.status === "success" ? (
+              <Button onClick={loginHandler}>OK</Button>
+            ) : (
+              <Button onClick={closeModal}>Thử lại</Button>
+            )}
+          </Modal.Footer>
+        </Spin>
+      </Modal>
+    </Layout>
   );
 }
 
 const mapStateToProps = (state) => ({
   abc: state.signup,
+  status: state.signup.status,
 });
 
 const mapDispatchToProps = (dispatch) => ({
