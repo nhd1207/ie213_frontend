@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { connect } from "react-redux";
 import LoginForm from "../../components/Authentication/Login/LoginForm";
 import classes from "./Login.module.css";
-import { login } from "./action";
+import { login, verifyLayout } from "./action";
 import { Button, Modal } from "antd";
 import RouteContext from "../../context/RouteContext";
+import { useHistory } from "react-router-dom";
 
 function Login(props) {
   let context = useContext(RouteContext);
@@ -32,6 +33,12 @@ function Login(props) {
       modal.destroy();
     }, secondsToGo * 1000);
   };
+  let history = useHistory();
+
+  useEffect(() => {
+    props.verifyLayout();
+    if (props?.isLoggedIn) history.push("/home");
+  }, [props?.isLoggedIn]);
 
   return (
     <section className={`${classes.container}`}>
@@ -54,11 +61,15 @@ function Login(props) {
 
 const mapStateToProps = (state) => ({
   user: state.login,
+  isLoggedIn: state.login.isLoggedIn,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   login: (params, url) => {
     dispatch(login(params, url));
+  },
+  verifyLayout: () => {
+    dispatch(verifyLayout());
   },
 });
 

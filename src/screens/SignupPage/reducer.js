@@ -23,6 +23,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        status: "error"
       };
     default:
       return state;

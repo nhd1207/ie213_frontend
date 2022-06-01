@@ -23,9 +23,15 @@ function SignUp(props) {
   function closeModal() {
     setShow(false);
   }
-  useEffect(() => {}, []);
   let history = useHistory();
 
+  let [permission, setPermission ]= useState(false);
+
+  // useEffect(() => {
+  //   if (props?.status === "success")
+  //   setPermission(true);
+  //   else setPermission(false);
+  // }, [props?.status])
   function loginHandler() {
     history.push("/login");
   }
