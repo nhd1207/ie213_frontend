@@ -24,6 +24,7 @@ import getListCarByIDSaga from "./screens/CarDetailPage/saga"
 import carOrderSaga from "./screens/CarOrder/saga"
 import compareSaga from "./screens/ComparePage/saga"
 import updateUserSaga from "./screens/UpdateUserPage/saga"
+import carHistorySaga from "./screens/CarOrderHistory/saga";
 import showroomSaga from './screens/ShowroomPage/saga'
 
 const Saga = function* (){
@@ -52,6 +53,7 @@ const Saga = function* (){
       carOrderSaga(),
       compareSaga(),
       updateUserSaga(),
+      carHistorySaga(),
       showroomSaga()
     ])
   }
