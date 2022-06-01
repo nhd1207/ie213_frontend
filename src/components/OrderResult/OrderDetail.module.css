@@ -26,3 +26,7 @@
     height: 1px;
     background-color: #b1b1b1;
 }
+
+.avatar {
+    width: 50vw;
+}

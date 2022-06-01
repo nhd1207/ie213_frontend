@@ -44,7 +44,7 @@ function* createCarOrderSaga(action) {
         // put({ type: TYPE.ACCESSORYBILLADMIN.REQUEST, params: { status: 1 } })
       ]);
       yield put(
-        push(`/order-result/${response.carOrder._id}`, [response.carOrder])
+        push(`/order-result/${response.createdCarOrder._id}`, [response.createdCarOrder])
       );
       window.location.reload();
     } else {

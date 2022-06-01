@@ -1,5 +1,5 @@
-import React from "react";
-import { Badge, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Badge, Button, Modal } from "react-bootstrap";
 import classes from "./OrderDetail.module.css";
 
 function OrderDetail(props) {
@@ -9,7 +9,7 @@ function OrderDetail(props) {
         status: "Đang chờ",
         bg: "warning",
       };
-    else if (status === "cancel")
+    else if (status === "cancelled")
       return {
         status: "Đã huỷ",
         bg: "danger",
@@ -20,10 +20,24 @@ function OrderDetail(props) {
         bg: "success",
       };
   }
+
+  let [id, setID] = useState();
+  let placeID = "";
+  function timestampConverter(timestamp) {
+    let t = timestamp.slice(0, 16);
+    let result = new Date(t);
+    return result;
+  }
+
+  function getID(id) {
+    return id;
+  }
+
   return (
     <>
       {props.data.map((item) => {
         let key = 0;
+        placeID = getID(item.place);
         key++;
         let status = translateStatus(item.status);
         return (
@@ -37,33 +51,54 @@ function OrderDetail(props) {
                   </Badge>
                 </h4>{" "}
                 <p>
-                  Họ và tên: {" "}
-                  <span>{props.user.name}</span>
+                  Họ và tên: <span>{props.user.name}</span>
                 </p>
                 <p>
-                  Địa chỉ nhận hàng: Showroom 123 Linh Chiểu, Thủ Đức, TP HCM
-                  {/* <span>{item.place}</span> */}
+                  Địa chỉ nhận xe: {" "}
+                  <span>{item.place.name + ", " + item.place.address}</span>
                 </p>
                 <p>
-                  Số điện thoại: 012121213
-                  {/* <span>{item.phone}</span> */}
+                  Số điện thoại: <span>{item.phone}</span>
                 </p>
                 <p>
-                  Ngày đặt hàng: 15-08-2022
-                  {/* <span>{item.tiem}</span> */}
+                  Ngày đặt xe:{" "}
+                  <span>
+                    {timestampConverter(item.updated_at).toLocaleDateString() +
+                      " " +
+                      timestampConverter(item.updated_at).toLocaleTimeString()}
+                  </span>
+                </p>
+                <p>
+                  Ngày nhận xe:{" "}
+                  <span>
+                    {timestampConverter(item.time).toLocaleDateString() +
+                      " " +
+                      timestampConverter(item.time).toLocaleTimeString()}
+                  </span>
+                </p>
+                <p>
+                  Ghi chú: <span>{item.note}</span>
                 </p>
                 <div style={{ textAlign: "center" }}>
-                  <Button variant="danger">Huỷ đơn hàng</Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => {
+                      props.cancelOrder(item._id);
+                      props.cancelAction("cancel");
+                    }}
+                  >
+                    Huỷ đơn hàng
+                  </Button>
                 </div>
                 <div className={classes.bar} />
                 <h3 className={classes.productDetail}>Thông tin sản phẩm</h3>
                 <p>
-                  Tên sản phẩm: Xe Audi RS7 2021
-                  {/* <span>{item.year}</span> */}
+                  Tên sản phẩm: {" "}
+                  <span>{item.carInfo.name}</span>
                 </p>
                 <p>
-                  Năm sản xuất: 2018
-                  {/* <span>{item.year}</span> */}
+                  Năm sản xuất: {" "}
+                  <span>{item.carInfo.year}</span>
                 </p>
                 <div style={{ textAlign: "center" }}>
                   <Button variant="primary">Xem chi tiết sản phẩm</Button>
@@ -72,11 +107,17 @@ function OrderDetail(props) {
               <div>
                 <img
                   alt=""
-                  src="https://cdn.24h.com.vn/upload/1-2021/images/2021-02-13/Audi-RS7-bo-sung-mau-ngoai-that-bat-mat-va-gia-ban-cao-nhat-trong-phan-khuc-a--4--1613233367-396-width660height440.jpg"
+                  src={item.carInfo.image.avatar}
+                  className={classes.avatar}
                 ></img>
               </div>
             </div>
             <div className={classes.break} />
+            <Modal>
+              <Modal.Header>
+                <Modal.Title></Modal.Title>
+              </Modal.Header>
+            </Modal>
           </section>
         );
       })}
