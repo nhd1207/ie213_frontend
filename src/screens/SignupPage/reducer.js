@@ -12,6 +12,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        status: ""
       };
     case type.SIGNUP.SUCCESS:
       return {

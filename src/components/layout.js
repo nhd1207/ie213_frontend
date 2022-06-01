@@ -80,7 +80,7 @@ function Layouts(props) {
             className="Navbar navLeft"
           >
             <Menu.Item key="home">
-              <NavLink to={"/home"} style={{}}>
+              <NavLink to={"/home"}>
                 <img
                   src={require("../Images/logo.png")}
                   alt={"logo"}
@@ -91,42 +91,42 @@ function Layouts(props) {
             </Menu.Item>
 
             <Menu.Item key="cars">
-              <NavLink to={`/car`} style={{ color: "#F3EA01" }}>
+              <NavLink to={`/car`} style={{ color: "#F3EA01" }} activeClassName={"activeNav"}>
                 {" "}
                 CÁC DÒNG XE{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="showrooms">
-              <NavLink to={`/showroom`} style={{ color: "#F3EA01" }}>
+              <NavLink to={`/showroom`} style={{ color: "#F3EA01" }} activeClassName={"activeNav"}>
                 {" "}
                 SHOWROOMS{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="accessory">
-              <NavLink to={`/accessory`} style={{ color: "#F3EA01" }}>
+              <NavLink to={`/accessory`} style={{ color: "#F3EA01" }} activeClassName={"activeNav"}>
                 {" "}
                 PHỤ KIỆN{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="news">
-              <NavLink to={`/news`} style={{ color: "#F3EA01" }}>
+              <NavLink to={`/news`} style={{ color: "#F3EA01" }} activeClassName={"activeNav"}>
                 {" "}
                 TIN TỨC{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="about_us">
-              <NavLink to={`/about_us`} style={{ color: "#F3EA01" }}>
+              <NavLink to={`/about_us`} style={{ color: "#F3EA01" }} activeClassName={"activeNav"}>
                 {" "}
                 VỀ CHÚNG TÔI{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="support">
-              <NavLink to={`/support`} style={{ color: "#F3EA01" }}>
+              <NavLink to={`/support`} style={{ color: "#F3EA01" }} activeClassName={"activeNav"}>
                 {" "}
                 HỖ TRỢ{" "}
               </NavLink>
@@ -181,7 +181,7 @@ function Layouts(props) {
                   Đăng xuất
                 </NavLink>
               ) : (
-                <NavLink to={"/login"} style={{ color: "#F3EA01" }}>
+                <NavLink to={"/login"} style={{ color: "#F3EA01" }} activeClassName={"activeNav"}>
                   Đăng nhập
                 </NavLink>
               )}
@@ -193,7 +193,7 @@ function Layouts(props) {
                 <></>
               ) : (
                 <Menu.Item key="signup">
-                <NavLink to={"/signup"} style={{ color: "#F3EA01" }}>
+                <NavLink to={"/signup"} style={{ color: "#F3EA01" }} activeClassName={"activeNav"}>
                   Đăng ký
                 </NavLink>
             </Menu.Item>

@@ -194,7 +194,7 @@ function SignupForm(props) {
           />
         </FormGroup>
         <FormGroup className={"mb-3"}>
-          <FormLabel>Số điện thoại <span style={{color: "red"}}>*</span></FormLabel>
+          <FormLabel>Số điện thoại </FormLabel>
           <InputGroup>
             <InputGroup.Text>+84</InputGroup.Text>
             <FormControl

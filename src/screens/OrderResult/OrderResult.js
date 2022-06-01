@@ -34,7 +34,7 @@ function OrderResult(props) {
           ) : (
             <>
               HUỶ ĐẶT XE THÀNH CÔNG {" "}
-              <FontAwesomeIcon color="#FF0000" icon={faCircleCheck} />
+              <FontAwesomeIcon color="#008000" icon={faCircleCheck} />
             </>
           )}
         </h3>

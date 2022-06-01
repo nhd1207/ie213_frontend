@@ -65,12 +65,12 @@ function SignUp(props) {
       <Modal show={show}>
         <Spin spinning={props.abc.loading}>
           <Modal.Header>
-            <Modal.Title>
+            <Modal.Title closeButton>
               {props.abc.loading
                 ? "Đang xử lý..."
                 : props?.status === "success"
-                ? "Đăng ký thành công"
-                : "Đăng ký thất bại"}
+                ? "Đăng ký thành công "
+                : "Đăng ký thất bại "}
               {props?.status === "success" ? (
                 <FontAwesomeIcon color={"#008000"} icon={faCircleCheck} />
               ) : props?.status === "" ? (
