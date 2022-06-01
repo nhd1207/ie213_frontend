@@ -37,15 +37,15 @@ function* verifySaga(action) {
     else 
     {
       // Cookies.set("jwt", null);
+      message.error('Vui lòng đăng nhập để tiếp tục')
       yield all([put({ type: TYPE.VERIFY.ERROR })]);
       yield put(push("/login"));
-      message.error('Vui lòng đăng nhập để tiếp tục')
       window.location.reload();
     }
   } catch (error) {
+    message.error('Vui lòng đăng nhập để tiếp tục')
     yield all([put({ type: TYPE.VERIFY.ERROR, error })]);
     yield put(push("/login"));
-    message.error('Vui lòng đăng nhập để tiếp tục')
     window.location.reload();
   }
 }

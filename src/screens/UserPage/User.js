@@ -44,12 +44,6 @@ function User(props) {
     handleShowForm(true);
     setAccessoryBill(values);
   };
-  let history = useHistory();
-
-  //thêm hàm này vào cái nút xem chi tiết đơn hàng onClick={() => viewOrderHandler(truyền vào id của đơn hàng)}
-  function viewOrderHandler(id) {
-    history.push(`/my-order/${id}`);
-  }
 
   return (
     <Layout>
@@ -136,7 +130,7 @@ function User(props) {
                     </Descriptions.Item>
                   </Descriptions>
                 </div>
-                <DataTable
+                {/* <DataTable
                   dataSource={props.bills?.accessoryBill}
                   handleShowForm={openModal}
                 ></DataTable>
@@ -160,7 +154,7 @@ function User(props) {
                       </List.Item>
                     )}
                   />
-                </Modal>
+                </Modal> */}
               </div>
             </div>
           </>

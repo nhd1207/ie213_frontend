@@ -11,6 +11,8 @@ import Cookies from "js-cookie";
 import DataTable from "../../components/CarOrderHistory/DataTable";
 import { useHistory } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
+import {verify} from "../LoginPage/action"
+
 function CarOrderHistory(props) {
   function signoutHandler() {
     Cookies.set("jwt", "");
@@ -19,9 +21,9 @@ function CarOrderHistory(props) {
   }
 
   useEffect(() => {
+    props.verify();
     props.getUser();
     props.getCarHistory();
-    console.log(props);
   }, []);
 
   let history = useHistory();
@@ -33,41 +35,45 @@ function CarOrderHistory(props) {
 
   return (
     <Layout>
-      <Spin spinning={props.userLoading || props.carLoading}>
-        <div className="row">
-          <div
-            className={`${style.sideMenu} col col-xl-3 d-none d-md-block d-inline-flex`}
-          >
-            <img
-              className={style.avatar}
-              src={`${props?.user?.photo}`}
-              alt="User avatar"
-            ></img>
-            <div className={style.avatarName}>{props?.user?.name}</div>
-            <Menu className={style.sideNav} defaultSelectedKeys={["3"]}>
-              <Menu.Item key="1">Thông tin</Menu.Item>
-              <Menu.Item key="2">
-                <Link to="/user/update">Cập nhật thông tin</Link>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Link to="/user/update">Lịch sử đặt hàng xe</Link>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Link to="/user/update">Lịch sử đặt hàng phụ kiện</Link>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <a onClick={signoutHandler}> {"Đăng xuất"}</a>
-              </Menu.Item>
-            </Menu>
-          </div>
-          <div className={`${style.content} col col-xl-9 d-none d-md-block`}>
+      <div className="row">
+        <div
+          className={`${style.sideMenu} col col-xl-3 d-none d-md-block d-inline-flex`}
+        >
+          <img
+            className={style.avatar}
+            src={`${props?.user?.photo}`}
+            alt="User avatar"
+          ></img>
+          <div className={style.avatarName}>{props?.user?.name}</div>
+          <Menu className={style.sideNav} defaultSelectedKeys={["3"]}>
+            <Menu.Item key="1">
+              <Link to="/user">
+                Thông tin
+              </Link>
+            </Menu.Item>              
+            <Menu.Item key="2">
+              <Link to="/user/update">Cập nhật thông tin</Link>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Link to="/user/my-order/cars">Lịch sử đặt hàng xe</Link>
+            </Menu.Item>
+            <Menu.Item key="4">
+              <Link to="/user/my-order/accessories">Lịch sử đặt hàng phụ kiện</Link>
+            </Menu.Item>
+            <Menu.Item key="5">
+              <a onClick={signoutHandler}> {"Đăng xuất"}</a>
+            </Menu.Item>
+          </Menu>
+        </div>
+        <div className={`${style.content} col col-xl-9 d-none d-md-block`}>
+          <Spin spinning={props.userLoading || props.carLoading}>
             <DataTable
               dataSource={props?.carsHistory?.carOrder}
               moreDetailHandler={moreDetailHandler}
             ></DataTable>
-          </div>
+          </Spin>
         </div>
-      </Spin>
+      </div>
     </Layout>
   );
 }
@@ -83,10 +89,12 @@ const mapDispatchToProps = (dispatch) => ({
   getUser: (params) => {
     dispatch(getUser(params));
   },
-
   getCarHistory: (params) => {
     dispatch(getCarHistory(params));
   },
+  verify: (params) => {
+    dispatch(verify(params));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarOrderHistory);
