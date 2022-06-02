@@ -225,8 +225,8 @@ function LoginForm(props) {
           </div>
           <div className={`${style.formGroup} ${style.singup} col-xl-9 col-9`}>
             <p className={`${style.titleSignup}`}>
-              Nếu bạn chưa có tài khoản,
-              <Link to={`/signup`}> Đăng ký ngay</Link>
+              Chưa có tài khoản? {" "}
+              <Link to={`/signup`} className={style.signup}>Đăng ký ngay! </Link>
             </p>
           </div>
         </Form>

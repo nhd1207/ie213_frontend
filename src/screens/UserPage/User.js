@@ -5,16 +5,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Spin, Table } from "antd";
-import { getUser, getListBill } from "./action";
+import { getUser, getListBill, updateUser } from "./action";
 import dateFormat from "dateformat";
 import Cookies from "js-cookie";
 import DataTable from "../../components/User/DataTable";
 import { verify } from "../LoginPage/action";
 import { useHistory, Link } from "react-router-dom";
+import FormUpdateUser from "../../components/User/FormUpdateUser";
+
 function User(props) {
-  const [showForm, setShowForm] = useState(false);
-  const [accessoryBill, setAccessoryBill] = useState({});
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     props.verify();
     props.getUser();
@@ -32,17 +33,11 @@ function User(props) {
     window.location.pathname = "/login";
   }
 
-  const handleShowForm = (value) => {
-    setShowForm({ showForm: value || false });
-  };
-
-  const handleCloseModal = () => {
-    setShowForm(false);
-  };
-
-  const openModal = (values) => {
-    handleShowForm(true);
-    setAccessoryBill(values);
+  const updateUserInfo = (value) => {
+    props.updateUser({
+      name: value.name,
+      info: value,
+    });
   };
 
   return (
@@ -53,15 +48,13 @@ function User(props) {
         ) : (
           <>
             <div className="row">
-              <div
-                className={`${style.sideMenu} col col-xl-3 d-none d-md-block d-inline-flex`}
-              >
+              <div className={`${style.sideMenu} col-xl-3 col-sm-3`}>
                 <img
                   className={style.avatar}
                   src={`${props.user?.photo}`}
                   alt="User avatar"
                 ></img>
-                <div className={style.avatarName}>{props.user.name}</div>
+                <div className={style.avatarName}>{props?.user?.name}</div>
                 <Menu
                   className={style.sideNav}
                   defaultSelectedKeys={["1"]}
@@ -69,68 +62,70 @@ function User(props) {
                 >
                   <Menu.Item key="1">Thông tin</Menu.Item>
                   <Menu.Item key="2">
-                    <Link to="/user/update">Cập nhật thông tin</Link>
-                  </Menu.Item>
-                  <Menu.Item key="3">
                     <Link to="/user/my-order/cars">Lịch sử đặt hàng xe</Link>
                   </Menu.Item>
-                  <Menu.Item key="4">
-                    <Link to="/user/my-order/accessories">Lịch sử đặt hàng phụ kiện</Link>
+                  <Menu.Item key="3">
+                    <Link to="/user/my-order/accessories">
+                      Lịch sử đặt hàng phụ kiện
+                    </Link>
                   </Menu.Item>
-                  <Menu.Item key="5">
+                  <Menu.Item key="4">
                     <a onClick={signoutHandler}> {"Đăng xuất"}</a>
                   </Menu.Item>
                 </Menu>
               </div>
-              <div
-                className={`${style.content} col col-xl-9 d-none d-md-block`}
-              >
-                <div className={`${style.descriptions}`}>
-                  <Descriptions
-                    labelStyle={{ fontSize: 50, fontWeight: "bold" }}
-                    title="THÔNG TIN"
-                    column={2}
-                  >
-                    {/* <Descriptions.Item
+              <div className={`${style.content} col-xl-9 col-sm-9`}>
+                <Spin spinning={props.loading}>
+                  <div className={`${style.descriptions}`}>
+                    <Descriptions
+                      labelStyle={{ fontSize: 50, fontWeight: "bold" }}
+                      title="THÔNG TIN"
+                      column={2}
+                    >
+                      {/* <Descriptions.Item
                     labelStyle={{ fontSize: 50, fontWeight: "bold" }}
                     contentStyle={{ fontSize: 50 }}
                   >
                     THÔNG TIN
                   </Descriptions.Item> */}
-                    <Descriptions.Item
-                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
-                      contentStyle={{ fontSize: 20 }}
-                      label="Tên người dùng"
-                    >
-                      {props.user?.name}
-                    </Descriptions.Item>
-                    <Descriptions.Item
-                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
-                      contentStyle={{ fontSize: 20 }}
-                      label="Số điện thoại"
-                    >
-                      {props.user?.info?.phoneNumber}
-                    </Descriptions.Item>
-                    <Descriptions.Item
-                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
-                      contentStyle={{ fontSize: 20 }}
-                      label="Email"
-                    >
-                      {props.user?.email}
-                    </Descriptions.Item>
-                    <Descriptions.Item
-                      labelStyle={{ fontSize: 20, fontWeight: "bold" }}
-                      contentStyle={{ fontSize: 20 }}
-                      label="Ngày sinh"
-                    >
-                      {dateFormat(
-                        props.user?.info?.dateOfBirth,
-                        "mmmm dS, yyyy"
-                      )}
-                    </Descriptions.Item>
-                  </Descriptions>
-                </div>
-                {/* <DataTable
+                      <Descriptions.Item
+                        labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                        contentStyle={{ fontSize: 20 }}
+                        label="Tên người dùng"
+                      >
+                        {props.user?.name}
+                      </Descriptions.Item>
+                      <Descriptions.Item
+                        labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                        contentStyle={{ fontSize: 20 }}
+                        label="Số điện thoại"
+                      >
+                        {props.user?.info?.phoneNumber}
+                      </Descriptions.Item>
+                      <Descriptions.Item
+                        labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                        contentStyle={{ fontSize: 20 }}
+                        label="Email"
+                      >
+                        {props.user?.email}
+                      </Descriptions.Item>
+                      <Descriptions.Item
+                        labelStyle={{ fontSize: 20, fontWeight: "bold" }}
+                        contentStyle={{ fontSize: 20 }}
+                        label="Ngày sinh"
+                      >
+                        {dateFormat(
+                          props.user?.info?.dateOfBirth,
+                          "mmmm dS, yyyy"
+                        )}
+                      </Descriptions.Item>
+                    </Descriptions>
+                  </div>
+                  <FormUpdateUser
+                    data={props.user}
+                    updateUser={updateUserInfo}
+                  ></FormUpdateUser>
+                  {/* <DataTable
                   dataSource={props.bills?.accessoryBill}
                   handleShowForm={openModal}
                 ></DataTable>
@@ -155,6 +150,7 @@ function User(props) {
                     )}
                   />
                 </Modal> */}
+                </Spin>
               </div>
             </div>
           </>
@@ -180,6 +176,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   verify: (params) => {
     dispatch(verify(params));
+  },
+  updateUser: (params) => {
+    dispatch(updateUser(params));
   },
 });
 

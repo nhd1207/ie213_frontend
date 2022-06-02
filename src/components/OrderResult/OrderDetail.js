@@ -1,7 +1,7 @@
-import React from "react";
-import { Badge, Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Badge, Button, Modal } from "react-bootstrap";
 import classes from "./OrderDetail.module.css";
-
+import {useHistory} from "react-router-dom";
 function OrderDetail(props) {
   function translateStatus(status) {
     if (status === "Pending")
@@ -9,70 +9,129 @@ function OrderDetail(props) {
         status: "Đang chờ",
         bg: "warning",
       };
-    else if (status === "cancel")
+    else if (status === "Cancelled")
       return {
         status: "Đã huỷ",
         bg: "danger",
       };
-    else
+    else if (status === "Accepted")
       return {
         status: "Đã xác nhận",
         bg: "success",
       };
+    else if (status === "Success")
+      return {
+        status: "Hoàn thành",
+        bg: "success",
+      };
+  }
+
+  function timestampConverter(timestamp) {
+    let t = timestamp.slice(0, 16);
+    let result = new Date(t);
+    return result;
+  }
+
+  let [orderStatus, setOrderStatus] = useState({
+    status: "",
+    bg: "",
+  });
+  let [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    setOrderStatus(translateStatus(props.data[0].status));
+  }, []);
+
+  useEffect(() => {
+    if (
+      props.data[0].status === "Success" ||
+      props.data[0].status === "Accepted" ||
+      props.data[0].status === "Cancelled"
+    )
+      setIsDisabled(true);
+  }, [props.data[0].status]);
+  let history = useHistory();
+  function carDetailHandler(id) {
+    history.push(`/car/${id}`);
   }
   return (
     <>
       {props.data.map((item) => {
         let key = 0;
         key++;
-        let status = translateStatus(item.status);
         return (
           <section key={`product ${key}`}>
             <div className={classes.container}>
               <div className={classes.detail}>
                 <h4>
                   Chi tiết đơn hàng #{item._id}{" "}
-                  <Badge as="span" bg={status.bg}>
-                    {status.status}
+                  <Badge as="span" bg={orderStatus.bg}>
+                    {orderStatus.status}
                   </Badge>
                 </h4>{" "}
                 <p>
-                  Họ và tên: {" "}
-                  <span>{props.user.name}</span>
+                  Họ và tên: <span>{item?.userInfo?.name}</span>
                 </p>
                 <p>
-                  Địa chỉ nhận hàng: Showroom 123 Linh Chiểu, Thủ Đức, TP HCM
-                  {/* <span>{item.place}</span> */}
+                  Địa chỉ nhận xe:{" "}
+                  <span>{item?.place?.name + ", " + item?.place?.address}</span>
                 </p>
                 <p>
-                  Số điện thoại: 012121213
-                  {/* <span>{item.phone}</span> */}
+                  Số điện thoại: <span>{item?.phone}</span>
                 </p>
                 <p>
-                  Ngày đặt hàng: 15-08-2022
-                  {/* <span>{item.tiem}</span> */}
+                  Ngày đặt xe:{" "}
+                  <span>
+                    {timestampConverter(item?.created_at).toLocaleDateString() +
+                      " " +
+                      timestampConverter(item?.created_at).toLocaleTimeString()}
+                  </span>
+                </p>
+                <p>
+                  Ngày nhận xe:{" "}
+                  <span>
+                    {timestampConverter(item?.time).toLocaleDateString() +
+                      " " +
+                      timestampConverter(item?.time).toLocaleTimeString()}
+                  </span>
+                </p>
+                <p>
+                  Ghi chú: <span>{item?.note}</span>
                 </p>
                 <div style={{ textAlign: "center" }}>
-                  <Button variant="danger">Huỷ đơn hàng</Button>
+                  <Button
+                    disabled={isDisabled}
+                    variant="danger"
+                    onClick={() => {
+                      props.cancelOrder(item._id);
+                      props.cancelAction("cancel");
+                      setOrderStatus({
+                        status: "Đã huỷ",
+                        bg: "danger",
+                      });
+                      setIsDisabled(true);
+                    }}
+                  >
+                    Huỷ đơn hàng
+                  </Button>
                 </div>
                 <div className={classes.bar} />
                 <h3 className={classes.productDetail}>Thông tin sản phẩm</h3>
                 <p>
-                  Tên sản phẩm: Xe Audi RS7 2021
-                  {/* <span>{item.year}</span> */}
+                  Tên sản phẩm: <span>{item?.carInfo?.name}</span>
                 </p>
                 <p>
-                  Năm sản xuất: 2018
-                  {/* <span>{item.year}</span> */}
+                  Năm sản xuất: <span>{item?.carInfo?.year}</span>
                 </p>
                 <div style={{ textAlign: "center" }}>
-                  <Button variant="primary">Xem chi tiết sản phẩm</Button>
+                  <Button variant="primary" onClick={() => carDetailHandler(item?.carInfo._id)}>Xem chi tiết sản phẩm</Button>
                 </div>
               </div>
               <div>
                 <img
                   alt=""
-                  src="https://cdn.24h.com.vn/upload/1-2021/images/2021-02-13/Audi-RS7-bo-sung-mau-ngoai-that-bat-mat-va-gia-ban-cao-nhat-trong-phan-khuc-a--4--1613233367-396-width660height440.jpg"
+                  src={item?.carInfo?.image?.avatar}
+                  className={classes.avatar}
                 ></img>
               </div>
             </div>

@@ -41,12 +41,8 @@ const tailFormItemLayout = {
 };
 
 export default function FormUpdateUser(props) {    
-
-  useEffect(() => {
-    console.log(props.data.info);
-    
-  }, []);
-  const [infoUser, setInfoUser] = useState(props.data.info);
+  
+  const [infoUser, setInfoUser] = useState(props?.data?.info);
 
   const [form] = Form.useForm();
 
@@ -71,10 +67,6 @@ export default function FormUpdateUser(props) {
               <div className={`${style.formWrapper} row`}>
                 <div className={`${style.formCol} col-xl-8`}>
                   <div className={`${style.heading} row`}>Cập nhật thông tin người dùng</div>
-                  <div className={`${style.carDetail} row`}>
-                  <div className={`${style.carSpec} col-xl-6 row`}>
-                    </div>
-                  </div>
                   <div className={`${style.orderInfo} row`}>
                     <Form
                       {...formItemLayout}
@@ -82,21 +74,11 @@ export default function FormUpdateUser(props) {
                       name="register"
                       onFinish={onFinish}
                       initialValues={{
-                        prefix: "84",
+                      prefix: "84",
                       }}
                       scrollToFirstError
                     >
-                       <Form.Item name="name" label="Tên người dùng">
-                        <Input.TextArea
-                          maxLength={10}
-                          onChange={(event) => {
-                            setInfoUser((info) => {
-                              return { ...info, name: event.target.value };
-                            });
-                          }}
-                        />
-                      </Form.Item>
-                      <Form.Item name="time" label="Chỉnh sửa ngày sinh">
+                      <Form.Item style={{textAlign:"center"}} name="time" label="Chỉnh sửa ngày sinh">
                         <DatePicker
                           defaultPickerValue={""}
                           onChange={(event) => {

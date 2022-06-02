@@ -29,10 +29,11 @@ import AboutUs from "./screens/AboutUsPage/AboutUs";
 import Support from "./screens/SupportPage/Support";
 import Compare from "./screens/ComparePage/Compare";
 import CarOrderPage from "./screens/CarOrder/CarOrder";
-import UpdateUserPage from "./screens/UpdateUserPage/UpdateUser";
 import OrderResult from "./screens/OrderResult/OrderResult";
 import CarOrderHistory from "./screens/CarOrderHistory/CarOrderHistory";
 import AccessoryOrderHistory from './screens/AccessoryOrderHistory/AccessoryOrderHistory'
+import CarDetailHistory from "./screens/CarOrderHistory/CarDetailHistory";
+
 function App(props) {
   useEffect(() => {
     document.title = "Seven";
@@ -61,12 +62,16 @@ function App(props) {
         <Route path="/about_us" component={AboutUs}></Route>
         <Route path="/support" component={Support}></Route>
         <Route path="/compare" component={Compare}></Route>
-        <Route path="/user/update" component={UpdateUserPage}></Route>
         <Route path="/order/:id" component={CarOrderPage}></Route>
         <Route path="/order-result/:id" component={OrderResult}></Route>
         <Route
           path="/user/my-order/cars"
           component={CarOrderHistory}
+          exact
+        ></Route>
+         <Route
+          path="/user/my-order/cars/:id"
+          component={CarDetailHistory}
           exact
         ></Route>
         <Route

@@ -24,10 +24,10 @@ import carListSaga from './screens/CarPage/saga'
 import getListCarByIDSaga from "./screens/CarDetailPage/saga"
 import carOrderSaga from "./screens/CarOrder/saga"
 import compareSaga from "./screens/ComparePage/saga"
-import updateUserSaga from "./screens/UpdateUserPage/saga"
 import carHistorySaga from "./screens/CarOrderHistory/saga";
 import showroomSaga from './screens/ShowroomPage/saga'
 import accessoryHistorySaga from './screens/AccessoryOrderHistory/saga'
+import cancelOrder from "./screens/OrderResult/saga"
 const Saga = function* (){
     yield all([
       loginSaga(),
@@ -57,7 +57,8 @@ const Saga = function* (){
       AdminHomeSaga(),
       carHistorySaga(),
       showroomSaga(),
-      accessoryHistorySaga()
+      accessoryHistorySaga(),
+      cancelOrder()
     ])
   }
   

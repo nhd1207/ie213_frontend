@@ -40,6 +40,22 @@ function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
             }
+        case type.UPDATEUSER.REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case type.UPDATEUSER.SUCCESS:
+            return {
+                ...state,
+                user: action.user,
+                loading: false,
+            }
+        case type.UPDATEUSER.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
         default:
             return state
     }
