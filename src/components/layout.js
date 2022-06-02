@@ -72,11 +72,14 @@ function Layouts(props) {
       }
     >
       <Affix style={{ zIndex: 100 }}>
-        <Header className="header" style={{ backgroundColor: "black" }}>
+        <Header
+          className="header"
+          style={{ backgroundColor: "rgb(27, 26, 23)" }}
+        >
           <Menu
             style={{
               width: "100%",
-              backgroundColor: "black",
+              backgroundColor: "rgb(27, 26, 23)",
               color: "#fff",
             }}
             mode="horizontal"
@@ -163,7 +166,7 @@ function Layouts(props) {
           <Menu
             style={{
               width: "100%",
-              backgroundColor: "black",
+              backgroundColor: "rgb(27, 26, 23)",
               color: "#fff",
             }}
             mode="horizontal"
