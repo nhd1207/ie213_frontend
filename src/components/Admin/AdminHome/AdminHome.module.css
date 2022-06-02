@@ -2,3 +2,44 @@
     padding: 20px;
     background-color: white; 
 }
+
+.activeUser > div {
+    color: #008000;
+}
+
+.inactiveUser > div {
+    color: #FF0000;
+}
+
+.ActiveUserIcon {
+    color: #008000;
+}
+
+.inactiveUserIcon {
+    color: #FF0000;
+}
+
+.userIcon,
+.acceptedOrder {
+    color: blue;
+}
+
+.pendingOrder {
+    color: #f0a500;
+}
+
+.lineChartContainer {
+    display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.lineChart,
+.lineChartContainer > h3 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.iconPrefix {
+    display: block;
+}

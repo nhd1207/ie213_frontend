@@ -37,7 +37,10 @@ function CarDetail(props) {
     props.getUserForWishListCar();
     props.getCarByID(params.id);
     setCarId(params.id)
+    props.getCarByID(params.id);
+    console.log(location);
   }, []);
+
 
   useEffect(() => {
       props?.user?.wishList?.cars.forEach((item) => {
