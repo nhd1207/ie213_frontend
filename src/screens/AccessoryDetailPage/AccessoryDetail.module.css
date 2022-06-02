@@ -79,3 +79,10 @@
   margin-top: 40px;
 }
 
+.carousel button {
+  background-color: var(--yellow-color) !important;
+}
+
+.carousel span {
+  background-color: var(--yellow-color) !important;
+}

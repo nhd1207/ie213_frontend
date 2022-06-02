@@ -173,11 +173,14 @@ function CarDetail(props) {
           <div className={`${style.carDescWrapper} row`}>
             <div className={`${style.carDesc} col-xl-4 col-md-12`}>
               <div className={`${style.title}`}>Tổng Quan</div>
-              <div className={`${style.text}`}>
-                {props?.carDetail?.car[0]?.description}
+              <div className={`${style.text}`}
+                          dangerouslySetInnerHTML={{ __html: props?.carDetail?.car[0]?.description }}>                     
+                {/* {props?.carDetail?.car[0]?.description} */}
               </div>
             </div>
-            <div className={`${style.carImg} col-xl-8 col-md-12`} style={{backgroundImage: `url("${props?.carDetail?.car[0]?.image?.avatar}")`}}></div>
+            <div className={`${style.carImgWrapper} col-xl-8 col-md-12`} >
+            <div className={`${style.carImg}`} style={{backgroundImage: `url("${props?.carDetail?.car[0]?.image?.avatar}")`}}></div>
+            </div>
           </div>
           <div className={`${style.carSpecWrapper} row`}>
             <div className={`${style.carSpecCol} col-xl-6`}>

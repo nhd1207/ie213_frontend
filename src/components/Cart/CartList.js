@@ -87,7 +87,7 @@ function CartList(props) {
 
     return (
         <div>
-            <Spin spinning={props.spinning}>
+            {/* <Spin spinning={props.spinning}> */}
                 {cart.length === 0 ? <Empty
                     description={
                         <span>
@@ -148,7 +148,7 @@ function CartList(props) {
                         className={`${style.buttonCss} ${style.deleteCart} col-xl-2`}
                     >HỦY</button>
                 </div>
-            </Spin>
+            {/* </Spin> */}
         </div>
     );
 }
