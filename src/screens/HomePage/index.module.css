@@ -30,7 +30,7 @@
 
 .carousel .btn {
   color: var(--white-color);
-  border: var(--white-color);
+  border: var(--white-background-color);
   opacity: 40%;
 }
 
@@ -46,33 +46,81 @@
 }
 
 .accessories {
-  min-height: 90vh;
-  background-image: url("../../Images/home_accessories.png");
-  background-size: 80% 80%;
-  background-repeat: no-repeat;
+  min-height: 70vh;
+  margin: 1rem 0;
   flex-direction: column;
   background-size: cover;
   background-position: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 2rem;
+}
+.accessories .accessoriesCute1 {
+  background-image: url("../../Images/seven/accessory/tẩu1.jpg");
+  background-size: cover;
+  position: relative;
+  margin: 1rem 0;
+  min-height: 50vh;
+}
+.accessories .accessoriesCute2 {
+  background-image: url("../../Images/seven/accessory/boc\ 2.jpg");
+  background-size: cover;
+  position: relative;
+  margin: 1rem 0;
+  min-height: 50vh;
+}
+.accessories .accessoriesCute3 {
+  background-image: url("../../Images/seven/accessory/giá\ 1.jpg");
+  background-size: cover;
+  position: relative;
+  margin: 1rem 0;
+  min-height: 50vh;
+}
+.accessories .accessoryItem {
+  justify-content: center;
+}
+
+.accDesc {
+  padding: 2rem 0;
+  background-color: var(--caption-background);
+  position: absolute;
+  left: 10%;
+  top: 30%;
+  right: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.descTitle {
+  color: var(--white-color);
+}
+
+.descAtt {
+  color: var(--white-color);
 }
 
 .accessories-header {
-  padding-left: 6vw;
-  padding-top: 60px;
+  padding-left: 32px;
+  padding-top: 1rem;
   font-size: 4rem;
   text-transform: uppercase;
   font-weight: bold;
 }
 
 .accessories-content {
-  padding: 2rem;
-  padding-left: 6vw;
+  padding-left: 32px;
   font-size: 2.2rem;
   text-transform: uppercase;
 }
 
 .accessories .accessories-btn {
-  margin-left: 6vw;
-  margin-top: 3rem;
+  /* margin-left: 6vw;
+  margin-top: 3rem; */
+  background-color: var(--white-background-color);
+  border-color: var(--white-background-color);
   width: 100px;
   height: 40px;
   border-radius: 5px;
@@ -94,7 +142,6 @@
 .accessories .accessories-btn:hover a {
   color: var(--yellow-color);
 }
-
 
 .newsList {
   display: flex;
@@ -188,7 +235,6 @@ a {
   object-position: 50% 50%;
 }
 
-
 .carousel .container .caption {
   color: var(--white-color);
 }
@@ -206,7 +252,6 @@ a {
   font-size: 4.2rem;
   text-transform: uppercase;
   color: var(--white-color);
-
 }
 
 .carousel .container .caption .attribute {
@@ -215,13 +260,12 @@ a {
   color: var(--white-color);
 }
 
-
-
 /* Small devices (landscape phones, 576px and up) */
-@media (max-width: 576px) {  }
+@media (max-width: 576px) {
+}
 
 /* // Medium devices (tablets, 768px and up) */
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
   .carousel .container .caption .title {
     font-size: 3rem;
   }
@@ -231,11 +275,11 @@ a {
   .news-header {
     font-size: 1.5rem;
   }
-  
+
   .news-name {
     font-size: 3rem;
   }
-  
+
   .news {
     margin-left: 4vw;
     margin-right: 2vw;
@@ -256,10 +300,12 @@ a {
   .accessories {
     background-size: contain;
   }
- }
+}
 
 /* // Large devices (desktops, 992px and up) */
-@media (max-width: 992px) {  }
+@media (max-width: 992px) {
+}
 
 /* // Extra large devices (large desktops, 1200px and up) */
-@media (max-width: 1200px) {  }
+@media (max-width: 1200px) {
+}
