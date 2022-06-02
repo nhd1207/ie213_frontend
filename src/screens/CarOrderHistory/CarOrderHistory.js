@@ -38,9 +38,7 @@ function CarOrderHistory(props) {
   return (
     <Layout>
       <div className="row">
-        <div
-          className={`${style.sideMenu} col col-xl-3 d-none d-md-block d-inline-flex`}
-        >
+        <div className={`${style.sideMenu} col-xl-3 col-sm-3`}>
           <img
             className={style.avatar}
             src={`${props?.user?.photo}`}
@@ -64,7 +62,7 @@ function CarOrderHistory(props) {
             </Menu.Item>
           </Menu>
         </div>
-        <div className={`${style.content} col col-xl-9 d-none d-md-block`}>
+        <div className={`${style.content} col-xl-9 col-sm-9`}>
           <Spin spinning={props.userLoading || props.carLoading}>
             <DataTable
               dataSource={props?.carsHistory?.carOrder}
