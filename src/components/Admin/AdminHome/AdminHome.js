@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 import { Statistic, Row, Col, Button, Card } from 'antd';
-import { CloseSquareFilled, CheckSquareFilled, LikeOutlined } from '@ant-design/icons';
+import { EditOutlined ,ExclamationCircleOutlined , CheckCircleOutlined , CloseSquareFilled, CheckSquareFilled, LikeOutlined } from '@ant-design/icons';
 import style from './AdminHome.module.css'
 import Layout from '../LayoutAdmin/LayoutAdmin'
 import { getData } from './action'
@@ -14,7 +14,7 @@ function AdminHome(props) {
     useEffect(() => {
         props.getData()
     }, [])
-    const data = [
+    const dataUser = [
         {
             name: 'Group A', value: props?.adminData?.user?.filter(item => {
                 return item.active === true
@@ -26,7 +26,29 @@ function AdminHome(props) {
             }).length
         },
     ];
+    const dataCarOrder = [
+        {
+            name: 'Group A', value: props?.adminData?.carOrder.filter(item => {
+                return item.status === 'Pending'
+            }).length,
+        },
+        {
+            name: 'Group B', value: props?.adminData?.carOrder.filter(item => {
+                return item.status === 'Accepted'
+            }).length,
+        },
+        {
+            name: 'Group C', value: props?.adminData?.carOrder.filter(item => {
+                return item.status === 'Success'
+            }).length,
+        },
+        {
+            name: 'Group D', value: props?.adminData?.carOrder.filter(item => {
+                return item.status === 'Cancelled'
+            }).length,
+        },
 
+    ]
     // const reduce1 = props.carOrder.reduce((sum, element) => {
 
     // }, 0)
@@ -35,8 +57,8 @@ function AdminHome(props) {
         const d = new Date(tickItem);
         return d.toLocaleString('default', { month: 'long' });
     };
-    const COLORS = ['#008000', '#FF0000'];
-
+    const COLORSUSER = ['#008000', '#FF0000'];
+    const COLORCARORDER = ['#f0a500', '#008000', '#0000FF', '#FF0000']
     const RADIAN = Math.PI / 180;
     const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -84,14 +106,18 @@ function AdminHome(props) {
                                             className="inactiveUser"
                                             prefix={<CloseSquareFilled className={`${style.inactiveUserIcon}`} />}
                                         />
-
+                                        <Statistic
+                                        title="Số lượng bài viết"
+                                        value={props?.postAdmin?.data?.post?.length}
+                                        prefix={<EditOutlined className={`${style.postIcon}`}/>}
+                                            />
                                     </Col>
                                     <Col span={6}>
                                         <div width="100%" height="100%">
                                             {/* <ResponsiveContainer width="100%" height="100%"> */}
                                             <PieChart width={200} height={200}>
                                                 <Pie
-                                                    data={data}
+                                                    data={dataUser}
                                                     cx="50%"
                                                     cy="50%"
                                                     labelLine={false}
@@ -100,8 +126,8 @@ function AdminHome(props) {
                                                     fill="#8884d8"
                                                     dataKey="value"
                                                 >
-                                                    {data.map((entry, index) => (
-                                                        <Cell label={renderCustomizedLabel} key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                                    {dataUser.map((entry, index) => (
+                                                        <Cell label={renderCustomizedLabel} key={`cell-${index}`} fill={COLORSUSER[index % COLORSUSER.length]} />
                                                     ))}
                                                 </Pie>
                                                 <Label></Label>
@@ -115,17 +141,82 @@ function AdminHome(props) {
                         </Col>
                         <Col span={12}>
                             <Card>
+                                <Row gutter={16}>
+                                    <Col span={12}>
                                 <Statistic
-                                    title="Số đơn hàng"
+                                    title="Tổng số đơn đặt cọc xe"
                                     value={props?.adminData?.carOrder?.length}
                                 />
-                                <Button
+                                 <Button
                                     onClick={() => history.push('/admin/car-order')}
-                                    style={{ marginTop: 16 }}
                                     type="primary"
                                 >
                                     Xem thêm
                                 </Button>
+                                <Statistic
+                                    title="Số đơn đặt cọc chờ đợi"
+                                    prefix={<ExclamationCircleOutlined className={`${style.pendingOrder}`} />}
+                                    value={props?.adminData?.carOrder?.filter(item => {
+                                        return item.status === 'Pending'
+                                    }).length}
+                                />
+                                 <Statistic
+                                    title="Số đơn được chấp nhận"
+                                    prefix={<CheckCircleOutlined className={`${style.acceptedOrder}`} />}
+                                    value={props?.adminData?.carOrder?.filter(item => {
+                                        return item.status === 'Accepted'
+                                    }).length}
+                                    
+                                />
+                                 <Statistic
+                                    title="Số đơn đã thành công"
+                                    prefix={<CheckSquareFilled className={`${style.ActiveUserIcon}`} />}
+                                    value={props?.adminData?.carOrder?.filter(item => {
+                                        return item.status === 'Success'
+                                    }).length}
+                                />
+                                 <Statistic
+                                    title="Số đơn đã hủy"
+                                    prefix={<CloseSquareFilled className={`${style.inactiveUserIcon}`} />}
+                                    value={props?.adminData?.carOrder?.filter(item => {
+                                        return item.status === 'Cancelled'
+                                    }).length}
+                                />
+                                {/* <Statistic
+                                    title="Số đơn đặt phụ kiện"
+                                    value={props?.adminData?.accessoryBill?.length}
+                                />
+                                <Button
+                                    onClick={() => history.push('admin/accessory')}
+                                    type="primary"
+                                    >
+                                        Xem thêm
+                                    </Button> */}
+                                    </Col>
+                                    <Col span={12}>
+                                    <div width="100%" height="100%">
+                                            {/* <ResponsiveContainer width="100%" height="100%"> */}
+                                            <PieChart width={200} height={200}>
+                                                <Pie
+                                                    data={dataCarOrder}
+                                                    cx="50%"
+                                                    cy="50%"
+                                                    labelLine={false}
+                                                    label={renderCustomizedLabel}
+                                                    outerRadius={80}
+                                                    fill="#8884d8"
+                                                    dataKey="value"
+                                                >
+                                                    {dataCarOrder.map((entry, index) => (
+                                                        <Cell label={renderCustomizedLabel} key={`cell-${index}`} fill={COLORCARORDER[index % COLORCARORDER.length]} />
+                                                    ))}
+                                                </Pie>
+                                                <Label></Label>
+                                            </PieChart>
+                                            {/* </ResponsiveContainer> */}
+                                        </div>
+                                    </Col>
+                                    </Row>
                             </Card>
                         </Col>
                         <LineChart width={800} height={400} data={props?.adminData?.orderCount || []}
@@ -139,14 +230,15 @@ function AdminHome(props) {
                             <Line type="monotone" interval={10} dataKey="total_order" stroke="#8884d8" activeDot={{ r: 8 }} />
                         </LineChart>
                     </Row>
-
+                                                        
                 </div>
             </Layout>
         </div>
     )
 }
 const mapStateToProps = (state) => ({
-    adminData: state.adminData
+    adminData: state.adminData,
+    postAdmin: state.postAdmin
 })
 
 const mapDispatchToProps = dispatch => ({

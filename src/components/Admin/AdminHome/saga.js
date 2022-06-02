@@ -10,6 +10,7 @@ import {
 } from './action'
 
 import * as api from '../../../apis/User'
+import * as apiPost from '../../../apis/Post'
 
 function* getDataSaga(action) {
     try {
@@ -65,11 +66,29 @@ function* getBillCountSaga(action) {
     }
 }
 
+function* getPostSaga(action) {
+    try {
+        const { params } = action
+        const response = yield call(api.getListPost, params)
+        if (response.status === 'success') {
+            yield all([
+                put({ type: TYPE.POSTADMIN.SUCCESS, ...response }),
+            ])
+        } else {
+            yield put({ type: TYPE.POSTADMIN.ERROR, error: response })
+        }
+    } catch (error) {
+        yield all([
+            put({ type: TYPE.POSTADMIN.ERROR, error })
+        ])
+    }
+}
 function* watcher() {
     yield all([
         takeLatest(TYPE.ADMINDATA.REQUEST, getDataSaga),
         takeLatest(TYPE.ADMINDATA.REQUEST, getOrderCountSaga),
         takeLatest(TYPE.ADMINDATA.REQUEST, getBillCountSaga),
+        takeLatest(TYPE.ADMINDATA.REQUEST, getPostSaga),
     ])
 }
 

@@ -4,11 +4,13 @@ const initialState = {
     loading: false,
     loadingOrder: false,
     loadingBill: false,
+    loadingPost: false,
     user: [],
     accessoryBill: [],
     carOrder: [],
     billCount: [],
     orderCount: [],
+    post: [],
 
 }
 
@@ -19,7 +21,8 @@ function reducer(state = initialState, action) {
                 ...state,
                 loading: true,
                 loadingOrder: true,
-                loadingBill: true
+                loadingBill: true,
+                loadingPost: true
             }
         case type.ADMINDATA.SUCCESS:
             return {
@@ -28,6 +31,7 @@ function reducer(state = initialState, action) {
                 user: action.user,
                 accessoryBill: action.accessoryBill,
                 carOrder: action.carOrder,
+                post: action.post,
                 loading: false,
             }
         case type.ADMINDATA.ERROR:
@@ -46,11 +50,22 @@ function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
             }
-            case type.ORDERCOUNT.SUCCESS:
+        case type.BILLCOUNT.SUCCESS:
             return {
                 ...state,
                 billCount: action.countBill,
                 loadingBill: false,
+            }
+        case type.ADMINDATA.ERROR:
+            return {
+                ...state,
+                loading: false,
+            }
+        case type.POSTADMIN.SUCCESS:
+            return {
+                ...state,
+                post: action.data,
+                loadingPost: false,
             }
         case type.ADMINDATA.ERROR:
             return {

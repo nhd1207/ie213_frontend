@@ -9,15 +9,19 @@ export const action_type = {
         SUCCESS: "ORDERCOUNT.SUCCESS",
         ERROR: "ORDERCOUNT.ERROR"
     },
-        BILLCOUNT: {
+    BILLCOUNT: {
         //REQUEST: "ADMINDATA.REQUEST",
         SUCCESS: "BILLCOUNT.SUCCESS",
         ERROR: "BILLCOUNT.ERROR"
     },
+    POSTADMIN: {
+        // REQUEST: "POSTADMIN.REQUEST",
+        SUCCESS: "POSTADMIN.SUCCESS",
+        ERROR: "POSTADMIN.ERROR"
+    },
 }
 
-export function getData (params)
-{
+export function getData(params) {
     return {
         type: action_type.ADMINDATA.REQUEST,
         params,

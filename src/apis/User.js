@@ -97,3 +97,10 @@ export const adminDataBillCount =(data)=> {
         url: `${prefix}/admindata/countBill`
     })
 }
+
+export const getListPost =()=> {
+    return axios({
+        method: 'GET',
+        url: `post/`
+    })
+}

@@ -19,6 +19,11 @@
     color: #FF0000;
 }
 
-.userIcon {
+.userIcon,
+.acceptedOrder {
     color: blue;
+}
+
+.pendingOrder {
+    color: #f0a500;
 }
