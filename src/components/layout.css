@@ -12,5 +12,9 @@
 
 .activeNav {
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #FFFFFF;
+  border-bottom: 2px solid #ffffff;
+}
+
+.header .colorText {
+  color: var(--yellow-color);
 }

@@ -58,7 +58,7 @@
       rgba(0, 0, 0, 0.6) 70%,
       rgb(0, 0, 0) 100%
     ),
-    url(../../Images/campbell.jpg);
+    url(../../Images/josh-berquist.jpg);
   background-size: cover;
   background-position: center center;
 
@@ -123,8 +123,33 @@
 }
 
 .questionDetail .answer {
+  width: 100%;
+  color: #000;
   text-transform: none;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  overflow-y: scroll;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* word-wrap: break-word; */
+  white-space: normal;
+  height: 8rem;
+}
+
+.questionDetail .answerRow {
+  display: block;
+  cursor: default;
+  min-height: 8rem;
+  /* pointer-events: none; */
+}
+
+.answerRow .ansLink {
+  /* pointer-events: none; */
+  color: var(--yellow-color);
+}
+
+.answerRow .ansLink:hover {
+  /* pointer-events: visibleStroke; */
+  color: var(--red-color);
 }
 
 .questionDetail ul {
