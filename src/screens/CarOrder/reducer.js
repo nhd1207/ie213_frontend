@@ -3,7 +3,10 @@ import { action_type as type } from './action'
 const initialState = {
     loading: false,
     car: {},
-    showroom: []
+    showroom: [],
+    orderLoading: false,
+    status: "",
+    go: false
 }
 
 function reducer(state = initialState, action) {
@@ -12,6 +15,7 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 loading: true,
+                go: false
             }
         case type.GETCARORDER.SUCCESS:
             return {
@@ -43,17 +47,20 @@ function reducer(state = initialState, action) {
         case type.CREATECARORDER.REQUEST:
             return {
                 ...state,
-                loading: true,
+                orderLoading: true,
             }
         case type.CREATECARORDER.SUCCESS:
             return {
                 ...state,
-                loading: false,
+                status: action.status,
+                carOrder: action.carOrder,
+                orderLoading: false,
+                go: true
             }
         case type.CREATECARORDER.ERROR:
             return {
                 ...state,
-                loading: false,
+                orderLoading: false,
             }
         default:
             return state

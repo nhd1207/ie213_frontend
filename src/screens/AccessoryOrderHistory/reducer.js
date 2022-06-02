@@ -2,23 +2,23 @@ import { action_type as type } from './action'
 
 const initialState = {
     loading: false,
-    showrooms: [],
+    data: [],
 }
 
 function reducer(state = initialState, action) {
     switch (action.type) {
-        case type.GETSHOWROOM.REQUEST:
+        case type.GETACCESSORYHISTORY.REQUEST:
             return {
                 ...state,
-                loading: true
+                loading: true,
             }
-        case type.GETSHOWROOM.SUCCESS:
+        case type.GETACCESSORYHISTORY.SUCCESS:
             return {
                 ...state,
-                showrooms: action.data,
+                data: action.data,
                 loading: false,
             }
-        case type.GETSHOWROOM.ERROR:
+        case type.GETACCESSORYHISTORY.ERROR:
             return {
                 ...state,
                 loading: false,

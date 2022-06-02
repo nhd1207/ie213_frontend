@@ -10,7 +10,7 @@ import {
 
 import * as api from '../../apis/Car'
 import * as apiUser from '../../apis/User'
-
+import {message} from 'antd'
 function* getListCarSaga(action) {
     try {
         const { params } = action
@@ -74,14 +74,18 @@ function* addCarToWishlistSaga(action) {
             ...data,
             type: "car"
         }
-        console.log(data1);
         const response = yield call(apiUser.addItemToWishlist, data1)
         if(response.status==='success')
+        {
                 yield all([put({type: TYPE.ADDCARTOWISHLIST.SUCCESS, ...response})])
+                message.success("Bạn đã thêm thành công xe vào danh sách yêu thích!");
+        }
         else{
+            message.error("Đã có lỗi xảy ra!!!" + response)
           yield put({type: TYPE.ADDCARTOWISHLIST.ERROR, error: response})
         }
     } catch (error) {
+        message.error("Đã có lỗi xảy ra!!!" + error)
         yield all([
             put({type: TYPE.ADDCARTOWISHLIST.ERROR, error})
         ])

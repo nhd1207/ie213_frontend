@@ -1,109 +1,120 @@
-import React from 'react';
-import { Table, Spin, Space, Tooltip, Popconfirm } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faExclamation } from '@fortawesome/free-solid-svg-icons'
-import dateFormat from 'dateformat';
+import React from "react";
+import { Table, Spin, Space, Tooltip, Popconfirm } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faExclamation } from "@fortawesome/free-solid-svg-icons";
+import dateFormat from "dateformat";
 const DataTable = ({ dataSource, loading, updateUser, deleteUser }) => {
-
   const onSubmit = (values) => {
-    updateUser(values)
-  }
+    updateUser(values);
+  };
 
   const onDelete = (values) => {
-    deleteUser(values)
-  }
+    deleteUser(values);
+  };
 
   const columns = [
     {
-      title: '#',
+      title: "#",
       width: 100,
       render: (value, record, i) => <a>{i + 1}</a>,
     },
     {
-      title: 'Tên người dùng',
-      dataIndex: 'name',
-      key: 'name',
-      className: 'text-left',
-      render: (value, record) =>
+      title: "Tên người dùng",
+      dataIndex: "name",
+      key: "name",
+      className: "text-left",
+      render: (value, record) => (
         <div>
-          <span> {value || ''} </span>
+          <span> {value || ""} </span>
         </div>
+      ),
     },
     {
-      title: 'Hình',
-      dataIndex: 'photo',
-      key: 'photo',
-      className: 'text-left',
-      render: (value, record) =>
-        <img src={value} height={50} width={50}></img>
+      title: "Hình",
+      dataIndex: "photo",
+      key: "photo",
+      className: "text-left",
+      render: (value, record) => <img src={value} height={50} width={50}></img>,
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
-      className: 'text-left',
-      render: (value, record) =>
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      className: "text-left",
+      render: (value, record) => (
         <div>
-          <span> {value || ''} </span>
+          <span> {value || ""} </span>
         </div>
+      ),
     },
     {
-      title: 'Số điện thoại',
-      dataIndex: ['info', 'phoneNumber'],
-      key: 'phone_number',
-      className: 'text-left',
-      render: (value, record) =>
+      title: "Số điện thoại",
+      dataIndex: ["info", "phoneNumber"],
+      key: "phone_number",
+      className: "text-left",
+      render: (value, record) => (
         <div>
-          <span> {value || ''} </span>
+          <span> {value || ""} </span>
         </div>
+      ),
     },
     {
-      title: 'Ngày sinh',
-      dataIndex: ['info', 'dateOfBirth'],
-      key: 'date_of_birth',
-      className: 'text-left',
-      render: (value, record) =>
+      title: "Ngày sinh",
+      dataIndex: ["info", "dateOfBirth"],
+      key: "date_of_birth",
+      className: "text-left",
+      render: (value, record) => (
         <div>
-          <span> {
-            dateFormat(value, "mmmm dS, yyyy")
-            || ''} </span>
+          <span> {dateFormat(value, "mmmm dS, yyyy") || ""} </span>
         </div>
+      ),
     },
     {
-      title: 'Quyền',
-      dataIndex: 'role',
-      key: 'role',
-      className: 'text-left',
-      render: (value, record) =>
-          <div style={{ textAlign: 'center' }}>{
-          (value === 'admin') ?
-            <span style={{ color: 'green' }}>  {'Quản trị viên' || ''} </span> :
-              <span style={{ color: 'blue' }}> {"Người dùng" || ''} </span>
-        }
+      title: "Quyền",
+      dataIndex: "role",
+      key: "role",
+      className: "text-left",
+      render: (value, record) => (
+        <div style={{ textAlign: "center" }}>
+          {value === "admin" ? (
+            <span style={{ color: "green" }}> {"Quản trị viên" || ""} </span>
+          ) : (
+            <span style={{ color: "blue" }}> {"Người dùng" || ""} </span>
+          )}
         </div>
-        },
+      ),
+    },
     {
-      title: 'Action',
-      key: 'action',
+      title: "Trạng thái",
+      dataIndex: "active",
+      key: "active",
+      className: "text-left",
+      render: (value, record) => (
+        <div style={{ textAlign: "center" }}>
+          {value? (
+            <span style={{ color: "green" }}> {"Hoạt động" || ""} </span>
+          ) : (
+            <span style={{ color: "red" }}> {"Không hoạt động" || ""} </span>
+          )}
+        </div>
+      ),
+    },
+    {
+      title: "Action",
+      key: "action",
       render: (text, record) => (
-        <Space >
-          {/* <button onClick={() => onSubmit(record)} className="btn btn-sm btn-primary">
-            <Tooltip placement="top" title="Update User">
-              <span className="px-2">
-                <FontAwesomeIcon icon={faEdit} />
-              </span>
-            </Tooltip>
-          </button> */}
+        <Space>
           <Popconfirm
             placement="left"
-            title='Bạn có muốn xóa?'
+            title={record.active?"Bạn có muốn xóa?":'Bạn có muốn khôi phục'}
             onConfirm={() => onDelete(record?._id)}
             okText="Có"
-            cancelText="Không">
-            <button
-              //onClick={() => onDelete(record?._id)} 
-              className="btn btn-sm btn-primary">
-              <Tooltip placement="top" title="Delete User">
+            cancelText="Không"
+          >
+            <button 
+              className="btn btn-sm btn-primary"
+            >
+              <Tooltip placement="top" title="Chuyển trạng thái người dùng">
                 <span className="px-2">
                   <FontAwesomeIcon icon={faExclamation} />
                 </span>
@@ -112,7 +123,8 @@ const DataTable = ({ dataSource, loading, updateUser, deleteUser }) => {
           </Popconfirm>
         </Space>
       ),
-    },]
+    },
+  ];
   return (
     <Table
       rowKey="_id"
@@ -121,6 +133,6 @@ const DataTable = ({ dataSource, loading, updateUser, deleteUser }) => {
       loading={loading}
     />
   );
-}
+};
 
 export default DataTable;

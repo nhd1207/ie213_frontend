@@ -138,8 +138,7 @@ class index extends Component {
             visible={showForm}
             closable={true}
             onCancel={this.handleCloseModal}
-            onOk={this.handleCloseModal}
-          //onCancel={handleCancel}
+            footer={false}
           >
             <List
               dataSource={this.state.accBill?.accessoryInfo || []}

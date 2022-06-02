@@ -2,61 +2,62 @@ import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from "../../screens/WishListPage/WishList.module.css"
-import {NavLink} from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import {
     HeartFilled,
     ShoppingCartOutlined,
     CarOutlined
 } from "@ant-design/icons";
 import money from "../Share/functions/money"
-import { Button, Spin} from "antd";
+import { Button, Spin } from "antd";
 
 function List(props) {
     const [wishList, setWishList] = useState({})
 
     useEffect(() => {
-        setWishList({...props.data})
+        setWishList({ ...props.data })
     }, [props.data]);
 
     const handleDeleteWishListItem = (index) => {
         let wishList2;
-        wishList2 = {...wishList}
-        wishList2.cars.splice(index,1)
+        wishList2 = { ...wishList }
+        wishList2.cars.splice(index, 1)
         let wishList3 = {
-            cars:[],
-            accessories:[]
+            cars: [],
+            accessories: []
         }
-        wishList3.cars = wishList2.cars.map(item=>{
+        wishList3.cars = wishList2.cars.map(item => {
             return item._id
         })
-        wishList3.accessories = wishList2.accessories.map(item=>{
+        wishList3.accessories = wishList2.accessories.map(item => {
             return item._id
         })
-        props.deleteItem({wishList: {...wishList3}})
+        props.deleteItem({ wishList: { ...wishList3 } })
     }
 
     const handleDeleteWishListItemAcc = (index) => {
         let wishList2;
-        wishList2 = {...wishList}
-        wishList2.accessories.splice(index,1)
+        wishList2 = { ...wishList }
+        wishList2.accessories.splice(index, 1)
         let wishList3 = {
-            cars:[],
-            accessories:[]
+            cars: [],
+            accessories: []
         }
-        wishList3.cars = wishList2.cars.map(item=>{
+        wishList3.cars = wishList2.cars.map(item => {
             return item._id
         })
-        wishList3.accessories = wishList2?.accessories?.map(item=>{
+        wishList3.accessories = wishList2?.accessories?.map(item => {
             return item._id
         })
-        props.deleteItem({wishList: {...wishList3}})
+        props.deleteItem({ wishList: { ...wishList3 } })
     }
 
     return (
-        <Spin spinning={props.spinning}>
+        // <Spin spinning={props.spinning}>
+        <div>
             <div className={`${style.carWrapper} row`}>
                 <h2 className={`${style.listHeading}`}>Danh Sách Xe</h2>
-                {props.data?.cars?.map((item,index) => {
+                {props.data?.cars?.map((item, index) => {
                     let myStyle = {
                         backgroundImage: `url(${item.image.avatar})`
                     }
@@ -66,8 +67,10 @@ function List(props) {
                                 <div className={`${style.productImg} col-xl-4 col-md-12`} style={myStyle} alt="abc"></div>
                                 <div className={`${style.productDetail} col-xl-4 col-md-12`}>
                                     <div className={`${style.productName} row`}>
-                                        <HeartFilled className={`${style.heartIcon}`} />
-                                        {item.name}
+                                        <Link to={`/car/${item._id}`}>
+                                            {item.name}
+                                        </Link>
+                                            {/* <HeartFilled className={`${style.heartIcon}`} /> */}
                                     </div>
                                     <div className={`${style.productDesc} row`}>
                                         {item.description}
@@ -79,18 +82,18 @@ function List(props) {
                                 <div className={`${style.productButton} col-xl-2 col-md-12`}>
                                     <div className={`row`}>
                                         <NavLink to={`/order/${item._id}`}>
-                                        <Button
-                                            className={`${style.bookButton} col-xl-12`}
-                                            type="primary"
-                                            danger
+                                            <Button
+                                                className={`${style.bookButton} col-xl-12`}
+                                                type="primary"
+                                                danger
                                             >
-                                            <CarOutlined />
-                                            Đặt Xe Ngay
-                                        </Button>
+                                                <CarOutlined />
+                                                Đặt Xe Ngay
+                                            </Button>
                                         </NavLink>
                                     </div>
                                     <div className={`row`}>
-                                        <Button onClick={()=>handleDeleteWishListItem(index)} className={`${style.removeButton}`} type="default">
+                                        <Button onClick={() => handleDeleteWishListItem(index)} className={`${style.removeButton}`} type="default">
                                             Xóa
                                         </Button>
                                     </div>
@@ -102,7 +105,7 @@ function List(props) {
             </div>
             <div className={`${style.accessoryWrapper} row`}>
                 <h2 className={`${style.listHeading}`}>Danh Sách Phụ Kiện</h2>
-                {props?.data?.accessories?.map((item,index) => {
+                {props?.data?.accessories?.map((item, index) => {
                     let myStyle = {
                         backgroundImage: `url(${item.image.avatar})`
                     }
@@ -112,8 +115,10 @@ function List(props) {
                                 <div className={`${style.productImg} col-xl-4`} style={myStyle} alt="abc"></div>
                                 <div className={`${style.productDetail} col-xl-4`}>
                                     <div className={`${style.productName} row`}>
-                                        <HeartFilled className={`${style.heartIcon}`} />
+                                        <Link to={`/accessory/${item._id}`}>
+                                        {/* <HeartFilled className={`${style.heartIcon}`} /> */}
                                         {item.name}
+                                        </Link>
                                     </div>
                                     <div className={`${style.productDesc} row`}>
                                         {item.description}
@@ -126,18 +131,18 @@ function List(props) {
                                     <div className={`row`}>
                                         <NavLink to={`/accessory/${item._id}`}>
 
-                                        <Button
-                                            className={`${style.addButton} col-xl-12`}
-                                            type="primary"
-                                            danger
-                                        >
-                                            <ShoppingCartOutlined />
-                                            Thêm vào giỏ hàng
-                                        </Button>
-                                            </NavLink>
+                                            <Button
+                                                className={`${style.addButton} col-xl-12`}
+                                                type="primary"
+                                                danger
+                                            >
+                                                <ShoppingCartOutlined />
+                                                Thêm vào giỏ hàng
+                                            </Button>
+                                        </NavLink>
                                     </div>
                                     <div className={`row`}>
-                                        <Button onClick={()=>handleDeleteWishListItemAcc(index)} className={`${style.removeButton}`} type="default">
+                                        <Button onClick={() => handleDeleteWishListItemAcc(index)} className={`${style.removeButton}`} type="default">
                                             Xóa
                                         </Button>
                                     </div>
@@ -147,7 +152,8 @@ function List(props) {
                     )
                 })}
             </div>
-        </Spin >
+            </div>
+        // </Spin >
     );
 }
 

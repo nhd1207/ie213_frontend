@@ -7,6 +7,7 @@ import home from "./screens/HomePage/reducer";
 import user from "./screens/UserPage/reducer";
 import cart from "./screens/CartPage/reducer";
 import admin from "./screens/AdminPage/reducer";
+import adminData from "./components/Admin/AdminHome/reducer";
 import userAdmin from "./components/Admin/User/reducer";
 import car from "./components/Admin/Car/reducer";
 import accessory from "./components/Admin/Accessory/reducer";
@@ -21,10 +22,13 @@ import newDetail from "./screens/NewsDetail/reducer";
 import wishList from "./screens/WishListPage/reducer";
 import carDetail from "./screens/CarDetailPage/reducer";
 import carList from "./screens/CarPage/reducer";
-import carOrderPage from "./screens/CarOrder/reducer"
-import compare from "./screens/ComparePage/reducer"
-import isLoggedIn from "./components/reducer"
-import updateUserPage from "./screens/UpdateUserPage/reducer"
+import carOrderPage from "./screens/CarOrder/reducer";
+import compare from "./screens/ComparePage/reducer";
+import isLoggedIn from "./components/reducer";
+import updateUserPage from "./screens/UpdateUserPage/reducer";
+import carsHistory from "./screens/CarOrderHistory/reducer";
+import showroom from "./screens/ShowroomPage/reducer"
+import accessoriesHistory from "./screens/AccessoryOrderHistory/reducer";
 
 const Reducer = (history) =>
   combineReducers({
@@ -53,7 +57,11 @@ const Reducer = (history) =>
     carOrderPage,
     compare,
     isLoggedIn,
-    updateUserPage
-  })
+    updateUserPage,
+    adminData,
+    carsHistory,
+    showroom,
+    accessoriesHistory
+  });
   
 export default Reducer

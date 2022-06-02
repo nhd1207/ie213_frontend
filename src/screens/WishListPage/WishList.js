@@ -35,7 +35,7 @@ function WishList(props) {
     return (
         <Layout>
             <Spin size="large" spinning={loading}>
-            {loading ? <></> :
+            {/* {loading ? <></> : */}{
                 (
                     <div className={`${style.wishListContainer}`}>
                         <div className={`${style.imgWrapper}`}></div>

@@ -2,3 +2,23 @@
     padding: 20px;
     background-color: white; 
 }
+
+.activeUser > div {
+    color: #008000;
+}
+
+.inactiveUser > div {
+    color: #FF0000;
+}
+
+.ActiveUserIcon {
+    color: #008000;
+}
+
+.inactiveUserIcon {
+    color: #FF0000;
+}
+
+.userIcon {
+    color: blue;
+}

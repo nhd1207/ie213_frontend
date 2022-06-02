@@ -16,7 +16,6 @@ function* verifyAdminSaga(action) {
     try {
         const { params } = action
         const response = yield call(api.verifyAdmin, params)
-        console.log('response',response)
         if (response.status === 'success' && response.user.role === 'admin') {
             message.success(`Chào mừng ${response.user.name} đến với trang admin`)
             yield all([
