@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import DataTable from "../../components/User/DataTable";
 import { verify } from "../LoginPage/action";
 import { useHistory, Link } from "react-router-dom";
-import FormUpdateUser from "../../components/User/FormUpdateUser"
+import FormUpdateUser from "../../components/User/FormUpdateUser";
 
 function User(props) {
   const [loading, setLoading] = useState(false);
@@ -36,9 +36,9 @@ function User(props) {
   const updateUserInfo = (value) => {
     props.updateUser({
       name: value.name,
-      info: value
+      info: value,
     });
-  }
+  };
 
   return (
     <Layout>
@@ -48,9 +48,7 @@ function User(props) {
         ) : (
           <>
             <div className="row">
-              <div
-                className={`${style.sideMenu} col col-xl-3 d-none d-md-block d-inline-flex`}
-              >
+              <div className={`${style.sideMenu} col-xl-3 col-sm-3`}>
                 <img
                   className={style.avatar}
                   src={`${props.user?.photo}`}
@@ -67,16 +65,16 @@ function User(props) {
                     <Link to="/user/my-order/cars">Lịch sử đặt hàng xe</Link>
                   </Menu.Item>
                   <Menu.Item key="3">
-                    <Link to="/user/my-order/accessories">Lịch sử đặt hàng phụ kiện</Link>
+                    <Link to="/user/my-order/accessories">
+                      Lịch sử đặt hàng phụ kiện
+                    </Link>
                   </Menu.Item>
                   <Menu.Item key="4">
                     <a onClick={signoutHandler}> {"Đăng xuất"}</a>
                   </Menu.Item>
                 </Menu>
               </div>
-              <div
-                className={`${style.content} col col-xl-9 d-none d-md-block`}
-              >
+              <div className={`${style.content} col-xl-9 col-sm-9`}>
                 <Spin spinning={props.loading}>
                   <div className={`${style.descriptions}`}>
                     <Descriptions
@@ -123,7 +121,10 @@ function User(props) {
                       </Descriptions.Item>
                     </Descriptions>
                   </div>
-                  <FormUpdateUser data={props.user} updateUser={updateUserInfo}></FormUpdateUser>
+                  <FormUpdateUser
+                    data={props.user}
+                    updateUser={updateUserInfo}
+                  ></FormUpdateUser>
                   {/* <DataTable
                   dataSource={props.bills?.accessoryBill}
                   handleShowForm={openModal}
@@ -178,7 +179,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   updateUser: (params) => {
     dispatch(updateUser(params));
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(User);

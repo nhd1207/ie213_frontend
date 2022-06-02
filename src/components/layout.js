@@ -29,16 +29,20 @@ function Layouts(props) {
 
   function logoutHandler() {
     props.logout();
-    if (match.url.contain("wishlist") || match.url.contain("cart") || match.url.contain("user")) {
-      history.replace(`login`)
+    if (
+      match.url.contain("wishlist") ||
+      match.url.contain("cart") ||
+      match.url.contain("user")
+    ) {
+      history.replace(`login`);
     }
-    history.replace(`${match.url}`)
+    history.replace(`${match.url}`);
   }
 
   const context = useContext(RouteContext);
   useEffect(() => {
     context.url = match.url;
-  }, [match])
+  }, [match]);
 
   useEffect(() => {
     props.verifyLayout();
@@ -188,17 +192,17 @@ function Layouts(props) {
               {/* </Spin> */}
             </Menu.Item>
 
-              {/* <Spin spinning={props?.isLoggedIn?.loading}> */}
-              {props?.isLoggedIn === true ? (
-                <></>
-              ) : (
-                <Menu.Item key="signup">
+            {/* <Spin spinning={props?.isLoggedIn?.loading}> */}
+            {props?.isLoggedIn === true ? (
+              <></>
+            ) : (
+              <Menu.Item key="signup">
                 <NavLink to={"/signup"} style={{ color: "#F3EA01" }}>
                   Đăng ký
                 </NavLink>
-            </Menu.Item>
-              )}
-              {/* </Spin> */}
+              </Menu.Item>
+            )}
+            {/* </Spin> */}
 
             {/* )} */}
 
@@ -213,7 +217,7 @@ function Layouts(props) {
       <Content
         style={{
           width: "100%",
-          minHeight: "100vh",
+          // minHeight: "100vh",
         }}
       >
         {props.children}
