@@ -27,3 +27,19 @@
 .pendingOrder {
     color: #f0a500;
 }
+
+.lineChartContainer {
+    display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.lineChart,
+.lineChartContainer > h3 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.iconPrefix {
+    display: block;
+}

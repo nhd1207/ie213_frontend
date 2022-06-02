@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect } from 'react'
 import { Statistic, Row, Col, Button, Card } from 'antd';
-import { EditOutlined ,ExclamationCircleOutlined , CheckCircleOutlined , CloseSquareFilled, CheckSquareFilled, LikeOutlined } from '@ant-design/icons';
+import { CarOutlined, DingtalkOutlined, WalletOutlined, EditOutlined, ExclamationCircleOutlined, CheckCircleOutlined, CloseSquareFilled, CheckSquareFilled, LikeOutlined } from '@ant-design/icons';
 import style from './AdminHome.module.css'
 import Layout from '../LayoutAdmin/LayoutAdmin'
 import { getData } from './action'
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { PureComponent } from 'react';
-import { Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend , Label, Text ,PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Label, Text, PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 
 function AdminHome(props) {
     const history = useHistory()
@@ -85,7 +85,7 @@ function AdminHome(props) {
                                             title="Số lượng người dùng"
                                             value={props?.adminData?.user?.length}
 
-                                            prefix={<LikeOutlined className={`${style.userIcon}`} />}
+                                            prefix={<LikeOutlined className={`${style.userIcon} ${style.iconPrefix}`} />}
                                         />
                                         <Statistic
                                             title="Số lượng người dùng hoạt động"
@@ -93,7 +93,7 @@ function AdminHome(props) {
                                                 return item.active === true
                                             }).length}
 
-                                            prefix={<CheckSquareFilled className={`${style.ActiveUserIcon}`} />}
+                                            prefix={<CheckSquareFilled className={`${style.ActiveUserIcon} ${style.iconPrefix}`} />}
                                             style={{ color: "008000" }}
                                             className="activeUser"
                                         />
@@ -104,15 +104,10 @@ function AdminHome(props) {
                                             }).length}
                                             style={{ color: "FF0000" }}
                                             className="inactiveUser"
-                                            prefix={<CloseSquareFilled className={`${style.inactiveUserIcon}`} />}
+                                            prefix={<CloseSquareFilled className={`${style.inactiveUserIcon} ${style.iconPrefix}`} />}
                                         />
-                                        <Statistic
-                                        title="Số lượng bài viết"
-                                        value={props?.postAdmin?.data?.post?.length}
-                                        prefix={<EditOutlined className={`${style.postIcon}`}/>}
-                                            />
                                     </Col>
-                                    <Col span={6}>
+                                    <Col span={12}>
                                         <div width="100%" height="100%">
                                             {/* <ResponsiveContainer width="100%" height="100%"> */}
                                             <PieChart width={200} height={200}>
@@ -136,6 +131,56 @@ function AdminHome(props) {
                                         </div>
                                     </Col>
                                 </Row>
+                                <Row gutter={16}>
+                                    <Col span={12}>
+                                        <Statistic
+                                            title="Số đơn đặt mua phụ kiện"
+                                            value={props?.adminData?.accessoryBill?.length}
+                                            prefix={<WalletOutlined className={`${style.accessoryBillIcon} ${style.iconPrefix}`} />}
+                                        />
+                                        <Button
+                                            onClick={() => history.push('/admin/accessory-bill')}
+                                            type="primary"
+                                        >
+                                            Xem thêm
+                                        </Button>
+                                        <Statistic
+                                            title="Số lượng bài viết"
+                                            value={props?.postAdmin?.data?.post?.length}
+                                            prefix={<EditOutlined className={`${style.postIcon} ${style.iconPrefix}`} />}
+                                        />
+                                        <Button
+                                            onClick={() => history.push('/admin/post')}
+                                            type="primary"
+                                        >
+                                            Xem thêm
+                                        </Button>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Statistic
+                                            title="Số xe hiện có"
+                                            value={props?.adminData?.accessoryBill?.length}
+                                            prefix={<CarOutlined className={`${style.accessoryBillIcon} ${style.iconPrefix}`} />}
+                                        />
+                                         <Button
+                                            onClick={() => history.push('/admin/car')}
+                                            type="primary"
+                                        >
+                                            Xem thêm
+                                        </Button>
+                                        <Statistic
+                                            title="Số phụ kiện hiện có"
+                                            value={props?.adminData?.accessoryBill?.length}
+                                            prefix={<DingtalkOutlined className={`${style.postIcon} ${style.iconPrefix}`} />}
+                                        />
+                                        <Button
+                                            onClick={() => history.push('/admin/accessory')}
+                                            type="primary"
+                                        >
+                                            Xem thêm
+                                        </Button>
+                                    </Col>
+                                </Row>
                             </Card>
 
                         </Col>
@@ -143,46 +188,46 @@ function AdminHome(props) {
                             <Card>
                                 <Row gutter={16}>
                                     <Col span={12}>
-                                <Statistic
-                                    title="Tổng số đơn đặt cọc xe"
-                                    value={props?.adminData?.carOrder?.length}
-                                />
-                                 <Button
-                                    onClick={() => history.push('/admin/car-order')}
-                                    type="primary"
-                                >
-                                    Xem thêm
-                                </Button>
-                                <Statistic
-                                    title="Số đơn đặt cọc chờ đợi"
-                                    prefix={<ExclamationCircleOutlined className={`${style.pendingOrder}`} />}
-                                    value={props?.adminData?.carOrder?.filter(item => {
-                                        return item.status === 'Pending'
-                                    }).length}
-                                />
-                                 <Statistic
-                                    title="Số đơn được chấp nhận"
-                                    prefix={<CheckCircleOutlined className={`${style.acceptedOrder}`} />}
-                                    value={props?.adminData?.carOrder?.filter(item => {
-                                        return item.status === 'Accepted'
-                                    }).length}
-                                    
-                                />
-                                 <Statistic
-                                    title="Số đơn đã thành công"
-                                    prefix={<CheckSquareFilled className={`${style.ActiveUserIcon}`} />}
-                                    value={props?.adminData?.carOrder?.filter(item => {
-                                        return item.status === 'Success'
-                                    }).length}
-                                />
-                                 <Statistic
-                                    title="Số đơn đã hủy"
-                                    prefix={<CloseSquareFilled className={`${style.inactiveUserIcon}`} />}
-                                    value={props?.adminData?.carOrder?.filter(item => {
-                                        return item.status === 'Cancelled'
-                                    }).length}
-                                />
-                                {/* <Statistic
+                                        <Statistic
+                                            title="Tổng số đơn đặt cọc xe"
+                                            value={props?.adminData?.carOrder?.length}
+                                        />
+                                        <Button
+                                            onClick={() => history.push('/admin/car-order')}
+                                            type="primary"
+                                        >
+                                            Xem thêm
+                                        </Button>
+                                        <Statistic
+                                            title="Số đơn đặt cọc chờ đợi"
+                                            prefix={<ExclamationCircleOutlined className={`${style.pendingOrder} ${style.iconPrefix}`} />}
+                                            value={props?.adminData?.carOrder?.filter(item => {
+                                                return item.status === 'Pending'
+                                            }).length}
+                                        />
+                                        <Statistic
+                                            title="Số đơn được chấp nhận"
+                                            prefix={<CheckCircleOutlined className={`${style.acceptedOrder} ${style.iconPrefix}`} />}
+                                            value={props?.adminData?.carOrder?.filter(item => {
+                                                return item.status === 'Accepted'
+                                            }).length}
+
+                                        />
+                                        <Statistic
+                                            title="Số đơn đã thành công"
+                                            prefix={<CheckSquareFilled className={`${style.ActiveUserIcon} ${style.iconPrefix}`} />}
+                                            value={props?.adminData?.carOrder?.filter(item => {
+                                                return item.status === 'Success'
+                                            }).length}
+                                        />
+                                        <Statistic
+                                            title="Số đơn đã hủy"
+                                            prefix={<CloseSquareFilled className={`${style.inactiveUserIcon} ${style.iconPrefix}`} />}
+                                            value={props?.adminData?.carOrder?.filter(item => {
+                                                return item.status === 'Cancelled'
+                                            }).length}
+                                        />
+                                        {/* <Statistic
                                     title="Số đơn đặt phụ kiện"
                                     value={props?.adminData?.accessoryBill?.length}
                                 />
@@ -194,7 +239,7 @@ function AdminHome(props) {
                                     </Button> */}
                                     </Col>
                                     <Col span={12}>
-                                    <div width="100%" height="100%">
+                                        <div width="100%" height="100%">
                                             {/* <ResponsiveContainer width="100%" height="100%"> */}
                                             <PieChart width={200} height={200}>
                                                 <Pie
@@ -216,21 +261,35 @@ function AdminHome(props) {
                                             {/* </ResponsiveContainer> */}
                                         </div>
                                     </Col>
-                                    </Row>
+                                </Row>
                             </Card>
                         </Col>
-                        <LineChart width={800} height={400} data={props?.adminData?.orderCount || []}
+
+                    </Row>
+                    <div className={`${style.lineChartContainer}`}>
+                        <h3>Số lượng đơn đặt cọc theo tháng</h3>
+                        <LineChart width={800} height={400} className={`${style.lineChart}`} data={props?.adminData?.orderCount || []}
                             margin={{ top: 5, right: 30, left: 50, bottom: 5 }}>
                             <XAxis tickFormatter={formatXAxis} dataKey="_id" />
                             <YAxis />
                             <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip/>
-                            <Legend />
-                            <Text text={'aaaaaa'}/>
+                            <Tooltip />
+                            <Legend></Legend>
                             <Line type="monotone" interval={10} dataKey="total_order" stroke="#8884d8" activeDot={{ r: 8 }} />
                         </LineChart>
-                    </Row>
-                                                        
+                    </div>
+                    <div className={`${style.lineChartContainer}`}>
+                        <h3>Số lượng đơn mua phụ kiện theo tháng</h3>
+                        <LineChart width={800} height={400} className={`${style.lineChart}`} data={props?.adminData?.orderCount || []}
+                            margin={{ top: 5, right: 30, left: 50, bottom: 5 }}>
+                            <XAxis tickFormatter={formatXAxis} dataKey="_id" />
+                            <YAxis />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Tooltip />
+                            <Legend></Legend>
+                            <Line type="monotone" interval={10} dataKey="total_order" stroke="#8884d8" activeDot={{ r: 8 }} />
+                        </LineChart>
+                    </div>
                 </div>
             </Layout>
         </div>
