@@ -148,10 +148,12 @@ function CarOrder(props) {
                       <div
                         className={`${style.color} ${style.specText} col-xl-12`}
                       >
-                        Màu có sẵn:
+                        <div>Màu có sẵn:</div>
+                        <div className={`${style["color-container"]}`}>
                         {props?.car[0]?.color.map((item) => {
-                          return <span> {item}</span>;
+                          return <div className={style["car-color"]} style={{backgroundColor: item}}/> ;
                         })}
+                        </div>
                       </div>
                     </div>
                     <div className={`${style.deposit} col-xl-12`}>
