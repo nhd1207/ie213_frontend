@@ -53,7 +53,6 @@ const Saga = function* (){
       getListCarByIDSaga(),
       carOrderSaga(),
       compareSaga(),
-     // updateUserSaga(),
       AdminHomeSaga(),
       carHistorySaga(),
       showroomSaga(),

@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
-import style from "./AccessoryList.module.css";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
+import { NavLink, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { Menu, Spin, Input, Space, Tag, Row,Pagination  } from "antd";
+import { HeartFilled, MenuOutlined, DollarOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Layout from "../../components/layout";
-import { Pagination } from "antd";
-import { Form } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { getWishList, deleteWishList } from "../WishListPage/action";
 import { getListAccessory, addAccessoryToWishlist, filter } from "./action";
-import { Menu, Spin, Slider } from "antd";
-import { HeartFilled, SettingOutlined } from "@ant-design/icons";
-import { Input, Space } from "antd";
-
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { getWishList, deleteWishList } from "../WishListPage/action";
 import money from "../../components/Share/functions/money";
-import { useHistory } from "react-router-dom";
+import style from "./AccessoryList.module.css";
 
 const { Search } = Input;
 const { SubMenu } = Menu;
@@ -36,21 +31,18 @@ function Accessory(props) {
     page: null,
     priceMin: null,
     priceMax: null,
-    sort: "name",
+    sort: null,
     field: ["name", "code", "price", "amount", "image"],
     keyword: null,
   });
-  var pageSize = 4;
-
-  const marks = {
-    30: "0°C",
-    100: {
-      style: {
-        color: "#f50",
-      },
-      label: <strong>max</strong>,
-    },
-  };
+  const [tags, setTags] = useState([]); // state to handle tag
+  const [isFilterPrice, setIsFilterPrice] = useState(false); // state to check price input filter has used yet?
+  const [priceFilter, setPriceFilter] = useState({ //state to binding to input value
+    priceMin: null,
+    priceMax: null
+  });
+  const history = useHistory();
+  var pageSize = 9;
 
   useEffect(() => {
     props.getWishList();
@@ -58,7 +50,6 @@ function Accessory(props) {
     setTotalPage(props.accessories?.accessories?.length / pageSize);
     setMinIndex(0);
     setMaxIndex(pageSize);
-    console.log(props);
   }, []);
 
   useEffect(() => {
@@ -88,25 +79,39 @@ function Accessory(props) {
     props.wishList.loading,
   ]);
 
-  const handleFilter = (filterValue) => {
-    let params = "";
+  useEffect(() => { //use effect for tag
+    let tagAray = [];
     for (let key in filterValue) {
-      if (filterValue[key] === null) {
-      } else if (key === "priceMin") {
-        params = params + "price[gte]" + "=" + filterValue[key] + "&";
-      } else if (key === "priceMax") {
-        params = params + "price[lt]" + "=" + filterValue[key] + "&";
+      if (filterValue[key] === null || key === "keyword" || key === "field") {
       } else {
-        params = params + key + "=" + filterValue[key] + "&";
+        tagAray.push(
+          <Tag
+            closable
+            onClose={(e) => {
+              e.preventDefault();
+              handleTag(key);
+            }}
+          >
+            {key === "priceMax"
+              ? "Giá tối đa"
+              : key === "priceMin"
+                ? "Giá tối thiểu"
+                : key === "sort"
+                  ? filterValue[key] === "name"
+                    ? "Tên tăng dần"
+                    : filterValue[key] === "-name"
+                      ? "Tên giảm dần"
+                      : filterValue[key] === "price"
+                        ? "Giá tăng dần"
+                        : "Giá giảm dần"
+                  : ""}
+            {key === "sort" ? "" : ": " + money(filterValue[key], "VNĐ")}
+          </Tag>
+        );
       }
     }
-    params = params.slice(0, -1);
-    props.filter(params);
-  };
-
-  const handleClick = (e) => {
-    // console.log("click ", e);
-  };
+    setTags([...tagAray]);
+  }, [filterValue]);
 
   const handleDeleteWishListItem = (value) => {
     let wishList2;
@@ -147,13 +152,34 @@ function Accessory(props) {
     }
   };
 
-  const history = useHistory();
-
   function loginHandler() {
     history.push("/login");
   }
 
-  const handleFilterValue = (value, type) => {
+  const handleChange = (page) => {
+    setCurrent(page);
+    setMinIndex((page - 1) * pageSize);
+    setMaxIndex(page * pageSize);
+  };
+
+  //begin handle filter
+  const handleFilter = (filterValue) => {  //function to call api and reload page
+    let params = "";
+    for (let key in filterValue) {
+      if (filterValue[key] === null) {
+      } else if (key === "priceMin") {
+        params = params + "price[gte]" + "=" + filterValue[key] + "&";
+      } else if (key === "priceMax") {
+        params = params + "price[lt]" + "=" + filterValue[key] + "&";
+      } else {
+        params = params + key + "=" + filterValue[key] + "&";
+      }
+    }
+    params = params.slice(0, -1);
+    props.filter(params);
+  };
+
+  const handleFilterValue = (value, type) => { // function to handle change of value in filter
     let params;
     switch (type) {
       case "name_asc":
@@ -178,17 +204,47 @@ function Accessory(props) {
         setFilterValue(params);
         //handleFilter(params)
         break;
+      case "price":
+        params = { ...filterValue };
+        setFilterValue(params);
+        break;
       default:
         return;
     }
     handleFilter(params);
   };
 
-  const handleChange = (page) => {
-    setCurrent(page);
-    setMinIndex((page - 1) * pageSize);
-    setMaxIndex(page * pageSize);
+  const setPrice = (e, type) => { //function to set value for input price Min and Max
+    let params;
+    let paramForPriceFilter;
+    if (type === "min") {
+      params = { ...filterValue, priceMin: e.target.value };
+      paramForPriceFilter = { ...priceFilter, priceMin: e.target.value }
+      setPriceFilter({ ...paramForPriceFilter })
+    } else if (type === "max") {
+      params = { ...filterValue, priceMax: e.target.value };
+      paramForPriceFilter = { ...priceFilter, priceMax: e.target.value }
+      setPriceFilter({ ...paramForPriceFilter })
+    } else {
+      return;
+    }
+    if (!priceFilter.priceMin && !priceFilter.priceMax) {
+      setIsFilterPrice(false);
+    } else {
+      setIsFilterPrice(true);
+    }
+    setFilterValue(params);
   };
+
+  const handleTag = (keys) => { //function to set value of close tag to null
+    let params = { ...filterValue };
+    for (let key in params) {
+      if (key === keys) params[key] = null;
+    }
+    setFilterValue(params);
+    handleFilter(params);
+  };
+  //end handle filter
 
   return (
     <Layout>
@@ -218,7 +274,6 @@ function Accessory(props) {
                 {props.accessories?.accessories?.length} sản phẩm
               </h3>
               <Menu
-                onClick={handleClick}
                 defaultSelectedKeys={["1"]}
                 defaultOpenKeys={["sub1"]}
                 mode="inline"
@@ -226,13 +281,13 @@ function Accessory(props) {
               >
                 <div className={`${style.rangeInput}`}>
                   <>
-                    <Form.Label>Công Suất</Form.Label>
-                    <Form.Range />
+                    <Form.Label>Bộ Lọc: </Form.Label>
+                    {tags?.map((item) => item)}
                   </>
                 </div>
                 <SubMenu
                   key="sub1"
-                  icon={<SettingOutlined />}
+                  icon={<MenuOutlined />}
                   title="Tên xe"
                   onClick={(e) => handleFilterValue(null, e.key)}
                 >
@@ -241,17 +296,39 @@ function Accessory(props) {
                 </SubMenu>
                 <SubMenu
                   key="sub2"
-                  icon={<SettingOutlined />}
+                  icon={<DollarOutlined />}
                   title="Giá"
                   onClick={(e) => handleFilterValue(null, e.key)}
                 >
-                  <Slider
-                    defaultValue={0}
-                    min={30}
-                    max={100}
-                    marks={marks}
-                    onChange={(e) => handleFilterValue(e, "power")}
-                  />
+                  <Input.Group size="medium">
+                    <Row>
+                      <Input
+                        type={"number"}
+                        value={priceFilter.priceMin}
+                        placeholder={"Giá tối thiểu"}
+                        onChange={(e) => {
+                          setPrice(e, "min");
+                        }}
+                      />
+                    </Row>
+                    <Row>
+                      <Input
+                        type={"number"}
+                        value={priceFilter.priceMax}
+                        placeholder={"Giá tối đa"}
+                        onChange={(e) => {
+                          setPrice(e, "max");
+                        }}
+                      />
+                    </Row>
+                    <p>(VNĐ)</p>
+                  </Input.Group>
+                  <Button
+                    disabled={!isFilterPrice}
+                    onClick={(e) => handleFilterValue(e, "price")}
+                  >
+                    Lọc giá
+                  </Button>
                   <Menu.Item key="price_asc">Tăng dần</Menu.Item>
                   <Menu.Item key="price_desc">Giảm dần</Menu.Item>
                 </SubMenu>
@@ -267,7 +344,7 @@ function Accessory(props) {
                   };
                   if (index >= minIndex && index < maxIndex)
                     return (
-                      <div className="col col-xl-4 col-md-6 col-12">
+                      <div key={index} className="col col-xl-4 col-md-6 col-12">
                         <Card className={`${style.card}`}>
                           <Card.Img
                             className={`${style.image}`}
