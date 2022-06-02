@@ -154,8 +154,9 @@
 
 .carDescWrapper .carImg {
   height: 50vh;
-  background: url(../../Images/Rectangle12.png);
+  /* background: url("https://res.cloudinary.com/sevenimg/image/upload/v1652028058/no-image-available_yyhche.png"); */
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center center;
   clip-path: polygon(50% 0, 100% 0%, 100% 100%, 0 100%);
   animation-name: appearRight;

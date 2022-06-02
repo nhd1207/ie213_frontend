@@ -76,9 +76,9 @@ const DataTable = ({ dataSource, loading, moreDetailHandler }) => {
             </span>
           ) : value === "Accepted" ? (
             <span className={`${style.buttonStateN}`}> {"Đã nhận" || ""} </span>
-          ) : (
+          ) : value === "Cancelled" ? (
             <span className={`${style.buttonStateH}`}> {"Đã hủy" || ""} </span>
-          )}
+          ) : <span className={`${style.buttonStateN}`}> {"Hoàn thành" || ""}</span>}
         </div>
       ),
     },

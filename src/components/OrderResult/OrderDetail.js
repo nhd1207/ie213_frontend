@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Badge, Button, Modal } from "react-bootstrap";
 import classes from "./OrderDetail.module.css";
-
+import {useHistory} from "react-router-dom";
 function OrderDetail(props) {
   function translateStatus(status) {
     if (status === "Pending")
@@ -14,9 +14,14 @@ function OrderDetail(props) {
         status: "Đã huỷ",
         bg: "danger",
       };
-    else
+    else if (status === "Accepted")
       return {
         status: "Đã xác nhận",
+        bg: "success",
+      };
+    else if (status === "Success")
+      return {
+        status: "Hoàn thành",
         bg: "success",
       };
   }
@@ -35,7 +40,20 @@ function OrderDetail(props) {
 
   useEffect(() => {
     setOrderStatus(translateStatus(props.data[0].status));
+  }, []);
+
+  useEffect(() => {
+    if (
+      props.data[0].status === "Success" ||
+      props.data[0].status === "Accepted" ||
+      props.data[0].status === "Cancelled"
+    )
+      setIsDisabled(true);
   }, [props.data[0].status]);
+  let history = useHistory();
+  function carDetailHandler(id) {
+    history.push(`/car/${id}`);
+  }
   return (
     <>
       {props.data.map((item) => {
@@ -59,26 +77,26 @@ function OrderDetail(props) {
                   <span>{item?.place?.name + ", " + item?.place?.address}</span>
                 </p>
                 <p>
-                  Số điện thoại: <span>{item.phone}</span>
+                  Số điện thoại: <span>{item?.phone}</span>
                 </p>
                 <p>
                   Ngày đặt xe:{" "}
                   <span>
-                    {timestampConverter(item.updated_at).toLocaleDateString() +
+                    {timestampConverter(item?.created_at).toLocaleDateString() +
                       " " +
-                      timestampConverter(item.updated_at).toLocaleTimeString()}
+                      timestampConverter(item?.created_at).toLocaleTimeString()}
                   </span>
                 </p>
                 <p>
                   Ngày nhận xe:{" "}
                   <span>
-                    {timestampConverter(item.time).toLocaleDateString() +
+                    {timestampConverter(item?.time).toLocaleDateString() +
                       " " +
-                      timestampConverter(item.time).toLocaleTimeString()}
+                      timestampConverter(item?.time).toLocaleTimeString()}
                   </span>
                 </p>
                 <p>
-                  Ghi chú: <span>{item.note}</span>
+                  Ghi chú: <span>{item?.note}</span>
                 </p>
                 <div style={{ textAlign: "center" }}>
                   <Button
@@ -100,19 +118,19 @@ function OrderDetail(props) {
                 <div className={classes.bar} />
                 <h3 className={classes.productDetail}>Thông tin sản phẩm</h3>
                 <p>
-                  Tên sản phẩm: <span>{item.carInfo.name}</span>
+                  Tên sản phẩm: <span>{item?.carInfo?.name}</span>
                 </p>
                 <p>
-                  Năm sản xuất: <span>{item.carInfo.year}</span>
+                  Năm sản xuất: <span>{item?.carInfo?.year}</span>
                 </p>
                 <div style={{ textAlign: "center" }}>
-                  <Button variant="primary">Xem chi tiết sản phẩm</Button>
+                  <Button variant="primary" onClick={() => carDetailHandler(item?.carInfo._id)}>Xem chi tiết sản phẩm</Button>
                 </div>
               </div>
               <div>
                 <img
                   alt=""
-                  src={item.carInfo.image.avatar}
+                  src={item?.carInfo?.image?.avatar}
                   className={classes.avatar}
                 ></img>
               </div>

@@ -111,6 +111,7 @@ function CarDetail(props) {
   function loginHandler() {
     history.push("/login");
   }
+
   return (
     <Layout>
       <Spin spinning={props.carDetail.loading}>
@@ -176,7 +177,7 @@ function CarDetail(props) {
                 {props?.carDetail?.car[0]?.description}
               </div>
             </div>
-            <div className={`${style.carImg} col-xl-8 col-md-12`}></div>
+            <div className={`${style.carImg} col-xl-8 col-md-12`} style={{backgroundImage: `url("${props?.carDetail?.car[0]?.image?.avatar}")`}}></div>
           </div>
           <div className={`${style.carSpecWrapper} row`}>
             <div className={`${style.carSpecCol} col-xl-6`}>
