@@ -2,29 +2,27 @@ import { action_type as type } from "./action";
 
 const initialState = {
   loading: false,
-  status: "",
-  user: {},
+  carOrder: {},
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case type.SIGNUP.REQUEST:
+    case type.CANCELORDER.REQUEST:
       return {
         ...state,
         loading: true,
-        status: ""
       };
-    case type.SIGNUP.SUCCESS:
+    case type.CANCELORDER.SUCCESS:
       return {
         ...state,
-        status: action.status,
+        carOrder: action.OrderResult,
         loading: false,
       };
-    case type.SIGNUP.ERROR: 
+    case type.CANCELORDER.ERROR:
       return {
         ...state,
         loading: false,
-        status: "error"
+        status: "error",
       };
     default:
       return state;

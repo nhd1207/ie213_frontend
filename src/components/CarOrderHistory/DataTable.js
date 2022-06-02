@@ -74,11 +74,11 @@ const DataTable = ({ dataSource, loading, moreDetailHandler }) => {
               {" "}
               {"Đang chờ" || ""}{" "}
             </span>
-          ) : value === "Success" ? (
+          ) : value === "Accepted" ? (
             <span className={`${style.buttonStateN}`}> {"Đã nhận" || ""} </span>
-          ) : (
+          ) : value === "Cancelled" ? (
             <span className={`${style.buttonStateH}`}> {"Đã hủy" || ""} </span>
-          )}
+          ) : <span className={`${style.buttonStateN}`}> {"Hoàn thành" || ""}</span>}
         </div>
       ),
     },
@@ -87,7 +87,7 @@ const DataTable = ({ dataSource, loading, moreDetailHandler }) => {
       dataIndex: "_id",
       key: "_id",
       className: "text-center",
-      render: (value, record) => <Button onClick={() => {moreDetailHandler(value)}}>Xem thêm</Button>,
+      render: (value, record) => <Button onClick={() => {moreDetailHandler(record); }}>Xem thêm</Button>,
     },
   ];
   return (

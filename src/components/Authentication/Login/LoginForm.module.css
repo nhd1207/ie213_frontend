@@ -75,3 +75,11 @@
 .formGroup .passwordError {
   color: var(--red-color);
 }
+
+.signup {
+  color: #1890ff;
+}
+
+.signup:hover {
+  text-decoration: underline;
+}

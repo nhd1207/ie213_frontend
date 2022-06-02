@@ -16,11 +16,12 @@ import {
 import { getWishList, deleteWishList } from "../WishListPage/action";
 import { addAccessoryToWishlist } from "../AccessoryPage/action";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Spin, Carousel } from "antd";
+import { Spin } from "antd";
 import money from '../../components/Share/functions/money'
 import { getDetailAccessory, updateCart } from "./action";
 import FormUpdateCart from "../../components/AccessoryDetail/FormUpdateCart";
-import {useHistory, useParams} from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom";
+import Carousel from "react-bootstrap/Carousel";
 
 function AccessoryDetail(props) {
     const [wishList, setWishList] = useState({});
@@ -35,45 +36,45 @@ function AccessoryDetail(props) {
         setAccessoryId(params.id)
     }, []);
 
-  useEffect(() => {
-    setWishList({ ...props?.wishList?.wishList });
-  }, [props.wishList.wishList]);
+    useEffect(() => {
+        setWishList({ ...props?.wishList?.wishList });
+    }, [props.wishList.wishList]);
 
-  useEffect(() => {
-      props?.wishList?.wishList?.accessories?.forEach((item) => {
-        if (item._id === accessoryId) {
-            setIsLiked(true)
-        }
-    });
-  }, [
-    props.data.loading,
-    props?.wishList?.wishList?.accessories,
-  ]);
+    useEffect(() => {
+        props?.wishList?.wishList?.accessories?.forEach((item) => {
+            if (item._id === accessoryId) {
+                setIsLiked(true)
+            }
+        });
+    }, [
+        props.data.loading,
+        props?.wishList?.wishList?.accessories,
+    ]);
 
-  const handleAddAccessoryToWishlist = () => {
-    props.addAccessoryToWishlist({itemId: params.id})
-  }
+    const handleAddAccessoryToWishlist = () => {
+        props.addAccessoryToWishlist({ itemId: params.id })
+    }
 
-  const handleDeleteWishListItem = () => {
-    let wishList2;
-    let index1;
-    wishList2 = { ...wishList };
-    wishList2.accessories.map((item, index) => {
-      if (item._id === accessoryId) index1 = index;
-    });
-    wishList2.accessories.splice(index1, 1);
-    let wishList3 = {
-      cars: [],
-      accessories: [],
+    const handleDeleteWishListItem = () => {
+        let wishList2;
+        let index1;
+        wishList2 = { ...wishList };
+        wishList2.accessories.map((item, index) => {
+            if (item._id === accessoryId) index1 = index;
+        });
+        wishList2.accessories.splice(index1, 1);
+        let wishList3 = {
+            cars: [],
+            accessories: [],
+        };
+        wishList3.cars = wishList2.cars.map((item) => {
+            return item._id;
+        });
+        wishList3.accessories = wishList2.accessories.map((item) => {
+            return item._id;
+        });
+        props.deleteWishList({ wishList: { ...wishList3 } });
     };
-    wishList3.cars = wishList2.cars.map((item) => {
-      return item._id;
-    });
-    wishList3.accessories = wishList2.accessories.map((item) => {
-      return item._id;
-    });
-    props.deleteWishList({ wishList: { ...wishList3 } });
-  };
 
     const handleUpdateCart = (value) => {
         if (value.color == null) {
@@ -109,10 +110,10 @@ function AccessoryDetail(props) {
     const history = useHistory();
 
     function loginHandler() {
-      history.push("/login");
+        history.push("/login");
     }
 
-    
+
     return (
         <Layout>
             <Spin size='large' spinning={props.data.loading}>
@@ -154,7 +155,8 @@ function AccessoryDetail(props) {
                             style={{ backgroundImage: `url(${props.data?.data[0]?.image.banner})` }} 
                             alt="abc"></div> */}
                             <div className={`${style.image} col-xl-5`}>
-                                <Carousel afterChange={onChange} >
+                                <Carousel className={`${style.carousel}`}
+                                    afterChange={onChange} >
                                     {/* <div>
                                     <h3 style={contentStyle}>1</h3>
                                 </div>
@@ -167,7 +169,13 @@ function AccessoryDetail(props) {
                                 <div>
                                     <h3 style={contentStyle}>4</h3>
                                 </div> */}
-                                    {props.data?.data[0]?.image?.gallery?.map(item => { return <img src={item}></img> })}
+                                    {props.data?.data[0]?.image?.gallery?.map(item => {
+                                        return(       
+                                        <Carousel.Item>
+                                            <img src={item}></img>
+                                        </Carousel.Item>
+                                        );
+                                    })}
                                 </Carousel>
                             </div>
                             <div className={`${style.content} col-xl-5`}>
@@ -206,19 +214,19 @@ function AccessoryDetail(props) {
                 </div>
             </Spin>
             <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Chức năng này yêu cầu đăng nhập</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Vui lòng đăng nhập để tiếp tục</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Huỷ
-          </Button>
-          <Button variant="primary" onClick={loginHandler}>
-            Đăng nhập
-          </Button>
-        </Modal.Footer>
-      </Modal>
+                <Modal.Header closeButton>
+                    <Modal.Title>Chức năng này yêu cầu đăng nhập</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Vui lòng đăng nhập để tiếp tục</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Huỷ
+                    </Button>
+                    <Button variant="primary" onClick={loginHandler}>
+                        Đăng nhập
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Layout >
     );
 }

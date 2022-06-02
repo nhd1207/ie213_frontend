@@ -94,13 +94,13 @@ function CompareTwoCar(props) {
             <div className={`${style.specRow} row`}>
               <div className={`${style.specRowTitle} col-xl-4`}>Mã lực</div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car1[0]?.specification.power
-                  ? props?.car?.car1[0]?.specification.power + " HP"
+                {props?.car?.car1[0]?.specification?.power
+                  ? props?.car?.car1[0]?.specification?.power + " HP"
                   : ""}
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car2[0]?.specification.power
-                  ? props?.car?.car2[0]?.specification.power + " HP"
+                {props?.car?.car2[0]?.specification?.power
+                  ? props?.car?.car2[0]?.specification?.power + " HP"
                   : ""}
               </div>
             </div>
@@ -109,13 +109,13 @@ function CompareTwoCar(props) {
                 Dung tích xi lanh
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car1[0]?.specification.displacement
-                  ? props?.car?.car1[0]?.specification.displacement + " cc"
+                {props?.car?.car1[0]?.specification?.displacement
+                  ? props?.car?.car1[0]?.specification?.displacement + " cc"
                   : ""}
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car2[0]?.specification.displacement
-                  ? props?.car?.car2[0]?.specification.displacement + " cc"
+                {props?.car?.car2[0]?.specification?.displacement
+                  ? props?.car?.car2[0]?.specification?.displacement + " cc"
                   : ""}
               </div>
             </div>

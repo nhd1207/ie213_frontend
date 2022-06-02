@@ -98,7 +98,6 @@ function Car(props) {
         );
       }
     }
-    console.log("tagAray", tagAray);
     setTags([...tagAray]);
   }, [filterValue]);
 

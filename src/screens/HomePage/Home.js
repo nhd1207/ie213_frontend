@@ -38,7 +38,7 @@ function Home(props) {
                   <Carousel.Caption className={style.caption}>
                     <div className={`${style.backgroundCaption}`}>
                       <h3 className={style.title}>{car?.name}</h3>
-                      <p className={style.attribute}>{car?.description}</p>
+                      <p className={style.attribute}>{car?.special}</p>
                     </div>
                     {/* <button className={style.btn}>
                       <NavLink to="/car">

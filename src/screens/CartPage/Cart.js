@@ -89,7 +89,7 @@ function Cart(props) {
   return (
     <Layout>
         <Spin size="large" spinning={loading}>
-        {loading ? <></> :
+        {/* {loading ? <></> : */}{
           (
         <>
           <div className={`${style.cartContainer}`}>

@@ -7,7 +7,7 @@
 
 .imgWrapper {
   height: 25vh;
-  background: url(../../Images/Rectangle12.png);
+  background: url(../../Images/spencer-davis.jpg);
   background-size: cover;
   background-position: center center;
 }
@@ -112,9 +112,9 @@
     1px -1px 0 rgba(255, 255, 0, 0.9), -1px 1px 0 rgba(255, 255, 0, 0.9); */
 }
 
-
 /* cart summary */
-.cartSummaryWrapper {}
+.cartSummaryWrapper {
+}
 
 .cartSummary {
   padding: 0.5rem;

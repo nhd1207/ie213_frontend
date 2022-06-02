@@ -1,5 +1,6 @@
 import { Menu, Button, Descriptions, Modal, List } from "antd";
-import style from "./index.module.css";
+// import style from "./index.module.css";
+import style from "../UserPage/index.module.css";
 import Layout from "../../components/layout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
@@ -11,7 +12,7 @@ import DataTable from "../../components/User/DataTable";
 import { getUser } from "../UserPage/action";
 import { useHistory, Link } from "react-router-dom";
 import { getAccessoryHistory } from "./action";
-import {verify} from "../LoginPage/action"
+import { verify } from "../LoginPage/action";
 
 function ACcessoryOrderHistory(props) {
   const [showForm, setShowForm] = useState(false);
@@ -45,42 +46,35 @@ function ACcessoryOrderHistory(props) {
   return (
     <Layout>
       <div className="row">
-        <div
-          className={`${style.sideMenu} col col-xl-3 d-none d-md-block d-inline-flex`}
-        >
+        <div className={`${style.sideMenu} col-xl-3 col-sm-3`}>
           <img
             className={style.avatar}
             src={`${props.user?.photo}`}
             alt="User avatar"
           ></img>
           <div className={style.avatarName}>{props.user.name}</div>
-          <Menu
-            className={style.sideNav}
-            defaultSelectedKeys={["4"]}
-          >
+          <Menu className={style.sideNav} defaultSelectedKeys={["3"]}>
             <Menu.Item key="1">
-              <Link to="/user">
-                Thông tin
-              </Link>
+              <Link to="/user">Thông tin</Link>
             </Menu.Item>
             <Menu.Item key="2">
-              <Link to="/user/update">Cập nhật thông tin</Link>
-            </Menu.Item>
-            <Menu.Item key="3">
               <Link to="/user/my-order/cars">Lịch sử đặt hàng xe</Link>
             </Menu.Item>
-            <Menu.Item key="4">
-              <Link to="/user/my-order/accessories">Lịch sử đặt hàng phụ kiện</Link>
+            <Menu.Item key="3">
+              <Link to="/user/my-order/accessories">
+                Lịch sử đặt hàng phụ kiện
+              </Link>
             </Menu.Item>
-            <Menu.Item key="5">
+            <Menu.Item key="4">
               <a onClick={signoutHandler}> {"Đăng xuất"}</a>
             </Menu.Item>
           </Menu>
         </div>
-        <div
-          className={`${style.content} col col-xl-9 d-none d-md-block`}
-        >
-          <Spin size="large" spinning={props.userLoading || props.accessoryLoading}>
+        <div className={`${style.content} col-xl-9 col-sm-9`}>
+          <Spin
+            size="large"
+            spinning={props.userLoading || props.accessoryLoading}
+          >
             <DataTable
               dataSource={props.accessoriesHistory?.accessoryBill}
               handleShowForm={openModal}
@@ -129,7 +123,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   verify: (params) => {
     dispatch(verify(params));
-  }
+  },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ACcessoryOrderHistory);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ACcessoryOrderHistory);

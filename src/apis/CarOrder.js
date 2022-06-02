@@ -47,4 +47,9 @@ export const destroy =(id)=> {
 }
 
 
-
+export const cancel =(id)=> {
+    return axios({
+        method: 'PATCH',
+        url: `${prefix}/cancel/${id}`
+    })
+}

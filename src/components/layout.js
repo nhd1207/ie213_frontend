@@ -29,16 +29,20 @@ function Layouts(props) {
 
   function logoutHandler() {
     props.logout();
-    if (match.url.contain("wishlist") || match.url.contain("cart") || match.url.contain("user")) {
-      history.replace(`login`)
+    if (
+      match.url.contain("wishlist") ||
+      match.url.contain("cart") ||
+      match.url.contain("user")
+    ) {
+      history.replace(`login`);
     }
-    history.replace(`${match.url}`)
+    history.replace(`${match.url}`);
   }
 
   const context = useContext(RouteContext);
   useEffect(() => {
     context.url = match.url;
-  }, [match])
+  }, [match]);
 
   useEffect(() => {
     props.verifyLayout();
@@ -68,11 +72,14 @@ function Layouts(props) {
       }
     >
       <Affix style={{ zIndex: 100 }}>
-        <Header className="header" style={{ backgroundColor: "black" }}>
+        <Header
+          className="header"
+          style={{ backgroundColor: "rgb(27, 26, 23)" }}
+        >
           <Menu
             style={{
               width: "100%",
-              backgroundColor: "black",
+              backgroundColor: "rgb(27, 26, 23)",
               color: "#fff",
             }}
             mode="horizontal"
@@ -80,7 +87,7 @@ function Layouts(props) {
             className="Navbar navLeft"
           >
             <Menu.Item key="home">
-              <NavLink to={"/home"} style={{}}>
+              <NavLink to={"/home"}>
                 <img
                   src={require("../Images/logo.png")}
                   alt={"logo"}
@@ -91,42 +98,66 @@ function Layouts(props) {
             </Menu.Item>
 
             <Menu.Item key="cars">
-              <NavLink to={`/car`} style={{ color: "#F3EA01" }}>
+              <NavLink
+                to={`/car`}
+                style={{ color: "#F3EA01" }}
+                activeClassName={"activeNav"}
+              >
                 {" "}
                 CÁC DÒNG XE{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="showrooms">
-              <NavLink to={`/showroom`} style={{ color: "#F3EA01" }}>
+              <NavLink
+                to={`/showroom`}
+                style={{ color: "#F3EA01" }}
+                activeClassName={"activeNav"}
+              >
                 {" "}
                 SHOWROOMS{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="accessory">
-              <NavLink to={`/accessory`} style={{ color: "#F3EA01" }}>
+              <NavLink
+                to={`/accessory`}
+                style={{ color: "#F3EA01" }}
+                activeClassName={"activeNav"}
+              >
                 {" "}
                 PHỤ KIỆN{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="news">
-              <NavLink to={`/news`} style={{ color: "#F3EA01" }}>
+              <NavLink
+                to={`/news`}
+                style={{ color: "#F3EA01" }}
+                activeClassName={"activeNav"}
+              >
                 {" "}
                 TIN TỨC{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="about_us">
-              <NavLink to={`/about_us`} style={{ color: "#F3EA01" }}>
+              <NavLink
+                to={`/about_us`}
+                style={{ color: "#F3EA01" }}
+                activeClassName={"activeNav"}
+              >
                 {" "}
                 VỀ CHÚNG TÔI{" "}
               </NavLink>
             </Menu.Item>
 
             <Menu.Item key="support">
-              <NavLink to={`/support`} style={{ color: "#F3EA01" }}>
+              <NavLink
+                to={`/support`}
+                style={{ color: "#F3EA01" }}
+                activeClassName={"activeNav"}
+              >
                 {" "}
                 HỖ TRỢ{" "}
               </NavLink>
@@ -135,7 +166,7 @@ function Layouts(props) {
           <Menu
             style={{
               width: "100%",
-              backgroundColor: "black",
+              backgroundColor: "rgb(27, 26, 23)",
               color: "#fff",
             }}
             mode="horizontal"
@@ -181,12 +212,32 @@ function Layouts(props) {
                   Đăng xuất
                 </NavLink>
               ) : (
-                <NavLink to={"/login"} style={{ color: "#F3EA01" }}>
+                <NavLink
+                  to={"/login"}
+                  style={{ color: "#F3EA01" }}
+                  activeClassName={"activeNav"}
+                >
                   Đăng nhập
                 </NavLink>
               )}
               {/* </Spin> */}
             </Menu.Item>
+
+            {/* <Spin spinning={props?.isLoggedIn?.loading}> */}
+            {props?.isLoggedIn === true ? (
+              <></>
+            ) : (
+              <Menu.Item key="signup">
+                <NavLink
+                  to={"/signup"}
+                  style={{ color: "#F3EA01" }}
+                  activeClassName={"activeNav"}
+                >
+                  Đăng ký
+                </NavLink>
+              </Menu.Item>
+            )}
+            {/* </Spin> */}
 
             {/* )} */}
 
@@ -201,7 +252,7 @@ function Layouts(props) {
       <Content
         style={{
           width: "100%",
-          minHeight: "100vh",
+          // minHeight: "100vh",
         }}
       >
         {props.children}
