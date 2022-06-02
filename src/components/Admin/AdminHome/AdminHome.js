@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 import { Statistic, Row, Col, Button, Card } from 'antd';
-import { CarOutlined, DingtalkOutlined, WalletOutlined, EditOutlined, ExclamationCircleOutlined, CheckCircleOutlined, CloseSquareFilled, CheckSquareFilled, LikeOutlined } from '@ant-design/icons';
+import { UserOutlined, UserAddOutlined, UserDeleteOutlined, CarOutlined, DingtalkOutlined, WalletOutlined, EditOutlined, ExclamationCircleOutlined, CheckCircleOutlined, CloseSquareFilled, CheckSquareFilled, LikeOutlined } from '@ant-design/icons';
 import style from './AdminHome.module.css'
 import Layout from '../LayoutAdmin/LayoutAdmin'
 import { getData } from './action'
@@ -85,7 +85,7 @@ function AdminHome(props) {
                                             title="Số lượng người dùng"
                                             value={props?.adminData?.user?.length}
 
-                                            prefix={<LikeOutlined className={`${style.userIcon} ${style.iconPrefix}`} />}
+                                            prefix={<UserOutlined className={`${style.userIcon} ${style.iconPrefix}`} />}
                                         />
                                         <Statistic
                                             title="Số lượng người dùng hoạt động"
@@ -93,7 +93,7 @@ function AdminHome(props) {
                                                 return item.active === true
                                             }).length}
 
-                                            prefix={<CheckSquareFilled className={`${style.ActiveUserIcon} ${style.iconPrefix}`} />}
+                                            prefix={<UserAddOutlined className={`${style.ActiveUserIcon} ${style.iconPrefix}`} />}
                                             style={{ color: "008000" }}
                                             className="activeUser"
                                         />
@@ -104,7 +104,7 @@ function AdminHome(props) {
                                             }).length}
                                             style={{ color: "FF0000" }}
                                             className="inactiveUser"
-                                            prefix={<CloseSquareFilled className={`${style.inactiveUserIcon} ${style.iconPrefix}`} />}
+                                            prefix={<UserDeleteOutlined className={`${style.inactiveUserIcon} ${style.iconPrefix}`} />}
                                         />
                                     </Col>
                                     <Col span={12}>
