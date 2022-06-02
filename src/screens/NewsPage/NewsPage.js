@@ -94,7 +94,7 @@ function NewsPage(props) {
                         onClick={() => {history.push(`news/${item._id}`)}}
                         className={`${style.newsBtn} btn btn-outline-dark col-xl-3`}
                       >
-                        <NavLink to={`news/${item._id}`}>ĐỌC THÊM</NavLink>
+                        ĐỌC THÊM
                       </button>
                     </div>
                   </div>
