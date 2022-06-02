@@ -40,7 +40,7 @@ function Accessory(props) {
     field: ["name", "code", "price", "amount", "image"],
     keyword: null,
   });
-  var pageSize = 4;
+  var pageSize = 6;
 
   const marks = {
     30: "0°C",
