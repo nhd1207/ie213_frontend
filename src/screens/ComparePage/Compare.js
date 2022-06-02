@@ -48,11 +48,15 @@ function CompareTwoCar(props) {
         history.push(`${location.pathname}?id1=${car1ID}&id2=${car2ID}`);
         props.getCar2(car2ID);
       } else history.push(`${location.pathname}?id1=${car1ID}`);
-    } else history.push(`${location.pathname}`);
+    } else history.push(`${location.pathname}?`);
+    if (car2ID !== "") {
+      props.getCar2(car2ID);
+      if (car1ID === "") history.push(`${location.pathname}?id2=${car2ID}`);
+    }
   }, [car1ID, car2ID]);
 
   function placingOder(carID) {
-    history.push(`/order/${carID}`)
+    history.push(`/order/${carID}`);
   }
 
   return (
@@ -178,32 +182,36 @@ function CompareTwoCar(props) {
               <div
                 className={`${style.specRowText} ${style.colorContainer} col-xl-4`}
               >
-                {props?.car?.car1[0]?.color ? props?.car?.car1[0]?.color.map((item) => {
-                  let key = 1;
-                  key++;
-                  return (
-                    <div
-                      key={item + " car1 " + key}
-                      className={style.color}
-                      style={{ backgroundColor: `${item}` }}
-                    />
-                  );
-                }) : ""}
+                {props?.car?.car1[0]?.color
+                  ? props?.car?.car1[0]?.color.map((item) => {
+                      let key = 1;
+                      key++;
+                      return (
+                        <div
+                          key={item + " car1 " + key}
+                          className={style.color}
+                          style={{ backgroundColor: `${item}` }}
+                        />
+                      );
+                    })
+                  : ""}
               </div>
               <div
                 className={`${style.specRowText} ${style.colorContainer} col-xl-4`}
               >
-                {props?.car?.car2[0]?.color ? props?.car?.car2[0]?.color.map((item) => {
-                  let key = 1;
-                  key++;
-                  return (
-                    <div
-                      key={item + " car2 " + key}
-                      className={style.color}
-                      style={{ backgroundColor: `${item}` }}
-                    />
-                  );
-                }) : ""}
+                {props?.car?.car2[0]?.color
+                  ? props?.car?.car2[0]?.color.map((item) => {
+                      let key = 1;
+                      key++;
+                      return (
+                        <div
+                          key={item + " car2 " + key}
+                          className={style.color}
+                          style={{ backgroundColor: `${item}` }}
+                        />
+                      );
+                    })
+                  : ""}
               </div>
             </div>
             <div className={`${style.specRow} ${style.specRowPrice} row`}>
@@ -211,10 +219,14 @@ function CompareTwoCar(props) {
                 Giá Tiêu Chuẩn
               </div>
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car1[0]?.price ? money(props?.car?.car1[0]?.price, "VND") : ""}
+                {props?.car?.car1[0]?.price
+                  ? money(props?.car?.car1[0]?.price, "VND")
+                  : ""}
               </div>{" "}
               <div className={`${style.specRowText} col-xl-4`}>
-                {props?.car?.car2[0]?.price ? money(props?.car?.car2[0]?.price, "VND") : ""}
+                {props?.car?.car2[0]?.price
+                  ? money(props?.car?.car2[0]?.price, "VND")
+                  : ""}
               </div>
             </div>
             <div className={`${style.specRow} row`}>
@@ -231,7 +243,9 @@ function CompareTwoCar(props) {
                   type="primary"
                   danger
                   disabled={car1ID ? false : true}
-                  onClick={() => {placingOder(props?.car?.car1[0]?._id)}}
+                  onClick={() => {
+                    placingOder(props?.car?.car1[0]?._id);
+                  }}
                 >
                   Đặt xe {props?.car?.car1[0]?.name}
                   <CarOutlined />
@@ -243,7 +257,9 @@ function CompareTwoCar(props) {
                   type="primary"
                   danger
                   disabled={car2ID ? false : true}
-                  onClick={() => {placingOder(props?.car?.car2[0]?._id)}}
+                  onClick={() => {
+                    placingOder(props?.car?.car2[0]?._id);
+                  }}
                 >
                   Đặt xe {props?.car?.car2[0]?.name}
                   <CarOutlined />
