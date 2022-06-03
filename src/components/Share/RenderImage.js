@@ -22,7 +22,6 @@ class renderImageDragAnt extends Component {
         const uploadData = new FormData();
         uploadData.append("file", e.target.files[0], "file");
         const url = cloudinaryUpload(uploadData)
-        console.log('url',url)
         //this.state.url=url.data
     }
 

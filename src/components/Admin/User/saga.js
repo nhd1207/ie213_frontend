@@ -53,7 +53,6 @@ function* UpdateSaga(action) {
 function* DeleteSaga(action) {
     try {
         const { id } = action
-        console.log(id);
         const response = yield call(apiAuth.toggleUser, id)  // chua co ham xoa nguoi dung
         if (response.status === 'success') {
             message.success('xóa người dùng thành công')

@@ -208,7 +208,6 @@ function Car(props) {
         //handleFilter(params)
         break;
       case "price":
-        console.log("value", value);
         params = { ...filterValue };
         setFilterValue(params);
         break;
@@ -251,8 +250,6 @@ function Car(props) {
     } else {
       setIsFilterPrice(true);
     }
-    console.log("priceFilter", priceFilter);
-    console.log("paramForPriceFilter", paramForPriceFilter);
     setFilterValue(params);
   };
 

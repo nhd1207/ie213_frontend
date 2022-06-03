@@ -5,7 +5,6 @@ const { Option } = Select;
 function CarSelection(props) {
 
   function carSelectHandler(id) {
-    console.log(id);
     props.onChangeCar(id);
   }
 

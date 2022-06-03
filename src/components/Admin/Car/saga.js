@@ -81,10 +81,8 @@ function* UpdateSaga(action) {
 
 function* DeleteSaga(action) {
     try {
-        console.log(action)
         const { id } = action
         const response = yield call(api.destroy, id)
-        console.log(response)
         if(response.status==='success'){
                 yield all([
                     put({type: TYPE.DELETE.SUCCESS, ...response}),

@@ -16,7 +16,6 @@ import { verify } from "../LoginPage/action";
 function CarOrderHistory(props) {
   function signoutHandler() {
     Cookies.set("jwt", "");
-    console.log(Cookies.get("jwt"));
     window.location.pathname = "/login";
   }
 
