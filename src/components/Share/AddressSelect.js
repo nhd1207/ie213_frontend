@@ -16,7 +16,7 @@ export default function Province(props) {
 
     useEffect(() => {
         props.address(address.add + ', ' + address.ward + ', ' + address.district + ', ' + address.city)
-        if (address.add == '' || address.ward == '' || address.district == '' || address.city == '') {
+        if (address.add === '' || address.ward === '' || address.district === '' || address.city === '') {
             props.modalValidate(false)
         } else {
             props.modalValidate(true)
@@ -24,7 +24,7 @@ export default function Province(props) {
     }, [address])
 
     const handleCityChange = (value) => { //value là id
-        if (value != "") {
+        if (value !== "") {
             const result = data.filter(n => n.Id === value);
             setAddress({ ...address, city: result[0].Name });
             setDistricts([...result[0].Districts])
@@ -32,7 +32,7 @@ export default function Province(props) {
     }
 
     const handleDistrictChange = (value) => {
-        if (value != "") {
+        if (value !== "") {
             const dataWards = districts.filter(n => n.Id === value)
             setWards([...dataWards[0].Wards])
             setAddress({ ...address, district: dataWards[0].Name });
@@ -40,7 +40,7 @@ export default function Province(props) {
     }
 
     const handleChangeWard = (value) => {
-        if (value != "") {
+        if (value !== "") {
             const Wa = wards.filter(n => n.Id === value)
             setAddress({ ...address, ward: Wa[0].Name });
         }
