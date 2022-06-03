@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Layout, Breadcrumb, Spin } from "antd";
+import { Breadcrumb, Spin } from "antd";
 import Layouts from "../../components/layout";
 import style from "./index.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
