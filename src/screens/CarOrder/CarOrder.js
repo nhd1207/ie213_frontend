@@ -328,7 +328,6 @@ function CarOrder(props) {
                           Tôi đã đọc{" "}
                           <a
                             onClick={() => {
-                              console.log("dieu khoan");
                             }}
                           >
                             Điều Khoản

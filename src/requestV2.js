@@ -35,7 +35,6 @@ instance.interceptors.response.use(
   },
   error => {
       if (!error.response) {
-          console.log("Please check your internet connection.");
           return {
             data: {
               status: 0,

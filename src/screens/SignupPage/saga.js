@@ -5,7 +5,6 @@ import * as api from "../../apis/Auth";
 
 function* getListSaga(action) {
   try {
-    console.log(123);
     const { params } = action;
     let data = params;
     const response = yield call(api.signup, data);

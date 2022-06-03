@@ -11,7 +11,6 @@ import { NavLink, useHistory } from "react-router-dom";
 function NewsPage(props) {
   useEffect(() => {
     props.getListPost();
-    console.log(props);
   }, []);
   const history = useHistory();
   return (
@@ -62,7 +61,6 @@ function NewsPage(props) {
             dataSource={props.news.posts?.post || []}
             pagination={{
               onChange: (page) => {
-                console.log(page);
               },
               pageSize: 3,
               className: `${style.pagination} col-xl-12`,

@@ -47,7 +47,6 @@ function* CreateSaga(action) {
         }
     } catch (error) {
         message.error('Xảy ra lỗi trong quá trình tạo bài viết')
-        console.log(error)
         yield all([
             put({ type: TYPE.CREATE.ERROR, error })
         ])
@@ -78,10 +77,8 @@ function* UpdateSaga(action) {
 
 function* DeleteSaga(action) {
     try {
-        console.log(action)
         const { id } = action
         const response = yield call(api.destroy, id)
-        console.log(response)
         if (response.status === 'success') {
             message.success('Xóa bài viết thành công')
             yield all([

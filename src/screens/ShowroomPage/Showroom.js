@@ -8,7 +8,6 @@ import {Spin} from "antd"
 function Showroom(props) {
   useEffect(() => {
     props.getListShowroom();
-    console.log("props", props);
   }, []);
   return (
     <Layout>

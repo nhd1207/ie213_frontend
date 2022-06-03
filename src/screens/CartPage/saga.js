@@ -34,7 +34,6 @@ function* getListCartSaga(action) {
 function* updateCartSaga(action) {
     try {
         const { params } = action
-        console.log('params:', params);
         const response = yield call(api.updateCart, params)
         if (response.status === "success") {
             yield all([

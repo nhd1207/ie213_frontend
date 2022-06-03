@@ -101,7 +101,6 @@ function AccessoryDetail(props) {
     };
 
     const onChange = (a, b, c) => {
-        console.log(a, b, c);
     }
 
     const [show, setShow] = useState(false);

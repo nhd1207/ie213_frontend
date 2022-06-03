@@ -56,18 +56,15 @@ export default function Support(props) {
       from_email: values.user.email,
       reply_to: values.user.email,
     });
-    console.log(props);
     send("service_6nktika", "template_8ghgt6g", toSend, "Ykjj7Wn1OrFZUmA72")
       .then((response) => {
         message.success(
           "Bạn đã gửi đơn thông tin hỗ trợ thành công, chúng tôi sẽ liên hệ đến bạn sớm nhất có thể!"
         );
-        console.log("SUCCESS!", response.status, response.text);
         form.resetFields();
       })
       .catch((err) => {
         message.error("Đã có lỗi xảy ra!!!" + err);
-        console.log("FAILED...", err);
       });
   };
 

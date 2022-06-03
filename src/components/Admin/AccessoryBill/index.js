@@ -41,7 +41,6 @@ class index extends Component {
       window.location.pathname + "?" + queryString.stringify(params)
     );
     this.props.getList(params);
-    console.log("handleSubmitFilter");
   };
 
   handleDeleteAccessoryBill = (value) => {
@@ -66,11 +65,9 @@ class index extends Component {
   }
 
   openModal = (values) => {
-    console.log("openModal", values);
     this.handleShowForm(true);
     this.state.idAccBill = values._id;
     this.state.accBill = values;
-    console.log("this.state.accBill", this.state.accBill.accessoryInfo);
   };
 
   render() {
