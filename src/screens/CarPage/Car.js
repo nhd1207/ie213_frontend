@@ -12,7 +12,7 @@ import {
 import { deleteWishList } from "../WishListPage/action";
 import { Button, Form, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Menu, Spin, Pagination, Input, Row, Col, Tag } from "antd";
+import { Menu, Spin, Pagination, Input, Row, Tag } from "antd";
 import {
   HeartFilled,
   ThunderboltOutlined,
@@ -133,19 +133,19 @@ function Car(props) {
         }
       });
     });
-  }, [props.cars.loading, props?.user?.wishList?.cars, props.wishList.loading]);
+  }, [props.cars.loading, props?.user?.wishList?.cars, props.cars.loading2, props?.cars?.cars]);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (props.cars.loading) {
-      if (props.wishList.loading)
+      if (props.cars.loading2)
         setLoading(true);
       else setLoading(true)
     } else setLoading(true);
-    if (props.cars.loading === false && props.wishList.loading === false)
+    if (props.cars.loading === false && props.cars.loading2 === false)
       setLoading(false);
-  }, [props.cars.loading, props.wishList.loading]);
+  }, [props.cars.loading, props.cars.loading2]);
 
   const handleFilter = (filterValue) => { //function to call api
     let params = "";
@@ -480,7 +480,7 @@ const mapStateToProps = (state) => ({
   models: state.carList.models,
   years: state.carList.years,
   user: state.carList.user,
-  wishList: state.wishList
+  // wishList: state.wishList
 });
 
 const mapDispatchToProps = (dispatch) => ({

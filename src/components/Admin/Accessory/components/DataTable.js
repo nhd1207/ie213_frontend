@@ -1,8 +1,8 @@
 import React from 'react';
-import { Table, Spin, Space, Tooltip } from 'antd';
+import { Table, Space, Tooltip } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDeleteLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
-import { Popconfirm, message, Button } from 'antd';
+import { Popconfirm } from 'antd';
 
 const DataTable = ({ dataSource, loading, updateAccessory, deleteAccessory,showImage }) => {
 

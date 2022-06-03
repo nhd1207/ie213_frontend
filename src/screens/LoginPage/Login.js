@@ -6,6 +6,7 @@ import { login, verifyLayout } from "./action";
 import { Button, Modal } from "antd";
 import RouteContext from "../../context/RouteContext";
 import { useHistory } from "react-router-dom";
+import Layout from "../../components/layout";
 
 function Login(props) {
   let context = useContext(RouteContext);
@@ -22,11 +23,9 @@ function Login(props) {
   //   }
   // }
   function translateResponse(m) {
-    if (m === "Incorrect email ")
-    return "Email không tồn tại!"
-    else if (m === "Incorrect password")
-    return "Sai mật khẩu!"
-      return m
+    if (m === "Incorrect email ") return "Email không tồn tại!";
+    else if (m === "Incorrect password") return "Sai mật khẩu!";
+    return m;
   }
   const countDown = () => {
     let secondsToGo = 5;
@@ -54,21 +53,23 @@ function Login(props) {
   }, [props?.isLoggedIn]);
 
   return (
-    <section className={`${classes.container}`}>
-      <LoginForm
-        className={`col-xl-12`}
-        loading={props.user.loading}
-        onSendLoginData={sendLoginData}
-      />
-      {/* {props?.user?.response?.message ? (
+    <Layout>
+      <section className={`${classes.container}`}>
+        <LoginForm
+          className={`col-xl-12`}
+          loading={props.user.loading}
+          onSendLoginData={sendLoginData}
+        />
+        {/* {props?.user?.response?.message ? (
         <div className={`${classes.message} col-xl-12`}>
           <p>{props?.user?.response?.message}</p>
         </div>
       ) : (
         <></>
       )} */}
-      {props?.user?.response?.message ? countDown() : null}
-    </section>
+        {props?.user?.response?.message ? countDown() : null}
+      </section>
+    </Layout>
   );
 }
 
