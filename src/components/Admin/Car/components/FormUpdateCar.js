@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Space } from 'antd'
 let ModalUpdateCar = props => {
-    console.log(props)
     const { handleSubmit, handleShowForm } = props
 
     return (

@@ -11,7 +11,6 @@ function Showroom(props) {
   useEffect(() => {
     // let params = {};
     props.getListShowroom();
-    console.log("props", props);
   }, []);
   return (
     <Layout>

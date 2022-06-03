@@ -10,7 +10,6 @@ import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Space } from 'antd'
 import { values } from 'redux-form'
 let ModalUpdateAccessory = props => {
-    console.log(props)
     const { handleSubmit, handleShowForm, initialValues } = props
 
     return (

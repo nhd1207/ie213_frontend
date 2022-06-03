@@ -37,7 +37,6 @@ function* createCarOrderSaga(action) {
     const { params } = action;
     let data = params;
     const response = yield call(apiCarOrder.create, data);
-    console.log(response);
     if (response.status === "success") {
       yield all([
         put({ type: TYPE.CREATECARORDER.SUCCESS, ...response }),

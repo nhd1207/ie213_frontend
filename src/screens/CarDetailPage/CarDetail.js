@@ -38,7 +38,6 @@ function CarDetail(props) {
     props.getCarByID(params.id);
     setCarId(params.id)
     props.getCarByID(params.id);
-    console.log(location);
   }, []);
 
 

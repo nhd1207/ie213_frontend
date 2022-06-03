@@ -38,7 +38,6 @@ class index extends Component {
         }
         this.props.history.replace(window.location.pathname + '?' + queryString.stringify(params));
         this.props.getList(params)
-        console.log('handleSubmitFilter')
     }
 
     //add Acc

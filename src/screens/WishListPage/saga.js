@@ -31,7 +31,6 @@ function* getListCartSaga(action) {
 function* deleteWishListSaga(action) {
     try {
         const { params } = action
-        console.log('params:', params);
         const response = yield call(api.updateWishlist, params)
         if(response.status==="success"){
             message.success("Xóa thành công")

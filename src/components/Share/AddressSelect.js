@@ -12,7 +12,6 @@ export default function Province(props) {
 
     useEffect(() => {
         setCity([...data]);
-        console.log('city', city)
     }, [])
 
     useEffect(() => {

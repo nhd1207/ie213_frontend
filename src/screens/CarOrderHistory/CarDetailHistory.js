@@ -9,7 +9,6 @@ function CarDetailHistory(props) {
   let history = useHistory();
   let [act, setAct] = useState("order");
   useEffect(() => {
-    console.log(history.location);
   }, [])
   
   return (
