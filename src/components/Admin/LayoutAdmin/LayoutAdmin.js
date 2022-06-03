@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState} from 'react';
 import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,14 +11,21 @@ import {
     RollbackOutlined
 } from '@ant-design/icons';
 import "antd/dist/antd.css";
+// import NavBarAdmin from './NavBavAdmin';
 
 const { Content, Sider } = Layout;
 
-
 export default function LayoutAdmin(props) {
+    const [collapsed, setCollapsed] = useState(false);
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sider
+                breakpoint={"lg"}
+                // collapsedWidth={0}
+                // trigger={null}
+                collapsible collapsed={collapsed} 
+                onCollapse={(value) => setCollapsed(value)}
+
             >
                 <div className="logo" />
                 <Menu theme="dark" mode="inline">

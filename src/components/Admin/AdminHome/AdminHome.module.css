@@ -28,6 +28,20 @@
     color: #f0a500;
 }
 
+.pieChart {
+    width: 200px;
+    height: 400px;
+}
+
+.pieChart1 {
+    width: 200px;
+    height: 200px;
+}
+
+.pieChart {
+    width: 200px;
+    height: 400px;
+}
 .lineChartContainer {
     display: flex;
   flex-direction: column;
@@ -39,7 +53,10 @@
     margin-left: auto;
     margin-right: auto;
   }
-
+.lineChartCon {
+    width: 600px;
+    height: 400px;
+}
 .iconPrefix {
     display: block;
 }
