@@ -58,3 +58,13 @@
   .btnWidth {
       width: 100%;
   }
+
+  
+@media only screen and (max-width: 1200px) {
+    .choice {
+      justify-content: center;
+    }
+    .submit {
+        justify-content: space-evenly;
+    }
+  }

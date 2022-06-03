@@ -91,3 +91,17 @@
 .carousel span {
   background-color: var(--yellow-color) !important;
 }
+
+.imgAccessory {
+  width: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+  .informationCar,
+  .FromUpdateCart {
+    justify-content: center;
+  }
+  .document {
+    width:130px;
+  }
+}

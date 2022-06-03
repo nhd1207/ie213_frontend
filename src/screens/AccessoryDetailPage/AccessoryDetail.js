@@ -173,7 +173,7 @@ function AccessoryDetail(props) {
                                         key++;
                                         return(       
                                         <Carousel.Item key={key + " ascimg"}>
-                                            <img src={item}></img>
+                                            <img className={`${style.imgAccessory}`} src={item}></img>
                                         </Carousel.Item>
                                         );
                                     })}
