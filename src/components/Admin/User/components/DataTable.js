@@ -78,7 +78,12 @@ const DataTable = ({ dataSource, loading, updateUser, deleteUser }) => {
         <div style={{ textAlign: "center" }}>
           {value === "admin" ? (
             <span style={{ color: "green" }}> {"Quản trị viên" || ""} </span>
-          ) : (
+          ) 
+          : value === "manager"?
+          (
+            <span style={{ color: "orange" }}> {"Quản lý" || ""} </span>
+          ):
+          (
             <span style={{ color: "blue" }}> {"Người dùng" || ""} </span>
           )}
         </div>
