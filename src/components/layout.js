@@ -67,7 +67,7 @@ function Layouts(props) {
     <Layout
       style={
         {
-          // overflow: "hidden"
+          overflow: "hidden"
         }
       }
     >
