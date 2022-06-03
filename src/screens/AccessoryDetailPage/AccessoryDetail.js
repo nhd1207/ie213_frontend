@@ -170,8 +170,10 @@ function AccessoryDetail(props) {
                                     <h3 style={contentStyle}>4</h3>
                                 </div> */}
                                     {props.data?.data[0]?.image?.gallery?.map(item => {
+                                        let key = 0;
+                                        key++;
                                         return(       
-                                        <Carousel.Item>
+                                        <Carousel.Item key={key + " ascimg"}>
                                             <img src={item}></img>
                                         </Carousel.Item>
                                         );
@@ -206,6 +208,11 @@ function AccessoryDetail(props) {
                                         handleDeleteWishListItem={handleDeleteWishListItem}
                                         setShow={setShow}
                                     />
+                                </div>
+                                <div className={`${style.informationCar}`}>
+                                    <div className={`${style.descriptionCar} col-xl-10`}
+                                    dangerouslySetInnerHTML={{ __html: props.data?.data[0]?.description }}          
+                                    ></div>
                                 </div>
                             </div>
 

@@ -10,6 +10,9 @@ import {
 import { message } from 'antd'
 import * as api from '../../apis/Accessory'
 import * as apiUser from '../../apis/User'
+import {
+    action_type as TYPEUSER
+} from '../WishListPage/action'
 
 function* getListAccessorySaga(action) {
     try {
@@ -39,7 +42,9 @@ function* addAccessoryToWishlistSaga(action) {
         const response = yield call(apiUser.addItemToWishlist, data1)
         if (response.status === 'success'){
             message.success("Chúc mừng, bạn đã thêm phụ kiện vào danh sách yêu thích thành công!")
-            yield all([put({ type: TYPE.ADDACCESSORYTOWISHLIST.SUCCESS, ...response })])
+            yield all([
+            put({ type: TYPE.ADDACCESSORYTOWISHLIST.SUCCESS, ...response }),
+            put({type: TYPEUSER.GETUSER.REQUEST, ...response})])
         }
         else {
             message.error("Đã có lỗi xảy ra: " + response)

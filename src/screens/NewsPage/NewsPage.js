@@ -13,7 +13,7 @@ function NewsPage(props) {
     props.getListPost();
     console.log(props);
   }, []);
-  const history = useHistory()
+  const history = useHistory();
   return (
     <Layout>
       <div>
@@ -69,7 +69,7 @@ function NewsPage(props) {
             }}
             renderItem={(item) => (
               <List.Item className={`${style.listItem} row`}>
-                <div className={`${style.avatar} col-xl-6 col-sm-12 col-12`}>
+                <div className={`${style.avatar} col-xl-5 col-sm-12 col-12`}>
                   <img
                     className={`${style["news-image"]}`}
                     src={item.image.avatar}
@@ -77,7 +77,7 @@ function NewsPage(props) {
                   />
                 </div>
                 <div
-                  className={`${style.content} col-xl-6 col-sm-12 col-12 row`}
+                  className={`${style.content} col-xl-7 col-sm-12 col-12 row`}
                 >
                   <div className={`${style["news-title"]} col-xl-12`}>
                     {item.title}
@@ -91,10 +91,12 @@ function NewsPage(props) {
                         dangerouslySetInnerHTML={{ __html: item?.content }}
                       />
                       <button
-                        onClick={() => {history.push(`news/${item._id}`)}}
+                        onClick={() => {
+                          history.push(`news/${item._id}`);
+                        }}
                         className={`${style.newsBtn} btn btn-outline-dark col-xl-3`}
                       >
-                        <NavLink to={`news/${item._id}`}>ĐỌC THÊM</NavLink>
+                        ĐỌC THÊM
                       </button>
                     </div>
                   </div>

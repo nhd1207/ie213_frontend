@@ -60,9 +60,12 @@ function Home(props) {
               Nhà phân phối xe Seven lớn nhất thế giới
             </div>
           </div>
-
+          <div className={style["accessories-header"]}>PHỤ KIỆN</div>
+          <div className={style["accessories-content"]}>
+            LÀM ĐẸP CHIẾC XE CỦA BẠN
+          </div>
           <div className={`${style.accessories} row`}>
-            <div className={style["accessories-header"]}>PHỤ KIỆN</div>
+            {/* <div className={style["accessories-header"]}>PHỤ KIỆN</div>
             <div className={style["accessories-content"]}>
               LÀM ĐẸP CHIẾC XE CỦA BẠN
             </div>
@@ -77,7 +80,79 @@ function Home(props) {
                   size={{ width: 100 }}
                 ></FontAwesomeIcon>
               </a>
-            </button>
+            </button> */}
+            <div
+              className={`${style.accessoryItem} col-xl-4 col-sm-12 col-12 row`}
+            >
+              <div
+                className={`${style.accessoriesCute1} col-xl-12 col-sm-12 col-12`}
+              >
+                <div className={`${style.accDesc}`}>
+                  <h3 className={style.descTitle}>lOA XE HOI</h3>
+                  <p className={style.descAtt}>5 000 000</p>
+                  <button
+                    variant="dark"
+                    className={`${style["accessories-btn"]}`}
+                  >
+                    <a href="/accessory">
+                      MORE{" "}
+                      <FontAwesomeIcon
+                        icon={faCircleRight}
+                        size={{ width: 100 }}
+                      ></FontAwesomeIcon>
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              className={`${style.accessoryItem} col-xl-4 col-sm-12 col-12 row`}
+            >
+              <div
+                className={`${style.accessoriesCute2} col-xl-12 col-sm-12 col-12`}
+              >
+                <div className={`${style.accDesc}`}>
+                  <h3 className={style.descTitle}>CHIA KHOA XE HOI</h3>
+                  <p className={style.descAtt}>2 000 000</p>
+                  <button
+                    variant="dark"
+                    className={`${style["accessories-btn"]}`}
+                  >
+                    <a href="/accessory">
+                      MORE{" "}
+                      <FontAwesomeIcon
+                        icon={faCircleRight}
+                        size={{ width: 100 }}
+                      ></FontAwesomeIcon>
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              className={`${style.accessoryItem} col-xl-4 col-sm-12 col-12 row`}
+            >
+              <div
+                className={`${style.accessoriesCute3} col-xl-12 col-sm-12 col-12`}
+              >
+                <div className={`${style.accDesc}`}>
+                  <h3 className={style.descTitle}>GIA DE DIEN THOAI</h3>
+                  <p className={style.descAtt}>1 000 000</p>
+                  <button
+                    variant="dark"
+                    className={`${style["accessories-btn"]}`}
+                  >
+                    <a href="/accessory">
+                      MORE{" "}
+                      <FontAwesomeIcon
+                        icon={faCircleRight}
+                        size={{ width: 100 }}
+                      ></FontAwesomeIcon>
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
           <div className={`${style.news} row`}>
             <div className={`${style["news-header"]} col-xl-12`}>TIN TỨC</div>

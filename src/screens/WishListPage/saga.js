@@ -9,7 +9,7 @@ import {
 } from './action'
 
 import * as api from '../../apis/User'
-
+import {message} from "antd"
 function* getListCartSaga(action) {
     try {
         const { params } = action
@@ -34,6 +34,7 @@ function* deleteWishListSaga(action) {
         console.log('params:', params);
         const response = yield call(api.updateWishlist, params)
         if(response.status==="success"){
+            message.success("Xóa thành công")
                 yield all([
                     put({type: TYPE.DELETEWISHLIST.SUCCESS, ...response}),
                     put({type: TYPE.GETUSER.REQUEST, params})
