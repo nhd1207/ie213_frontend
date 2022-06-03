@@ -116,7 +116,7 @@ class index extends Component {
                 <Layout>
                     <div className='container-fluid mb-3 text-left py-2' style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <span className='h3 font-weight-bold '>Showroom</span>
-                        <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} title='Thêm showroom' type="primary" >Thêm bài viết</Button></span>
+                        <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} title='Thêm showroom' type="primary" >Thêm showroom</Button></span>
                     </div>
                     {/* <FormFilter
                     onSubmit={()=>handleSubmitFilter}

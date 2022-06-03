@@ -6,7 +6,7 @@ import { Popconfirm, message, Button } from 'antd';
 import money from '../../../Share/functions/money';
 
 
-const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
+const DataTable = ({ dataSource, loading, updateCar, deleteCar, showImage }) => {
 
   const onSubmit = (values) => {
     updateCar(values)
@@ -42,9 +42,13 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
       dataIndex: ['image'],
       key: 'picture',
       className: 'text-left',
-      render: (value, record) => <button className="btn btn-sm btn-primary" onClick={()=>onShowImage(record)}>Quản lý hình ảnh</button>
-      // render: (value, record) =>
-      //   <img src={value} height={50} width={50} style={{ objectFit: 'cover' }} ></img>
+      render: (value, record) =>
+        <button
+          className="btn btn-sm btn-primary"
+          onClick={() => onShowImage(record)}
+        >
+          Quản lý hình ảnh
+        </button>
     },
     {
       title: 'Tiền đặt cọc',
@@ -63,7 +67,7 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
       className: 'text-left',
       render: (value, record) =>
         <div>
-          <span> {money(value, 'VNĐ')|| ''} </span>
+          <span> {money(value, 'VNĐ') || ''} </span>
         </div>
     },
     {
@@ -77,13 +81,17 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
         </div>
     },
     {
-      title: 'Giới thiệu',
-      dataIndex: 'description',
-      key: 'description',
+      title: 'Thông số',
+      dataIndex: 'specification',
+      key: 'specification',
       className: 'text-left',
       render: (value, record) =>
         <div>
-          <span> {value || ''} </span>
+          <span>Dung tích xi lanh: {value.displacement || ''} cm3</span><br/>
+          <span>Mã lực: {value.power || ''} HP </span><br/>
+          <span>Tốc độ tối đa: {value.maxSpeed || ''} km/h </span><br/>
+          <span>Tăng tốc 0-100km/h: {value.acceleration || ''}s</span><br/>
+          <span>Tải trọng: {value.weight || ''} kg  </span>
         </div>
     },
     {
@@ -99,16 +107,16 @@ const DataTable = ({ dataSource, loading, updateCar, deleteCar,showImage }) => {
             </Tooltip>
           </button>
           <Popconfirm placement="left" title='Bạn có muốn xóa?' onConfirm={() => onDelete(record?._id)} okText="Có" cancelText="Không">
-            <button 
-           // onClick={() => onDelete(record?._id)} 
-            className="btn btn-sm btn-primary">
+            <button
+              // onClick={() => onDelete(record?._id)} 
+              className="btn btn-sm btn-primary">
               <Tooltip placement="top" title="Xóa">
                 <span className="px-2">
                   <FontAwesomeIcon icon={faDeleteLeft} />
                 </span>
               </Tooltip>
             </button>
-            </Popconfirm>
+          </Popconfirm>
         </Space>
       ),
     },]

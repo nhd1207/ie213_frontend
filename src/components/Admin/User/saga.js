@@ -22,11 +22,9 @@ function* getListSaga(action) {
                 put({ type: TYPE.USERADMIN.SUCCESS, ...response }),
             ])
         } else {
-            message.error('Bạn không có quyền xem thông tin người dùng\n',response.message)
             yield put({ type: TYPE.USERADMIN.ERROR, error: response })
         }
     } catch (error) {
-        message.error('Bạn không có quyền xem thông tin người dùng\n',error.message)
         yield all([
             put({ type: TYPE.USERADMIN.ERROR, error })
         ])

@@ -8,15 +8,18 @@ import RenderInputText from '../../../Share/RenderInputText'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Space } from 'antd'
-import { values } from 'redux-form'
+import style from "./FormAddNew.module.css";
+
 let ModalUpdateAccessory = props => {
     const { handleSubmit, handleShowForm, initialValues } = props
 
     return (
         <form onSubmit={handleSubmit}>
+            <label className={`${style.red_symbol}`}>Những trường có dấu (*) là bắt buộc </label> <br></br>
             <div className='row bg-white m-3 pt-3' >
                 <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Tên phụ kiện</label>
+                    <label className={`${style.red_symbol}`}>*</label>
                     <Field
                         name="name"
                         component={RenderInputText}
@@ -25,6 +28,7 @@ let ModalUpdateAccessory = props => {
                 </div>
                 <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Mã phụ kiện</label>
+                    <label className={`${style.red_symbol}`}>*</label>
                     <Field
                         name="code"
                         component={RenderInputText}
@@ -33,6 +37,7 @@ let ModalUpdateAccessory = props => {
                 </div>
                 <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Giá phụ kiện</label>
+                    <label className={`${style.red_symbol}`}>*</label>
                     <Field
                         name="price"
                         component={RenderNumberAnt}
@@ -41,6 +46,7 @@ let ModalUpdateAccessory = props => {
                 </div>
                 <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Số lượng</label>
+                    <label className={`${style.red_symbol}`}>*</label>
                     <Field
                         name="amount"
                         component={RenderNumberAnt}
@@ -50,6 +56,7 @@ let ModalUpdateAccessory = props => {
                 </div>
                 <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Loại</label>
+                    <label className={`${style.red_symbol}`}>*</label>
                     <Field
                         name="type"
                         component={RenderInputText}
@@ -58,6 +65,7 @@ let ModalUpdateAccessory = props => {
                 </div>
                 <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Thời gian bảo hành</label>
+                    <label className={`${style.red_symbol}`}>*</label>
                     <Field
                         name="warrantyPeriod"
                         component={RenderNumberAnt}
@@ -66,6 +74,7 @@ let ModalUpdateAccessory = props => {
                 </div>
                 <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Thông số chiều dài (cm)</label>
+                    <label className={`${style.red_symbol}`}>*</label>
                     <Field
                         name="specification.height"
                         component={RenderNumberAnt}
@@ -74,6 +83,7 @@ let ModalUpdateAccessory = props => {
                 </div>
                 <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Thông số cân nặng (kg)</label>
+                    <label className={`${style.red_symbol}`}>*</label>
                     <Field
                         name="specification.weight"
                         component={RenderNumberAnt}
@@ -82,6 +92,7 @@ let ModalUpdateAccessory = props => {
                 </div>
                 <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Mô tả</label>
+                    <label className={`${style.red_symbol}`}>*</label>
                     <Field
                         name="description"
                         component={RenderTextareaAnt}
