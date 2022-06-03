@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Spin, Modal } from 'antd';
+import {  Modal } from 'antd';
 import { connect } from 'react-redux'
 import Layout from '../LayoutAdmin/LayoutAdmin'
 import DataTable from './components/DataTable'
-import FormFilter from './components/FormFilter'
-import { getList, updateUser, deleteUser, crateUser } from './action'
+// import FormFilter from './components/FormFilter'
+import { getList, updateUser, deleteUser } from './action'
 import FormUpdateUser from "./components/FormUpdateUser"
 import queryString from 'query-string'
 

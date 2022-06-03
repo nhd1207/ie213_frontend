@@ -3,7 +3,7 @@ import style from "./index.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
 import { getListCar, getListPost } from "./action";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { List, Spin } from "antd";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

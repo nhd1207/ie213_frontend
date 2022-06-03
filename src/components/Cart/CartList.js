@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { InputNumber, Space, Button, Spin, Empty } from "antd";
+import { InputNumber, Space, Button, Empty } from "antd";
 import money from "../Share/functions/money";
 import style from "./Cart.module.css";
 import "antd/dist/antd.css";

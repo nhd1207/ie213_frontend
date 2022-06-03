@@ -1,8 +1,7 @@
-import React, {useState,useEffect } from "react";
+import React, {useState } from "react";
 import style from "../../screens/CarOrder/CarOrder.module.css";
 import "antd/dist/antd.css";
 import moment from "moment";
-import money from "../../components/Share/functions/money";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Input, Select, Button, DatePicker } from "antd";
 

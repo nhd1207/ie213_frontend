@@ -7,7 +7,6 @@ import { getCarByID } from "./action";
 import { connect } from "react-redux";
 import { Button } from "antd";
 import { Spin } from "antd";
-import { NavLink } from "react-router-dom";
 import {
   CaretRightOutlined,
   HeartFilled,
@@ -19,7 +18,6 @@ import Layout from "../../components/layout";
 import { Link, useHistory } from "react-router-dom";
 import money from "../../components/Share/functions/money";
 import { Modal } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
 
 function CarDetail(props) {
   const [wishList, setWishList] = useState({});
@@ -28,7 +26,6 @@ function CarDetail(props) {
 
   const params = useParams();
 
-  const location = useLocation();
   
   useEffect(() => {
     setWishList({ ...props?.user?.wishList });

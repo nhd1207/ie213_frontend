@@ -1,12 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from "react";
-import { List, Spin } from "antd";
+import React, { useEffect } from "react";
+import { List } from "antd";
 import style from "./index.module.css";
 import dateFormat from "dateformat";
 import { connect } from "react-redux";
 import { getListPost } from "./action";
 import Layout from "../../components/layout";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function NewsPage(props) {
   useEffect(() => {

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import LoginForm from "../../components/Authentication/Login/LoginForm";
 import classes from "./Login.module.css";
 import { login, verifyLayout } from "./action";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 import RouteContext from "../../context/RouteContext";
 import { useHistory } from "react-router-dom";
 import Layout from "../../components/layout";

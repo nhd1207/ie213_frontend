@@ -7,7 +7,7 @@ import { send } from "emailjs-com";
 
 import { MailOutlined, PhoneOutlined, CarOutlined } from "@ant-design/icons";
 
-import { Form, Input, InputNumber, Button, message } from "antd";
+import { Form, Input, Button, message } from "antd";
 
 import { Menu } from "antd";
 const { SubMenu } = Menu;

@@ -3,7 +3,6 @@ import {
     call,
     put,
     all,
-    take,
 } from 'redux-saga/effects'
 import {
     action_type as TYPE

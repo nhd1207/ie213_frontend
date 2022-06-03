@@ -3,13 +3,7 @@ import style from "./AboutUs.module.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "../../components/layout";
-import { Button } from "antd";
 
-import {
-  HeartFilled,
-  ShoppingCartOutlined,
-  CarOutlined,
-} from "@ant-design/icons";
 
 export default function AccessoryDetail() {
   return (

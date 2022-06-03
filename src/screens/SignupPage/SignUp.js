@@ -5,7 +5,7 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import classes from "./SignUp.module.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SignupForm from "../../components/Authentication/Signup/SignupForm";
 import { connect } from "react-redux";
 import { signup } from "./action";
@@ -25,7 +25,6 @@ function SignUp(props) {
   }
   let history = useHistory();
 
-  let [permission, setPermission ]= useState(false);
 
   // useEffect(() => {
   //   if (props?.status === "success")

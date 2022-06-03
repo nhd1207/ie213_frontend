@@ -1,16 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Layout, Menu, Breadcrumb, Spin } from "antd";
+import { Layout, Breadcrumb, Spin } from "antd";
 import Layouts from "../../components/layout";
 import style from "./index.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from "react";
-import ReactDOMServer from "react-dom/server";
+import React, { useEffect } from "react";
 import dateFormat from "dateformat";
 import { connect } from "react-redux";
 import { getListPost } from "./action";
-import queryString from "query-string";
 
-const { Content } = Layout;
+// const { Content } = Layout;
 
 function NewsDetail(props) {
   useEffect(() => {

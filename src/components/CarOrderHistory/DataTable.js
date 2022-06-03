@@ -1,15 +1,9 @@
 import style from "../User/DataTable.module.css";
 import React from "react";
-import { Table, Spin, Space, Tooltip, List } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { Table } from "antd";
 import money from "../Share/functions/money";
 import dateFormat from "dateformat";
-import {
-  HistoryOutlined,
-  CheckOutlined,
-  CloseOutlined,
-} from "@ant-design/icons";
+
 import { Button } from "react-bootstrap";
 const DataTable = ({ dataSource, loading, moreDetailHandler }) => {
     

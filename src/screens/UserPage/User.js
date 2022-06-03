@@ -1,16 +1,16 @@
-import { Menu, Button, Descriptions, Modal, List } from "antd";
+import { Menu, Descriptions } from "antd";
 import style from "./index.module.css";
 import Layout from "../../components/layout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Spin, Table } from "antd";
+import { Spin } from "antd";
 import { getUser, getListBill, updateUser } from "./action";
 import dateFormat from "dateformat";
 import Cookies from "js-cookie";
-import DataTable from "../../components/User/DataTable";
+// import DataTable from "../../components/User/DataTable";
 import { verify } from "../LoginPage/action";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FormUpdateUser from "../../components/User/FormUpdateUser";
 
 function User(props) {

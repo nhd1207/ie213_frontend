@@ -1,11 +1,9 @@
 import React, { useReducer, useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import classes from "./SignupForm.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FormControl, FormGroup, FormLabel, InputGroup } from "react-bootstrap";
-import { faWindows } from "@fortawesome/free-brands-svg-icons";
 function emailReducer(state, action) {
   if (action.type === "EMAIL_CHANGE") {
     return {
