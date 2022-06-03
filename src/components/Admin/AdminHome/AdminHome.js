@@ -12,7 +12,6 @@ import {
   CheckCircleOutlined,
   CloseSquareFilled,
   CheckSquareFilled,
-  LikeOutlined,
 } from "@ant-design/icons";
 import style from "./AdminHome.module.css";
 import Layout from "../LayoutAdmin/LayoutAdmin";

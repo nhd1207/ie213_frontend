@@ -46,7 +46,6 @@ function* getOrderCountSaga(action) {
 
 function* getBillCountSaga(action) {
     try {
-        const { params } = action
         const response = yield call(api.adminDataBillCount)
         if (response.status === 'success') {
             yield all([
