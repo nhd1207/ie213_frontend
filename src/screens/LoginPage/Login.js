@@ -9,17 +9,30 @@ import { useHistory } from "react-router-dom";
 
 function Login(props) {
   let context = useContext(RouteContext);
+  // let modalTitle = ''
 
   function sendLoginData(params) {
     let url = context.url;
     if (url === "/signup") url = "/home";
     props.login(params, url);
   }
-
+  // const wrongPassword = () => {
+  //   if(props?.user?.response?.message === 'Incorrect password') {
+  //     props.modalTitle= 'Sai mật khẩu'
+  //   }
+  // }
+  function translateResponse(m) {
+    if (m === "Incorrect email ")
+    return "Email không tồn tại!"
+    else if (m === "Incorrect password")
+    return "Sai mật khẩu!"
+      return m
+  }
   const countDown = () => {
     let secondsToGo = 5;
+    // wrongPassword(Modal.error)
     const modal = Modal.error({
-      title: `${props?.user?.response?.message}`,
+      title: `${translateResponse(props?.user?.response?.message)}`,
       // content: `This modal will be destroyed after ${secondsToGo} second.`,
     });
     const timer = setInterval(() => {
