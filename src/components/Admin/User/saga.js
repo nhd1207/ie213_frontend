@@ -22,9 +22,11 @@ function* getListSaga(action) {
                 put({ type: TYPE.USERADMIN.SUCCESS, ...response }),
             ])
         } else {
+            message.error('Bạn không có quyền xem thông tin người dùng\n',response.message)
             yield put({ type: TYPE.USERADMIN.ERROR, error: response })
         }
     } catch (error) {
+        message.error('Bạn không có quyền xem thông tin người dùng\n',error.message)
         yield all([
             put({ type: TYPE.USERADMIN.ERROR, error })
         ])
@@ -61,11 +63,11 @@ function* DeleteSaga(action) {
                 put({ type: TYPE.USERADMIN.REQUEST, params: { status: 1 } }),
             ])
         } else {
-            message.error('xóa người dùng thất bại')
+            message.error('xóa người dùng thất bại\n',response.message)
             yield put({ type: TYPE.DELETE.ERROR, error: response })
         }
     } catch (error) {
-        message.error('xóa người dùng thất bại')
+        message.error('xóa người dùng thất bại\n',error.message)
         yield all([
             put({ type: TYPE.DELETE.ERROR, error })
         ])

@@ -8,7 +8,8 @@ import {
     ShoppingCartOutlined,
     LogoutOutlined,
     UnorderedListOutlined,
-    RollbackOutlined
+    RollbackOutlined,
+    ProjectOutlined
 } from '@ant-design/icons';
 import "antd/dist/antd.css";
 // import NavBarAdmin from './NavBavAdmin';
@@ -47,7 +48,7 @@ export default function LayoutAdmin(props) {
                     <Menu.Item key="6" icon={<FontAwesomeIcon icon={faNewspaper} />}>
                         <Link to={`/admin/post`} > Bài viết </Link>
                     </Menu.Item>
-                    <Menu.Item key="7" icon={<FontAwesomeIcon icon={faNewspaper} />}>
+                    <Menu.Item key="7" icon={<ProjectOutlined />}>
                         <Link to={`/admin/showroom`} > Showroom </Link>
                     </Menu.Item>
                     <Menu.Item key="8" icon={<TeamOutlined />}>
