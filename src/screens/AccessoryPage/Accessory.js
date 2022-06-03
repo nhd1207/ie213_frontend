@@ -140,6 +140,7 @@ function Accessory(props) {
       e.preventDefault();
     } else {
       if (!item.isLiked) {
+        e.preventDefault();
         let element = e.target.parentElement.parentElement;
         element.classList.toggle(`${style.heartIconClicked}`);
         props.addAccessoryToWishlist({ itemId: value });
