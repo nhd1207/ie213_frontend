@@ -15,36 +15,27 @@ let ModalAddAccessory = props => {
         <form onSubmit={handleSubmit}>
             <div className='row bg-white m-3 pt-3' >
                 <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Tên xe</label>
+                    <label className="font-weight-bold text-muted">Tên phụ kiện</label>
                     <Field
                         name="name"
                         component={RenderInputText}
-                        placeholder='Tên xe'
+                        placeholder='Tên phụ kiện'
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Mã xe</label>
+                    <label className="font-weight-bold text-muted">Mã phụ kiện</label>
                     <Field
                         name="code"
                         component={RenderInputText}
-                        placeholder='Đây là mã xe'
+                        placeholder='Đây là phụ kiện'
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Giá xe</label>
+                    <label className="font-weight-bold text-muted">Giá phụ kiện</label>
                     <Field
                         name="price"
                         component={RenderNumberAnt}
-                        placeholder='Giá xe'
-                    />
-                </div>
-                <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Giá đặt cọc</label>
-                    <Field
-                        name="deposit"
-                        component={RenderNumberAnt}
-                        placeholder='Giá đặt cọc'
-
+                        placeholder='Giá phụ kiện'
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
@@ -57,11 +48,11 @@ let ModalAddAccessory = props => {
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Năm sản xuất</label>
+                    <label className="font-weight-bold text-muted">Loại</label>
                     <Field
-                        name="year"
-                        component={RenderNumberAnt}
-                        placeholder='Năm sản xuất'
+                        name="type"
+                        component={RenderInputText}
+                        placeholder='Loại'
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
@@ -73,30 +64,29 @@ let ModalAddAccessory = props => {
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Mẫu</label>
+                    <label className="font-weight-bold text-muted">Thông số chiều dài (cm)</label>
                     <Field
-                        name="model"
-                        component={RenderInputText}
-                        placeholder='A001'
+                        name="specification.height"
+                        component={RenderNumberAnt}
+                        placeholder='0'
+                    />
+                </div>
+                <div className='col-12 mb-3 text-left' >
+                    <label className="font-weight-bold text-muted">Thông số cân nặng (kg)</label>
+                    <Field
+                        name="specification.weight"
+                        component={RenderNumberAnt}
+                        placeholder='0'
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
                     <label className="font-weight-bold text-muted">Mô tả</label>
                     <Field
                         name="description"
-                        component={RenderInputText}
+                        component={RenderTextareaAnt}
                         placeholder='Đây là mô tả'
                     />
                 </div>
-                
-                {/* <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Hình ảnh: </label>
-                    <Field
-                        type="file"
-                        name="poster"
-                        component={FileInput}
-                    />
-                </div> */}
                 <div className='col-12 text-center'>
                     <Space>
                         <button className='btn btn-primary mr-3' type='submit' > <FontAwesomeIcon icon={faSave} /> Lưu</button>
