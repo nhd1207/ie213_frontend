@@ -29,7 +29,7 @@ function Home(props) {
                   <div className={style["img-container"]}>
                     <img
                       className={style.img2}
-                      src={car.image.avatar}
+                      src={car.image.banner}
                       alt="Carousel Slide"
                     />
                   </div>
