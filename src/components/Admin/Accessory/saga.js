@@ -10,6 +10,7 @@ import {
 } from './action'
 
 import * as api from '../../../apis/Accessory'
+import { message } from 'antd'
 
 function* getListSaga(action) {
     try {
@@ -35,14 +36,17 @@ function* CreateSaga(action) {
         let data = params
         const response = yield call(api.create, data)
         if (response.status==='success') {
+            message.success('Tạo phụ kiện thành công')
             yield all([
                 put({ type: TYPE.CREATE.SUCCESS, ...response }),
                 put({ type: TYPE.ACCESSORYADMIN.REQUEST, params: { status: 1 } })
             ])
         } else {
+            message.error('Tạo phụ kiện thất bại\n',response.message)
             yield put({ type: TYPE.CREATE.ERROR, error: response })
         }
     } catch (error) {
+        message.error('Tạo phụ kiện thất bại\n',error.message)
         yield all([
             put({ type: TYPE.CREATE.ERROR, error })
         ])
@@ -54,14 +58,17 @@ function* UpdateSaga(action) {
         const { id, params } = action
         const response = yield call(api.update, id, params)
         if (response.status==='success') {
+            message.success('Cập nhật phụ kiện thành công')
             yield all([
                 put({ type: TYPE.UPDATE.SUCCESS, ...response }),
                 put({ type: TYPE.ACCESSORYADMIN.REQUEST, params: { status: 1 } })
             ])
         } else {
+            message.error('Cập nhật phụ kiện thất bại\n',response.message)
             yield put({ type: TYPE.UPDATE.ERROR, error: response })
         }
     } catch (error) {
+        message.error('Cập nhật phụ kiện thất bại\n',error.message)
         yield all([
             put({ type: TYPE.UPDATE.ERROR, error })
         ])
@@ -73,14 +80,17 @@ function* DeleteSaga(action) {
         const { id } = action
         const response = yield call(api.destroy, id)
         if (response.status==='success') {
+            message.success('Xóa phụ kiện thành công')
             yield all([
                 put({ type: TYPE.DELETE.SUCCESS, ...response }),
                 put({ type: TYPE.ACCESSORYADMIN.REQUEST, params: { status: 1 } }),
             ])
         } else {
+            message.error('Xóa phụ kiện thất bại\n',response.message)
             yield put({ type: TYPE.DELETE.ERROR, error: response })
         }
     } catch (error) {
+        message.error('Xóa phụ kiện thất bại\n',error.message)
         yield all([
             put({ type: TYPE.DELETE.ERROR, error })
         ])

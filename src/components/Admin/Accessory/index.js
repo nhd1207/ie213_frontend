@@ -11,6 +11,7 @@ import { createAccessory, getList, updateAccessory, deleteAccessory } from './ac
 import FormFilter from './components/FormFilter';
 import FileInput from '../../Share/FileInput';
 import classes from "./index.module.css";
+const noImage = 'https://res.cloudinary.com/sevenimg/image/upload/v1652028058/no-image-available_yyhche.png';
 
 class index extends Component {
     constructor(props) {
@@ -52,7 +53,7 @@ class index extends Component {
 
     handleCreateAccessory = (value) => {
         this.setState({ showForm2: false })
-        let params = value
+        let params = { ...value, image: { avatar: noImage, banner: noImage} }
         this.props.createAccessory(params)
     }
 

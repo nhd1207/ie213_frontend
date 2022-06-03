@@ -50,6 +50,9 @@ function NewsDetail(props) {
               dangerouslySetInnerHTML={{ __html: props.data?.data[0]?.content }}
             ></div>
           </div>
+          <p>Tác giả: {
+            props.data?.data[0]?.author?.name
+            }</p>
         </div>
         {/* </Content>
                 )}>

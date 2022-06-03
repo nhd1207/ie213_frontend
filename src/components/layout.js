@@ -287,9 +287,9 @@ function Layouts(props) {
             <br></br>
             <strong style={{ marginTop: 20, fontSize: 20 }}>Follow Us</strong>
             <br></br>
-            <FontAwesomeIcon icon={faInstagram} style={{ fontSize: 20 }} />
-            <FontAwesomeIcon icon={faFacebook} style={{ fontSize: 20 }} />
-            <FontAwesomeIcon icon={faTwitter} style={{ fontSize: 20 }} />
+            <FontAwesomeIcon icon={faInstagram} style={{ fontSize: 20, marginRight: 30}} />
+            <FontAwesomeIcon icon={faFacebook} style={{ fontSize: 20, marginRight: 30 }} />
+            <FontAwesomeIcon icon={faTwitter} style={{ fontSize: 20, marginRight: 30 }} />
           </div>
         </div>
       </Footer>
