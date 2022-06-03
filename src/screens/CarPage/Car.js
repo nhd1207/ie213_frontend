@@ -130,18 +130,19 @@ function Car(props) {
         }
       });
     });
-  }, [props.cars.loading, props?.user?.wishList?.cars, props.cars.loading2]);
+  }, [props.cars.loading, props?.user?.wishList?.cars, props.wishList.loading]);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (props.cars.loading) {
-      if (props.cars.loading2) setLoading(true);
-      else setLoading(true);
+      if (props.wishList.loading)
+        setLoading(true);
+      else setLoading(true)
     } else setLoading(true);
-    if (props.cars.loading === false && props.cars.loading2 === false)
+    if (props.cars.loading === false && props.wishList.loading === false)
       setLoading(false);
-  }, [props.cars.loading, props.cars.loading2]);
+  }, [props.cars.loading, props.wishList.loading]);
 
   const handleFilter = (filterValue) => {
     let params = "";
@@ -451,6 +452,7 @@ const mapStateToProps = (state) => ({
   isLoggedIn: state.login.isLoggedIn,
   cars: state.carList,
   user: state.carList.user,
+  wishList: state.wishList
 });
 
 const mapDispatchToProps = (dispatch) => ({

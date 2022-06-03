@@ -77,7 +77,9 @@ function* addCarToWishlistSaga(action) {
         const response = yield call(apiUser.addItemToWishlist, data1)
         if(response.status==='success')
         {
-                yield all([put({type: TYPE.ADDCARTOWISHLIST.SUCCESS, ...response})])
+                yield all([put({type: TYPE.ADDCARTOWISHLIST.SUCCESS, ...response}),
+                    put({type: TYPE.GETUSERFORWISHLISTCAR.REQUEST, ...response})
+                ])
                 message.success("Bạn đã thêm thành công xe vào danh sách yêu thích!");
         }
         else{

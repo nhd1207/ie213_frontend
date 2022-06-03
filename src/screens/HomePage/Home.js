@@ -11,7 +11,6 @@ import { faCircleRight } from "@fortawesome/free-solid-svg-icons";
 import dateFormat from "dateformat";
 import { NavLink } from "react-router-dom";
 import "antd/dist/antd.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function Home(props) {
   useEffect(() => {

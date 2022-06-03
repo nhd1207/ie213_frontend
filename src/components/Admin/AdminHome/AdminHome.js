@@ -76,8 +76,8 @@ function AdminHome(props) {
             <Layout>
                 <h2 style={{ textAlign: "center" }}>Tổng quan</h2>
                 <div className={`${style.AdminHome} site-statistic-demo-card`}>
-                    <Row gutter={16}>
-                        <Col span={12}>
+                    <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                        <Col xs={24} xl={12} lg={12} sm={24} md={24}>
                             <Card>
                                 <Row gutter={16}>
                                     <Col span={12}>
@@ -108,9 +108,9 @@ function AdminHome(props) {
                                         />
                                     </Col>
                                     <Col span={12}>
-                                        <div width="100%" height="100%">
-                                            {/* <ResponsiveContainer width="100%" height="100%"> */}
-                                            <PieChart width={200} height={200}>
+                                    <div className={`${style.pieChart1}`}>
+                                            <ResponsiveContainer width="100%" height="100%">
+                                            <PieChart >
                                                 <Pie
                                                     data={dataUser}
                                                     cx="50%"
@@ -127,7 +127,7 @@ function AdminHome(props) {
                                                 </Pie>
                                                 <Label></Label>
                                             </PieChart>
-                                            {/* </ResponsiveContainer> */}
+                                            </ResponsiveContainer>
                                         </div>
                                     </Col>
                                 </Row>
@@ -184,9 +184,9 @@ function AdminHome(props) {
                             </Card>
 
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} xl={12} lg={12} sm={24} md={24}>
                             <Card>
-                                <Row gutter={16}>
+                                <Row gutter={16} >
                                     <Col span={12}>
                                         <Statistic
                                             title="Tổng số đơn đặt cọc xe"
@@ -239,9 +239,9 @@ function AdminHome(props) {
                                     </Button> */}
                                     </Col>
                                     <Col span={12}>
-                                        <div width="100%" height="100%">
-                                            {/* <ResponsiveContainer width="100%" height="100%"> */}
-                                            <PieChart width={200} height={200}>
+                                        <div className={`${style.pieChart}`}>
+                                            <ResponsiveContainer width="100%" height="100%">
+                                            <PieChart>
                                                 <Pie
                                                     data={dataCarOrder}
                                                     cx="50%"
@@ -258,7 +258,7 @@ function AdminHome(props) {
                                                 </Pie>
                                                 <Label></Label>
                                             </PieChart>
-                                            {/* </ResponsiveContainer> */}
+                                            </ResponsiveContainer>
                                         </div>
                                     </Col>
                                 </Row>
@@ -266,9 +266,31 @@ function AdminHome(props) {
                         </Col>
 
                     </Row>
-                    <div className={`${style.lineChartContainer}`}>
+                    <Row gutter={12}>
+                        <Col xs={24} xl={12} lg={24} sm={24} md={24}>
+                        <div className={`${style.lineChartContainer}`}>
+                        <h3>Số lượng đơn phụ kiện theo tháng</h3>
+                        <div className={`${style.lineChartCon}`}>
+                        <ResponsiveContainer width="100%" height="100%">
+                        <LineChart className={`${style.lineChart}`} data={props?.adminData?.orderCount || []}
+                            margin={{ top: 5, right: 30, left: 50, bottom: 5 }}>
+                            <XAxis tickFormatter={formatXAxis} dataKey="_id" />
+                            <YAxis />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Tooltip />
+                            <Legend></Legend>
+                            <Line type="monotone" interval={10} dataKey="total_order" stroke="#8884d8" activeDot={{ r: 8 }} />
+                        </LineChart>
+                        </ResponsiveContainer>
+                        </div>
+                    </div>
+                        </Col>
+                        <Col xs={24} xl={12} lg={24} sm={24} md={24}>
+                        <div className={`${style.lineChartContainer}`}>
                         <h3>Số lượng đơn đặt cọc theo tháng</h3>
-                        <LineChart width={800} height={400} className={`${style.lineChart}`} data={props?.adminData?.orderCount || []}
+                        <div className={`${style.lineChartCon}`}>
+                        <ResponsiveContainer width="100%" height="100%">
+                        <LineChart className={`${style.lineChart}`} data={props?.adminData?.orderCount || []}
                             margin={{ top: 5, right: 30, left: 50, bottom: 5 }}>
                             <XAxis tickFormatter={formatXAxis} dataKey="_id" />
                             <YAxis />
@@ -277,19 +299,13 @@ function AdminHome(props) {
                             <Legend></Legend>
                             <Line type="monotone" interval={10} dataKey="total_order" stroke="#8884d8" activeDot={{ r: 8 }} />
                         </LineChart>
+                        </ResponsiveContainer>
+                        </div>
                     </div>
-                    <div className={`${style.lineChartContainer}`}>
-                        <h3>Số lượng đơn mua phụ kiện theo tháng</h3>
-                        <LineChart width={800} height={400} className={`${style.lineChart}`} data={props?.adminData?.orderCount || []}
-                            margin={{ top: 5, right: 30, left: 50, bottom: 5 }}>
-                            <XAxis tickFormatter={formatXAxis} dataKey="_id" />
-                            <YAxis />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Tooltip />
-                            <Legend></Legend>
-                            <Line type="monotone" interval={10} dataKey="total_order" stroke="#8884d8" activeDot={{ r: 8 }} />
-                        </LineChart>
-                    </div>
+                        </Col>
+                    </Row>
+                   
+                    
                 </div>
             </Layout>
         </div>
