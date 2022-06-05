@@ -3,13 +3,13 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
-trigger:
-- master
-
 jobs:
 - job: Test
-  timeoutInMinutes: 360 # how long to run the job before automatically cancelling
-  cancelTimeoutInMinutes: 80
+  timeoutInMinutes: 0 # how long to run the job before automatically cancelling
+  cancelTimeoutInMinutes: 2 # how much time to give 'run always even if cancelled tasks' before stopping them
+
+trigger:
+- master
 
 pool:
   vmImage: ubuntu-latest
