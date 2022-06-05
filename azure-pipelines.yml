@@ -6,6 +6,11 @@
 trigger:
 - master
 
+jobs:
+- job: Test
+  timeoutInMinutes: 360 # how long to run the job before automatically cancelling
+  cancelTimeoutInMinutes: 80
+
 pool:
   vmImage: ubuntu-latest
 
