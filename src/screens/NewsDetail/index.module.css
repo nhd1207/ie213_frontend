@@ -47,3 +47,7 @@
   padding: 3rem 7rem;
   text-align: justify; 
 }
+
+.news_author{
+  float: right;
+}
