@@ -32,8 +32,8 @@ function Accessory(props) {
     priceMin: null,
     priceMax: null,
     sort: null,
-    field: ["name", "code", "price", "amount", "image"],
     keyword: null,
+    //field: ["name", "code", "price", "amount", "image"],
   });
   const [tags, setTags] = useState([]); // state to handle tag
   const [isFilterPrice, setIsFilterPrice] = useState(false); // state to check price input filter has used yet?
@@ -245,6 +245,15 @@ function Accessory(props) {
     setFilterValue(params);
     handleFilter(params);
   };
+
+  const cancelAll = () => {
+    let params = { ...filterValue };
+    for (let key in params) {
+      if (key !='field' && key!='keyword') params[key] = null;
+    }
+    setFilterValue(params);
+    handleFilter(params);
+  };
   //end handle filter
 
   return (
@@ -333,6 +342,12 @@ function Accessory(props) {
                   <Menu.Item key="price_asc">Tăng dần</Menu.Item>
                   <Menu.Item key="price_desc">Giảm dần</Menu.Item>
                 </SubMenu>
+                <Button
+                  className={'btn btn-warning'}
+                  onClick={cancelAll}
+                >
+                  Đặt lại tất cả
+                </Button>
               </Menu>
             </div>
             <div
