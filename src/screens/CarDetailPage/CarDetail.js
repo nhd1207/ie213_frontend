@@ -233,7 +233,7 @@ function CarDetail(props) {
                   Tăng tốc từ 0-100 km/h
                 </p>
                 <p className={`${style.specRowText} col-xl-6`}>
-                  {props?.carDetail?.car[0]?.specification?.maxSpeed + " km/h"}
+                  {props?.carDetail?.car[0]?.specification?.acceleration + " giây"}
                 </p>
               </div>
               <div className={`${style.specRow} row`}>
