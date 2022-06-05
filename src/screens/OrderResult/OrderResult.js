@@ -17,7 +17,6 @@ function OrderResult(props) {
   let history = useHistory();
 
   useEffect(() => {
-    console.log(history.location);
     props.getUser();
   }, []);
 

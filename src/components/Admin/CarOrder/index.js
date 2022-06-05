@@ -150,7 +150,7 @@ class index extends Component {
           >
             <img
               src={this.state.carOrder?.carInfo?.image.avatar}
-              style={{ width: 100, height: 100 }}
+              style={{ maxWidth: 100, maxHeight: 100 }}
             ></img>
             <h4>Tên xe: {this.state.carOrder?.carInfo?.name}</h4>
             <p>Dòng: {this.state.carOrder?.carInfo?.model}</p>
@@ -160,7 +160,6 @@ class index extends Component {
               Tiền đặt cọc:{" "}
               {money(this.state.carOrder?.carInfo?.deposit, "VNĐ")}
             </p>
-            <p>Mô tả: {this.state.carOrder?.carInfo?.description}</p>
             <p>Thông tin đặc biệt: {this.state.carOrder?.carInfo?.special}</p>
           </Modal>
         </Layout>

@@ -19,6 +19,7 @@ import CartList from "../../components/Cart/CartList";
 import AddressSelect from "../../components/Share/AddressSelect";
 import { Redirect } from "react-router-dom";
 import {verify} from "../LoginPage/action"
+
 const { Option } = Select;
 
 function Cart(props) {
@@ -28,11 +29,7 @@ function Cart(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalValidate, setIsModalValidate] = useState(false);
   const [loading, setLoading] = useState(true)
-
-  // useEffect(() => {
-  //   console.log(props.carts.carts);
-  //   setCart(props?.carts?.carts);
-  // }, [props?.carts?.loading]);
+  const [isDataEmpty, setIsDataEmpty] = useState(false)
 
   useEffect(() => {
     props.verify();
@@ -45,7 +42,6 @@ function Cart(props) {
     else
       setLoading(true);
   }, [props.loading, props.loading2]);
-
 
   const showModal = () => {
     props.getMe();
@@ -88,8 +84,7 @@ function Cart(props) {
 
   return (
     <Layout>
-        <Spin size="large" spinning={loading}>
-        {/* {loading ? <></> : */}{
+        <Spin size="large" spinning={loading}>{
           (
         <>
           <div className={`${style.cartContainer}`}>
@@ -174,6 +169,7 @@ function Cart(props) {
                 </div>
                 <div className={`${style.checkout} row`}>
                   <Button
+                    disabled={isDataEmpty}
                     className={`${style.checkoutButton} col-xl-11`}
                     type="primary"
                     onClick={showModal}

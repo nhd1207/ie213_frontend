@@ -15,7 +15,6 @@ const { Content } = Layout;
 function NewsDetail(props) {
   useEffect(() => {
     props.getListPost(props.match.params.id);
-    console.log(props);
   }, []);
   return (
     <Layouts>

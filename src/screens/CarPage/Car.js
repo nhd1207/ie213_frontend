@@ -14,11 +14,12 @@ import { Button, Form, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Menu, Spin, Pagination, Input, Row, Col, Tag } from "antd";
 import {
-  SettingOutlined,
   HeartFilled,
   ThunderboltOutlined,
   DollarOutlined,
   MenuOutlined,
+  CarOutlined,
+  CalendarOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { Space } from "antd";
@@ -44,13 +45,15 @@ function Car(props) {
     sort: null,
     field: ["name", "code", "price", "amount", "image"],
     keyword: null,
+    year: null,
+    model: null
   });
 
   const [tags, setTags] = useState([]);
   const [isFilterPrice, setIsFilterPrice] = useState(false);
   const [priceFilter, setPriceFilter] = useState({
-    priceMin:null,
-    priceMax:null
+    priceMin: null,
+    priceMax: null
   });
 
   var pageSize = 6;
@@ -83,17 +86,17 @@ function Car(props) {
             {key === "priceMax"
               ? "Giá tối đa"
               : key === "priceMin"
-              ? "Giá tối thiểu"
-              : key === "sort"
-              ? filterValue[key] === "name"
-                ? "Tên tăng dần"
-                : filterValue[key] === "-name"
-                ? "Tên giảm dần"
-                : filterValue[key] === "price"
-                ? "Giá tăng dần"
-                : "Giá giảm dần"
-              : ""}
-            {key === "sort" ? "" : ": " + money(filterValue[key], "VNĐ")}
+                ? "Giá tối thiểu"
+                : key === "sort"
+                  ? filterValue[key] === "name"
+                    ? "Tên tăng dần"
+                    : filterValue[key] === "-name"
+                      ? "Tên giảm dần"
+                      : filterValue[key] === "price"
+                        ? "Giá tăng dần"
+                        : "Giá giảm dần"
+                  : ""}
+            {key === "sort" ? "" : key === "model" ? filterValue[key] : key === "year" ? filterValue[key] : ": " + money(filterValue[key], "VNĐ")}
           </Tag>
         );
       }
@@ -144,7 +147,7 @@ function Car(props) {
       setLoading(false);
   }, [props.cars.loading, props.wishList.loading]);
 
-  const handleFilter = (filterValue) => {
+  const handleFilter = (filterValue) => { //function to call api
     let params = "";
     for (let key in filterValue) {
       if (filterValue[key] === null) {
@@ -182,7 +185,7 @@ function Car(props) {
     }
   };
 
-  const handleFilterValue = (value, type) => {
+  const handleFilterValue = (value, type) => { //function to chage value of filter
     let params;
     switch (type) {
       case "name_asc":
@@ -208,8 +211,15 @@ function Car(props) {
         //handleFilter(params)
         break;
       case "price":
-        console.log("value", value);
         params = { ...filterValue };
+        setFilterValue(params);
+        break;
+      case "model":
+        params = { ...filterValue, model: value };
+        setFilterValue(params);
+        break;
+      case "year":
+        params = { ...filterValue, year: value };
         setFilterValue(params);
         break;
       default:
@@ -237,22 +247,20 @@ function Car(props) {
     let paramForPriceFilter;
     if (type === "min") {
       params = { ...filterValue, priceMin: e.target.value };
-      paramForPriceFilter={...priceFilter,priceMin:e.target.value}
-      setPriceFilter({...paramForPriceFilter})
+      paramForPriceFilter = { ...priceFilter, priceMin: e.target.value }
+      setPriceFilter({ ...paramForPriceFilter })
     } else if (type === "max") {
       params = { ...filterValue, priceMax: e.target.value };
-      paramForPriceFilter={...priceFilter,priceMax:e.target.value}
-      setPriceFilter({...paramForPriceFilter})
+      paramForPriceFilter = { ...priceFilter, priceMax: e.target.value }
+      setPriceFilter({ ...paramForPriceFilter })
     } else {
       return;
     }
-    if (!priceFilter.priceMin && !priceFilter.priceMax ) {
+    if (!priceFilter.priceMin && !priceFilter.priceMax) {
       setIsFilterPrice(false);
     } else {
       setIsFilterPrice(true);
     }
-    console.log("priceFilter", priceFilter);
-    console.log("paramForPriceFilter", paramForPriceFilter);
     setFilterValue(params);
   };
 
@@ -354,6 +362,24 @@ function Car(props) {
                   <Menu.Item key="price_asc">Tăng dần</Menu.Item>
                   <Menu.Item key="price_desc">Giảm dần</Menu.Item>
                 </SubMenu>
+                <SubMenu
+                  icon={<CarOutlined />}
+                  title="Dòng"
+                  onClick={(e) => handleFilterValue(e.key, 'model')}
+                >
+                  {props?.models?.map((item, index) => {
+                    return (<Menu.Item key={item}>{item}</Menu.Item>)
+                  })}
+                </SubMenu>
+                <SubMenu
+                  icon={<CalendarOutlined />}
+                  title="Năm"
+                  onClick={(e) => handleFilterValue(e.key, 'year')}
+                >
+                  {props?.years?.map((item, index) => {
+                    return (<Menu.Item key={item}>{item}</Menu.Item>)
+                  })}
+                </SubMenu>
               </Menu>
             </div>
             <div
@@ -451,6 +477,8 @@ function Car(props) {
 const mapStateToProps = (state) => ({
   isLoggedIn: state.login.isLoggedIn,
   cars: state.carList,
+  models: state.carList.models,
+  years: state.carList.years,
   user: state.carList.user,
   wishList: state.wishList
 });

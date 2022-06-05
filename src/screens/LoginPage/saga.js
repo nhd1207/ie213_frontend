@@ -15,7 +15,6 @@ function* getListSaga(action) {
     if (response.status === "success") {
       yield all([put({ type: TYPE.LOGIN.SUCCESS, ...response })]);
       Cookies.set("jwt", response.token);
-      console.log(response);
       yield put(push(url));
       window.location.reload();
       // let param = {email: params.email};

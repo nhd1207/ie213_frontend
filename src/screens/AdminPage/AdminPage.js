@@ -1,8 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
-import { Button, Spin, Alert, Modal, Skeleton } from 'antd';
 import { connect } from 'react-redux'
+import { Route } from "react-router-dom";
 import { verify } from './action';
-import Layout from '../../components/Admin/LayoutAdmin/LayoutAdmin'
 import CarAdmin from "../../components/Admin/Car";
 import AccAdmin from "../../components/Admin/Accessory";
 import postAdmin from "../../components/Admin/Post";
@@ -10,7 +9,6 @@ import AccBillAdmin from "../../components/Admin/AccessoryBill";
 import UserAdmin from "../../components/Admin/User";
 import ShowroomAdmin from "../../components/Admin/Showroom";
 import CarOrder from "../../components/Admin/CarOrder";
-import { Route } from "react-router-dom";
 import AdminHome from '../../components/Admin/AdminHome/AdminHome';
 
 //neu lam router tự sửa chứ không biết nhé

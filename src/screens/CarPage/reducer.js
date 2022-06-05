@@ -4,6 +4,8 @@ const initialState = {
   loading: false,
   cars: [],
   user: [],
+  models: [],
+  years: [],
 };
 
 function reducer(state = initialState, action) {
@@ -17,6 +19,8 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         cars: action.data.car,
+        models: action.models,
+        years:action.years,
         loading: false,
       };
     case type.GETLISTCAR.ERROR:

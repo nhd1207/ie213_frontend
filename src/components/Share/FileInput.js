@@ -25,7 +25,6 @@ class FileInput extends React.Component {
       const uploadData = new FormData();
       uploadData.append("file", e.target.files[0], "file");
       const url = await cloudinaryUpload(uploadData)
-      //console.log('url', url)
       this.setState({ url: url.secure_url })
       await this.props.urlImage(url.secure_url, this.state.type)
       await this.props.update();
@@ -33,7 +32,6 @@ class FileInput extends React.Component {
       this.setState({ loading: false });
       this.setState({ url: '' })
     } catch (error) {
-      console.log(error)
       message.error('Tải lên thất bại');
     }
   }
@@ -50,7 +48,7 @@ class FileInput extends React.Component {
           <input className='fancy-input'
             type="file"
             //value={value}
-            onChange={(e) => { this.setState({ value: e }); console.log(this.state.value) }}
+            onChange={(e) => { this.setState({ value: e })}}
           />
           <p></p>
           <Button className='btn btn-sm btn-primary'

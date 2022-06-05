@@ -53,7 +53,6 @@ function* UpdateSaga(action) {
 function* DeleteSaga(action) {
     try {
         const { id } = action
-        console.log(id);
         const response = yield call(apiAuth.toggleUser, id)  // chua co ham xoa nguoi dung
         if (response.status === 'success') {
             message.success('xóa người dùng thành công')
@@ -62,11 +61,11 @@ function* DeleteSaga(action) {
                 put({ type: TYPE.USERADMIN.REQUEST, params: { status: 1 } }),
             ])
         } else {
-            message.error('xóa người dùng thất bại')
+            message.error('xóa người dùng thất bại\n',response.message)
             yield put({ type: TYPE.DELETE.ERROR, error: response })
         }
     } catch (error) {
-        message.error('xóa người dùng thất bại')
+        message.error('xóa người dùng thất bại\n',error.message)
         yield all([
             put({ type: TYPE.DELETE.ERROR, error })
         ])

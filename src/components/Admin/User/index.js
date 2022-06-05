@@ -44,7 +44,6 @@ class index extends Component {
     }
 
     handleUpdateUser = (value) => {
-        console.log('handleUpdateUser',value)
         let id = this.state.idUser;
         this.setState({ showForm: false })
         let params = value
@@ -56,11 +55,9 @@ class index extends Component {
     }
 
     openModal = (values) => {
-        console.log('openModal')
         this.handleShowForm(true);
         this.state.idUser = values._id;
         this.state.initUser = values;
-        console.log(this.state.initUser)
     }
 
     render() {

@@ -93,7 +93,6 @@ function LoginForm(props) {
       if (password.trim().length >= 8) return true;
       return false;
     }
-    console.log(validatePassword(enteredPassword));
     dispatchPassword({
       type: "PASSWORD_LOGIN",
       value: enteredPassword,
@@ -108,7 +107,6 @@ function LoginForm(props) {
   let [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    console.log(email.isEmailValid && password.isPasswordCorrect)
     if (email.isEmailValid && password.isPasswordCorrect) setDisabled(false);
     else setDisabled(true)
   }, [email.isEmailValid, password.isPasswordCorrect]);
@@ -133,7 +131,6 @@ function LoginForm(props) {
     const endPassword = passwordInput.current.value.length
     passwordInput.current.setSelectionRange(endPassword, endPassword)
     passwordInput.current.focus()
-    console.log(endPassword);
   }
   return (
     <div className={`row`}>

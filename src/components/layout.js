@@ -67,7 +67,7 @@ function Layouts(props) {
     <Layout
       style={
         {
-          // overflow: "hidden"
+          overflow: "hidden"
         }
       }
     >
@@ -84,7 +84,8 @@ function Layouts(props) {
             }}
             mode="horizontal"
             theme="dark"
-            className="Navbar navLeft"
+            breakpoint=""
+            collapsedWidth="0"
           >
             <Menu.Item key="home">
               <NavLink to={"/home"}>
@@ -165,13 +166,14 @@ function Layouts(props) {
           </Menu>
           <Menu
             style={{
-              width: "100%",
+              // width: "100%",
               backgroundColor: "rgb(27, 26, 23)",
               color: "#fff",
             }}
             mode="horizontal"
             theme="dark"
-            className="Navbar navRight"
+            breakpoint=""
+            collapsedWidth="0"
           >
             <Menu.Item key="wishlist">
               <NavLink to={`/wishlist`}>

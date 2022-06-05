@@ -5,7 +5,6 @@ import * as api from "../../apis/CarOrder";
 
 function* cancelOrderSaga(action) {
   try {
-    console.log(123);
     const { id } = action;
     const response = yield call(api.cancel, id);
     if (response.status === "success") {

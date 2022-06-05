@@ -48,6 +48,10 @@
 
 .bannerContainer {
   position: relative;
+  background-size: cover;
+  background-position: center center;
+  animation-name: appear;
+  animation-duration: 1s;
 }
 
 .bannerImg {
@@ -291,4 +295,10 @@
   height: var(--font-title);
   border: 1px var(--black-color) solid;
   margin-left: 1rem;
+}
+
+@media only screen and (min-width: 1200px) {
+  /* .bannerContainer {
+    background-position: 50% 70%;
+  } */
 }

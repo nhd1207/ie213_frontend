@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import RenderNumberAnt from '../../../Share/RenderNumberAnt'
+import RenderTextArea from '../../../Share/RenderTextareaAnt'
 //import RenderSelect from '../../../../share/components/RenderSelect'
 import RenderInputText from '../../../Share/RenderInputText'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -97,11 +98,11 @@ let ModalAddCar = props => {
                     />
                 </div>
                 <div className='col-12 mb-3 text-left' >
-                    <label className="font-weight-bold text-muted">Mô tả </label>
+                    <label className="font-weight-bold text-muted">Mô tả (HTML) </label>
                     <label className={`${style.red_symbol}`}>*</label>
                     <Field
                         name="description"
-                        component={RenderInputText}
+                        component={RenderTextArea}
                         placeholder='Đây là mô tả'
                     />
                 </div>

@@ -51,7 +51,6 @@ function* filterAndSearchCarSaga(action) {
     try {
         const { params } = action
         const response = (yield call(api.filter, params))
-        console.log('response',response)
         if (response.status=='success') {
             yield all([ 
                 put({ type: TYPE.FILTER.SUCCESS, ...response }),

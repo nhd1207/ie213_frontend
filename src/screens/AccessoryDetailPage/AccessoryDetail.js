@@ -29,7 +29,14 @@ function AccessoryDetail(props) {
     const [isLiked, setIsLiked] = useState(false);
 
     const params = useParams();
-
+    const splitLine = (htmlString) => {
+        const lines = htmlString?.split(/\r?\n/);
+        let html=""
+        for(var i=0;i<lines?.length;i++){
+            html+='<p>'+lines[i]+'</p>';
+        }
+        return html;
+    }
     useEffect(() => {
         props.getWishList();
         props.getDetailAccessory(params.id)
@@ -101,7 +108,6 @@ function AccessoryDetail(props) {
     };
 
     const onChange = (a, b, c) => {
-        console.log(a, b, c);
     }
 
     const [show, setShow] = useState(false);
@@ -174,7 +180,7 @@ function AccessoryDetail(props) {
                                         key++;
                                         return(       
                                         <Carousel.Item key={key + " ascimg"}>
-                                            <img src={item}></img>
+                                            <img className={`${style.imgAccessory}`} src={item}></img>
                                         </Carousel.Item>
                                         );
                                     })}
@@ -211,7 +217,7 @@ function AccessoryDetail(props) {
                                 </div>
                                 <div className={`${style.informationCar}`}>
                                     <div className={`${style.descriptionCar} col-xl-10`}
-                                    dangerouslySetInnerHTML={{ __html: props.data?.data[0]?.description }}          
+                                    dangerouslySetInnerHTML={{ __html: splitLine(props.data?.data[0]?.description) }}          
                                     ></div>
                                 </div>
                             </div>
