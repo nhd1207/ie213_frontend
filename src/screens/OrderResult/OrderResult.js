@@ -6,7 +6,6 @@ import classes from "./OrderResult.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
-  faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import { getUser } from "../UserPage/action";

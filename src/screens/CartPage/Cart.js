@@ -17,13 +17,11 @@ import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CartList from "../../components/Cart/CartList";
 import AddressSelect from "../../components/Share/AddressSelect";
-import { Redirect } from "react-router-dom";
 import {verify} from "../LoginPage/action"
 
 const { Option } = Select;
 
 function Cart(props) {
-  const [cart, setCart] = useState([]);
   const [price, setPrice] = useState(5);
   const [place, setPlace] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);

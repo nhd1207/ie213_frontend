@@ -10,9 +10,8 @@ import {
   updateCarOrder,
   deleteCarOrder,
 } from "./action";
-import FormFilter from "./components/FormFilter";
 import money from "../../Share/functions/money";
-import classes from "./index.module.css";
+// import classes from "./index.module.css";
 const { TabPane } = Tabs;
 
 class index extends Component {
@@ -93,7 +92,7 @@ class index extends Component {
               <DataTable
                 dataSource={
                   this.props?.carOrder?.data?.carOrders?.filter((item) => {
-                    return item.status == "Pending";
+                    return item.status === "Pending";
                   }) || []
                 }
                 loading={this.props.carOrder.loading}
@@ -106,7 +105,7 @@ class index extends Component {
               <DataTable
                 dataSource={
                   this.props?.carOrder?.data?.carOrders?.filter((item) => {
-                    return item.status == "Accepted";
+                    return item.status === "Accepted";
                   }) || []
                 }
                 loading={this.props.carOrder.loading}
@@ -119,7 +118,7 @@ class index extends Component {
               <DataTable
                 dataSource={
                   this.props?.carOrder?.data?.carOrders?.filter((item) => {
-                    return item.status == "Success";
+                    return item.status === "Success";
                   }) || []
                 }
                 loading={this.props.carOrder.loading}
@@ -131,7 +130,7 @@ class index extends Component {
               <DataTable
                 dataSource={
                   this.props?.carOrder?.data?.carOrders?.filter((item) => {
-                    return item.status == "Cancelled";
+                    return item.status === "Cancelled";
                   }) || []
                 }
                 loading={this.props.carOrder.loading}
@@ -151,6 +150,7 @@ class index extends Component {
             <img
               src={this.state.carOrder?.carInfo?.image.avatar}
               style={{ maxWidth: 100, maxHeight: 100 }}
+              alt=""
             ></img>
             <h4>Tên xe: {this.state.carOrder?.carInfo?.name}</h4>
             <p>Dòng: {this.state.carOrder?.carInfo?.model}</p>

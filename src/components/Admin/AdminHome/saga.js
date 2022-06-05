@@ -3,18 +3,15 @@ import {
     call,
     put,
     all,
-    select
 } from 'redux-saga/effects'
 import {
     action_type as TYPE
 } from './action'
 
 import * as api from '../../../apis/User'
-import * as apiPost from '../../../apis/Post'
 
 function* getDataSaga(action) {
     try {
-        const { params } = action
         const response = yield call(api.adminData)
         if (response.status === 'success') {
             yield all([
@@ -32,7 +29,6 @@ function* getDataSaga(action) {
 
 function* getOrderCountSaga(action) {
     try {
-        const { params } = action
         const response = yield call(api.adminDataOrderCount)
         if (response.status === 'success') {
             yield all([
@@ -50,7 +46,6 @@ function* getOrderCountSaga(action) {
 
 function* getBillCountSaga(action) {
     try {
-        const { params } = action
         const response = yield call(api.adminDataBillCount)
         if (response.status === 'success') {
             yield all([

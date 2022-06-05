@@ -10,8 +10,8 @@ import {
   updateAccessoryBill,
   deleteAccessoryBill,
 } from "./action";
-import FormFilter from "./components/FormFilter";
-import classes from "./index.module.css";
+// import FormFilter from "./components/FormFilter";
+// import classes from "./index.module.css";
 const { TabPane } = Tabs;
 
 class index extends Component {
@@ -89,7 +89,7 @@ class index extends Component {
             <TabPane tab="Đang chờ duyệt" key="1">
             <DataTable
             dataSource={this.props?.accessoryBill?.data?.accessoryBills?.filter((item)=>{
-              return item.status=='Pending'
+              return item.status === 'Pending'
             }) 
             || []} 
             loading={this.props.accessoryBill.loading}
@@ -101,7 +101,7 @@ class index extends Component {
             <TabPane tab="Đã duyệt" key="2">
             <DataTable //done
             dataSource={this.props?.accessoryBill?.data?.accessoryBills?.filter((item)=>{
-              return item.status=='Accepted'
+              return item.status === 'Accepted'
             })  || []}
             loading={this.props.accessoryBill.loading}
             info={this.openModal}
@@ -112,7 +112,7 @@ class index extends Component {
             <TabPane tab="Giao thành công" key="3">
             <DataTable //done
             dataSource={this.props?.accessoryBill?.data?.accessoryBills?.filter((item)=>{
-              return item.status=='Success'
+              return item.status === 'Success'
             })  || []}
             loading={this.props.accessoryBill.loading}
             info={this.openModal}
@@ -122,7 +122,7 @@ class index extends Component {
             <TabPane tab="Đã hủy" key="4">
             <DataTable //done
             dataSource={this.props?.accessoryBill?.data?.accessoryBills?.filter((item)=>{
-              return item.status=='Cancelled'
+              return item.status === 'Cancelled'
             })  || []}
             loading={this.props.accessoryBill.loading}
             info={this.openModal}

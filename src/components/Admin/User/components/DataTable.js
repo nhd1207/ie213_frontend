@@ -1,7 +1,7 @@
 import React from "react";
-import { Table, Spin, Space, Tooltip, Popconfirm } from "antd";
+import { Table, Space, Tooltip, Popconfirm } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faExclamation } from "@fortawesome/free-solid-svg-icons";
+import {  faExclamation } from "@fortawesome/free-solid-svg-icons";
 import dateFormat from "dateformat";
 const DataTable = ({ dataSource, loading, updateUser, deleteUser }) => {
   const onSubmit = (values) => {

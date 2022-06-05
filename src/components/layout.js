@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { Affix, Menu, Layout, Spin } from "antd";
+import { Affix, Menu, Layout } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink, useRouteMatch, useHistory } from "react-router-dom";
 import {
@@ -15,7 +15,6 @@ import {
   faFacebook,
 } from "@fortawesome/free-brands-svg-icons";
 import "antd/dist/antd.css";
-import Cookies from "js-cookie";
 import "./layout.css";
 import { verifyLayout, logout } from "../screens/LoginPage/action";
 import { connect } from "react-redux";

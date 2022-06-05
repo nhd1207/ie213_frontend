@@ -2,8 +2,7 @@ import {
     takeLatest, 
     call, 
     put, 
-    all,
-    select
+    all
   } from 'redux-saga/effects'
 import {
       action_type as TYPE

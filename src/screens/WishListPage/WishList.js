@@ -3,15 +3,11 @@ import style from "./WishList.module.css";
 import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from '../../components/layout'
-import { Button, Spin } from "antd";
+import { Spin } from "antd";
 import { connect } from "react-redux";
 import { getWishList, deleteWishList } from "./action"
 import List from "../../components/WishList/List";
-import {
-    HeartFilled,
-    ShoppingCartOutlined,
-} from "@ant-design/icons";
-import { Redirect } from "react-router-dom";
+
 import { verify } from "../LoginPage/action"
 function WishList(props) {
     const [loading, setLoading] = useState(true)
