@@ -16,6 +16,14 @@ function NewsDetail(props) {
   useEffect(() => {
     props.getListPost(props.match.params.id);
   }, []);
+  const splitLine = (htmlString) => {
+    const lines = htmlString?.split(/\r?\n/);
+    let html=""
+    for(var i=0;i<lines?.length;i++){
+        html+='<p>'+lines[i]+'</p>';
+    }
+    return html;
+}
   return (
     <Layouts>
       <Spin size="large" spinning={props.data.loading}>
@@ -46,7 +54,7 @@ function NewsDetail(props) {
           <div className={`${style.news_items}`}>
             <div
               className={`${style.news_content}`}
-              dangerouslySetInnerHTML={{ __html: props.data?.data[0]?.content }}
+              dangerouslySetInnerHTML={{ __html: splitLine(props.data?.data[0]?.content) }}
             ></div>
           </div>
           <p>Tác giả: {
