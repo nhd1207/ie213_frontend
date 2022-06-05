@@ -5,7 +5,6 @@ import homeSaga from "./screens/HomePage/saga"
 import userSaga from "./screens/UserPage/saga"
 import postSaga from "./screens/NewsPage/saga"
 import cartSaga from "./screens/CartPage/saga"
-import newsDetailSaga from './screens/NewsDetail/saga'
 import userAdminSaga from './components/Admin/User/saga'
 import showroomAdminSaga from './components/Admin/Showroom/saga'
 import carAdminSaga from './components/Admin/Car/saga'

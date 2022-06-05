@@ -57,7 +57,7 @@ function Home(props) {
             <div className={`${style.s} col-xl-12`}>s</div>
             <div className={`${style.header} col-xl-12`}>Seven</div>
             <div className={`${style["introduce-content"]}`}>
-              Nhà phân phối xe Seven lớn nhất thế giới
+              Nhà phân phối xe Seven hàng đầu Việt Nam
             </div>
           </div>
           <div className={style["accessories-header"]}>PHỤ KIỆN</div>
@@ -88,7 +88,7 @@ function Home(props) {
                 className={`${style.accessoriesCute1} col-xl-12 col-sm-12 col-12`}
               >
                 <div className={`${style.accDesc}`}>
-                  <h3 className={style.descTitle}>lOA XE HOI</h3>
+                  <h3 className={style.descTitle}>LOA XE HƠI</h3>
                   <p className={style.descAtt}>5 000 000</p>
                   <button
                     variant="dark"
@@ -112,7 +112,7 @@ function Home(props) {
                 className={`${style.accessoriesCute2} col-xl-12 col-sm-12 col-12`}
               >
                 <div className={`${style.accDesc}`}>
-                  <h3 className={style.descTitle}>CHIA KHOA XE HOI</h3>
+                  <h3 className={style.descTitle}>CHÌA KHOÁ XE HƠI</h3>
                   <p className={style.descAtt}>2 000 000</p>
                   <button
                     variant="dark"
@@ -136,14 +136,14 @@ function Home(props) {
                 className={`${style.accessoriesCute3} col-xl-12 col-sm-12 col-12`}
               >
                 <div className={`${style.accDesc}`}>
-                  <h3 className={style.descTitle}>GIA DE DIEN THOAI</h3>
+                  <h3 className={style.descTitle}>GIÁ ĐỂ ĐIỆN THOẠI</h3>
                   <p className={style.descAtt}>1 000 000</p>
                   <button
                     variant="dark"
                     className={`${style["accessories-btn"]}`}
                   >
                     <a href="/accessory">
-                      MORE{" "}
+                      Tìm hiểu thêm{" "}
                       <FontAwesomeIcon
                         icon={faCircleRight}
                         size={{ width: 100 }}
