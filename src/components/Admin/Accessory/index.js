@@ -125,6 +125,7 @@ class index extends Component {
                 <Layout>
                     <div className='container-fluid mb-3 text-left py-2' style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <span className='h3 font-weight-bold '>Phụ kiện</span>
+                        {/* <span className='h4 font-weight-bold '>Số phụ kiện: {this.props?.accessory?.data.accessory?.length}</span> */}
                         <span ><Button icon={<PlusOutlined />} onClick={this.openModalAdd} text='Thêm phụ kiện' type="primary" >Thêm phụ kiện</Button></span>
                     </div>
                     {/* <FormFilter

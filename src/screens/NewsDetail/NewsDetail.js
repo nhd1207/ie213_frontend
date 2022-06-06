@@ -22,6 +22,7 @@ function NewsDetail(props) {
     for(var i=0;i<lines?.length;i++){
         html+='<p>'+lines[i]+'</p>';
     }
+    console.log(htmlString);
     return html;
 }
   return (

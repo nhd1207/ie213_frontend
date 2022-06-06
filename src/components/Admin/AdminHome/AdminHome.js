@@ -4,6 +4,8 @@ import { UserOutlined, UserAddOutlined, UserDeleteOutlined, CarOutlined, Dingtal
 import style from './AdminHome.module.css'
 import Layout from '../LayoutAdmin/LayoutAdmin'
 import { getData } from './action'
+import { getList as getListCar }  from '../Car/action'
+import { getList as getListAccessory }  from '../Accessory/action'
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { PureComponent } from 'react';
@@ -13,6 +15,8 @@ function AdminHome(props) {
     const history = useHistory()
     useEffect(() => {
         props.getData()
+        props.getListCar()
+        props.getListAccessory()
     }, [])
     const dataUser = [
         {
@@ -158,7 +162,7 @@ function AdminHome(props) {
                                     <Col span={12}>
                                         <Statistic
                                             title="Số xe hiện có"
-                                            value={props?.adminData?.accessoryBill?.length}
+                                            value={props?.carData?.data?.car?.length}
                                             prefix={<CarOutlined className={`${style.accessoryBillIcon} ${style.iconPrefix}`} />}
                                         />
                                         <Button
@@ -169,7 +173,7 @@ function AdminHome(props) {
                                         </Button>
                                         <Statistic
                                             title="Số phụ kiện hiện có"
-                                            value={props?.adminData?.accessoryBill?.length}
+                                            value={props?.accData?.data?.accessory?.length}
                                             prefix={<DingtalkOutlined className={`${style.postIcon} ${style.iconPrefix}`} />}
                                         />
                                         <Button
@@ -417,13 +421,21 @@ function AdminHome(props) {
 }
 const mapStateToProps = (state) => ({
     adminData: state.adminData,
-    postAdmin: state.postAdmin
+    postAdmin: state.postAdmin,
+    carData: state.car,
+    accData: state.accessory
 })
 
 const mapDispatchToProps = dispatch => ({
     getData: (params) => {
         dispatch(getData(params))
-    }
+    },
+    getListCar: (params) => {
+        dispatch(getListCar(params))
+    },
+    getListAccessory: (params) => {
+        dispatch(getListAccessory(params))
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminHome)
