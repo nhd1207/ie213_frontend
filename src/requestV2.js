@@ -13,19 +13,16 @@ const instance = axios.create({
     'Access-Control-Allow-Origin': '*'
   },
   validateStatus: (status) => {
-    return true; // I'm always returning true, you may want to do it depending on the status received
+    return true;
   },
 });
 instance.interceptors.request.use(function (config) {
-  // Do something before request is sent
-  // const token = localStorage.getItem('client_hasaki_inside_token')
   const token = Cookies.get('jwt')
   if(token){
     config.headers.common['Authorization'] = `Bearer ${token}`;
   }
   return config;
 }, function (error) {
-  // Do something with request error
   return Promise.reject(error);
   // return Promise.resolve(error)
 });
@@ -87,7 +84,6 @@ export const multipart = (url, form_data)=> {
       }})
       .then(response => resolve(response.data))
       .catch(error => {
-        // reject(error)
         throw error
       })
   })
