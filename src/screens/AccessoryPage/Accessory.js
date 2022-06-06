@@ -27,7 +27,7 @@ function Accessory(props) {
   const handleClose = () => setShow(false);
   const [filterValue, setFilterValue] = useState({
     color: null,
-    limit: null,
+    limit: 10000,
     page: null,
     priceMin: null,
     priceMax: null,
@@ -82,7 +82,7 @@ function Accessory(props) {
   useEffect(() => { //use effect for tag
     let tagAray = [];
     for (let key in filterValue) {
-      if (filterValue[key] === null || key === "keyword" || key === "field") {
+      if (filterValue[key] === null || key === "keyword" || key === "field" ||key === "limit") {
       } else {
         tagAray.push(
           <Tag
@@ -249,7 +249,7 @@ function Accessory(props) {
   const cancelAll = () => {
     let params = { ...filterValue };
     for (let key in params) {
-      if (key !='field' && key!='keyword') params[key] = null;
+      if (key !='field' && key!='keyword' && key!='limit') params[key] = null;
     }
     setFilterValue(params);
     handleFilter(params);

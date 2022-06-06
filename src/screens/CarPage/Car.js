@@ -38,7 +38,7 @@ function Car(props) {
   const history = useHistory();
   const [filterValue, setFilterValue] = useState({
     color: null,
-    limit: null,
+    limit: 10000,
     page: null,
     priceMin: null,
     priceMax: null,
@@ -73,10 +73,11 @@ function Car(props) {
   useEffect(() => {
     let tagAray = [];
     for (let key in filterValue) {
-      if (filterValue[key] === null || key === "keyword" || key === "field") {
+      if (filterValue[key] === null || key === "keyword" || key === "field" || key === "limit") {
       } else {
         tagAray.push(
           <Tag
+          style={{overflow: 'hidden'}}
             closable
             onClose={(e) => {
               e.preventDefault();
@@ -282,7 +283,7 @@ function Car(props) {
   const cancelAll = () => {
     let params = { ...filterValue };
     for (let key in params) {
-      if (key !='field' && key!='keyword') params[key] = null;
+      if (key !='field' && key!='keyword' && key!='limit') params[key] = null;
     }
     setFilterValue(params);
     handleFilter(params);
@@ -317,15 +318,17 @@ function Car(props) {
               </h3>
               <Menu
                 // onClick={handleClick}
-                defaultSelectedKeys={["1"]}
-                defaultOpenKeys={["sub1"]}
+                //defaultSelectedKeys={["1"]}
+                //defaultOpenKeys={["sub1"]}
                 mode="inline"
                 className={`${style.filter} col-xl-12`}
               >
                 <div className={`${style.rangeInput}`}>
                   <>
                     <Form.Label>Bộ Lọc: </Form.Label>
+                    <Space>
                     {tags?.map((item) => item)}
+                    </Space>
                   </>
                 </div>
                 <SubMenu
@@ -346,6 +349,7 @@ function Car(props) {
                   <Input.Group size="medium">
                     <Row>
                       <Input
+                        maxLength={2}
                         type={"number"}
                         value={priceFilter.priceMin}
                         placeholder={"Giá tối thiểu (VNĐ)"}
