@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useState, useEffect, useRef } from "react";
+import React, { useReducer, useState, useEffect, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -8,7 +8,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faKey, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Spin } from "antd";
-import AuthContext from "../../../context/AuthContext";
 import { Link } from "react-router-dom";
 function emailReducer(state, action) {
   if (action.type === "EMAIL_LOGIN") {

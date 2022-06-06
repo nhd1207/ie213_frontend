@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Badge, Button, Modal } from "react-bootstrap";
+import { Badge, Button } from "react-bootstrap";
 import classes from "./OrderDetail.module.css";
 import {useHistory} from "react-router-dom";
 function OrderDetail(props) {

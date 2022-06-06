@@ -1,6 +1,5 @@
 import React from 'react'
 import { DatePicker } from 'antd';
-import dateFormat from 'dateformat';
 
 const renderField = ({
   input,

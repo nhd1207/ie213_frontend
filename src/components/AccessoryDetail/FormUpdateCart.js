@@ -7,9 +7,6 @@ import RenderSelect from "../Share/RenderSelect";
 import RenderNumberAnt from "../Share/RenderNumberAnt"
 import {
     HeartFilled,
-    AppstoreOutlined,
-    MailOutlined,
-    SettingOutlined,
   } from "@ant-design/icons";
 
 let FormUpdateCart = props => {

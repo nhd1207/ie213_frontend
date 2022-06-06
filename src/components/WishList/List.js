@@ -4,12 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import style from "../../screens/WishListPage/WishList.module.css";
 import { NavLink, Link } from "react-router-dom";
 import {
-  HeartFilled,
+
   ShoppingCartOutlined,
   CarOutlined,
 } from "@ant-design/icons";
 import money from "../Share/functions/money";
-import { Button, Spin } from "antd";
+import { Button } from "antd";
 
 function List(props) {
   const [wishList, setWishList] = useState({});

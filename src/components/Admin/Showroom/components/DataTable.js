@@ -2,7 +2,6 @@ import React from 'react';
 import { Table, Space, Tooltip, Popconfirm } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDeleteLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
-import dateFormat from 'dateformat';
 import classes from "../index.module.css"; 
 
 

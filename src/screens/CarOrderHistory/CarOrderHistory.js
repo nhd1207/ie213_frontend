@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import Layout from "../../components/layout";
-import OrderDetail from "../../components/OrderResult/OrderDetail";
 import { connect } from "react-redux";
 import { Menu, Spin } from "antd";
 import style from "../UserPage/index.module.css";

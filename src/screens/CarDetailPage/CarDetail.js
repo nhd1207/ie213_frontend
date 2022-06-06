@@ -7,7 +7,6 @@ import { getCarByID } from "./action";
 import { connect } from "react-redux";
 import { Button } from "antd";
 import { Spin } from "antd";
-import { NavLink } from "react-router-dom";
 import {
   CaretRightOutlined,
   HeartFilled,
@@ -19,7 +18,6 @@ import Layout from "../../components/layout";
 import { Link, useHistory } from "react-router-dom";
 import money from "../../components/Share/functions/money";
 import { Modal } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
 
 function CarDetail(props) {
   const [wishList, setWishList] = useState({});
@@ -28,7 +26,7 @@ function CarDetail(props) {
 
   const params = useParams();
 
-  const location = useLocation();
+  
   useEffect(() => {
     setWishList({ ...props?.user?.wishList });
   }, [props.user.wishList]);
@@ -37,9 +35,19 @@ function CarDetail(props) {
     props.getUserForWishListCar();
     props.getCarByID(params.id);
     setCarId(params.id)
-    props.getCarByID(params.id);
   }, []);
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (props.carDetail.loading) {
+      if (props.loading2)
+        setLoading(true);
+      else setLoading(true)
+    } else setLoading(true);
+    if (props.carDetail.loading === false && props.loading2 === false)
+      setLoading(false);
+  }, [props.carDetail.loading, props.loading2]);
 
   useEffect(() => {
       props?.user?.wishList?.cars.forEach((item) => {
@@ -47,7 +55,7 @@ function CarDetail(props) {
           setIsLiked(true);
         }
       })
-  }, [props.carDetail.loading, props?.user?.wishList?.cars]);
+  }, [props.carDetail.loading, props?.user?.wishList?.cars, wishList]);
 
   let myStyle = {
     backgroundImage: `url(${props?.carDetail?.car[0]?.image.banner})`,
@@ -89,7 +97,7 @@ function CarDetail(props) {
         e.preventDefault();
         let element = e.target.parentElement.parentElement;
         element.classList.toggle(`${style.heartIconClicked}`);
-        props.addCarToWishlist({ itemId: value });
+        props.addCarToWishlist({ itemId: params.id });
       } else {
         e.preventDefault();
         let element = e.target.parentElement.parentElement;
@@ -116,7 +124,7 @@ function CarDetail(props) {
 
   return (
     <Layout>
-      <Spin spinning={props.carDetail.loading}>
+      <Spin spinning={loading}>
         <div className={`${style.main}`}>
           <div className={`${style.bannerContainer} row`} style={myStyle}>
             <div className={`${style.bannerImg} col-xl-12`}></div>
@@ -163,11 +171,21 @@ function CarDetail(props) {
                   </Button>
                 </div>
                 <div className={`col-xl-2 row`}>
-                  {/* <HeartOutlined className={`${style.heartIcon}`} /> */}
-                  <HeartFilled
-                    onClick={(e) => toggleClass(e)}
-                    className={`${style.heartIcon}`}
-                  />
+                {isLiked ? (
+                                <HeartFilled
+                                  onClick={(e) =>
+                                    toggleClass(e)
+                                  }
+                                  className={`${style.heartIcon} ${style.heartIconClicked}`}
+                                />
+                              ) : (
+                                <HeartFilled
+                                  onClick={(e) =>
+                                    toggleClass(e)
+                                  }
+                                  className={`${style.heartIcon}`}
+                                />
+                              )}
                 </div>
               </div>
             </div>
@@ -215,7 +233,7 @@ function CarDetail(props) {
                   Tăng tốc từ 0-100 km/h
                 </p>
                 <p className={`${style.specRowText} col-xl-6`}>
-                  {props?.carDetail?.car[0]?.specification?.maxSpeed + " km/h"}
+                  {props?.carDetail?.car[0]?.specification?.acceleration + " giây"}
                 </p>
               </div>
               <div className={`${style.specRow} row`}>
@@ -307,7 +325,8 @@ function CarDetail(props) {
 const mapStateToProps = (state) => ({
   isLoggedIn: state.login.isLoggedIn,
   carDetail: state.carDetail,
-  user: state.carList.user
+  user: state.carList.user,
+  loading2: state.carList.loading2
 });
 
 const mapDispatchToProps = (dispatch) => ({

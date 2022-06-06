@@ -1,6 +1,5 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import RenderNumberAnt from '../../../Share/RenderNumberAnt'
 import RenderTextareaAnt from '../../../Share/RenderTextareaAnt'
 import RenderInputText from '../../../Share/RenderInputText'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
