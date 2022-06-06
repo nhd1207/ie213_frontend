@@ -5,6 +5,7 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import classes from "./SignUp.module.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import SignupForm from "../../components/Authentication/Signup/SignupForm";
 import { connect } from "react-redux";
@@ -25,7 +26,6 @@ function SignUp(props) {
   }
   let history = useHistory();
 
-
   // useEffect(() => {
   //   if (props?.status === "success")
   //   setPermission(true);
@@ -37,14 +37,18 @@ function SignUp(props) {
 
   return (
     <Layout>
-      <div style={{ position: "absolute" }}>
+      <div
+        className="d-sm-none d-none d-xl-block"
+        style={{ position: "absolute" }}
+      >
         <div className={classes.rectangle} />
         <div className={classes.triangle} />
       </div>
-      <div className={classes.container}>
-        <div className={classes.introduction}>
-          <h1>
-            CÔNG TY CỔ PHẦN <b style={{ color: "yellow" }}>SEVEN</b>
+      <div className={`${classes.container} row`}>
+        <div className={`${classes.introduction} col-xl-8 col-sm-6 col-12`}>
+          <h1 className={classes.introHeading}>
+            CÔNG TY CỔ PHẦN{" "}
+            <b style={{ color: "var(--yellow-color)" }}>SEVEN</b>
           </h1>
           <p>Nhà phân phối xe hơi cao cấp uy tín hàng đầu Việt Nam</p>
           <div className={classes.contact}>
@@ -57,8 +61,13 @@ function SignUp(props) {
             </div>
           </div>
         </div>
-        <div className={classes["signup-form"]}>
-          <SignupForm onSignUp={signUpHandler} />
+        <div
+          className={`${classes.signupFormContainer} col-xl-4 col-sm-6 col-12 row`}
+        >
+          <SignupForm
+            onSignUp={signUpHandler}
+            className={`${classes.signupForm} col-xl-12`}
+          />
         </div>
       </div>
       <Modal show={show}>

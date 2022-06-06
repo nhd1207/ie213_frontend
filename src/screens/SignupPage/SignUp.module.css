@@ -1,8 +1,6 @@
 .container {
-  display: grid;
-  grid-template-columns: 60% 40%;
-  grid-template-rows: 100%;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   align-items: center;
   background-image: url("../../Images/background.jpg");
   background-size: cover;
@@ -29,11 +27,13 @@
   z-index: 1;
   color: white;
   font-size: 22px;
+  padding: 1rem;
 }
 
-.introduction h1 {
-    margin-bottom: 80px;
-    transform: scale(1.5);
+.introHeading {
+  /* width: 100%; */
+  font-size: 5rem;
+  color: yellow;
 }
 
 .contact {
@@ -41,7 +41,6 @@
   grid-template-columns: 40% 60%;
   z-index: 1;
   align-items: center;
-  
 }
 
 .contact-icon {
@@ -61,7 +60,10 @@
   margin: 0px;
 }
 
-.signup-form {
+.signupFormContainer {
   z-index: 1;
-  padding: 50px;
+  /* padding: 50px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

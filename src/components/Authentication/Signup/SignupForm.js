@@ -66,11 +66,11 @@ function confirmPasswordReducer(state, action) {
       isLostFocused: true,
     };
   }
-    return {
-      value: "",
-      isValid: false,
-      isLostFocused: false,
-    };
+  return {
+    value: "",
+    isValid: false,
+    isLostFocused: false,
+  };
 }
 
 function SignupForm(props) {
@@ -86,24 +86,27 @@ function SignupForm(props) {
     isPasswordValid: false,
     isPasswordLostFocused: false,
   });
-  const [confirmPassword, dispatchConfirmPassword] = useReducer(confirmPasswordReducer, {
-    value: "",
-    isValid: true ,
-    isLostFocused: false,
-  });
+  const [confirmPassword, dispatchConfirmPassword] = useReducer(
+    confirmPasswordReducer,
+    {
+      value: "",
+      isValid: true,
+      isLostFocused: false,
+    }
+  );
 
   function signUpHandler(event) {
     event.preventDefault();
-    let params={
+    let params = {
       name: name,
       email: email.value,
       password: password.value,
       passwordConfirmation: confirmPassword.value,
       info: {
         phoneNumber: phoneNumber,
-        dateOfBirth: "01/01/1990"
-      }
-    }
+        dateOfBirth: "01/01/1990",
+      },
+    };
     props.onSignUp(params);
   }
 
@@ -140,8 +143,8 @@ function SignupForm(props) {
     });
     dispatchConfirmPassword({
       type: "COMPARE",
-      isValid: confirmPassword.value === enteredPassword
-    })
+      isValid: confirmPassword.value === enteredPassword,
+    });
   }
   function passwordBlurHandler() {
     dispatchPassword({
@@ -162,27 +165,40 @@ function SignupForm(props) {
       isLostFocused: true,
     });
   }
-  
+
   function confirmPasswordBlurHandler() {
-    dispatchConfirmPassword({type: "CONFIRM_LOST_FOCUS"})
+    dispatchConfirmPassword({ type: "CONFIRM_LOST_FOCUS" });
   }
 
   let errorEmail = email.isEmailLostFocused && !email.isEmailValid;
-  let errorPassword = password.isPasswordLostFocused && !password.isPasswordValid;
+  let errorPassword =
+    password.isPasswordLostFocused && !password.isPasswordValid;
   let errorConfirm = confirmPassword.isLostFocused && !confirmPassword.isValid;
   let [disabledButton, setDisabledButton] = useState(false);
 
   useEffect(() => {
-    setDisabledButton(email.isEmailValid && password.isPasswordValid && confirmPassword.isValid && name.trim().length > 0) ;
-  }, [email.isEmailValid, password.isPasswordValid, confirmPassword.isValid, disabledButton, name])
-  
+    setDisabledButton(
+      email.isEmailValid &&
+        password.isPasswordValid &&
+        confirmPassword.isValid &&
+        name.trim().length > 0
+    );
+  }, [
+    email.isEmailValid,
+    password.isPasswordValid,
+    confirmPassword.isValid,
+    disabledButton,
+    name,
+  ]);
 
   return (
     <div className={classes.container}>
       <h2>ĐĂNG KÝ</h2>
       <Form className={classes.form} onSubmit={signUpHandler}>
         <FormGroup className={"mb-3"}>
-          <FormLabel>Họ và tên <span style={{color: "red"}}>*</span></FormLabel>
+          <FormLabel>
+            Họ và tên <span style={{ color: "red" }}>*</span>
+          </FormLabel>
           <FormControl
             id="name"
             type="text"
@@ -205,39 +221,54 @@ function SignupForm(props) {
           </InputGroup>
         </FormGroup>
         <Form.Group className={"mb-3"} controlId="formBasicEmail">
-          <Form.Label>Email <span style={{color: "red"}}>*</span></Form.Label>
+          <Form.Label>
+            Email <span style={{ color: "red" }}>*</span>
+          </Form.Label>
           <Form.Control
             type="email"
             placeholder="seven@example.org"
             onChange={emailChangeHandler}
             onBlur={emailBlurHandler}
           />
-          {errorEmail && <Form.Text className={classes.error}>Email sai định dạng</Form.Text>}
+          {errorEmail && (
+            <Form.Text className={classes.error}>Email sai định dạng</Form.Text>
+          )}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Mật khẩu <span style={{color: "red"}}>*</span></Form.Label>
+          <Form.Label>
+            Mật khẩu <span style={{ color: "red" }}>*</span>
+          </Form.Label>
           <Form.Control
             type="password"
             placeholder="Mật khẩu ít nhất 8 ký tự"
             onChange={passwordChangeHandler}
             onBlur={passwordBlurHandler}
           />
-          {errorPassword && <Form.Text className={classes.error}>Mật khẩu phải có ít nhất 8 ký tự</Form.Text>}
+          {errorPassword && (
+            <Form.Text className={classes.error}>
+              Mật khẩu phải có ít nhất 8 ký tự
+            </Form.Text>
+          )}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Xác nhận mật khẩu <span style={{color: "red"}}>*</span></Form.Label>
+          <Form.Label>
+            Xác nhận mật khẩu <span style={{ color: "red" }}>*</span>
+          </Form.Label>
           <Form.Control
             type="password"
             onChange={confirmPasswordChangeHandler}
             onBlur={confirmPasswordBlurHandler}
           />
-          {errorConfirm && <Form.Text className={classes.error}>Mật khẩu không trùng khớp</Form.Text>}
+          {errorConfirm && (
+            <Form.Text className={classes.error}>
+              Mật khẩu không trùng khớp
+            </Form.Text>
+          )}
         </Form.Group>
         <Button
           className={classes["signup-button"]}
           type="submit"
           disabled={!disabledButton}
-
         >
           Đăng ký
         </Button>
