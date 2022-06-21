@@ -18,7 +18,7 @@ jobs:
       versionSpec: '16.x'
     displayName: 'Install Node.js'
   - script: |
-      npm install
+      npm install --legacy-peer-deps
       npm run build
     displayName: 'npm install and build'
 
