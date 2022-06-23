@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import style from "./Showroom.module.css";
+import style from "./showroom.module.css";
 import { getListShowroom } from "./action";
 import { connect } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
