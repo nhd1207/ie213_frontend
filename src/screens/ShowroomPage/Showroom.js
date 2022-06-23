@@ -83,20 +83,20 @@ function Showroom(props) {
             <div className={`${style.cube}`}>
               <div className={`${style.top}`}></div>
               <span className={`${style.span1} ${style.spann}`}>
-                <h2>07</h2>
-                <h2>07</h2>
+                <h2>Đức</h2>
+                <h2>Đức</h2>
               </span>
               <span className={`${style.span2} ${style.spann}`}>
-                <h2>07</h2>
-                <h2>07</h2>
+                <h2>Minh</h2>
+                <h2>Minh</h2>
               </span>
               <span className={`${style.span3} ${style.spann}`}>
-                <h2>07</h2>
-                <h2>07</h2>
+                <h2>My</h2>
+                <h2>My</h2>
               </span>
               <span className={`${style.span4} ${style.spann}`}>
-                <h2>07</h2>
-                <h2>07</h2>
+                <h2>Bảo</h2>
+                <h2>Bảo</h2>
               </span>
             </div>
           </div>
