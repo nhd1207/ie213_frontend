@@ -1,0 +1,36 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+jobs:
+- job: Build
+  timeoutInMinutes: 0
+  cancelTimeoutInMinutes: 2
+  pool:
+    vmImage: ubuntu-latest
+
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - script: |
+      npm install
+      npm run build
+    displayName: 'npm install and build'
+    
+    
+  - task: CopyFiles@2
+    inputs:
+      targetFolder: '$(Build.ArtifactStagingDirectory)'
+    displayName: 'Copy artifact'  
+  - task: PublishBuildArtifacts@1    
+    displayName: 'Publish drop artifact'
+    inputs:
+      targetPath: '$(build.artifactstagingdirectory)'
+      artifactName: drop
