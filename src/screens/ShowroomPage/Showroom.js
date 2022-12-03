@@ -78,28 +78,7 @@ function Showroom(props) {
               </div>
             </div>
           </div>
-          <div className={`${style.body}`}>
-
-            <div className={`${style.cube}`}>
-              <div className={`${style.top}`}></div>
-              <span className={`${style.span1} ${style.spann}`}>
-                <h2>07</h2>
-                <h2>07</h2>
-              </span>
-              <span className={`${style.span2} ${style.spann}`}>
-                <h2>07</h2>
-                <h2>07</h2>
-              </span>
-              <span className={`${style.span3} ${style.spann}`}>
-                <h2>07</h2>
-                <h2>07</h2>
-              </span>
-              <span className={`${style.span4} ${style.spann}`}>
-                <h2>07</h2>
-                <h2>07</h2>
-              </span>
-            </div>
-          </div>
+          
         </div>
       </Spin>
     </Layout>
