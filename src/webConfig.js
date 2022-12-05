@@ -1,1 +1,1 @@
-export const link_api = 'https://seven-ie213.herokuapp.com/api/v1'
+export const link_api = 'https://sevenbe.glitch.me/api/v1'
