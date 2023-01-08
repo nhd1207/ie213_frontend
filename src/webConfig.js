@@ -1,1 +1,1 @@
-export const link_api = 'https://sevenbe.glitch.me/api/v1'
+export const link_api = 'http://localhost:5000/api/v1'
